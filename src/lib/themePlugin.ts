@@ -36,9 +36,11 @@ export const shadcnPlugin = plugin(
         "--red": "12, 100%, 49%, .1",
         "--blue": "201, 100%, 50%, .1",
         "--green": "170, 73%, 46%, 0.1",
-        "--white": "0, 0%, 98%, 1",
+        "--white": "0, 0%, 100%, 1",
         "--gray": "260, 9%, 92%, 1",
         "--gray-2": "0, 0%, 34%, 1",
+        "--gray-300": "0, 0%, 34%, 1",
+        "--gray-400": "0, 0%, 0%, 0.1",
         "--yellow": "39, 100%, 73%, 1",
       },
       ".dark": {
@@ -65,7 +67,7 @@ export const shadcnPlugin = plugin(
     });
     addBase({
       "*": { "@apply border-border": {} },
-      body: { "@apply bg-background text-foreground": {} },
+      body: { "@apply  text-foreground": {} },
     });
   },
   // 2. Extend the tailwindCSS theme
@@ -119,7 +121,9 @@ export const shadcnPlugin = plugin(
           },
           gray: {
             100: "hsla(var(--gray))",
-            200: "hsla(var(--gray-deep))",
+            2: "hsla(var(--gray-2))",
+            200: "hsla(var(--gray-200))",
+            400: "hsla(var(--gray-400))",
           },
           white: {
             100: "hsla(var(--white))",
@@ -148,6 +152,7 @@ export const shadcnPlugin = plugin(
           },
         },
         borderRadius: {
+          default: "10px",
           lg: "var(--radius)",
           md: "calc(var(--radius) - 2px)",
           sm: "calc(var(--radius) - 4px)",
@@ -167,10 +172,16 @@ export const shadcnPlugin = plugin(
             from: { height: "var(--radix-accordion-content-height)" },
             to: { height: "0" },
           },
+          "caret-blink": {
+            "0%,70%,100%": { opacity: "1" },
+            "20%,50%": { opacity: "0" },
+          },
         },
+
         animation: {
           "accordion-down": "accordion-down 0.2s ease-out",
           "accordion-up": "accordion-up 0.2s ease-out",
+          "caret-blink": "caret-blink 1.25s ease-out infinite",
         },
       },
     },

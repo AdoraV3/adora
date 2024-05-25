@@ -1,6 +1,6 @@
 "use client";
 
-import { TailwindIndicator } from "@/modules/commons/component/TailwindIndicator";
+import { TailwindIndicator } from "@/modules/commons/components/TailwindIndicator";
 import {
   HydrationBoundary,
   QueryClient,

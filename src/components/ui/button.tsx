@@ -7,11 +7,11 @@ import { forwardRef } from "react";
 import { Icons } from "../icons";
 
 const buttonVariants = cva(
-  "inline-flex gap-2 items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+  "inline-flex gap-2 items-center justify-center rounded-default text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-purple-100 text-white ",
+        default: "bg-primary text-white-100 ",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -23,8 +23,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-12 px-4 py-4",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-9 rounded-default px-3",
+        lg: "h-11 rounded-default px-8",
         icon: "h-10 w-10",
       },
     },

@@ -9,7 +9,8 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { AuthSchemaType } from "@/validations/auth";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { RegisterSchemaType } from "@/validations/auth";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -20,29 +21,59 @@ import {
 } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
 
-export function Login() {
-  const form = useForm<AuthSchemaType>({
+export function Register() {
+  const form = useForm<RegisterSchemaType>({
     mode: "all",
     // resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit: SubmitHandler<AuthSchemaType> = () => {};
+  const onSubmit: SubmitHandler<RegisterSchemaType> = () => {};
 
   return (
     <Shell className="w-full mt-10">
-      <div>
-        <PageHeader className="mb-5" title="Welcome back" />
+      <ScrollArea className="h-[calc(95dvh-100px)] px-6 ">
+        <PageHeader className="mb-10" title="Create an account" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem id="name" className="mb-6 relative">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingInput placeholder="John Doe" {...field} />
+                      <FloatingLabel>Full Name</FloatingLabel>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem id="email" className="mb-5 relative">
+                <FormItem id="email" className="mb-6 relative">
                   <FormControl>
                     <div className="relative">
                       <FloatingInput placeholder="john@doe.com" {...field} />
                       <FloatingLabel>Email address</FloatingLabel>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="businessName"
+              render={({ field }) => (
+                <FormItem id="email" className="mb-6 relative">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingInput placeholder="Paystack" {...field} />
+                      <FloatingLabel>Business Name</FloatingLabel>
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -54,11 +85,30 @@ export function Login() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem className="mt-10 ">
+                <FormItem className="mb-6 ">
                   <FormControl>
                     <PasswordInput
                       id="password"
                       placeholder="Enter password"
+                      label="Password"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem className="mb-6 ">
+                  <FormControl>
+                    <PasswordInput
+                      id="password"
+                      label="Confirm Password"
+                      placeholder="Enter confirm password"
                       {...field}
                     />
                   </FormControl>
@@ -68,10 +118,6 @@ export function Login() {
               )}
             />
 
-            <Link href="/forgot-password" className="text-primary">
-              Forgot Password?
-            </Link>
-
             <Button
               onClick={form.handleSubmit(onSubmit)}
               // isLoading={createAssetsHandler.isPending}
@@ -79,7 +125,7 @@ export function Login() {
               // isDisabled={phoneNumber.length < 12}
               id="submit"
             >
-              Con
+              Sign Up
             </Button>
           </form>
         </Form>
@@ -127,7 +173,7 @@ export function Login() {
             Privacy Policy
           </Link>
         </div>
-      </div>
+      </ScrollArea>
     </Shell>
   );
 }

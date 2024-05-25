@@ -42,10 +42,10 @@ const SATOSHI = localFont({
       path: "../../public/fonts/SatoshiMedium.otf",
       weight: "500",
     },
-    {
-      path: "../../public/fonts/SatoshiSemibold.otf",
-      weight: "600",
-    },
+    // {
+    //   path: "../../public/fonts/SatoshiSemibold.otf",
+    //   weight: "600",
+    // },
     {
       path: "../../public/fonts/SatoshiBold.otf",
       weight: "700",
