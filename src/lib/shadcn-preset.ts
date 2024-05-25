@@ -4,7 +4,7 @@ import typographyPlugin from "@tailwindcss/typography";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import animatedPlugin from "tailwindcss-animate";
-import { shadcnPlugin } from "./shadcn-plugin";
+import { shadcnPlugin } from "./themePlugin";
 
 export const shadcnPreset = {
   content: [],

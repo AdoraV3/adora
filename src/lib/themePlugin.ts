@@ -30,20 +30,16 @@ export const shadcnPlugin = plugin(
         "--radius": "0.5rem",
 
         // custom themes
-        "--dark-foreground": "255, 8%, 19%, 1",
-        "--dark-light-foreground": "270, 25%, 98%, 1",
-        "--purple-foreground": "246, 91%, 61%, 1",
-        "--purple": "246, 91%, 61%, .1",
-        "--red-foreground": "12, 100%, 49%, 1",
+
+        "--brown-100": "25, 64%, 36%, 1",
+        "--black-100": "0, 0%, 2%, 1",
         "--red": "12, 100%, 49%, .1",
-        "--blue-foreground": "201, 100%, 50%, 1",
         "--blue": "201, 100%, 50%, .1",
-        "--green-foreground": "170, 73%, 46%, 1",
         "--green": "170, 73%, 46%, 0.1",
-        "--white": "270, 25%, 98%, 1",
+        "--white": "0, 0%, 98%, 1",
         "--gray": "260, 9%, 92%, 1",
+        "--gray-2": "0, 0%, 34%, 1",
         "--yellow": "39, 100%, 73%, 1",
-        "--gray-deep": "260, 4%, 52%, 1",
       },
       ".dark": {
         "--background": "0 0% 3.9%",
@@ -90,8 +86,8 @@ export const shadcnPlugin = plugin(
           background: "hsla(var(--background))",
           foreground: "hsla(var(--foreground))",
           primary: {
-            DEFAULT: "hsla(var(--purple))",
-            foreground: "hsla(var(--purple-foreground))",
+            DEFAULT: "hsla(var(--brown-100))",
+            foreground: "hsla(var(--brown-foreground))",
           },
           // blue: {
           //   DEFAULT: "hsla(var(--blue))",
@@ -140,7 +136,7 @@ export const shadcnPlugin = plugin(
           },
 
           black: {
-            100: "hsla(var(--dark-foreground))",
+            100: "hsla(var(--black-100))",
           },
           blue: {
             100: "hsla(var(--blue-foreground))",
@@ -156,9 +152,12 @@ export const shadcnPlugin = plugin(
           md: "calc(var(--radius) - 2px)",
           sm: "calc(var(--radius) - 4px)",
         },
+
         fontFamily: {
-          sans: ["var(--font-sans)", ...fontFamily.sans],
+          coreC: ["var(--coreC-font)", ...fontFamily.sans],
+          satoshi: ["var(--satoshi-font)", ...fontFamily.sans],
         },
+
         keyframes: {
           "accordion-down": {
             from: { height: "0" },
