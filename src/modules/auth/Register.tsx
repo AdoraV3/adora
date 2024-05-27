@@ -130,7 +130,7 @@ export function Register() {
           </form>
         </Form>
         <div className=" text-center mt-2">
-          <p className="font-sfPro text-base font-normal text-gray-750">
+          <p className="font-satoshi text-base font-normal text-gray-750">
             Don’t have an account?
             <span>
               <Link href="/register" className="text-primary">
@@ -144,7 +144,7 @@ export function Register() {
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-400" />
           </div>
-          <div className="relative flex justify-center font-sfPro text-lg font-normal ">
+          <div className="relative flex justify-center font-satoshi text-lg font-normal ">
             <span className="bg-white-100 px-2 uppercase text-muted-foreground">
               or
             </span>

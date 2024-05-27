@@ -40,7 +40,7 @@ export default function VerifyOtp() {
               name="otp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-sfPro text-sm font-normal text-black-400">
+                  <FormLabel className="font-satoshi text-sm font-normal text-black-400">
                     Enter Code
                   </FormLabel>
                   <FormControl>
