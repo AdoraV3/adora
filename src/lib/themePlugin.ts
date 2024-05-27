@@ -32,6 +32,7 @@ export const shadcnPlugin = plugin(
         // custom themes
 
         "--brown-100": "25, 64%, 36%, 1",
+        "--brown-200": "25, 64%, 12%, 1",
         "--black-100": "0, 0%, 2%, 1",
         "--red": "12, 100%, 49%, .1",
         "--blue": "201, 100%, 50%, .1",
@@ -41,7 +42,9 @@ export const shadcnPlugin = plugin(
         "--gray-2": "0, 0%, 34%, 1",
         "--gray-300": "0, 0%, 34%, 1",
         "--gray-400": "0, 0%, 0%, 0.1",
+        "--gray-450": "0, 0%, 0%, 0.08",
         "--yellow": "39, 100%, 73%, 1",
+        "--gray-500": "hsla(213, 10%, 18%, 0.44)",
       },
       ".dark": {
         "--background": "0 0% 3.9%",
@@ -124,6 +127,8 @@ export const shadcnPlugin = plugin(
             2: "hsla(var(--gray-2))",
             200: "hsla(var(--gray-200))",
             400: "hsla(var(--gray-400))",
+            450: "hsla(var(--gray-450))",
+            500: "hsla(var(--gray-500))",
           },
           white: {
             100: "hsla(var(--white))",
@@ -134,6 +139,9 @@ export const shadcnPlugin = plugin(
           red: {
             100: "hsla(var(--red-foreground))",
             light: "hsla(var(--red))",
+          },
+          brown: {
+            200: "hsla(var(--brown-200))",
           },
           yellow: {
             100: "hsla(var(--yellow))",
