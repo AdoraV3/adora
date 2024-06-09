@@ -18,6 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { BOTTOM_SIDEBAR_ITEM } from "@/mock";
 import Link from "next/link";
 
 export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -44,17 +45,16 @@ interface MobileLinkProps extends React.PropsWithChildren {
 function RouteLink({ isActive, routeIcon, isOpen, title }: RouteLinkProps) {
   const Icon = Icons[routeIcon ?? "Home"];
   return (
-    <div className="item-center flex gap-3">
+    <div className="item-center  flex gap-3">
       <Icon
         className={cn("text-gray-100", isActive && " text-primary ")}
         size={35}
       />
       <p
         className={cn(
-          `whitespace-nowrap font-satoshi text-sm font-normal text-white-100 ${
+          `whitespace-nowrap font-satoshi text-sm font-normal  ${
             isOpen ? "block" : "hidden"
           }`,
-          isActive && " text-white-100 ",
         )}
       >
         {title}{" "}
@@ -135,17 +135,18 @@ export function Sidebar({
 
   return (
     <aside className="scrollbar-hide sticky left-0 top-0 z-30 hidden h-screen w-full bg-brown-200 text-white-100 lg:block">
-      <div className="py-6 lg:py-8">
+      <div className="py-6 lg:pt-8">
         <div
           className={cn("flex w-full flex-col gap-2 px-6 ", className)}
           {...props}
         >
+          <p className="text-center">Logo</p>
           {/* <Icons.Logo isOpen={isOpen} size={48} className="px-4" /> */}
           <Button
             style={{ zIndex: 99999 }}
             variant="ghost"
             onClick={() => setIsOpen?.(!isOpen)}
-            className="z-100 absolute rounded-full -right-5 top-10 mt-6 h-8 w-8 bg-white-100 px-2 shadow-sm"
+            className="z-100 absolute rounded-full -right-5 top-2 mt-6 h-8 w-8 bg-white-100 px-2 shadow-sm"
           >
             <Icons.ChevronLeft className="text-black-100" />
           </Button>
@@ -160,7 +161,13 @@ export function Sidebar({
                 );
 
                 return (
-                  <div key={item.title}>
+                  <div
+                    className={cn(
+                      isActiveRoute &&
+                        "bg-white-100 text-primary rounded-[10px] ",
+                    )}
+                    key={item.title}
+                  >
                     {item?.items && item?.items?.length > 0 ? (
                       <Accordion
                         type="single"
@@ -224,38 +231,71 @@ export function Sidebar({
                 );
               })}
             </div>
-            {/* <PopUp
-              isOpen={closeLogoutModal}
-              isOpenChange={setCloseLogoutModal}
-              title=" Are you sure you want to log out?"
-              description={
-                "By logging out, You'll not be able to take further actions on the admin panel."
-              }
-              handleConfirm={() => logOutHandler.mutate()}
-              isLoading={logOutHandler.isPending}
-              variant="error"
-              modalTrigger={
-                <Button
-                  variant="ghost"
-                  className={cn(
-                    `flex items-center ${
-                      !isOpen ? "justify-center" : "justify-start"
-                    }  gap-3 px-0`,
-                  )}
-                >
-                  <Icons.Logout size={35} className={cn("text-gray-100")} />
-                  <p
-                    className={cn(
-                      `font-Satoshi text-base font-medium text-gray-100 ${
-                        isOpen ? "block" : "hidden"
-                      }`,
+
+            <div>
+              {BOTTOM_SIDEBAR_ITEM?.map(item => {
+                const Icon = Icons[item.icon ?? "Dashboard"];
+                const isActiveRoute = item.href?.includes(String(segment[1]));
+
+                return (
+                  <div key={item.title}>
+                    {item.isButton ? (
+                      <div className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4">
+                        <Icon
+                          size={35}
+                          className={cn(
+                            "text-[hsla(229,18%,64%,1)]",
+                            isActiveRoute && "",
+                            // "bg-[hsla(210,13%,97%,0.5)] text-black-100 ",
+                          )}
+                        />
+                        <p
+                          className={cn(
+                            `font-sfPro text-sm font-normal  text-gray-350 ${
+                              isOpen ? "block" : "hidden"
+                            }`,
+                            isActiveRoute && "",
+                            // "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                          )}
+                        >
+                          Log out
+                        </p>
+                      </div>
+                    ) : (
+                      <Link
+                        key={item.title}
+                        className={cn(
+                          "my-5 flex items-center gap-2  px-4",
+                          isActiveRoute &&
+                            "rounded-lg bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                        )}
+                        href={item.href ?? "/"}
+                      >
+                        <Icon
+                          size={18}
+                          className={cn(
+                            "text-gray-350",
+                            isActiveRoute &&
+                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                          )}
+                        />
+                        <p
+                          className={cn(
+                            `font-sfPro text-base font-medium text-gray-350 ${
+                              isOpen ? "block" : "hidden"
+                            }`,
+                            isActiveRoute &&
+                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                          )}
+                        >
+                          Link
+                        </p>
+                      </Link>
                     )}
-                  >
-                    Log out
-                  </p>
-                </Button>
-              }
-            /> */}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

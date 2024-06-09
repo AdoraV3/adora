@@ -130,12 +130,11 @@ export function Register() {
           </form>
         </Form>
         <div className=" text-center mt-2">
-          <p className="font-satoshi text-base font-normal text-gray-750">
-            Don’t have an account?
+          <p className="font-satoshi text-base font-normal text-black-100">
+            Already have an account?
             <span>
-              <Link href="/register" className="text-primary">
-                {" "}
-                Sign Up{" "}
+              <Link href="/login" className="text-primary">
+                Login
               </Link>
             </span>{" "}
           </p>
@@ -144,17 +143,25 @@ export function Register() {
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-400" />
           </div>
-          <div className="relative flex justify-center font-satoshi text-lg font-normal ">
-            <span className="bg-white-100 px-2 uppercase text-muted-foreground">
+          <div className="relative flex justify-center font-satoshi  font-normal ">
+            <span className="bg-white-100 text-sm font-normal font-satoshi px-2 uppercase text-muted-foreground">
               or
             </span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Button variant="outline" icon={<Icons.Google />}>
+          <Button
+            className="text-gray-2 font-medium text-lg "
+            variant="outline"
+            icon={<Icons.Google />}
+          >
             Continue with Google{" "}
           </Button>
-          <Button variant="outline" icon={<Icons.Apple />}>
+          <Button
+            className="text-gray-2 font-medium text-lg "
+            variant="outline"
+            icon={<Icons.Apple />}
+          >
             Continue with Apple{" "}
           </Button>
         </div>

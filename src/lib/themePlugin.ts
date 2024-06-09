@@ -10,7 +10,7 @@ export const shadcnPlugin = plugin(
         // shadcn theme
         "--background": "0 0% 100%, 1",
         "--foreground": "0 0% 3.9%, 1",
-        "--muted": "0 1% 96.1%, 1",
+        "--muted": "0, 0%, 85%, 0.5",
         "--muted-foreground": "260, 4%, 52%, 1",
         "--popover": "0 0% 100%",
         "--popover-foreground": "0 0% 3.9%",
@@ -34,10 +34,14 @@ export const shadcnPlugin = plugin(
         "--brown-100": "25, 64%, 36%, 1",
         "--brown-200": "25, 64%, 12%, 1",
         "--black-100": "0, 0%, 2%, 1",
-        "--red": "12, 100%, 49%, .1",
+        "--black-300": "240, 3%, 11%, 1",
+        "--red": "4, 74%, 49%, 1",
         "--blue": "201, 100%, 50%, .1",
+        "--blue-200": "215, 69%, 67%, 1",
         "--green": "170, 73%, 46%, 0.1",
+        "--green-200": "141, 82%, 90%, 1",
         "--white": "0, 0%, 100%, 1",
+        "--white-200": "0, 0%, 81%, 1",
         "--gray": "260, 9%, 92%, 1",
         "--gray-2": "0, 0%, 34%, 1",
         "--gray-300": "0, 0%, 34%, 1",
@@ -132,9 +136,11 @@ export const shadcnPlugin = plugin(
           },
           white: {
             100: "hsla(var(--white))",
+            200: "hsla(var(--white-200))",
           },
           green: {
             100: "hsla(var(--green-foreground))",
+            200: "hsla(var(--green-200))",
           },
           red: {
             100: "hsla(var(--red-foreground))",
@@ -153,11 +159,18 @@ export const shadcnPlugin = plugin(
           blue: {
             100: "hsla(var(--blue-foreground))",
             light: "hsla(var(--blue))",
+            200: "hsla(var(--blue-200))",
           },
           purple: {
             100: "hsla(var(--purple-foreground))",
             light: "hsla(var(--purple))",
           },
+        },
+        boxShadow: {
+          100: "6px 16px 0px hsla(25, 64%, 36%, 0.1)",
+          short: "0px 5px 16px 0px hsla(230, 73%, 12%, 0.06)",
+          300: "0px 5px 16px 0px hsla(230, 73%, 12%, 0.06)",
+          xs: " 0px 1px 2px 0px hsla(220, 43%, 11%, 0.05)",
         },
         borderRadius: {
           default: "10px",

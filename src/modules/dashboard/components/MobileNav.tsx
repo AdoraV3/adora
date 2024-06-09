@@ -259,7 +259,7 @@ export function MobileNav({
                         <p className="font-satoshi text-black-200 font-normal text-sm mb-3">
                           Are you sure you want to log out of this account?
                         </p>
-                        <p className="text-gray-100 font-normal md:w-3/4 mx-auto text-xs font-mulish">
+                        <p className="text-gray-100 font-normal md:w-3/4 mx-auto text-xs font-satoshi">
                           By logging out, you’ll be required to enter your email
                           and password to access this account again
                         </p>

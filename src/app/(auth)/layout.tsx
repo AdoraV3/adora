@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
     <div className="min-h-screen max-w-md mx-auto">
-      <nav className=" p-4 pb-6  md:p-6  text-center">Hello</nav>
+      <nav className=" p-4 pb-6  md:p-6  text-center">Logo</nav>
 
       <main>{children}</main>
     </div>

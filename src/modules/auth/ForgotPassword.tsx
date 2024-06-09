@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { EmailSchemaType } from "@/validations/auth";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FloatingInput, FloatingLabel, Shell } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
@@ -19,7 +20,10 @@ export function ForgotPassword() {
     // resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit: SubmitHandler<EmailSchemaType> = () => {};
+  const router = useRouter();
+  const onSubmit: SubmitHandler<EmailSchemaType> = () => {
+    router.push("/reset-password");
+  };
 
   return (
     <Shell className="w-full mt-10">

@@ -54,7 +54,7 @@ export function Login() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem className="mt-10 ">
+                <FormItem className="mt-10 mb-2 ">
                   <FormControl>
                     <PasswordInput
                       id="password"
@@ -68,7 +68,10 @@ export function Login() {
               )}
             />
 
-            <Link href="/forgot-password" className="text-primary">
+            <Link
+              href="/forgot-password"
+              className="text-primary font-medium text-base  font-satoshi"
+            >
               Forgot Password?
             </Link>
 
@@ -79,7 +82,7 @@ export function Login() {
               // isDisabled={phoneNumber.length < 12}
               id="submit"
             >
-              Con
+              Login
             </Button>
           </form>
         </Form>
@@ -105,10 +108,18 @@ export function Login() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Button variant="outline" icon={<Icons.Google />}>
+          <Button
+            className="text-gray-2 font-medium text-lg "
+            variant="outline"
+            icon={<Icons.Google />}
+          >
             Continue with Google{" "}
           </Button>
-          <Button variant="outline" icon={<Icons.Apple />}>
+          <Button
+            className="text-gray-2 font-medium text-lg "
+            variant="outline"
+            icon={<Icons.Apple />}
+          >
             Continue with Apple{" "}
           </Button>
         </div>
