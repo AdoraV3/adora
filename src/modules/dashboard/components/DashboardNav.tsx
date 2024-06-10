@@ -17,8 +17,15 @@ import Link from "next/link";
 
 export function DashboardNav() {
   return (
-    <nav className=" sticky md:flex justify-between top-0 z-10 px-6 border-b border-gray-450 pb-4 hidden w-full   bg-white-100 py-4 ">
-      <div className="flex w-full items-center justify-end gap-4">
+    <nav className=" sticky px-10 md:flex items-center justify-between top-0 z-10  border-b border-gray-450 pb-4 hidden w-full   bg-white-100 py-4 ">
+      <div>Hello </div>
+      <p className="font-satoshi text-gray-550   text-sm font-medium">
+        Agent Number:
+        <span className="font-bold text-sm text-blue-300 ml-2">
+          012-333-444
+        </span>{" "}
+      </p>
+      <div className="flex gap-4 items-center">
         <Link href="/notification">
           <Icons.Notification className="text-black-100" />
         </Link>

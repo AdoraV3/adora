@@ -31,7 +31,7 @@ export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
 interface RouteLinkProps {
   title: string;
   routeIcon: keyof typeof Icons;
-  isActive: boolean;
+
   isOpen: boolean;
 }
 
@@ -42,12 +42,12 @@ interface MobileLinkProps extends React.PropsWithChildren {
   //   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function RouteLink({ isActive, routeIcon, isOpen, title }: RouteLinkProps) {
+function RouteLink({ routeIcon, isOpen, title }: RouteLinkProps) {
   const Icon = Icons[routeIcon ?? "Home"];
   return (
     <div className="item-center  flex gap-3">
       <Icon
-        className={cn("text-gray-100", isActive && " text-primary ")}
+        // className={cn("text-gray-100", isActive && " text-primary ")}
         size={35}
       />
       <p
@@ -163,6 +163,7 @@ export function Sidebar({
                 return (
                   <div
                     className={cn(
+                      "hover:bg-white-100 hover:text-primary hover:rounded-[10px] ",
                       isActiveRoute &&
                         "bg-white-100 text-primary rounded-[10px] ",
                     )}
@@ -187,7 +188,6 @@ export function Sidebar({
                           >
                             <RouteLink
                               isOpen={isOpen ?? false}
-                              isActive={isActiveParentLink}
                               routeIcon={item.icon ?? "Dashboard"}
                               title={item.title}
                             />
@@ -205,15 +205,14 @@ export function Sidebar({
                       <Link
                         key={item.title}
                         className={cn(
-                          "mb-8 flex justify-between px-3",
-                          isActiveRoute && "rounded-lg py-3 text-primary",
-                          !isOpen && "px-4",
+                          "mb-4 flex justify-between py-3 px-3",
+                          isActiveRoute && "rounded-lg  text-primary",
+                          // !isOpen && "px-4",
                         )}
                         href={item.href ?? "/"}
                       >
                         <RouteLink
                           isOpen={isOpen ?? false}
-                          isActive={isActiveRoute ?? false}
                           routeIcon={item.icon ?? "Dashboard"}
                           title={item.title}
                         />
@@ -243,19 +242,13 @@ export function Sidebar({
                       <div className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4">
                         <Icon
                           size={35}
-                          className={cn(
-                            "text-[hsla(229,18%,64%,1)]",
-                            isActiveRoute && "",
-                            // "bg-[hsla(210,13%,97%,0.5)] text-black-100 ",
-                          )}
+                          className={cn("text-[hsla(229,18%,64%,1)]")}
                         />
                         <p
                           className={cn(
                             `font-sfPro text-sm font-normal  text-gray-350 ${
                               isOpen ? "block" : "hidden"
                             }`,
-                            isActiveRoute && "",
-                            // "bg-[hsla(210,13%,97%,0.5)] text-black-100",
                           )}
                         >
                           Log out
