@@ -5,7 +5,6 @@ import { SIDEBAR_ITEMS } from "@/mock";
 import { useSidebarState } from "@/store/sidebar";
 import { PropsWithChildren } from "react";
 import { MainNavItem, NavItem } from "../types";
-import { DashboardNav } from "./DashboardNav";
 import { MobileNav } from "./MobileNav";
 import { Sidebar } from "./Sidebar";
 
@@ -46,13 +45,7 @@ PropsWithChildren<NavigationProps>) {
           bottomSidebarItems={[]}
         />
 
-        <div>
-          <DashboardNav />
-
-          <main className="flex container mt-10 flex-1 flex-col">
-            {children}
-          </main>
-        </div>
+        <main className="flex container py-5 flex-1 flex-col">{children}</main>
       </div>
     </>
   );

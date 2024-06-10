@@ -12,13 +12,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DynamicBreadcrumb } from "@/modules/commons/components";
 
 import Link from "next/link";
 
 export function DashboardNav() {
   return (
-    <nav className=" sticky px-10 md:flex items-center justify-between top-0 z-10  border-b border-gray-450 pb-4 hidden w-full   bg-white-100 py-4 ">
-      <div>Hello </div>
+    <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
+      <DynamicBreadcrumb
+        activeClasses="text-black-100"
+        homeElement="Menu"
+        separator="/"
+        capitalizeLinks
+        listClasses="font-satoshi text-gray-550 text-sm font-normal"
+      />
       <p className="font-satoshi text-gray-550   text-sm font-medium">
         Agent Number:
         <span className="font-bold text-sm text-blue-300 ml-2">

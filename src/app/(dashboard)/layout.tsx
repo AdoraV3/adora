@@ -1,4 +1,5 @@
 import { BOTTOM_SIDEBAR_ITEM, SIDEBAR_ITEMS } from "@/mock";
+import { DashboardNav } from "@/modules/dashboard/components/DashboardNav";
 import { Navigation } from "@/modules/dashboard/components/Navigation";
 
 interface DashboardLayoutProps {
@@ -12,6 +13,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         sidebarItems={SIDEBAR_ITEMS}
         bottomSidebarItems={BOTTOM_SIDEBAR_ITEM}
       >
+        <DashboardNav />
         {children}{" "}
       </Navigation>
     </div>
