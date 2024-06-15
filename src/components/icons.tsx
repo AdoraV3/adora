@@ -501,4 +501,148 @@ export const Icons = {
       />
     </svg>
   ),
+
+  Time: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="22"
+      fill="none"
+      viewBox="0 0 24 22"
+      {...props}
+    >
+      <g clipPath="url(#clip0_2034_502)">
+        <path
+          stroke="#fff"
+          d="M3 .458h18M3 21.542h18m-15.5 0v-5.5l2.856-1.572a4.236 4.236 0 001.57-1.476A3.789 3.789 0 0010.5 11c0-.699-.198-1.386-.573-1.994A4.236 4.236 0 008.356 7.53L5.5 5.958v-5.5m13 0v5.5L15.644 7.53a4.237 4.237 0 00-1.57 1.476A3.79 3.79 0 0013.501 11c0 .699.197 1.386.573 1.994a4.237 4.237 0 001.57 1.476l2.856 1.572v5.5"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_2034_502">
+          <path fill="#fff" d="M0 0H24V22H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  HeartRate: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      fill="none"
+      viewBox="0 0 22 22"
+      {...props}
+    >
+      <path
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3.143 11h2.095l2.62-6.286 2.094 12.572 3.143-9.429 2.195 6.286L16.762 11h2.095"
+      />
+    </svg>
+  ),
+
+  Expand: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      fill="none"
+      viewBox="0 0 22 22"
+      {...props}
+    >
+      <path
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M12.833 9.167l5.959-5.959m.367 4.125l.086-3.645c.01-.441.016-.662-.12-.8-.135-.138-.357-.138-.8-.138h-3.658M9.167 9.167L3.208 3.208m4.125-.458H3.667c-.432 0-.649 0-.783.134s-.134.35-.134.783v3.666M9.167 12.833l-5.959 5.959m-.458-4.125v3.666c0 .432 0 .648.134.783.134.134.35.134.783.134h3.666M12.833 12.833l5.959 5.959m-4.125.458h3.666c.432 0 .649 0 .783-.134.134-.135.134-.35.134-.783v-3.666"
+      />
+    </svg>
+  ),
+  Chart: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="22"
+      fill="none"
+      viewBox="0 0 20 22"
+      {...props}
+    >
+      <path
+        fill="#fff"
+        fillRule="evenodd"
+        d="M0 20.75A.75.75 0 01.75 20h18a.75.75 0 010 1.5h-18a.75.75 0 01-.75-.75zM0 8.13c0-.963.786-1.75 1.75-1.75h1.6c.964 0 1.75.787 1.75 1.75v8.62c0 .965-.786 1.75-1.75 1.75h-1.6C.786 18.5 0 17.716 0 16.75V8.13zm1.75-.25a.253.253 0 00-.25.25v8.62c0 .137.114.25.25.25h1.6c.136 0 .25-.113.25-.25V8.13a.253.253 0 00-.25-.25h-1.6zM7.2 4.94c0-.965.785-1.75 1.75-1.75h1.6c.963 0 1.75.785 1.75 1.75v11.81c0 .964-.787 1.75-1.75 1.75h-1.6c-.965 0-1.75-.786-1.75-1.75V4.94zm1.75-.25a.253.253 0 00-.25.25v11.81c0 .135.113.25.25.25h1.6c.135 0 .25-.115.25-.25V4.94a.253.253 0 00-.25-.25h-1.6zM14.398 1.75c0-.964.786-1.75 1.75-1.75h1.6c.965 0 1.75.786 1.75 1.75v15c0 .964-.785 1.75-1.75 1.75h-1.6c-.964 0-1.75-.786-1.75-1.75v-15zm1.75-.25a.253.253 0 00-.25.25v15c0 .136.115.25.25.25h1.6c.136 0 .25-.114.25-.25v-15a.253.253 0 00-.25-.25h-1.6z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  Mic: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeWidth="1.5"
+        d="M11.333 4.667v2.666a3.333 3.333 0 11-6.666 0V4.667a3.333 3.333 0 116.666 0z"
+      />
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.5"
+        d="M13.333 7.333A5.333 5.333 0 018 12.667m0 0a5.333 5.333 0 01-5.333-5.334M8 12.667v2m0 0h2m-2 0H6"
+      />
+    </svg>
+  ),
+  ArrowRightDown: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      fill="none"
+      viewBox="0 0 14 14"
+      {...props}
+    >
+      <path
+        fill="#EE201C"
+        fillRule="evenodd"
+        d="M10.506 5.061c.242 0 .437.196.437.438v5.007a.437.437 0 01-.437.438H5.498a.437.437 0 110-.875h4.57v-4.57c0-.242.196-.438.438-.438z"
+        clipRule="evenodd"
+      />
+      <path
+        fill="#EE201C"
+        fillRule="evenodd"
+        d="M3.185 3.185c.17-.171.447-.171.618 0l6.942 6.942a.438.438 0 01-.618.619L3.185 3.804a.437.437 0 010-.62z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
+  ArrowRightUp: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      fill="currentColor"
+      viewBox="0 0 14 14"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M5.06 3.494c0-.242.196-.438.438-.438h5.007a.437.437 0 01.438.438V8.5a.438.438 0 01-.875 0v-4.57h-4.57a.438.438 0 01-.438-.437z"
+        clipRule="evenodd"
+      />
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M3.184 10.816a.438.438 0 010-.62l6.942-6.941a.437.437 0 11.619.618l-6.942 6.942a.438.438 0 01-.619 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
 };

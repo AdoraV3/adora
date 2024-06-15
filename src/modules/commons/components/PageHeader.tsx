@@ -1,6 +1,6 @@
 interface PageHeaderProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }
 
 export function PageHeader({ title, subtitle }: PageHeaderProps) {

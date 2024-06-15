@@ -1,7 +1,5 @@
+import { Home } from "@/modules/home/pages";
+
 export default function page() {
-  return (
-    <div>
-      <p>Hi</p>
-    </div>
-  );
+  return <Home />;
 }

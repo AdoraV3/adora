@@ -41,6 +41,7 @@ export const shadcnPlugin = plugin(
         "--blue-300": "230, 95%, 55%, 1",
         "--green": "170, 73%, 46%, 0.1",
         "--green-200": "141, 82%, 90%, 1",
+        "--green-300": "130, 33%, 46%, 1",
         "--white": "0, 0%, 100%, 1",
         "--white-200": "0, 0%, 81%, 1",
         "--gray": "260, 9%, 92%, 1",
@@ -49,8 +50,9 @@ export const shadcnPlugin = plugin(
         "--gray-400": "0, 0%, 0%, 0.1",
         "--gray-450": "0, 0%, 0%, 0.08",
         "--gray-550": "240, 2%, 57%, 1",
+        "--gray-600": "0, 0%, 47%, 1",
         "--yellow": "39, 100%, 73%, 1",
-        "--gray-500": "hsla(213, 10%, 18%, 0.44)",
+        "--gray-500": "213, 10%, 18%, 0.44",
       },
       ".dark": {
         "--background": "0 0% 3.9%",
@@ -136,6 +138,7 @@ export const shadcnPlugin = plugin(
             450: "hsla(var(--gray-450))",
             500: "hsla(var(--gray-500))",
             550: "hsla(var(--gray-550))",
+            600: "hsla(var(--gray-600))",
           },
           white: {
             100: "hsla(var(--white))",
@@ -144,6 +147,7 @@ export const shadcnPlugin = plugin(
           green: {
             100: "hsla(var(--green-foreground))",
             200: "hsla(var(--green-200))",
+            300: "hsla(var(--green-300))",
           },
           red: {
             100: "hsla(var(--red-foreground))",
@@ -173,7 +177,8 @@ export const shadcnPlugin = plugin(
         boxShadow: {
           100: "6px 16px 0px hsla(25, 64%, 36%, 0.1)",
           300: "0px 5px 16px 0px hsla(230, 73%, 12%, 0.06)",
-          xs: " 0px 1px 2px 0px hsla(220, 43%, 11%, 0.05)",
+          xs: "0px 1px 2px 0px hsla(220, 43%, 11%, 0.05)",
+          350: "2px 2px 16px 2px hsla(0, 0%, 0%, 0.05)",
         },
         borderRadius: {
           default: "10px",
