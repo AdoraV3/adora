@@ -1,5 +1,5 @@
 export const REQUIRED_EMAIL = "Email is required";
-export const REQUIRED_FIELD = "error_requiredField";
+export const REQUIRED_FIELD = "This field is required";
 export const REQUIRED_NUMBER = "Please input a number";
 export const INVALID_EMAIL = "Please enter a valid email";
 export const INVALID_PHONE = "Please enter your phone number";

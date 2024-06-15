@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Edit } from "../components/profile/Edit";
 
 export function Profile() {
   return (
@@ -17,6 +18,8 @@ export function Profile() {
           </p>
         </div>
       </div>
+
+      <Edit />
     </div>
   );
 }
