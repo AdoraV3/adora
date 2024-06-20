@@ -38,7 +38,7 @@ export function Edit() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="max-w-4xl bg-white-100 mt-20 grid md:grid-cols-2 gap-5">
+        <div className="max-w-3xl bg-white-100 mt-20 grid md:grid-cols-2 gap-5">
           <FormField
             control={form.control}
             name="firstName"
@@ -154,7 +154,7 @@ export function Edit() {
                   }}
                   value={value}
                 >
-                  <SelectTrigger className=" py-3 text-black-300 focus-visible:border-none">
+                  <SelectTrigger className=" py-3 border-none text-black-300 focus-visible:border-none">
                     <SelectValue placeholder="Country" />
                   </SelectTrigger>
                   <SelectContent sideOffset={5}>

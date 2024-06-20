@@ -9,7 +9,7 @@ import {
   NavItem,
   NavItemWithOptionalChildren,
 } from "@/modules/dashboard/types";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 // import { useSelectedLayoutSegment } from "next/navigation";
 // import { DeleteModal } from "../../commons/components/DeleteModal";
 import {
@@ -64,14 +64,14 @@ function RouteLink({ routeIcon, isOpen, title }: RouteLinkProps) {
 }
 
 function MobileLink({ children, href, disabled, className }: MobileLinkProps) {
-  const segments = useSelectedLayoutSegments();
+  const pathname = usePathname();
   return (
     <div className="mb-3 w-full">
       <Link
         href={href}
         className={cn(
-          "flex w-full  p-2 font-satoshi text-xs font-semibold text-foreground/70  transition-colors hover:text-foreground",
-          href.includes(segments[0]) && "bg-[hsla(0,2%,8%,1)] text-primary ",
+          "flex w-full p-2 font-satoshi text-sm font-normal text-foreground/70  transition-colors",
+          href === pathname && "bg-white-100 rounded-[10px] text-primary ",
           disabled && "pointer-events-none opacity-60",
           className,
         )}
@@ -123,7 +123,7 @@ export function Sidebar({
   ...props
 }: SidebarNavProps) {
   // const segment = useSelectedLayoutSegment();
-  const segment = useSelectedLayoutSegments();
+  const segment = useSelectedLayoutSegment();
   //   const router = useRouter();
   //   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
 
@@ -153,17 +153,15 @@ export function Sidebar({
           <div className="mt-20 flex flex-col justify-between md:h-[75dvh]">
             <div>
               {sidebarItems?.map(item => {
-                const isActiveRoute = item.href?.includes(String(segment[0]));
+                const isActiveRoute = item.href?.includes(String(segment));
                 const isActiveParentLink = Boolean(
-                  item?.items?.find(el =>
-                    el.href?.includes(String(segment[0])),
-                  ),
+                  item?.items?.find(el => el.href?.includes(String(segment))),
                 );
 
                 return (
                   <div
                     className={cn(
-                      "hover:bg-white-100 hover:text-primary hover:rounded-[10px] ",
+                      "",
                       isActiveRoute &&
                         "bg-white-100 text-primary rounded-[10px] ",
                     )}
@@ -173,18 +171,24 @@ export function Sidebar({
                       <Accordion
                         type="single"
                         defaultValue="drafts"
-                        className="mb-1 w-full "
+                        className="w-full "
                         collapsible
                       >
-                        <AccordionItem value={item.title}>
+                        <AccordionItem
+                          className="border-none px-0"
+                          value={item.title}
+                        >
                           <AccordionTrigger
                             // onClick={() => setIsOpen?.(true)}
                             className={cn(
-                              `flex flex-row justify-between  gap-2  px-4 text-sm capitalize ${
-                                isActiveParentLink ? " py-3 text-primary " : ""
+                              `flex flex-row py-3 justify-between text-white-100 gap-2  px-4 text-sm capitalize ${
+                                isActiveParentLink
+                                  ? "bg-white-100 rounded-[10px] text-primary "
+                                  : ""
                               } `,
-                              isOpen && "bg-[hsla(0,2%,8%,1)]",
+                              isOpen && "  ",
                             )}
+                            showIcon={isActiveParentLink}
                           >
                             <RouteLink
                               isOpen={isOpen ?? false}
@@ -206,7 +210,7 @@ export function Sidebar({
                         key={item.title}
                         className={cn(
                           "mb-4 flex justify-between py-3 px-3",
-                          isActiveRoute && "rounded-lg  text-primary",
+                          isActiveRoute && "rounded-[10px]   text-primary",
                           // !isOpen && "px-4",
                         )}
                         href={item.href ?? "/"}
@@ -234,7 +238,7 @@ export function Sidebar({
             <div>
               {BOTTOM_SIDEBAR_ITEM?.map(item => {
                 const Icon = Icons[item.icon ?? "Dashboard"];
-                const isActiveRoute = item.href?.includes(String(segment[1]));
+                const isActiveRoute = item.href?.includes(String(segment));
 
                 return (
                   <div key={item.title}>
@@ -260,7 +264,7 @@ export function Sidebar({
                         className={cn(
                           "my-5 flex items-center gap-2  px-4",
                           isActiveRoute &&
-                            "rounded-lg bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                            "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
                         )}
                         href={item.href ?? "/"}
                       >

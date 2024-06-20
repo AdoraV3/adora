@@ -25,8 +25,11 @@ AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
+    chevronClassName?: string;
+    showIcon?: boolean;
+  }
+>(({ className, showIcon, children, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
@@ -37,9 +40,12 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <div className="size-5 flex justify-center items-center shadow-300 rounded-full bg-white-100 [&[data-state=open]>svg]:bg-primary  ">
-        <Icons.ChevronDown className="size-4 text-primary [&[data-state=open]]:text-white-100  shrink-0 transition-transform duration-200" />
-      </div>
+
+      {showIcon && (
+        <div className="size-5 flex justify-center items-center shadow-300 rounded-full bg-white-100 [&[data-state=open]>svg]:bg-primary  ">
+          <Icons.ChevronDown className="size-4 text-primary [&[data-state=open]]:text-white-100  shrink-0 transition-transform duration-200" />
+        </div>
+      )}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));

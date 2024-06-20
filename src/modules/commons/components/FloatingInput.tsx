@@ -8,7 +8,14 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const FloatingInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
-    return <Input type={type} className={cn(className)} ref={ref} {...props} />;
+    return (
+      <Input
+        type={type}
+        className={cn("border-primary", className)}
+        ref={ref}
+        {...props}
+      />
+    );
   },
 );
 FloatingInput.displayName = "FloatingInput";

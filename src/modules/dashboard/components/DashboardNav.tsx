@@ -92,11 +92,14 @@ export function DashboardNav() {
 
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="pt-2 space-y-2">
-              <DropdownMenuItem className=" text-gray-2 font-satoshi font-normal text-sm">
-                Profile
+              <DropdownMenuItem
+                asChild
+                className="text-gray-2 font-satoshi font-normal text-sm"
+              >
+                <Link href="/profile">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="text-gray-2  font-satoshi font-normal text-sm">
-                Account Settings
+                <Link href="/account-settings">Account Settings</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="text-gray-2  font-satoshi font-normal text-sm">
                 Selected agents

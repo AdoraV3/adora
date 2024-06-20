@@ -1,5 +1,6 @@
 import { Providers } from "@/services/Providers";
 import localFont from "next/font/local";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const CORE_SANS_C = localFont({
@@ -71,7 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${CORE_SANS_C.variable} ${SATOSHI.variable}`}>
-        <Providers> {children}</Providers>
+        <Providers>
+          <NextTopLoader color="hsla(25, 64%, 36%, 1)" /> {children}
+        </Providers>
       </body>
     </html>
   );

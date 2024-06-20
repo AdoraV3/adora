@@ -38,6 +38,7 @@ export const resetPasswordSchema = z
     code: verifyEmailSchema.shape.code,
   })
   .refine(data => data.password === data.confirmPassword, {
+    // eslint-disable-next-line sonarjs/no-duplicate-string
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
@@ -79,3 +80,16 @@ export const otpSchema = z.object({
 });
 
 export type OtpSchemaType = z.infer<typeof otpSchema>;
+
+export const changePasswordSchema = z
+  .object({
+    oldPassword: authSchema.shape.password,
+    password: authSchema.shape.password,
+    confirmPassword: authSchema.shape.password,
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;

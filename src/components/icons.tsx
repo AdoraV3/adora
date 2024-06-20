@@ -645,4 +645,118 @@ export const Icons = {
       />
     </svg>
   ),
+
+  Share: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeWidth="1.5"
+        d="M14 4.333a2 2 0 11-4 0 2 2 0 014 0zM6 8a2 2 0 11-4 0 2 2 0 014 0zM14 11.667a2 2 0 11-4 0 2 2 0 014 0zM5.819 7.167l4.333-2M5.82 8.834l4.333 2"
+      />
+    </svg>
+  ),
+
+  Printer: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <g stroke="currentColor" clipPath="url(#clip0_2014_735)">
+        <path
+          strokeWidth="1.5"
+          d="M4.903 12c-1.416 0-2.123 0-2.627-.302a2.029 2.029 0 01-.766-.815c-.262-.513-.192-1.191-.05-2.548.117-1.132.176-1.699.465-2.114.19-.273.446-.497.747-.652.458-.236 1.05-.236 2.23-.236h6.196c1.181 0 1.772 0 2.23.236.301.155.558.379.748.652.289.415.348.982.465 2.114.14 1.357.211 2.035-.05 2.548a2.029 2.029 0 01-.766.815C13.22 12 12.513 12 11.098 12"
+        />
+        <path
+          strokeLinejoin="round"
+          strokeWidth="1.5"
+          d="M11.334 5.333V4c0-1.257 0-1.886-.39-2.276-.391-.39-1.02-.39-2.277-.39H7.334c-1.257 0-1.886 0-2.276.39-.391.39-.391 1.019-.391 2.276v1.333M9.326 10.667H6.675c-.457 0-.686 0-.88.072a1.25 1.25 0 00-.63.534c-.113.187-.168.428-.279.909-.173.751-.26 1.127-.2 1.428.078.402.323.742.663.922.255.135.612.135 1.326.135h2.651c.714 0 1.07 0 1.326-.135.34-.18.585-.52.663-.922.06-.301-.027-.677-.2-1.428-.111-.481-.167-.722-.279-.909a1.25 1.25 0 00-.63-.534c-.195-.072-.423-.072-.88-.072z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M12 8h.006"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_2014_735">
+          <path fill="#fff" d="M0 0H16V16H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+
+  Calendar: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="25"
+      fill="none"
+      viewBox="0 0 24 25"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.8"
+        strokeWidth="1.5"
+        d="M18 2.696v2m-12-2v2"
+      />
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeOpacity="0.8"
+        strokeWidth="1.5"
+        d="M10 17.696v-3.653c0-.192-.137-.347-.305-.347H9m4.63 4l1.354-3.651c.063-.171-.071-.35-.263-.35H13"
+      />
+      <path
+        stroke="#1C1C1C"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.8"
+        strokeWidth="1.5"
+        d="M2.5 12.939c0-4.358 0-6.536 1.252-7.89C5.004 3.696 7.02 3.696 11.05 3.696h1.9c4.03 0 6.046 0 7.298 1.353C21.5 6.403 21.5 8.581 21.5 12.94v.513c0 4.358 0 6.536-1.252 7.89s-3.268 1.354-7.298 1.354h-1.9c-4.03 0-6.046 0-7.298-1.354C2.5 19.988 2.5 17.81 2.5 13.452v-.513zM6 8.696h12"
+      />
+    </svg>
+  ),
+
+  Timer: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="25"
+      fill="none"
+      viewBox="0 0 24 25"
+      {...props}
+    >
+      <path
+        stroke="#1C1C1C"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.8"
+        strokeWidth="1.5"
+        d="M11.08 13.988L8 7.836l5.42 4.28c.77.608.774 1.767.008 2.38a1.547 1.547 0 01-2.347-.508z"
+      />
+      <path
+        stroke="#1C1C1C"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.8"
+        strokeWidth="1.5"
+        d="M5 5.656a10.003 10.003 0 00-3 7.157c0 5.535 4.477 10.023 10 10.023s10-4.488 10-10.023a10.02 10.02 0 00-8.013-9.825c-.836-.169-1.254-.253-1.62.048-.367.3-.367.787-.367 1.759v1.002"
+      />
+    </svg>
+  ),
 };

@@ -43,7 +43,7 @@ function FlagComponent({ country, countryName }: RPNInput.FlagProps) {
   const Flag = flags[country];
 
   return (
-    <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20">
+    <span className="flex h-4 w-6  overflow-hidden rounded-sm bg-foreground/20">
       {Flag && <Flag title={countryName} />}
     </span>
   );
@@ -79,7 +79,7 @@ function CountrySelect({
           type="button"
           variant="outline"
           className={cn(
-            "flex gap-1 px-3 ltr:rounded-e-none ltr:rounded-s-lg rtl:flex-row-reverse rtl:rounded-e-lg rtl:rounded-s-none",
+            "flex gap-1 border-input px-3 ltr:rounded-e-none ltr:rounded-s-lg rtl:flex-row-reverse rtl:rounded-e-lg rtl:rounded-s-none",
           )}
           disabled={disabled}
         >
@@ -152,7 +152,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
           flagComponent={FlagComponent}
           countrySelectComponent={CountrySelect}
           inputComponent={InputComponent}
-          defaultCountry="CA"
+          defaultCountry="NG"
           countries={["CA", "NG", "US"]}
           addInternationalOption={false}
           countryCallingCodeEditable={false}

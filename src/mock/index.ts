@@ -1,5 +1,5 @@
 import { MainNavItem, NavItem } from "@/modules/dashboard/types";
-import { FAQ } from "./types/index";
+import { FAQ, Option } from "./types/index";
 
 export const SIDEBAR_ITEMS: Array<MainNavItem> = [
   {
@@ -16,19 +16,26 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     title: "Knowledge Base",
     href: "/dashboard/investors",
     icon: "KnowledgeBase",
+    items: [
+      { title: "View Knowledge Base", href: "/knowledge-base" },
+      {
+        title: "Create Knowledge Base",
+        href: "/knowledge-base/add",
+      },
+    ],
   },
   {
     title: "Outbound Calls",
     icon: "OutboundCall",
-    // items: [
-    //   { title: "Payment", href: "/dashboard/users" },
-    //   { title: "Database API", href: "/dashboard/roles" },
-    //   { title: "Settings", href: "/dashboard/roles" },
-    // ],
+    href: "/outbound-calls",
   },
-  { title: "Payment", href: "/dashboard/users", icon: "Wallet" },
-  { title: "Database API", href: "/dashboard/roles", icon: "Api" },
-  { title: "Settings", href: "/dashboard/roles", icon: "Settings" },
+  { title: "Payment", href: "/payment", icon: "Wallet" },
+  { title: "Database API", href: "/database", icon: "Api" },
+  {
+    title: "Settings",
+    href: "/account-settings?tab=accountInfo",
+    icon: "Settings",
+  },
 ];
 
 export const BOTTOM_SIDEBAR_ITEM: NavItem[] = [
@@ -92,4 +99,38 @@ export const BRANDS = [
   "/images/piggyvest.png",
   "/images/ibom-ait.png",
   "/images/bolt.png",
+];
+
+export const VOICES: Array<Option> = [
+  {
+    label: "Female",
+    value: "female",
+  },
+  {
+    label: "Male",
+    value: "male",
+  },
+];
+
+export const LANGUAGES: Array<Option> = [
+  {
+    label: "English",
+    value: "english",
+  },
+  {
+    label: "Yoruba",
+    value: "yoruba",
+  },
+  {
+    label: "Igbo",
+    value: "igbo",
+  },
+  {
+    label: "Hausa",
+    value: "hausa",
+  },
+  {
+    label: "French",
+    value: "french",
+  },
 ];

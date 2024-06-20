@@ -20,7 +20,7 @@ export function Home() {
         </h2>
 
         <Select>
-          <SelectTrigger className="w-[120px] border-none">
+          <SelectTrigger className="w-[120px] bg-white-100 border-none">
             <SelectValue placeholder="Days" />
           </SelectTrigger>
           <SelectContent>

@@ -20,7 +20,7 @@ export const profileSchema = z.object({
     .string()
     .regex(phoneRegExp, INVALID_PHONE)
     .min(13, MIN_PHONE_NUMBER_LENGTH)
-    .max(13, MAX_PHONE_NUMBER_LENGTH),
+    .max(15, MAX_PHONE_NUMBER_LENGTH),
 });
 
 export type ProfileSchemaType = z.infer<typeof profileSchema>;

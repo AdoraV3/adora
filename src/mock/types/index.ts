@@ -3,3 +3,8 @@ export interface FAQ {
   content: string;
   id: number;
 }
+
+export interface Option {
+  label: string;
+  value: string;
+}
