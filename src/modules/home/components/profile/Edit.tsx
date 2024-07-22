@@ -1,5 +1,7 @@
 "use client";
 
+import { getBusinessProfileAction } from "@/app/actions/businessProfile";
+import { getUserAction, updateUserProfileAction } from "@/app/actions/user";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PhoneInput } from "@/components/ui/phone-input";
 import {
   Select,
   SelectContent,
@@ -20,9 +21,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  useServerActionMutation,
+  useServerActionQuery,
+} from "@/lib/hooks/server-action-hooks";
+import { PhoneInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { ProfileSchemaType, profileSchema } from "./validation";
 
 export function Edit() {
@@ -30,28 +38,80 @@ export function Edit() {
     label: el.name,
     value: el.isoCode,
   }));
+
+  const { data, isPending } = useServerActionQuery(getBusinessProfileAction, {
+    input: undefined,
+    queryKey: ["getBusinessProfile"],
+  });
+
+  const { data: queryData, isPending: loadingUser } = useServerActionQuery(
+    getUserAction,
+    {
+      input: undefined,
+      queryKey: ["getUser"],
+    },
+  );
+
+  const user = queryData?.data;
+
+  const updateProfileHandler = useServerActionMutation(
+    updateUserProfileAction,
+    {
+      onSuccess: () => {
+        toast.success("Profile updated successfully");
+      },
+      onError: error => {
+        toast.error(error?.message);
+      },
+    },
+  );
   const form = useForm<ProfileSchemaType>({
     mode: "all",
     resolver: zodResolver(profileSchema),
   });
-  const onSubmit: SubmitHandler<ProfileSchemaType> = () => {};
+
+  const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
+    updateProfileHandler.mutate(values);
+  };
+
+  const businessProfile = data?.data?.businessProfile;
+
+  useEffect(() => {
+    form.reset({
+      businessCountry: businessProfile?.country || "",
+      businessName: businessProfile?.name || "",
+      country: user?.profile?.country || "",
+      phoneNumber: user?.profile?.phone || "",
+      name: user?.profile?.name || "",
+    });
+  }, [
+    form,
+    businessProfile?.name,
+    businessProfile?.country,
+    user?.profile?.country,
+    user?.profile?.name,
+    user?.profile?.phone,
+  ]);
+
+  if (isPending || loadingUser) return <div>Loading...</div>;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="max-w-3xl bg-white-100 mt-20 grid md:grid-cols-2 gap-5">
           <FormField
             control={form.control}
-            name="firstName"
+            name="name"
             render={({ field }) => (
               <FormItem id="email" className="mb-5 relative">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  First name
+                  Full Name
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
                       className="border-none bg-gray-650"
-                      placeholder="John"
+                      placeholder="John Doe"
                       {...field}
                     />
                   </div>
@@ -60,27 +120,7 @@ export function Edit() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem className="mb-5 relative">
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Last name
-                </FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      className="border-none bg-gray-650"
-                      placeholder="Doe"
-                      {...field}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <FormField
             control={form.control}
             name="businessName"
@@ -106,21 +146,17 @@ export function Edit() {
           <FormField
             control={form.control}
             name="country"
-            render={({ field: { onChange, value } }) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Country of residence
                 </FormLabel>
-                <Select
-                  defaultValue={value}
-                  onValueChange={data => {
-                    onChange(data);
-                  }}
-                  value={value}
-                >
-                  <SelectTrigger className=" py-3 border-none text-black-100 focus-visible:border-none">
-                    <SelectValue placeholder="Country" />
-                  </SelectTrigger>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <FormControl>
+                    <SelectTrigger className=" py-3 border-none text-black-100 focus-visible:border-none">
+                      <SelectValue placeholder="Country" />
+                    </SelectTrigger>
+                  </FormControl>
                   <SelectContent sideOffset={5}>
                     <SelectGroup>
                       <SelectLabel>All Countries</SelectLabel>
@@ -142,21 +178,24 @@ export function Edit() {
           <FormField
             control={form.control}
             name="businessCountry"
-            render={({ field: { onChange, value } }) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business Country
                 </FormLabel>
                 <Select
-                  defaultValue={value}
-                  onValueChange={data => {
-                    onChange(data);
-                  }}
-                  value={value}
+                  // value={field.value}
+                  defaultValue={field.value}
+                  onValueChange={field.onChange}
                 >
-                  <SelectTrigger className=" py-3 border-none text-black-300 focus-visible:border-none">
-                    <SelectValue placeholder="Country" />
-                  </SelectTrigger>
+                  <FormControl>
+                    <SelectTrigger className=" py-3 border-none text-black-300 focus-visible:border-none">
+                      <SelectValue
+                        placeholder="Country"
+                        aria-label={field.value}
+                      />
+                    </SelectTrigger>
+                  </FormControl>
                   <SelectContent sideOffset={5}>
                     <SelectGroup>
                       <SelectLabel>All Countries</SelectLabel>
@@ -164,7 +203,7 @@ export function Edit() {
                         <SelectItem
                           className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
-                          value={el.value}
+                          value={el.value?.toString()}
                         >
                           {el.label}
                         </SelectItem>
@@ -179,19 +218,17 @@ export function Edit() {
           <FormField
             control={form.control}
             name="phoneNumber"
-            render={({ field: { onChange, value, ...rest } }) => (
+            render={({ field }) => (
               <FormItem id="phoneNumber" className="mb-5">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Phone
                 </FormLabel>
                 <FormControl>
                   <PhoneInput
-                    // maxLength={phoneNumber.length < 13 ? 16 : 14}
-                    // id="phoneNumber"
-                    onChange={onChange}
+                    id="phoneNumber"
                     className="border-none bg-gray-650"
                     placeholder="Phone Number"
-                    {...rest}
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -201,10 +238,10 @@ export function Edit() {
         </div>
 
         <Button
-          className="mt-10 text-black-100 px-6 border border-input bg-gray-650"
-          disabled
+          className="mt-10 bg-brown-50 text-black-100 px-6 border border-input "
+          onClick={form.handleSubmit(onSubmit)}
+          isLoading={updateProfileHandler.isPending}
         >
-          {" "}
           Save Changes
         </Button>
       </form>

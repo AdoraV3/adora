@@ -30,12 +30,13 @@ export const shadcnPlugin = plugin(
         "--radius": "0.5rem",
 
         // custom themes
-
+        "--brown-50": "28, 62%, 96%, 1",
         "--brown-100": "25, 64%, 36%, 1",
         "--brown-200": "25, 64%, 12%, 1",
         "--black-100": "0, 0%, 2%, 1",
         "--black-300": "240, 3%, 11%, 1",
         "--red": "4, 74%, 49%, 1",
+        "--red-200": "353, 82%, 50%, 1",
         "--blue": "201, 100%, 50%, .1",
         "--blue-200": "215, 69%, 67%, 1",
         "--blue-300": "230, 95%, 55%, 1",
@@ -156,9 +157,11 @@ export const shadcnPlugin = plugin(
           },
           red: {
             100: "hsla(var(--red-foreground))",
+            200: "hsla(var(--red-200))",
             light: "hsla(var(--red))",
           },
           brown: {
+            50: "hsla(var(--brown-50))",
             200: "hsla(var(--brown-200))",
           },
           yellow: {
@@ -184,6 +187,7 @@ export const shadcnPlugin = plugin(
           300: "0px 5px 16px 0px hsla(230, 73%, 12%, 0.06)",
           xs: "0px 1px 2px 0px hsla(220, 43%, 11%, 0.05)",
           350: "2px 2px 16px 2px hsla(0, 0%, 0%, 0.05)",
+          400: "0px 4px 20px 6px hsla(0, 0%, 0%, 0.05)",
         },
         borderRadius: {
           default: "10px",
@@ -210,12 +214,18 @@ export const shadcnPlugin = plugin(
             "0%,70%,100%": { opacity: "1" },
             "20%,50%": { opacity: "0" },
           },
+          gradient: {
+            to: {
+              backgroundPosition: "var(--bg-size) 0",
+            },
+          },
         },
 
         animation: {
           "accordion-down": "accordion-down 0.2s ease-out",
           "accordion-up": "accordion-up 0.2s ease-out",
           "caret-blink": "caret-blink 1.25s ease-out infinite",
+          gradient: "gradient 8s linear infinite",
         },
       },
     },

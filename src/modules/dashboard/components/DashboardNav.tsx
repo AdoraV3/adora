@@ -1,5 +1,7 @@
 "use client";
 
+import { logOut } from "@/app/actions/auth";
+import { getUserAction } from "@/app/actions/user";
 import { Icons } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -12,11 +14,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { DynamicBreadcrumb } from "@/modules/commons/components";
+import { getInitials } from "@/modules/commons/utils/helpers";
 
 import Link from "next/link";
 
 export function DashboardNav() {
+  const { data: queryData } = useServerActionQuery(getUserAction, {
+    input: undefined,
+    queryKey: ["getUser"],
+  });
+
+  const user = queryData?.data;
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
       <DynamicBreadcrumb
@@ -42,15 +52,17 @@ export function DashboardNav() {
             <div className="flex cursor-pointer items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Avatar className="size-9">
-                  <AvatarImage src="" alt="name" />
-                  <AvatarFallback>AM</AvatarFallback>
+                  <AvatarImage src={user?.profile?.avatar ?? ""} alt="name" />
+                  <AvatarFallback>
+                    {getInitials(user?.profile?.name)}{" "}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-left">
                   <p className="font-satoshi text-sm font-normal text-black-100">
-                    Alex Meian
+                    {user?.profile?.name}
                   </p>
-                  <p className="font-satoshi font-normal text-xs  capitalize text-gray-500 ">
-                    alex@gmail.com
+                  <p className="font-satoshi font-normal text-xs  text-gray-500 ">
+                    {user?.email}
                   </p>
                 </div>
               </div>
@@ -64,15 +76,18 @@ export function DashboardNav() {
             <div className="flex mt-3 mb-5 justify-between px-3 items-center">
               <div className="flex items-center gap-2">
                 <Avatar className="size-9">
-                  <AvatarImage src="" alt="name" />
-                  <AvatarFallback>AM</AvatarFallback>
+                  <AvatarImage src={user?.profile?.avatar ?? ""} alt="name" />
+                  <AvatarFallback>
+                    {" "}
+                    {getInitials(user?.profile?.name ?? "")}{" "}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="text-left">
-                  <p className="font-satoshi text-sm font-normal text-black-100">
-                    Alex Meian
+                  <p className="font-satoshi text-sm font-normal capitalize text-black-100">
+                    {user?.profile?.name}
                   </p>
-                  <p className="font-satoshi font-normal text-xs  capitalize text-gray-500 ">
-                    alex@gmail.com
+                  <p className="font-satoshi font-normal text-xs text-gray-500 ">
+                    {user?.email}
                   </p>
                 </div>
               </div>
@@ -114,7 +129,10 @@ export function DashboardNav() {
               <DropdownMenuItem className=" text-gray-2 font-satoshi font-normal text-sm">
                 Help
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-gray-2  font-satoshi font-normal text-sm">
+              <DropdownMenuItem
+                onClick={() => logOut()}
+                className="text-gray-2  font-satoshi font-normal text-sm"
+              >
                 Logout
               </DropdownMenuItem>
             </DropdownMenuGroup>

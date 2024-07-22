@@ -9,8 +9,8 @@ import { FAQs } from "@/mock";
 export default function Faq() {
   return (
     <section>
-      <div className="mb-10 px-12">
-        <h6 className="text-black-100 text-4xl font-normal font-coreC mb-2">
+      <div className="mb-10 px-4 md:px-12">
+        <h6 className="text-black-100 text-xl md:text-4xl font-normal font-coreC mb-2">
           Frequently Asked Questions
         </h6>
         <p className="font-satoshi text-lg text-gray-2 font-normal">

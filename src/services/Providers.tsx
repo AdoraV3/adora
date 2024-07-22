@@ -1,5 +1,6 @@
 "use client";
 
+import { Toaster } from "@/components/ui/sonner";
 import { TailwindIndicator } from "@/modules/commons/components/TailwindIndicator";
 import {
   HydrationBoundary,
@@ -8,14 +9,13 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactNode, useState } from "react";
-import { Toaster } from "sonner";
 
 export function Providers({ children }: { children: ReactNode }) {
   const [client] = useState(new QueryClient());
   return (
     <>
       <TailwindIndicator />
-      <Toaster richColors position="top-right" />
+      <Toaster className="bg-red-300" position="top-right" />
       <QueryClientProvider client={client}>
         <HydrationBoundary>{children}</HydrationBoundary>
         <ReactQueryDevtools

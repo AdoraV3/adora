@@ -11,7 +11,7 @@ const FloatingInput = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <Input
         type={type}
-        className={cn("border-primary", className)}
+        className={cn(" !border !border-primary", className)}
         ref={ref}
         {...props}
       />

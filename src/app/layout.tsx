@@ -73,7 +73,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${CORE_SANS_C.variable} ${SATOSHI.variable}`}>
         <Providers>
-          <NextTopLoader color="hsla(25, 64%, 36%, 1)" /> {children}
+          <NextTopLoader color="hsla(25, 64%, 36%, 1)" />
+          {children}
         </Providers>
       </body>
     </html>

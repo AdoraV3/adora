@@ -17,7 +17,7 @@ export function FileUpload(props: PropsWithChildren<FileUploadProps>) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const handleClick = () => inputRef.current?.click();
   return (
-    <div className="w-full border-dashed-4  border-[hsla(216,12%,84%,1)]  bg-[hsla(210,20%,98%,1)]">
+    <div className="w-full border-dashed-4 rounded-md border-[hsla(216,12%,84%,1)]  bg-[hsla(210,20%,98%,1)]">
       <input
         type="file"
         hidden

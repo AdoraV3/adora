@@ -5,6 +5,7 @@ import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import Link from "next/link";
 import { AccountInfo } from "../account-settings/AccountInfo";
 import { AccountPreferenceTab } from "../account-settings/AccountPreferenceTab";
+import { Email } from "../account-settings/Email";
 import { SecurityTab } from "../account-settings/SecurityTab";
 import { SubscriptionTab } from "../account-settings/SubscriptionTab";
 
@@ -60,6 +61,9 @@ export function AccountSettings() {
       </TabsList>
       <TabsContent value="accountInfo">
         <AccountInfo />
+      </TabsContent>
+      <TabsContent value="email">
+        <Email />
       </TabsContent>
       <TabsContent value="security">
         <SecurityTab />

@@ -8,7 +8,8 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { EmailSchemaType } from "@/validations/auth";
+import { EmailSchemaType, emailSchema } from "@/validations/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FloatingInput, FloatingLabel, Shell } from "../commons/components";
@@ -17,7 +18,7 @@ import { PageHeader } from "./components/PageHeader";
 export function ForgotPassword() {
   const form = useForm<EmailSchemaType>({
     mode: "all",
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(emailSchema),
   });
 
   const router = useRouter();

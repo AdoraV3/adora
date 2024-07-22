@@ -1,3 +1,5 @@
+"use client";
+
 import { Icons } from "@/components/icons";
 import {
   Select,
@@ -6,12 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Activities } from "../components/Activities";
 import { AiInfo } from "../components/AiInfo";
 import { OverviewCard } from "../components/OverviewCard";
 import { RecentCalls } from "../components/RecentCalls";
 
 export function Home() {
+  // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex mt-10 justify-between">
@@ -82,10 +84,8 @@ export function Home() {
         />
       </div>
 
-      <div className="grid mt-20 grid-cols-[65%_30%] items-center  gap-[5%] ">
-        <AiInfo />
-        <Activities />
-      </div>
+      <AiInfo />
+      {/* <Activities /> */}
 
       <RecentCalls />
     </section>

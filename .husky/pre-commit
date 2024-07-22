@@ -12,6 +12,14 @@ pnpm run lint ||
     false;
 )
 
+# Check TypeScript Compilation
+pnpm run tsc --noEmit ||
+(
+    echo '🔨❌ Yoo, you have TypeScript errors in your code. Fix them 🔨❌
+          Run pnpm tsc, add changes and try commit again.';
+    false;
+)
+
 echo '🎉 No error found: committing this now.... ✨🚀🏄‍♂️🍻'
 
 npx lint-staged

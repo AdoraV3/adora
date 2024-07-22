@@ -759,4 +759,83 @@ export const Icons = {
       />
     </svg>
   ),
+
+  Delete: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.5"
+        d="M13 3.667l-.413 6.683c-.106 1.708-.159 2.561-.586 3.175-.212.304-.485.56-.8.752-.64.39-1.495.39-3.206.39-1.713 0-2.57 0-3.209-.39a2.666 2.666 0 01-.8-.754c-.428-.615-.48-1.47-.583-3.18L3 3.667M2 3.667h12m-3.296 0l-.455-.94c-.303-.623-.454-.935-.715-1.13a1.333 1.333 0 00-.183-.114c-.288-.15-.635-.15-1.328-.15-.71 0-1.066 0-1.36.156a1.333 1.333 0 00-.185.12c-.264.202-.41.525-.706 1.172l-.403.886M6.333 11V7M9.667 11V7"
+      />
+    </svg>
+  ),
+  Edit: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <g
+        stroke="#F9F9F9"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        clipPath="url(#clip0_2053_568)"
+      >
+        <path d="M9.382 2.59c.497-.538.745-.807 1.01-.964a2.07 2.07 0 012.068-.031c.268.149.524.41 1.036.934.512.523.768.784.914 1.058.352.662.34 1.463-.03 2.113-.154.27-.417.524-.944 1.031l-6.27 6.039c-.998.961-1.497 1.442-2.121 1.686-.624.244-1.31.226-2.682.19l-.186-.005c-.418-.011-.627-.017-.748-.154-.122-.138-.105-.35-.072-.776l.018-.231c.093-1.198.14-1.796.374-2.335.234-.538.637-.975 1.444-1.849l6.19-6.706zM8.666 2.667l4.667 4.666" />
+        <path strokeLinecap="round" d="M9.333 14.667h5.333" />
+      </g>
+      <defs>
+        <clipPath id="clip0_2053_568">
+          <path fill="#fff" d="M0 0H16V16H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  ArrowRight: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        stroke="#F9F9F9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+        d="M20 12H4M15 17s5-3.682 5-5-5-5-5-5"
+      />
+    </svg>
+  ),
+
+  Warning: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="none"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <path
+        fill="#975221"
+        fillRule="evenodd"
+        d="M3.541 7.175C5.487 3.725 6.46 2 8 2c1.54 0 2.513 1.725 4.459 5.175l.242.429c1.617 2.867 2.425 4.3 1.695 5.348C13.666 14 11.857 14 8.242 14h-.485c-3.614 0-5.422 0-6.153-1.048-.73-1.048.078-2.481 1.695-5.348l.242-.43zM8 4.833a.5.5 0 01.5.5v3.334a.5.5 0 11-1 0V5.333a.5.5 0 01.5-.5zm0 6.5A.667.667 0 108 10a.667.667 0 000 1.333z"
+        clipRule="evenodd"
+      />
+    </svg>
+  ),
 };

@@ -25,11 +25,11 @@ export const verifyEmailSchema = z.object({
     .max(6),
 });
 
-export const EmailSchema = z.object({
+export const emailSchema = z.object({
   email: authSchema.shape.email,
 });
 
-export type EmailSchemaType = z.infer<typeof EmailSchema>;
+export type EmailSchemaType = z.infer<typeof emailSchema>;
 
 export const resetPasswordSchema = z
   .object({
@@ -56,7 +56,7 @@ export const registerSchema = z
         message: "Business name must be at least 3 characters long",
       })
       .max(100),
-    fullName: z
+    name: z
       .string()
       .min(3, {
         message: "Full name must be at least 3 characters long",
@@ -73,10 +73,10 @@ export type RegisterSchemaType = z.infer<typeof registerSchema>;
 export const otpSchema = z.object({
   otp: z
     .string()
-    .min(6, {
-      message: "OTP must be 6 characters long",
+    .min(4, {
+      message: "OTP must be 4 characters long",
     })
-    .max(6),
+    .max(4),
 });
 
 export type OtpSchemaType = z.infer<typeof otpSchema>;
@@ -86,6 +86,7 @@ export const changePasswordSchema = z
     oldPassword: authSchema.shape.password,
     password: authSchema.shape.password,
     confirmPassword: authSchema.shape.password,
+    token: z.string().optional(),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: "Passwords do not match",

@@ -12,6 +12,7 @@ import {
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 // import { useSelectedLayoutSegment } from "next/navigation";
 // import { DeleteModal } from "../../commons/components/DeleteModal";
+import { logOut } from "@/app/actions/auth";
 import {
   Accordion,
   AccordionContent,
@@ -243,7 +244,11 @@ export function Sidebar({
                 return (
                   <div key={item.title}>
                     {item.isButton ? (
-                      <div className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4">
+                      <button
+                        onClick={() => logOut()}
+                        type="button"
+                        className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4"
+                      >
                         <Icon
                           size={35}
                           className={cn("text-[hsla(229,18%,64%,1)]")}
@@ -257,7 +262,7 @@ export function Sidebar({
                         >
                           Log out
                         </p>
-                      </div>
+                      </button>
                     ) : (
                       <Link
                         key={item.title}

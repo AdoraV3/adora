@@ -1,24 +1,28 @@
+import BlurIn from "@/components/animations/blur-in";
+import { USE_CASES } from "@/mock";
 import { UseCaseItem } from "./UseCaseItem";
 
 export function UseCases() {
   return (
-    <div className="mt-20">
-      <div className="px-12">
-        <h2 className="text-black-100 font-coreC text-4xl pb-2">Uses Cases</h2>
+    <div className="mt-10 md:mt-20">
+      <div className="px-4 md:px-12">
+        <BlurIn
+          className="text-black-100 text-left font-coreC text-4xl pb-2"
+          word="Uses Cases"
+        />
         <p className="max-w-sm font-satoshi text-gray-2 font-normal text-lg">
           A glimpse into how Adora streamlines various aspects of customer
           service across different industries.
         </p>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 px-20 gap-6">
-        {Array.from({ length: 4 }).map((_, i) => (
+      <div className="mt-5 grid md:grid-cols-2 md:px-20 gap-6">
+        {USE_CASES.map(el => (
           <UseCaseItem
-            // eslint-disable-next-line react/no-array-index-key
-            key={i}
-            image="/images/retail.png"
-            title="Retail & e-commerce"
-            description="Adora provides instant troubleshooting and answers to frequently asked questions, freeing up human agents for more complex issues."
+            key={el.title}
+            image={el.image}
+            title={el.title}
+            description={el.description}
           />
         ))}
       </div>

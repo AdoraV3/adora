@@ -11,3 +11,4 @@ export * from "./SearchInput";
 export * from "./Shell";
 export * from "./TailwindIndicator";
 export * from "./TimePicker";
+export * from "./phone-input";

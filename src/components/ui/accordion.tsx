@@ -29,7 +29,7 @@ const AccordionTrigger = React.forwardRef<
     chevronClassName?: string;
     showIcon?: boolean;
   }
->(({ className, showIcon, children, ...props }, ref) => (
+>(({ className, showIcon = true, children, ...props }, ref) => (
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}

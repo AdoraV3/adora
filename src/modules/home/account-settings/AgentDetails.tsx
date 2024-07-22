@@ -38,6 +38,7 @@ export default function AgentDetails() {
                     <Input
                       className="bg-white-100   !border border-[hsla(0,0%,91%,1)] "
                       placeholder="Agent Number"
+                      disabled
                       {...field}
                     />
                   </div>
@@ -56,6 +57,7 @@ export default function AgentDetails() {
                   Voice
                 </FormLabel>
                 <Select
+                  disabled
                   defaultValue={value}
                   onValueChange={data => {
                     onChange(data);
@@ -98,6 +100,7 @@ export default function AgentDetails() {
                     onChange(data);
                   }}
                   value={value}
+                  disabled
                 >
                   <SelectTrigger className=" py-3 border bg-white-100 text-black-100 focus-visible:border-none">
                     <SelectValue placeholder="Language" />

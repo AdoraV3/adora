@@ -1,5 +1,6 @@
 "use client";
 
+import { getGoogleOauthConsentUrl, signupAction } from "@/app/actions/auth";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,10 +10,14 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { RegisterSchemaType } from "@/validations/auth";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
+import { RegisterSchemaType, registerSchema } from "@/validations/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import {
   FloatingInput,
   FloatingLabel,
@@ -24,20 +29,46 @@ import { PageHeader } from "./components/PageHeader";
 export function Register() {
   const form = useForm<RegisterSchemaType>({
     mode: "all",
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
+  });
+  const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
+  const signUpHandler = useServerActionMutation(signupAction, {
+    onSuccess: () => {
+      toast.success("Account created successfully", {
+        description: "We have sent you a code to verify your account.",
+      });
+      router.push(`/verify-email?email=${form.getValues("email")}`);
+    },
+    onError: error => {
+      toast.error(error?.message);
+    },
   });
 
-  const onSubmit: SubmitHandler<RegisterSchemaType> = () => {};
+  const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
+    signUpHandler.mutate(data);
+  };
+
+  const handleGoogleSignIn = () => {
+    startTransition(async () => {
+      const res = await getGoogleOauthConsentUrl();
+
+      if (res.url) {
+        window.location.href = res.url;
+      }
+    });
+  };
 
   return (
     <Shell className="w-full mt-10">
-      <ScrollArea className="h-[calc(95dvh-100px)] px-6 ">
+      <div className="h-[calc(95dvh-100px)] scrollbar-thin px-6 ">
         <PageHeader className="mb-10" title="Create an account" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name="fullName"
+              name="name"
               render={({ field }) => (
                 <FormItem id="name" className="mb-6 relative">
                   <FormControl>
@@ -101,7 +132,7 @@ export function Register() {
             />
             <FormField
               control={form.control}
-              name="password"
+              name="confirmPassword"
               render={({ field }) => (
                 <FormItem className="mb-6 ">
                   <FormControl>
@@ -120,7 +151,7 @@ export function Register() {
 
             <Button
               onClick={form.handleSubmit(onSubmit)}
-              // isLoading={createAssetsHandler.isPending}
+              isLoading={signUpHandler.isPending}
               className="mt-5 w-full"
               // isDisabled={phoneNumber.length < 12}
               id="submit"
@@ -129,11 +160,12 @@ export function Register() {
             </Button>
           </form>
         </Form>
-        <div className=" text-center mt-2">
+        <div className="text-center mt-2">
           <p className="font-satoshi text-base font-normal text-black-100">
             Already have an account?
             <span>
               <Link href="/login" className="text-primary">
+                {" "}
                 Login
               </Link>
             </span>{" "}
@@ -154,16 +186,18 @@ export function Register() {
             className="text-gray-2 font-medium text-lg "
             variant="outline"
             icon={<Icons.Google />}
+            onClick={handleGoogleSignIn}
+            isLoading={isPending}
           >
             Continue with Google{" "}
           </Button>
-          <Button
+          {/* <Button
             className="text-gray-2 font-medium text-lg "
             variant="outline"
             icon={<Icons.Apple />}
           >
             Continue with Apple{" "}
-          </Button>
+          </Button> */}
         </div>
 
         <div className=" divide-x  mt-6 divide-primary text-center">
@@ -180,7 +214,7 @@ export function Register() {
             Privacy Policy
           </Link>
         </div>
-      </ScrollArea>
+      </div>
     </Shell>
   );
 }

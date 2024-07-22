@@ -1,5 +1,5 @@
 import { MainNavItem, NavItem } from "@/modules/dashboard/types";
-import { FAQ, Option } from "./types/index";
+import { FAQ, ListItem, Option } from "./types/index";
 
 export const SIDEBAR_ITEMS: Array<MainNavItem> = [
   {
@@ -132,5 +132,73 @@ export const LANGUAGES: Array<Option> = [
   {
     label: "French",
     value: "french",
+  },
+];
+
+export const NAVBAR_ITEMS: Array<NavItem> = [
+  { label: "Home", href: "/", title: "Home" },
+  {
+    label: "Pricing",
+
+    href: "/pricing",
+    title: "Pricing",
+  },
+  {
+    href: "/about",
+    title: "About Us",
+    label: "About Us",
+  },
+  {
+    href: "/contact-us",
+    title: "Contact Us",
+    label: "Contact Us",
+  },
+];
+
+export const REVOLUTION_ITEMS: Array<ListItem> = [
+  {
+    title: "AI-Powered Assistance",
+    description:
+      "Our AI customer service agents are equipped to handle inbound and outbound calls, process orders, schedule appointments, and even securely process payments, all with the finesse and empathy of a seasoned human agent.",
+    image: "/images/ai-powered.png",
+  },
+  {
+    title: "Cost-Effective Solution",
+    description:
+      "Say goodbye to the hefty costs associated with traditional call centers. Adora offers a cost-effective alternative that delivers exceptional results without breaking the bank.",
+    image: "/images/cost.png",
+  },
+  {
+    title: "Scalability & Efficiency",
+    description:
+      "As your business grows, so does Adora. Our AI call center solution is scalable, allowing you to handle increasing call volumes without sacrificing quality or customer satisfaction.",
+    image: "/images/scale.png",
+  },
+];
+
+export const USE_CASES: Array<ListItem> = [
+  {
+    title: "Healthcare",
+    description:
+      "Adora can answer frequently asked patient questions (FAQs) about appointments, billing, or basic medical inquiries, reducing the burden on medical staff. This allows them to focus on providing personalized care.",
+    image: "/images/healthcare.png",
+  },
+  {
+    title: "Retail & E-commerce",
+    description:
+      "Adora provides instant troubleshooting and answers to frequently asked questions, freeing up human agents for more complex issues.",
+    image: "/images/retail.png",
+  },
+  {
+    title: "Restaurants & Hospitality",
+    description:
+      "Customers can browse menus, place orders, and receive confirmation - all within Adora's platform, reducing wait times and streamlining the ordering process.",
+    image: "/images/restaurant.png",
+  },
+  {
+    title: "Professional Services",
+    description:
+      "Clients can inquire about appointments, schedules, or service details using natural language.  Adora understands their intent, retrieves information from your system, and provides real-time updates.",
+    image: "/images/professional.png",
   },
 ];

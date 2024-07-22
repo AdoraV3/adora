@@ -3,13 +3,16 @@ import { Icons } from "@/components/icons";
 export function Footer() {
   return (
     <footer>
-      <div className="grid py-20 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
+      <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
         <div>
-          <div className="flex gap-1">
-            <Icons.Logo />
-            <p className="font-bold text-4xl text-black-100 font-urbanist">
-              Adora
-            </p>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-2 items-center">
+              <p>Logo</p>
+
+              <p className="font-bold text-4xl text-black-100 font-urbanist">
+                Adora
+              </p>
+            </div>
             <div className="flex mt-10 gap-2 items-center">
               <Icons.Facebook />
               <Icons.Twitter />
@@ -18,7 +21,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <h6 className="text-black-100 font-satoshi font-bold text-base">
             Home
           </h6>
@@ -33,7 +36,7 @@ export function Footer() {
             Legal
           </p>
         </div>
-        <div>
+        <div className="space-y-3">
           <h6 className="text-black-100 font-satoshi font-bold text-base">
             Contact us
           </h6>

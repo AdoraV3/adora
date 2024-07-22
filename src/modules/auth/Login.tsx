@@ -1,5 +1,6 @@
 "use client";
 
+import { getGoogleOauthConsentUrl, loginInAction } from "@/app/actions/auth";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +10,14 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { AuthSchemaType } from "@/validations/auth";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
+import { AuthSchemaType, authSchema } from "@/validations/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import {
   FloatingInput,
   FloatingLabel,
@@ -23,10 +29,34 @@ import { PageHeader } from "./components/PageHeader";
 export function Login() {
   const form = useForm<AuthSchemaType>({
     mode: "all",
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(authSchema),
   });
 
-  const onSubmit: SubmitHandler<AuthSchemaType> = () => {};
+  const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
+  const loginHandler = useServerActionMutation(loginInAction, {
+    onSuccess: () => {
+      router.push("/home");
+      toast.success("Login successful");
+    },
+    onError: error => {
+      toast.error(error?.message);
+    },
+  });
+
+  const onSubmit: SubmitHandler<AuthSchemaType> = data => {
+    loginHandler.mutate(data);
+  };
+
+  const handleGoogleSignIn = () => {
+    startTransition(async () => {
+      const res = await getGoogleOauthConsentUrl();
+      if (res.url) {
+        window.location.href = res.url;
+      }
+    });
+  };
 
   return (
     <Shell className="w-full mt-10">
@@ -58,7 +88,8 @@ export function Login() {
                   <FormControl>
                     <PasswordInput
                       id="password"
-                      placeholder="Enter password"
+                      label="Password"
+                      placeholder="Enter  password"
                       {...field}
                     />
                   </FormControl>
@@ -77,7 +108,7 @@ export function Login() {
 
             <Button
               onClick={form.handleSubmit(onSubmit)}
-              // isLoading={createAssetsHandler.isPending}
+              isLoading={loginHandler.isPending}
               className="mt-5 w-full"
               // isDisabled={phoneNumber.length < 12}
               id="submit"
@@ -109,19 +140,21 @@ export function Login() {
         </div>
         <div className="flex flex-col gap-2">
           <Button
+            onClick={handleGoogleSignIn}
             className="text-gray-2 font-medium text-lg "
             variant="outline"
             icon={<Icons.Google />}
+            isLoading={isPending}
           >
             Continue with Google{" "}
           </Button>
-          <Button
+          {/* <Button
             className="text-gray-2 font-medium text-lg "
             variant="outline"
             icon={<Icons.Apple />}
           >
             Continue with Apple{" "}
-          </Button>
+          </Button> */}
         </div>
 
         <div className=" divide-x  mt-6 divide-primary text-center">

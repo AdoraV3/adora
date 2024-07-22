@@ -1,3 +1,5 @@
-export function page() {
-  return <p>About uUs</p>;
+import { About } from "@/modules/landing-page/pages/About";
+
+export default function page() {
+  return <About />;
 }

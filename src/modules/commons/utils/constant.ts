@@ -17,7 +17,7 @@ export const MAX_PHONE_NUMBER_LENGTH =
 
 export const phoneRegExp =
   // eslint-disable-next-line security/detect-unsafe-regex
-  /^(?:\+?\d{1,3}(?:(?:\d{3})+)?(?:[-\s]\d+)?|\(\d+\)(?:[-\s]\d+)?)$/;
+  /^\+?(\d{1,4}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?(\d{1,4}[-.\s]?){1,4}\d{1,4}$/;
 
 export const MAX_FILE_SIZE = 16 * 1024 * 1024; // 16MB
 export const ACCEPTED_IMAGE_TYPES = [

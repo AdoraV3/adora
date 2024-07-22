@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function AiInfo() {
   return (
-    <Card className="shadow-350 h-[14.7rem] relative rounded-md bg-white-100">
+    <Card className="shadow-350 mt-10 h-[14.7rem] relative rounded-md bg-white-100">
       <CardContent className="flex justify-between ">
         <div className="p-4">
           <h5 className="font-medium text-2xl font-satoshi text-black-100">
