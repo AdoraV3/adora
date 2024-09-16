@@ -17,7 +17,7 @@ import { cache } from "react";
 import { ZSAError } from "zsa";
 
 export async function createAccount(data: NewAccount) {
-  await db
+  return db
     .insert(account)
     .values({
       ...data,
@@ -28,10 +28,9 @@ export async function createAccount(data: NewAccount) {
 export const getUserByEmail = cache(async (email: string) => {
   return db.query.user.findFirst({
     where: eq(user.email, email),
-    columns: { password: false },
     with: {
       profile: { columns: { userId: false } },
-      account: { columns: { userId: false } },
+      account: { columns: { userId: false, password: false } },
       accountPreferences: { columns: { userId: false } },
     },
   });
@@ -44,7 +43,7 @@ export async function getPasswordResetToken(token: string) {
 }
 
 export async function deletePasswordResetToken(token: string, trx = db) {
-  await trx.delete(resetToken).where(eq(resetToken.token, token));
+  return trx.delete(resetToken).where(eq(resetToken.token, token));
 }
 
 export async function updatePassword(
@@ -53,12 +52,12 @@ export async function updatePassword(
   trx = db,
 ) {
   const passwordHash = await new Argon2id().hash(password);
-  await trx
-    .update(user)
+  return trx
+    .update(account)
     .set({
       password: passwordHash,
     })
-    .where(and(eq(user.id, userId), eq(account?.type, "email")));
+    .where(and(eq(account?.userId, userId), eq(account?.type, "email")));
 }
 
 export async function getVerifyEmailToken(token: string) {
@@ -68,7 +67,7 @@ export async function getVerifyEmailToken(token: string) {
 }
 
 export async function deleteVerifyEmailToken(token: string) {
-  await db.delete(verifyEmailToken).where(eq(verifyEmailToken.token, token));
+  return db.delete(verifyEmailToken).where(eq(verifyEmailToken.token, token));
 }
 
 export async function createPasswordResetToken(userId: User["id"]) {
@@ -110,7 +109,7 @@ export const createVerifyEmailToken = async (userId: string) => {
 export async function verifyEmail(token: string) {
   const tokenEntry = await getVerifyEmailToken(token);
   if (!tokenEntry) {
-    throw new ZSAError("NOT_FOUND");
+    throw new ZSAError("NOT_FOUND", "Invalid  OTP");
   }
   const { userId } = tokenEntry;
   await db.update(user).set({ emailVerified: true }).where(eq(user.id, userId));
@@ -119,7 +118,18 @@ export async function verifyEmail(token: string) {
 }
 
 export async function deleteSessionForUser(userId: User["id"]) {
-  await db.delete(session).where(eq(session.userId, userId));
+  return db.delete(session).where(eq(session.userId, userId));
+}
+
+export async function verifyResetPasswordEmail(token: string) {
+  const tokenEntry = await getPasswordResetToken(token);
+  if (!tokenEntry) {
+    throw new ZSAError("NOT_FOUND", "Invalid  OTP");
+  }
+  const { userId } = tokenEntry;
+  await db.update(user).set({ emailVerified: true }).where(eq(user.id, userId));
+  await deletePasswordResetToken(token);
+  return { user: userId, success: true };
 }
 
 export async function createAccountViaGoogle(
@@ -141,14 +151,21 @@ export async function updateUser(
   userId: User["id"],
   updatedUser: Partial<User>,
 ) {
-  await db.update(user).set(updatedUser).where(eq(user.id, userId));
+  return db.update(user).set(updatedUser).where(eq(user.id, userId));
 }
 
-export async function createUser(data: NewUser) {
-  await db
+export async function createUser(data: NewUser, trx = db) {
+  return trx
     .insert(user)
     .values({
       ...data,
     })
-    .onConflictDoNothing();
+    .onConflictDoNothing()
+    .returning({ userId: user.id });
 }
+
+export const getSubscriberByEmail = async (email: string) => {
+  return db.query.user.findFirst({
+    where: eq(user.email, email),
+  });
+};

@@ -12,13 +12,14 @@ import {
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 // import { useSelectedLayoutSegment } from "next/navigation";
 // import { DeleteModal } from "../../commons/components/DeleteModal";
-import { logOut } from "@/app/actions/auth";
+import { logOutAction } from "@/app/actions/auth";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { BOTTOM_SIDEBAR_ITEM } from "@/mock";
 import Link from "next/link";
 
@@ -71,7 +72,7 @@ function MobileLink({ children, href, disabled, className }: MobileLinkProps) {
       <Link
         href={href}
         className={cn(
-          "flex w-full p-2 font-satoshi text-sm font-normal text-foreground/70  transition-colors",
+          "flex w-full p-2 font-satoshi text-sm font-normal text-foreground/70 transition-colors",
           href === pathname && "bg-white-100 rounded-[10px] text-primary ",
           disabled && "pointer-events-none opacity-60",
           className,
@@ -134,6 +135,8 @@ export function Sidebar({
   //   };
   //   const logOutHandler = useLogout(onLogoutSuccess);
 
+  const logOutHandler = useServerActionMutation(logOutAction, {});
+
   return (
     <aside className="scrollbar-hide sticky left-0 top-0 z-30 hidden h-screen w-full bg-brown-200 text-white-100 lg:block">
       <div className="py-6 lg:pt-8">
@@ -168,7 +171,7 @@ export function Sidebar({
                     )}
                     key={item.title}
                   >
-                    {item?.items && item?.items?.length > 0 ? (
+                    {item?.items && !!item?.items?.length ? (
                       <Accordion
                         type="single"
                         defaultValue="drafts"
@@ -245,7 +248,7 @@ export function Sidebar({
                   <div key={item.title}>
                     {item.isButton ? (
                       <button
-                        onClick={() => logOut()}
+                        onClick={() => logOutHandler.mutate(undefined)}
                         type="button"
                         className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4"
                       >

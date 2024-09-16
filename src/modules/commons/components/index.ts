@@ -1,7 +1,8 @@
+"use client";
+
 export * from "./DataTable";
 export * from "./DynamicBreadCrumb";
 export * from "./EmptyState";
-export * from "./FileUpload";
 export * from "./FloatingInput";
 export * from "./Modal";
 export * from "./PageLoader";
@@ -11,4 +12,5 @@ export * from "./SearchInput";
 export * from "./Shell";
 export * from "./TailwindIndicator";
 export * from "./TimePicker";
+export * from "./fileUpload/FileUpload";
 export * from "./phone-input";

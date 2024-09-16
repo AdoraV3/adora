@@ -8,7 +8,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex flex-1 flex-col">
       <Navigation
         sidebarItems={SIDEBAR_ITEMS}
         bottomSidebarItems={BOTTOM_SIDEBAR_ITEM}

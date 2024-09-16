@@ -1,55 +1,64 @@
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
+import { useFormatSize } from "@/modules/commons/utils/helpers";
+import { DeleteModal } from "../components/DeleteModal";
 
-export function ViewKnowledgeBase() {
+interface ViewKnowledgeBaseProps {
+  file: { name: string; size: number; url: string };
+  handleDelete: () => void;
+  isLoading: boolean;
+}
+
+export function ViewKnowledgeBase({
+  file,
+  handleDelete,
+  isLoading,
+}: ViewKnowledgeBaseProps) {
+  const formatSize = useFormatSize();
+
+  const disclosure = useDisclosure();
+
   return (
-    <div className="pt-10">
-      <div className="flex items-center gap-4">
-        <Button
-          icon={<Icons.Delete />}
-          className="px-6 text-red-200  !border-[hsla(218,39%,90%,1)] "
-          size="sm"
-          variant="outline"
-        >
-          Delete
-        </Button>
-        <Button className="px-6" size="sm" icon={<Icons.Edit />}>
-          Edit{" "}
-        </Button>
-      </div>
-
-      <section className="mt-10">
-        <h4 className="font-satoshi underline underline-offset-2 font-medium text-base text-black-100">
-          Client Information
-        </h4>
-
-        <h6 className="font-satoshi font-bold text-base text-black-100 my-4">
-          Company A
-        </h6>
-
-        <div className="space-y-2 my-3">
-          <p className="font-satoshi font-normal text-base text-[hsla(0,0%,11%,0.5)] ">
-            Contact Person: <span className="text-black-100">Person A</span>
-          </p>
-          <p className="font-satoshi font-normal text-base text-[hsla(0,0%,11%,0.5)] ">
-            Email: <span className="text-black-100">company@gmail.com</span>
-          </p>
-          <p className="font-satoshi font-normal text-base text-[hsla(0,0%,11%,0.5)] ">
-            Phone Number:
-            <span className="text-black-100"> 08122233344</span>
-          </p>
-          <p className="font-satoshi font-normal text-base text-[hsla(0,0%,11%,0.5)] ">
-            Website:
-            <span className="text-black-100">www.comanya.com</span>
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <h4 className="font-satoshi underline-offset-2 underline font-medium text-base text-black-100">
+    <Card className="mt-10 flex flex-1 flex-col  shadow-350 h-[31rem] rounded-3xl bg-white-100">
+      <CardContent className="p-20 flex flex-1 mt-auto gap-6 flex-col">
+        <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-black-100">
           Customer Support Knowledge Base
         </h4>
-      </section>
-    </div>
+        <div
+          className={cn(
+            "flex min-h-[4.25rem]  items-center gap-2.5 rounded-2xl border-2 !border-[hsla(212,33%,95%,1)] p-4 py-2",
+          )}
+        >
+          <Icons.File />
+          <div
+            className="flex flex-col gap-1 text-xs font-normal text-gray-600"
+            title={file.name}
+          >
+            <p className="line-clamp-1 font-semibold text-black-100">
+              {file.name}
+            </p>
+            <p>{formatSize(file.size)}</p>
+          </div>
+        </div>
+
+        <Button
+          className="bg-[hsla(25,64%,36%,0.05)] rounded-lg  text-primary w-full max-w-md m-auto "
+          variant="ghost"
+          icon={<Icons.Delete />}
+          onClick={disclosure.onOpen}
+          isLoading={isLoading}
+        >
+          Delete File
+        </Button>
+      </CardContent>
+      <DeleteModal
+        isLoading={isLoading}
+        handleDelete={handleDelete}
+        {...disclosure}
+      />
+    </Card>
   );
 }

@@ -59,9 +59,6 @@ export function ResetPassword({
               Password reset instructions, if you didn&apos;t initiate this
               process, please change your password immediately.
             </Text>
-            <Text className="text-black-100 font-satoshi font-normal pb-3 text-lg">
-              To activate your account, please use the following OTP:
-            </Text>
 
             <Text className="text-black-100 font-satoshi font-bold text-3xl pb-3">
               {token}

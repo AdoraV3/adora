@@ -6,8 +6,8 @@ import { user } from "./user";
 export const accountPreference = pgTable("account_preference", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
+    .$defaultFn(() => createId()),
+
   userId: text("user_id")
     .notNull()
     .references(() => user.id, {

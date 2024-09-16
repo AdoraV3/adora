@@ -1,5 +1,5 @@
-import { ViewKnowledgeBase } from "@/modules/knowledge-base/pages/ViewKnowledgeBase";
+import { CreateKnowledgeBase } from "@/modules/knowledge-base/pages/CreateKnowledgeBase";
 
 export default function page() {
-  return <ViewKnowledgeBase />;
+  return <CreateKnowledgeBase />;
 }

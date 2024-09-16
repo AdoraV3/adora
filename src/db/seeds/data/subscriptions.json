@@ -1,0 +1,34 @@
+[
+  {
+    "plan": "premium",
+    "period": "monthly",
+    "amount": 10,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe"
+  },
+  {
+    "plan": "basic",
+    "period": "monthly",
+    "amount": 0,
+    "priceId": "",
+    "paymentProvider": ""
+  },
+  {
+    "plan": "premium",
+    "period": "yearly",
+    "amount": 100,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe"
+  },
+  {
+    "plan": "premium",
+    "period": "monthly",
+    "amount": 3000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN"
+  }
+]

@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { NAVBAR_ITEMS } from "@/mock";
+import { useGetLocation } from "@/modules/commons/hooks/useGetLocation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -14,7 +15,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   // const { data: session } = useSession();
-
+  useGetLocation();
   const pathname = usePathname();
 
   return (

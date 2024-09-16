@@ -22,8 +22,10 @@ function Toaster({ ...props }: ToasterProps) {
             "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
           success: "!bg-white-100 !text-green-100",
           error: "!bg-white-100 text-destructive",
+          closeButton: "!end-0 !start-auto !top-auto",
         },
       }}
+      closeButton
       {...props}
     />
   );

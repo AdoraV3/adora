@@ -5,10 +5,8 @@ import { lifecycleDates, pgTable } from "../utils";
 export const user = pgTable("user", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
+    .$defaultFn(() => createId()),
   email: varchar("email", { length: 255 }).unique().notNull(),
-  password: varchar("password", { length: 255 }),
   emailVerified: boolean("email_verified").default(false),
   ...lifecycleDates,
 });

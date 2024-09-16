@@ -2,7 +2,7 @@ export const REQUIRED_EMAIL = "Email is required";
 export const REQUIRED_FIELD = "This field is required";
 export const REQUIRED_NUMBER = "Please input a number";
 export const INVALID_EMAIL = "Please enter a valid email";
-export const INVALID_PHONE = "Please enter your phone number";
+export const INVALID_PHONE = "Invalid phone number";
 export const INVALID_FULL_NAME = "Please enter your name";
 export const INVALID_FIRST_NAME = "Please enter your first name";
 export const INVALID_LAST_NAME = "Please enter your last name";
@@ -25,4 +25,10 @@ export const ACCEPTED_IMAGE_TYPES = [
   "image/jpg",
   "image/png",
   "image/webp",
+];
+
+export const ACCEPTED_KNOWLEDGE_BASE_TYPES = [
+  "image/jpeg",
+  "application/pdf",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];

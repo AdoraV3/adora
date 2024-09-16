@@ -1,5 +1,6 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { MainNavItem, NavItem } from "@/modules/dashboard/types";
-import { FAQ, ListItem, Option } from "./types/index";
+import { FAQ, ListItem, Option, PricingPlan } from "./types/index";
 
 export const SIDEBAR_ITEMS: Array<MainNavItem> = [
   {
@@ -14,15 +15,15 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
   },
   {
     title: "Knowledge Base",
-    href: "/dashboard/investors",
+    href: "/knowledge-base",
     icon: "KnowledgeBase",
-    items: [
-      { title: "View Knowledge Base", href: "/knowledge-base" },
-      {
-        title: "Create Knowledge Base",
-        href: "/knowledge-base/add",
-      },
-    ],
+    // items: [
+    //   { title: "View Knowledge Base", href: "/knowledge-base" },
+    //   {
+    //     title: "Create Knowledge Base",
+    //     href: "/knowledge-base/add",
+    //   },
+    // ],
   },
   {
     title: "Outbound Calls",
@@ -202,3 +203,144 @@ export const USE_CASES: Array<ListItem> = [
     image: "/images/professional.png",
   },
 ];
+
+export const PRICING_PLANS: Array<PricingPlan> = [
+  {
+    amount: {
+      monthly: 0,
+      yearly: 0,
+    },
+    plan: "Basic",
+    features: [
+      "500 Calls",
+      "Basic call handling",
+      "Email support",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      "Customized greeting.",
+    ],
+    regionalPrices: {
+      Nigeria: {
+        monthly: 0,
+        yearly: 0,
+      },
+    },
+    actionLabel: "Choose Plan",
+  },
+  {
+    amount: {
+      monthly: 29,
+      yearly: 290,
+    },
+    plan: "Starter",
+    features: [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+    ],
+    regionalPrices: {
+      Nigeria: {
+        monthly: 2000,
+        yearly: 20000,
+      },
+    },
+    actionLabel: "Choose Plan",
+  },
+  {
+    amount: {
+      monthly: 99,
+      yearly: 999,
+    },
+    plan: "Premium",
+    features: [
+      "5000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+      "Advanced voice recognition.",
+      "Multilingual support Integration with Twilio for SMS and email notifications.",
+      "Phone support.",
+    ],
+    regionalPrices: {
+      Nigeria: {
+        monthly: 5000,
+        yearly: 50000,
+      },
+    },
+    isPopular: true,
+    actionLabel: "Choose Plan",
+  },
+  {
+    amount: {
+      monthly: 199,
+      yearly: 1990,
+    },
+    plan: "Custom",
+    features: [
+      "Unlimited Calls",
+      "Unlimited Contacts",
+      "All Premium features plus custom integrations.",
+      "Dedicated account manager.",
+      "SLA guarantees and personalized support.",
+      "24/7 Support",
+      "Customizable Voice & Language",
+      "Customizable Branding",
+      "Customizable Use Cases",
+      "Choice of 10 distinct voices.",
+      "Custom integration.",
+      "Detailed usage analytics.",
+      "Company operations in real-time.",
+    ],
+    regionalPrices: {
+      Nigeria: {
+        monthly: 10000,
+        yearly: 100000,
+      },
+    },
+    actionLabel: "Contact Sales",
+  },
+];
+
+export const assistantConfig = {
+  transcriber: {
+    provider: "deepgram", // Default transcriber
+    keywords: [],
+  },
+  model: {
+    provider: "openai",
+    model: "gpt-4", // Using GPT-4 as the model
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are an AI assistant. You are here to help the user with their inquiries.",
+      },
+    ],
+    knowledgeBase: {
+      provider: "canonical",
+      topK: 10,
+      fileIds: [],
+    },
+  },
+  voice: {
+    provider: "openai",
+    voiceId: "onyx", // Default voice
+  },
+
+  // firstMessage: "Hello! How can I assist you today?",
+  endCallMessage: "Thank you for using our service. Goodbye!",
+  endCallFunctionEnabled: true, // Allows the assistant to end the call
+};

@@ -5,10 +5,10 @@ import { PropsWithChildren } from "react";
 // }
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
-    <div className="min-h-screen max-w-md mx-auto">
+    <div className="flex flex-col gap-20 flex-1 max-w-[25rem]  m-auto">
       <nav className=" p-4 pb-6  md:p-6  text-center">Logo</nav>
 
-      <main>{children}</main>
+      {children}
     </div>
   );
 }

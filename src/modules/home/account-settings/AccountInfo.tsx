@@ -1,18 +1,36 @@
-import { getBusinessProfileAction } from "@/app/actions/businessProfile";
+import { getBusinessAction } from "@/app/actions/business";
+import { getSubscriptionAction } from "@/app/actions/subscription";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
-import { formatDate } from "date-fns";
+import { differenceInDays, formatDate } from "date-fns";
 import AgentDetails from "./AgentDetails";
 import { PageHeader } from "./PageHeader";
 
 export function AccountInfo() {
-  const { data, isPending } = useServerActionQuery(getBusinessProfileAction, {
+  const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
     queryKey: ["getBusinessProfile"],
   });
 
-  const businessProfile = data?.data.businessProfile;
+  const businessProfile = data?.data;
+
+  const { data: subscriptionData } = useServerActionQuery(
+    getSubscriptionAction,
+    {
+      input: businessProfile?.subscriptionId as string,
+      queryKey: ["getSubscription"],
+      enabled: !!businessProfile?.subscriptionId,
+    },
+  );
+
+  const subscription = subscriptionData?.data;
+
+  const daysLeft = differenceInDays(
+    businessProfile?.subscriptionEndDate ?? new Date(),
+    new Date(),
+  );
+
   if (isPending) return <div>Loading...</div>;
 
   return (
@@ -25,9 +43,12 @@ export function AccountInfo() {
           <h6 className="font-medium text-sm text-black-100 font-satoshi">
             {businessProfile?.name}
           </h6>
-          <Badge className="bg-[hsla(25,64%,59%,1)] rounded-md text-white-100 ">
-            12 days left
-          </Badge>
+
+          {businessProfile?.subscriptionEndDate && (
+            <Badge className="bg-[hsla(25,64%,59%,1)] py-2 h-4 text-[10px] rounded-sm text-white-100 ">
+              {daysLeft > 0 ? daysLeft : 0} days left
+            </Badge>
+          )}
         </div>
 
         <div>
@@ -46,7 +67,7 @@ export function AccountInfo() {
             Subscription
           </h6>
           <p className="text-black-100 capitalize mb-1 font-satoshi font-medium text-sm">
-            {businessProfile?.plan} plan
+            {subscription?.plan ?? "basic"} plan
           </p>
           <p className="text-black-100 mb-1 font-satoshi font-medium text-sm">
             5 agents

@@ -60,19 +60,16 @@ function ModalContent({
   children: ReactNode;
 }) {
   return (
-    <>
-      {/* <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[dialog-overlay-hide_200ms] data-[state=open]:animate-[dialog-overlay-show_200ms]" /> */}
-      <DialogContent
-        title={title}
-        className={cn(
-          `scrollbar-hide fixed left-1/2 top-1/2 max-h-full w-full max-w-lg -translate-x-1/2 -translate-y-1/2  overflow-y-scroll rounded-[50px] bg-[#fff] py-4  text-gray-900  data-[state=closed]:animate-[dialog-content-hide_200ms] data-[state=open]:animate-[dialog-content-show_200ms] ${className}`,
-        )}
-      >
-        {children}
+    <DialogContent
+      title={title}
+      className={cn(
+        `scrollbar-hide flex flex-col flex-1 fixed left-1/2 top-1/2  w-full max-w-lg -translate-x-1/2 -translate-y-1/2   rounded-[50px] bg-white-100  text-gray-900  data-[state=closed]:animate-[dialog-content-hide_200ms] data-[state=open]:animate-[dialog-content-show_200ms] ${className}`,
+      )}
+    >
+      {children}
 
-        <ModalFooter />
-      </DialogContent>
-    </>
+      <ModalFooter />
+    </DialogContent>
   );
 }
 

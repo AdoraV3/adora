@@ -37,7 +37,7 @@ export function DynamicBreadcrumb({
         <BreadcrumbItem className={listClasses}>
           <BreadcrumbLink href="/home">{homeElement}</BreadcrumbLink>
         </BreadcrumbItem>
-        {pathNames.length > 0 && separator}
+        {!!pathNames.length && separator}
         {pathNames.map((link, index) => {
           const href = `/${pathNames.slice(0, index + 1).join("/")}`;
           const itemClasses =

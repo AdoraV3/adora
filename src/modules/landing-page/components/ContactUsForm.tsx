@@ -1,5 +1,6 @@
 "use client";
 
+import { sendContactUsAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,9 +12,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { PhoneInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { ContactUsSchemaType, contactUsSchema } from "../validation";
 
 export function ContactUsForm() {
@@ -22,10 +25,31 @@ export function ContactUsForm() {
     resolver: zodResolver(contactUsSchema),
   });
 
-  const onSubmit: SubmitHandler<ContactUsSchemaType> = () => {};
+  const contactUsHandler = useServerActionMutation(sendContactUsAction, {
+    onSuccess: () => {
+      toast.success("Your enquiry has ben sent successfully!");
+      form.reset({
+        fullName: "",
+        businessName: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+      });
+    },
+    onError: error => {
+      toast.error(error?.message);
+    },
+  });
+
+  const onSubmit: SubmitHandler<ContactUsSchemaType> = data => {
+    contactUsHandler.mutate(data);
+  };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col mt-auto flex-1"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <div className="grid  md:grid-cols-2 items-center gap-4">
           <FormField
             control={form.control}
@@ -134,7 +158,9 @@ export function ContactUsForm() {
           />
         </div>
 
-        <Button className="w-full mt-10">Submit </Button>
+        <Button isLoading={contactUsHandler.isPending} className="w-full mt-10">
+          Submit{" "}
+        </Button>
       </form>
     </Form>
   );

@@ -8,7 +8,11 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { ResetPasswordSchemaType } from "@/validations/auth";
+import {
+  ResetPasswordSchemaType,
+  resetPasswordSchema,
+} from "@/validations/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PasswordInput, Shell } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
@@ -16,7 +20,7 @@ import { PageHeader } from "./components/PageHeader";
 export function ResetPassword() {
   const form = useForm<ResetPasswordSchemaType>({
     mode: "all",
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(resetPasswordSchema),
   });
 
   const onSubmit: SubmitHandler<ResetPasswordSchemaType> = () => {};

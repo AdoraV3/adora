@@ -9,22 +9,24 @@ import { PageHeader } from "../components/PageHeader";
 
 export function ContactUs() {
   return (
-    <section className="pt-20">
-      <div className="max-w-3xl mx-auto">
+    <section className="pt-20 px-4 flex flex-col flex-1 md:px-20">
+      <div className="max-w-3xl  mx-auto">
         <PageHeader
+          className="text-center mb-6"
           title="Contact Us"
-          subTitle="We're here to help! Let us know how we can assist you
-with Adora."
+          subTitle="We're here to help! Let us know how we can assist you with Adora."
         />
       </div>
 
-      <div className="grid py-10 px-12 md:grid-cols-2 gap-5">
+      <div className="grid py-10  md:grid-cols-2 gap-5">
         <ContactUsForm />
+
         <BlurImage
           src="/images/marker.png"
           width={568}
           height={508}
           alt="marker"
+          className="h-full w-full"
         />
       </div>
 

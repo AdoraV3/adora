@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { text } from "drizzle-orm/pg-core";
+import { text, varchar } from "drizzle-orm/pg-core";
 import { lifecycleDates, pgTable } from "../utils";
 import { user } from "./user";
 
@@ -8,8 +8,8 @@ export const accountTypeEnum = ["email", "google"] as const;
 export const account = pgTable("account", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
+    .$defaultFn(() => createId()),
+
   userId: text("user_id")
     .notNull()
     .references(() => user.id, {
@@ -19,6 +19,7 @@ export const account = pgTable("account", {
     .notNull()
     .default("email"),
   googleId: text("google_id").unique(),
+  password: varchar("password", { length: 255 }),
   ...lifecycleDates,
 });
 

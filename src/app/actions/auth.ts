@@ -2,23 +2,31 @@
 
 import {
   createAccount,
-  createBusinessProfile,
+  createBusiness,
   createProfile,
+  createUser,
   createVerifyEmailToken,
+  deleteSessionForUser,
   verifyEmail,
 } from "@/data-access";
+
+import { getAccount } from "@/data-access/account";
+import { createAgent } from "@/data-access/agents";
 import { db } from "@/db";
-import { user as userTable } from "@/db/schema";
+import { subscription, user as userTable } from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
+import { createTransaction } from "@/lib/create-transaction";
 import { googleOAuthClient } from "@/lib/googleAuth";
+import { authenticationProcedure } from "@/lib/procedures";
 import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
 import { generateCodeVerifier, generateState } from "arctic";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { ZSAError, createServerAction } from "zsa";
+import { createAssistant } from "./vapi/assistant";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
@@ -33,28 +41,51 @@ export const signupAction = createServerAction()
     if (result) {
       throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
     }
-
-    const [newUser] = await db
-      .insert(userTable)
-      .values({
-        email,
-        password: passwordHash,
-      })
-      .returning({ userId: userTable.id });
-
-    createBusinessProfile({
-      name: businessName,
-      userId: newUser.userId,
+    const [newUser] = await createUser({
+      email,
+    });
+    const basicSubscription = await db.query.subscription.findFirst({
+      where: eq(subscription.plan, "basic"),
     });
 
-    createProfile({
+    if (!basicSubscription) {
+      throw new ZSAError("NOT_FOUND", "Subscription not found");
+    }
+    const payload = {
+      name: businessName,
+      firstMessage: `Hello, I'm a ${businessName} AI agent. How can I help you today?`,
+    };
+    const response = await createAssistant(payload);
+
+    await createTransaction(async trx => {
+      const [newAgent] = await createAgent(
+        {
+          assistantId: response.id,
+          name: businessName,
+        },
+        trx,
+      );
+
+      await createBusiness(
+        {
+          name: businessName,
+          userId: newUser.userId,
+          subscriptionId: basicSubscription?.id,
+          agentId: newAgent.agentId,
+        },
+        trx,
+      );
+    });
+
+    await createProfile({
       userId: newUser.userId,
       name,
     });
 
-    createAccount({
+    await createAccount({
       userId: newUser.userId,
       type: "email",
+      password: passwordHash,
     });
 
     const token = await createVerifyEmailToken(newUser.userId);
@@ -64,6 +95,7 @@ export const signupAction = createServerAction()
       // to: email,
       name,
     });
+
     return { success: true };
   });
 
@@ -72,24 +104,30 @@ export const loginInAction = createServerAction()
   .handler(async ({ input }) => {
     const { password, email } = input;
     const user = await db.query.user.findFirst({
-      where: eq(userTable.email, email),
+      where: and(eq(userTable.email, email), eq(userTable.emailVerified, true)),
     });
 
-    if (!user || !user?.password) {
-      throw new ZSAError("NOT_AUTHORIZED", "Invalid email or password");
+    if (!user) {
+      throw new ZSAError("NOT_AUTHORIZED", "User not registered");
     }
 
     if (!user.emailVerified) {
       throw new ZSAError("NOT_AUTHORIZED", "Please verify your email");
     }
 
+    const account = await getAccount(user?.id);
+
+    if (!account || !account?.password) {
+      throw new ZSAError("NOT_AUTHORIZED", "Invalid email or password");
+    }
+
     const isPasswordValid = await new Argon2id().verify(
-      user?.password,
+      account?.password,
       password,
     );
 
     if (!isPasswordValid) {
-      throw new ZSAError("NOT_AUTHORIZED");
+      throw new ZSAError("NOT_AUTHORIZED", "Invalid email or password");
     }
 
     const session = await lucia.createSession(user.id, {});
@@ -102,15 +140,19 @@ export const loginInAction = createServerAction()
     return { user, success: true };
   });
 
-export const logOut = async () => {
-  const sessionCookie = lucia.createBlankSessionCookie();
-  cookies().set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  );
-  return redirect("/login");
-};
+export const logOutAction = authenticationProcedure
+  .createServerAction()
+  .handler(async ({ ctx }) => {
+    const { id } = ctx;
+    await deleteSessionForUser(id);
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes,
+    );
+    return redirect("/login");
+  });
 
 export const getGoogleOauthConsentUrl = async () => {
   try {
