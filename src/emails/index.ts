@@ -61,15 +61,19 @@ export async function sendContactUsEmail({
   name,
   phone,
   email,
+  businessName,
 }: {
   message: string;
   name: string;
   phone: string;
   email: string;
+  businessName: string;
 }) {
-  const contactUsHTML = render(ContactUs({ message, name, phone, email }));
+  const contactUsHTML = render(
+    ContactUs({ message, name, phone, email, businessName }),
+  );
   const mailOptions = {
-    to: process.env.SMTP_FROM_EMAIL,
+    to: "stemitope370@gmail.com",
     from: process.env.SMTP_FROM_EMAIL,
     subject: `Message from ${name}`,
     html: contactUsHTML,

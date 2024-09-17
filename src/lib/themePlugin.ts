@@ -37,6 +37,7 @@ export const shadcnPlugin = plugin(
         "--black-300": "240, 3%, 11%, 1",
         "--red": "4, 74%, 49%, 1",
         "--red-200": "353, 82%, 50%, 1",
+        "--red-300": "4, 88%, 97%, 1",
         "--blue": "201, 100%, 50%, .1",
         "--blue-200": "215, 69%, 67%, 1",
         "--blue-300": "230, 95%, 55%, 1",
@@ -57,6 +58,7 @@ export const shadcnPlugin = plugin(
         "--gray-700": "0, 0%, 85%, 1",
         "--yellow": "39, 100%, 73%, 1",
         "--gray-500": "213, 10%, 18%, 0.44",
+        "--gray-750": "215, 18%, 34%, 1",
       },
       ".dark": {
         "--background": "0 0% 3.9%",
@@ -145,6 +147,7 @@ export const shadcnPlugin = plugin(
             600: "hsla(var(--gray-600))",
             650: "hsla(var(--gray-650))",
             700: "hsla(var(--gray-700))",
+            750: "hsla(var(--gray-750))",
           },
           white: {
             100: "hsla(var(--white))",
@@ -158,6 +161,7 @@ export const shadcnPlugin = plugin(
           red: {
             100: "hsla(var(--red-foreground))",
             200: "hsla(var(--red-200))",
+            300: "hsla(var(--red-300))",
             light: "hsla(var(--red))",
           },
           brown: {

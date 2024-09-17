@@ -1,6 +1,9 @@
 "use client";
 
-import { logOut } from "@/app/actions/auth";
+import { getSubscriptionAction } from "@/app/actions";
+import { getAgentAction } from "@/app/actions/agent";
+import { logOutAction } from "@/app/actions/auth";
+import { getBusinessAction } from "@/app/actions/business";
 import { getUserAction } from "@/app/actions/user";
 import { Icons } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,11 +17,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import {
+  useServerActionMutation,
+  useServerActionQuery,
+} from "@/lib/hooks/server-action-hooks";
 import { DynamicBreadcrumb } from "@/modules/commons/components";
+import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
+import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import { getInitials } from "@/modules/commons/utils/helpers";
-
+import { ImportPhoneNumberModal } from "@/modules/home/components/phone-number/ImportPhoneNumberModal";
+import { env } from "env.mjs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export function DashboardNav() {
   const { data: queryData } = useServerActionQuery(getUserAction, {
@@ -26,7 +37,57 @@ export function DashboardNav() {
     queryKey: ["getUser"],
   });
 
+  const { data: agent } = useServerActionQuery(getAgentAction, {
+    input: undefined,
+    queryKey: ["getAgent"],
+  });
+
+  const { data: businessData } = useServerActionQuery(getBusinessAction, {
+    input: undefined,
+    queryKey: ["getBusiness"],
+  });
+  const business = businessData?.data;
+  const { data: subscriptionData } = useServerActionQuery(
+    getSubscriptionAction,
+    {
+      input: business?.subscriptionId as string,
+      queryKey: ["getSubscription"],
+      enabled: !!business?.subscriptionId,
+    },
+  );
+
+  const logOutHandler = useServerActionMutation(logOutAction, {});
+
   const user = queryData?.data;
+  const { createQueryStrings } = useQueryParams();
+  const router = useRouter();
+  const handleUpgradePlan = () => {
+    if (user?.email) {
+      router.push(
+        `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}?${createQueryStrings({
+          prefilled_email: user?.email,
+        })}`,
+      );
+    } else {
+      router.push(
+        `/login?${createQueryStrings({
+          from: encodeURIComponent(
+            `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}`,
+          ),
+        })}`,
+      );
+    }
+  };
+
+  const disclosure = useDisclosure();
+
+  useEffect(() => {
+    if (!agent?.data?.telephone) {
+      disclosure.onOpen();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [agent?.data?.telephone]);
+
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
       <DynamicBreadcrumb
@@ -92,18 +153,24 @@ export function DashboardNav() {
                 </div>
               </div>
 
-              <Badge className="bg-blue-200 rounded-md text-white-100">
-                Pro plan{" "}
+              <Badge className="bg-blue-200 capitalize rounded-md text-white-100">
+                {subscriptionData?.data?.plan ?? "basic"} plan{" "}
               </Badge>
             </div>
 
-            <div className="flex justify-between px-3 mb-3 items-center">
-              <p className="font-satoshi font-normal text-sm text-primary">
-                Upgrade Plan
-              </p>
+            {subscriptionData?.data?.plan !== "enterprise" && (
+              <button
+                type="button"
+                onClick={handleUpgradePlan}
+                className="flex justify-between w-full px-3 mb-3 items-center"
+              >
+                <p className="font-satoshi font-normal text-sm text-primary">
+                  Upgrade Plan
+                </p>
 
-              <Icons.Upload className="text-primary" />
-            </div>
+                <Icons.Upload className="text-primary" />
+              </button>
+            )}
 
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="pt-2 space-y-2">
@@ -130,7 +197,7 @@ export function DashboardNav() {
                 Help
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => logOut()}
+                onClick={() => logOutHandler.mutate(undefined)}
                 className="text-gray-2  font-satoshi font-normal text-sm"
               >
                 Logout
@@ -139,6 +206,8 @@ export function DashboardNav() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      <ImportPhoneNumberModal {...disclosure} />
     </nav>
   );
 }

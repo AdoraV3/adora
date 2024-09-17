@@ -3,9 +3,9 @@ CREATE TABLE IF NOT EXISTS "adora_account" (
 	"user_id" text NOT NULL,
 	"account_type" text DEFAULT 'email' NOT NULL,
 	"google_id" text,
+	"password" varchar(255),
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_account_id_unique" UNIQUE("id"),
 	CONSTRAINT "adora_account_google_id_unique" UNIQUE("google_id")
 );
 --> statement-breakpoint
@@ -16,8 +16,7 @@ CREATE TABLE IF NOT EXISTS "adora_account_preference" (
 	"language" text,
 	"timezone" text,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_account_preference_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_agent" (
@@ -27,8 +26,7 @@ CREATE TABLE IF NOT EXISTS "adora_agent" (
 	"voice" text DEFAULT 'female' NOT NULL,
 	"telephone" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_agent_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_business" (
@@ -37,12 +35,14 @@ CREATE TABLE IF NOT EXISTS "adora_business" (
 	"name" varchar(255) NOT NULL,
 	"description" varchar(255),
 	"logo" varchar(255),
-	"subscription_plan" varchar DEFAULT 'basic' NOT NULL,
+	"stripe_customer_id" varchar(255),
 	"customer_base" integer,
 	"country" varchar(255),
+	"subscription_start_date" timestamp DEFAULT now() NOT NULL,
+	"subscription_end_date" timestamp DEFAULT now() NOT NULL,
+	"subscription_id" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_business_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_call_log" (
@@ -51,8 +51,7 @@ CREATE TABLE IF NOT EXISTS "adora_call_log" (
 	"transcript" text,
 	"business_id" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_call_log_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_knowledge_base" (
@@ -60,8 +59,7 @@ CREATE TABLE IF NOT EXISTS "adora_knowledge_base" (
 	"transcript" text,
 	"business_id" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_knowledge_base_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_profile" (
@@ -73,8 +71,7 @@ CREATE TABLE IF NOT EXISTS "adora_profile" (
 	"phone" varchar,
 	"country" varchar,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_profile_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_reset_token" (
@@ -83,8 +80,7 @@ CREATE TABLE IF NOT EXISTS "adora_reset_token" (
 	"token" varchar,
 	"expires_at" timestamp with time zone NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_reset_token_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_session" (
@@ -96,12 +92,16 @@ CREATE TABLE IF NOT EXISTS "adora_session" (
 CREATE TABLE IF NOT EXISTS "adora_user" (
 	"id" text PRIMARY KEY NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"password" varchar(255),
 	"email_verified" boolean DEFAULT false,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_user_id_unique" UNIQUE("id"),
 	CONSTRAINT "adora_user_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "adora_user_business" (
+	"user_id" text NOT NULL,
+	"business_id" text NOT NULL,
+	CONSTRAINT "adora_user_business_user_id_business_id_unique" UNIQUE("user_id","business_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_verify_email_token" (
@@ -110,8 +110,17 @@ CREATE TABLE IF NOT EXISTS "adora_verify_email_token" (
 	"token" text,
 	"expires_at" timestamp with time zone NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "adora_verify_email_token_id_unique" UNIQUE("id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "adora_subscription" (
+	"id" text PRIMARY KEY NOT NULL,
+	"subscription_plan" varchar DEFAULT 'basic',
+	"subscription_period" varchar DEFAULT 'monthly',
+	"amount" integer DEFAULT 0,
+	"price_id" varchar(255),
+	"plan_link" varchar(255),
+	"payment_provider" varchar
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -134,6 +143,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "adora_business" ADD CONSTRAINT "adora_business_user_id_adora_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."adora_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "adora_business" ADD CONSTRAINT "adora_business_subscription_id_adora_subscription_id_fk" FOREIGN KEY ("subscription_id") REFERENCES "public"."adora_subscription"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -164,6 +179,18 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "adora_session" ADD CONSTRAINT "adora_session_user_id_adora_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."adora_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "adora_user_business" ADD CONSTRAINT "adora_user_business_user_id_adora_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."adora_user"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "adora_user_business" ADD CONSTRAINT "adora_user_business_business_id_adora_business_id_fk" FOREIGN KEY ("business_id") REFERENCES "public"."adora_business"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

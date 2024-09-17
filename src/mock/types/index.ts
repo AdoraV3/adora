@@ -17,3 +17,18 @@ export interface ListItem {
   description: string;
   image: string;
 }
+
+export interface PricingPlan {
+  amount: {
+    monthly: number;
+    yearly: number;
+  };
+  plan: string;
+  features: string[];
+  isPopular?: boolean;
+  price?: string;
+  monthlyPrice?: string;
+  yearlyPrice?: string;
+  actionLabel: string;
+  regionalPrices?: Record<string, PricingPlan["amount"]>;
+}

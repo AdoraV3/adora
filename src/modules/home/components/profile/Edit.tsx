@@ -1,6 +1,6 @@
 "use client";
 
-import { getBusinessProfileAction } from "@/app/actions/businessProfile";
+import { getBusinessAction } from "@/app/actions/business";
 import { getUserAction, updateUserProfileAction } from "@/app/actions/user";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +39,7 @@ export function Edit() {
     value: el.isoCode,
   }));
 
-  const { data, isPending } = useServerActionQuery(getBusinessProfileAction, {
+  const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
     queryKey: ["getBusinessProfile"],
   });
@@ -74,7 +74,7 @@ export function Edit() {
     updateProfileHandler.mutate(values);
   };
 
-  const businessProfile = data?.data?.businessProfile;
+  const businessProfile = data?.data;
 
   useEffect(() => {
     form.reset({

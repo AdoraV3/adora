@@ -4,6 +4,7 @@ import {
   createPasswordResetToken,
   deletePasswordResetToken,
   getPasswordResetToken,
+  getProfile,
   getUserByEmail,
   updatePassword,
 } from "@/data-access";
@@ -42,12 +43,18 @@ export async function resetPasswordAction(email: string) {
     throw new ZSAError("NOT_FOUND", "User not found");
   }
 
+  const profile = await getProfile(user?.id);
+
+  if (!profile) {
+    throw new ZSAError("NOT_FOUND", "Profile not found");
+  }
+
   const token = await createPasswordResetToken(user.id);
 
   await sendResetPasswordEmail({
     token,
     to: "stemitope370@gmail.com",
-    name: user?.profile?.name,
+    name: profile?.name,
   });
   return { success: true };
 }

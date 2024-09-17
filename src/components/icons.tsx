@@ -1,6 +1,7 @@
 import {
   ArrowDown,
   ArrowUp,
+  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -40,12 +41,13 @@ export const Icons = {
   ChevronsUpDown,
   ArrowUp,
   ArrowDown,
+
   Menu,
   VerticalThreeDots: MoreVertical,
   HorizontalThreeDots: MoreHorizontal,
   VerticalSliders: Sliders,
   HorizontalSliders: SlidersHorizontal,
-
+  Check,
   Add: Plus,
   AddCircle: PlusCircle,
   Remove: Minus,
@@ -835,6 +837,102 @@ export const Icons = {
         fillRule="evenodd"
         d="M3.541 7.175C5.487 3.725 6.46 2 8 2c1.54 0 2.513 1.725 4.459 5.175l.242.429c1.617 2.867 2.425 4.3 1.695 5.348C13.666 14 11.857 14 8.242 14h-.485c-3.614 0-5.422 0-6.153-1.048-.73-1.048.078-2.481 1.695-5.348l.242-.43zM8 4.833a.5.5 0 01.5.5v3.334a.5.5 0 11-1 0V5.333a.5.5 0 01.5-.5zm0 6.5A.667.667 0 108 10a.667.667 0 000 1.333z"
         clipRule="evenodd"
+      />
+    </svg>
+  ),
+  File: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="28"
+      height="34"
+      fill="none"
+      viewBox="0 0 28 34"
+      {...props}
+    >
+      <path
+        fill="#321B0B"
+        d="M17.333 3.926H4v26.667h20v-20h-6.667V3.926zm3.334 11.667v6.666A6.665 6.665 0 0114 28.926a6.665 6.665 0 01-6.667-6.667v-9.166c0-2.3 1.867-4.167 4.167-4.167s4.167 1.867 4.167 4.167v9.166h-3.334v-9.166a.825.825 0 00-.833-.834.825.825 0 00-.833.834v9.166c0 1.834 1.5 3.334 3.333 3.334 1.833 0 3.333-1.5 3.333-3.334v-6.666h3.334z"
+        opacity="0.3"
+      />
+      <path
+        fill="#321B0B"
+        d="M17.333 22.26c0 1.833-1.5 3.333-3.333 3.333a3.343 3.343 0 01-3.334-3.334v-9.166c0-.467.367-.834.834-.834.466 0 .833.367.833.834v9.166h3.333v-9.166c0-2.3-1.866-4.167-4.166-4.167a4.168 4.168 0 00-4.167 4.167v9.166A6.665 6.665 0 0014 28.926a6.665 6.665 0 006.666-6.667v-6.666h-3.333v6.666z"
+      />
+      <path
+        fill="#321B0B"
+        d="M17.334.595H4A3.343 3.343 0 00.667 3.928v26.667c0 1.833 1.5 3.333 3.333 3.333h20c1.834 0 3.334-1.5 3.334-3.333v-20l-10-10zm6.666 30H4V3.928h13.334v6.667H24v20z"
+      />
+    </svg>
+  ),
+
+  Retry: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="20"
+      fill="none"
+      viewBox="0 0 17 20"
+      {...props}
+    >
+      <path
+        fill="#321B0B"
+        d="M2.5 11.263c0-1.65.67-3.15 1.76-4.24l-1.42-1.42a8.014 8.014 0 00-2.34 5.66c0 4.08 3.05 7.44 7 7.93v-2.02c-2.83-.48-5-2.94-5-5.91zm14 0c0-4.42-3.58-8-8-8-.06 0-.12.01-.18.01l1.09-1.09L8 .763l-3.5 3.5 3.5 3.5 1.41-1.41-1.08-1.08c.06 0 .12-.01.17-.01 3.31 0 6 2.69 6 6 0 2.97-2.17 5.43-5 5.91v2.02c3.95-.49 7-3.85 7-7.93z"
+      />
+    </svg>
+  ),
+  Delete2: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="56"
+      height="56"
+      fill="none"
+      viewBox="0 0 56 56"
+      {...props}
+    >
+      <rect width="48" height="48" x="4" y="4" fill="#FEE4E2" rx="24" />
+      <rect
+        width="48"
+        height="48"
+        x="4"
+        y="4"
+        stroke="#FEF3F2"
+        strokeWidth="8"
+        rx="24"
+      />
+      <path
+        stroke="#D92D20"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M32 22v-.8c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C30.48 18 29.92 18 28.8 18h-1.6c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C24 19.52 24 20.08 24 21.2v.8m2 5.5v5m4-5v5M19 22h18m-2 0v11.2c0 1.68 0 2.52-.327 3.162a3 3 0 01-1.311 1.311C32.72 38 31.88 38 30.2 38h-4.4c-1.68 0-2.52 0-3.162-.327a3 3 0 01-1.311-1.311C21 35.72 21 34.88 21 33.2V22"
+      />
+    </svg>
+  ),
+  Success: (props: LucideProps) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="56"
+      height="56"
+      fill="none"
+      viewBox="0 0 56 56"
+      {...props}
+    >
+      <rect width="48" height="48" x="4" y="4" fill="#D1FADF" rx="24" />
+      <rect
+        width="48"
+        height="48"
+        x="4"
+        y="4"
+        stroke="#ECFDF3"
+        strokeWidth="8"
+        rx="24"
+      />
+      <path
+        stroke="#039855"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M23.5 28l3 3 6-6m5.5 3c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z"
       />
     </svg>
   ),

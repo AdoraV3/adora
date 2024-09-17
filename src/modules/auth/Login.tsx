@@ -24,6 +24,7 @@ import {
   PasswordInput,
   Shell,
 } from "../commons/components";
+import { useQueryParams } from "../commons/hooks/useQueryParams";
 import { PageHeader } from "./components/PageHeader";
 
 export function Login() {
@@ -32,11 +33,24 @@ export function Login() {
     resolver: zodResolver(authSchema),
   });
 
+  const { queryParams, createQueryStrings } = useQueryParams();
+
+  const from = queryParams.get("from");
+
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
   const loginHandler = useServerActionMutation(loginInAction, {
     onSuccess: () => {
+      if (from) {
+        const redirectUrl = decodeURIComponent(from);
+        router.push(
+          `${redirectUrl}?${createQueryStrings({
+            prefilled_email: form.getValues("email"),
+          })}`,
+        );
+        return;
+      }
       router.push("/home");
       toast.success("Login successful");
     },
@@ -59,9 +73,9 @@ export function Login() {
   };
 
   return (
-    <Shell className="w-full mt-10">
-      <div>
-        <PageHeader className="mb-5" title="Welcome back" />
+    <Shell as="main" className="flex w-full flex-col flex-1">
+      <div className="w-full flex flex-col flex-1 gap-5">
+        <PageHeader className="mb-2" title="Welcome back" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -70,9 +84,15 @@ export function Login() {
               render={({ field }) => (
                 <FormItem id="email" className="mb-5 relative">
                   <FormControl>
-                    <div className="relative">
-                      <FloatingInput placeholder="john@doe.com" {...field} />
-                      <FloatingLabel>Email address</FloatingLabel>
+                    <div className="relative group focus:text-primary">
+                      <FloatingInput
+                        className="group-focus:text-primary"
+                        placeholder="john@doe.com"
+                        {...field}
+                      />
+                      <FloatingLabel className="group-focus:text-primary">
+                        Email address
+                      </FloatingLabel>
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -101,7 +121,7 @@ export function Login() {
 
             <Link
               href="/forgot-password"
-              className="text-primary font-medium text-base  font-satoshi"
+              className="text-primary font-medium text-base  mt-4 font-satoshi"
             >
               Forgot Password?
             </Link>
@@ -117,7 +137,7 @@ export function Login() {
             </Button>
           </form>
         </Form>
-        <div className=" text-center mt-2">
+        <div className=" text-center">
           <p className="font-satoshi text-base font-normal text-gray-750">
             Don’t have an account?
             <span>

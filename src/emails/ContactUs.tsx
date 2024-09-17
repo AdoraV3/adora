@@ -15,8 +15,15 @@ interface ContactUsProps {
   email: string;
   phone: string;
   message: string;
+  businessName: string;
 }
-export function ContactUs({ name, email, phone, message }: ContactUsProps) {
+export function ContactUs({
+  name,
+  email,
+  phone,
+  message,
+  businessName,
+}: ContactUsProps) {
   return (
     <Html>
       <Head />
@@ -30,6 +37,10 @@ export function ContactUs({ name, email, phone, message }: ContactUsProps) {
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
               <strong>{name}</strong> would like to contact you about something!
             </Heading>
+
+            <Text className="text-black text-[14px] my-10 leading-[24px]">
+              Their businessName is {businessName}{" "}
+            </Text>
             <Text className="text-black text-[14px] my-10 leading-[24px]">
               Here is the message:
             </Text>

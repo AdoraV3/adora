@@ -7,6 +7,7 @@ import { callLog } from "./call-log";
 import { knowledgeBase } from "./knowledge-base";
 import { outboundBound } from "./outbound-call";
 import { profile } from "./profile";
+import { subscription } from "./subscription";
 import { user } from "./user";
 import { userBusiness } from "./userBusiness";
 import { verifyEmailToken } from "./verifyEmailToken";
@@ -15,8 +16,8 @@ export const businessRelations = relations(business, ({ many, one }) => ({
   knowledgeBase: many(knowledgeBase),
   callLogs: many(callLog),
   agent: one(agent, {
-    fields: [business.id],
-    references: [agent.businessId],
+    fields: [business.agentId],
+    references: [agent.id],
   }),
   outboundCall: many(outboundBound),
   user: one(user, {
@@ -24,13 +25,21 @@ export const businessRelations = relations(business, ({ many, one }) => ({
     references: [user.id],
   }),
   userBusiness: many(userBusiness),
+  subscription: one(subscription, {
+    fields: [business.subscriptionId],
+    references: [subscription.id],
+  }),
 }));
 
 export const agentRelations = relations(agent, ({ one }) => ({
   business: one(business, {
-    fields: [agent.businessId],
-    references: [business.id],
+    fields: [agent.id],
+    references: [business.agentId],
   }),
+}));
+
+export const subscriptionRelations = relations(subscription, ({ many }) => ({
+  business: many(business),
 }));
 
 export const userRelations = relations(user, ({ one, many }) => ({

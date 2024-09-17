@@ -1,14 +1,18 @@
 "use server";
 
 import {
-  createBusinessProfile,
-  getBusinessProfile,
+  createBusiness,
+  getBusiness,
   getUserByEmail,
-  updateBusinessProfile,
+  updateBusiness,
   updateProfile,
 } from "@/data-access";
+import { getPlan } from "@/data-access/subscription";
+import { sendContactUsEmail } from "@/emails";
 import { authenticationProcedure } from "@/lib/procedures";
 import { profileSchema } from "@/modules/home/components/profile/validation";
+import { contactUsSchema } from "@/modules/landing-page/validation";
+import { ZSAError, createServerAction } from "zsa";
 
 export const updateUserProfileAction = authenticationProcedure
   .createServerAction()
@@ -23,15 +27,23 @@ export const updateUserProfileAction = authenticationProcedure
     });
     let businessProfile;
 
-    const findBusinessProfile = await getBusinessProfile(id);
+    const findBusinessProfile = await getBusiness(id);
     if (!findBusinessProfile) {
-      businessProfile = await createBusinessProfile({
+      const basicPlan = await getPlan("basic");
+
+      if (!basicPlan) {
+        throw new ZSAError("NOT_FOUND", "Subscription not found");
+      }
+
+      businessProfile = await createBusiness({
         name: businessName,
         country: businessCountry,
         userId: id,
+        subscriptionId: basicPlan.id,
+        agentId: "wo4lm1obd1tahizoxgj64ef3",
       });
     } else {
-      businessProfile = await updateBusinessProfile(id, {
+      businessProfile = await updateBusiness(id, {
         name: businessName,
         country: businessCountry,
       });
@@ -45,6 +57,18 @@ export const getUserAction = authenticationProcedure
   .handler(async ({ ctx }) => {
     const { email } = ctx;
     const user = await getUserByEmail(email);
-
     return { success: true, data: user };
+  });
+
+export const sendContactUsAction = createServerAction()
+  .input(contactUsSchema)
+  .handler(async ({ input }) => {
+    const { fullName, businessName, email, phoneNumber, message } = input;
+    await sendContactUsEmail({
+      name: fullName,
+      businessName,
+      email,
+      phone: phoneNumber,
+      message,
+    });
   });

@@ -45,8 +45,6 @@ export function CreateOutboundCall() {
 
   const onSubmit: SubmitHandler<CreateOutboundCallSchemaType> = () => {};
 
-  const handleFileChange = () => {};
-
   return (
     <section className="max-w-3xl pt-10 ">
       <Form {...form}>
@@ -233,23 +231,7 @@ export function CreateOutboundCall() {
               <Label className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                 Upload Knowledge Base (Optional){" "}
               </Label>
-              <FileUpload
-                accept="jpg, .jpeg, .png,"
-                register={form.register("knowledgeBase", {
-                  onChange: handleFileChange,
-                })}
-              >
-                <div className="flex py-16  flex-col gap-2 justify-center items-center">
-                  <p className="text-sm font-normal font-satoshi text-[hsla(0,2%,41%,1)] ">
-                    <span className="font-bold"> Click to upload </span> or drag
-                    and drop
-                  </p>
-
-                  <p className="text-[hsla(0,2%,41%,1)] font-normal text-sm font-satoshi ">
-                    PDF, SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-              </FileUpload>
+              <FileUpload />
             </div>
             <div className="flex col-span-2 justify-center mt-20">
               <Button className="px-20" type="submit">

@@ -6,8 +6,7 @@ import { business } from "./business";
 export const callLog = pgTable("call_log", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
+    .$defaultFn(() => createId()),
   agentName: varchar("agent_name", { length: 255 }),
   transcript: text("transcript"),
   businessId: text("business_id")

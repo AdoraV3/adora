@@ -1,6 +1,10 @@
 "use client";
 
-import { sendResetPasswordEmailAction } from "@/app/actions/reset-token";
+import { logOutAction } from "@/app/actions";
+import {
+  changePasswordAction,
+  sendResetPasswordEmailAction,
+} from "@/app/actions/reset-token";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,8 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
-import VerifyOtp from "@/modules/auth/components/VerifyOtp";
-import { Modal, PasswordInput } from "@/modules/commons/components";
+import { PasswordInput } from "@/modules/commons/components";
 import {
   ChangePasswordSchemaType,
   changePasswordSchema,
@@ -21,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { VerifyOtpModal } from "./VerifyOtpModal";
 
 export function ChangePassword() {
   const [showOTP, setShowOTP] = useState(false);
@@ -29,19 +33,35 @@ export function ChangePassword() {
     resolver: zodResolver(changePasswordSchema),
   });
 
-  // const changePasswordHandler = useServerActionMutation(changePasswordAction, {
-  //   onSuccess: () => {
-  //     toast.success("Password changed successfully");
-  //   },
-  //   onError: error => toast.error(error?.message),
-  // });
+  const logOutHandler = useServerActionMutation(logOutAction, {});
+
+  const changePasswordHandler = useServerActionMutation(changePasswordAction, {
+    onSuccess: () => {
+      toast.success("Password changed successfully!", {
+        description: "Please login again with your new password",
+      });
+      setShowOTP(!showOTP);
+      form.reset({
+        oldPassword: "",
+        password: "",
+        confirmPassword: "",
+      });
+      logOutHandler.mutate(undefined);
+    },
+    onError: error => toast.error(error?.message),
+  });
+
+  const changePassword = (otp: string) => {
+    if (!otp) return;
+    changePasswordHandler.mutate({ ...form.getValues(), token: otp });
+  };
 
   const sendResetOTPHandler = useServerActionMutation(
     sendResetPasswordEmailAction,
     {
       onSuccess: () => {
         toast.success("Password OTP sent successfully!");
-        setShowOTP(true);
+        setShowOTP(!showOTP);
       },
       onError: error => toast.error(error?.message),
     },
@@ -49,6 +69,7 @@ export function ChangePassword() {
   const onSubmit: SubmitHandler<ChangePasswordSchemaType> = () => {
     sendResetOTPHandler.mutate(undefined);
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -127,12 +148,12 @@ export function ChangePassword() {
         </Button>
       </form>
 
-      <Modal isOpen={showOTP} isOpenChange={setShowOTP}>
-        <Modal.Content title="Change Password">
-          <VerifyOtp />
-          <Modal.Footer>Hi</Modal.Footer>
-        </Modal.Content>
-      </Modal>
+      <VerifyOtpModal
+        isOpen={showOTP}
+        onClose={() => setShowOTP(!showOTP)}
+        isLoading={changePasswordHandler.isPending}
+        onSubmit={changePassword}
+      />
     </Form>
   );
 }

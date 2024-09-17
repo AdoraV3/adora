@@ -1,7 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
-import { text } from "drizzle-orm/pg-core";
-import { lifecycleDates, pgTable } from "../utils";
-import { business } from "./business";
+import { text, varchar } from "drizzle-orm/pg-core";
+import { pgTable } from "../utils";
 
 export const languageEnum = ["french", "english"] as const;
 export const voiceEnum = ["male", "female"] as const;
@@ -9,11 +8,7 @@ export const voiceEnum = ["male", "female"] as const;
 export const agent = pgTable("agent", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
-  businessId: text("business_id")
-    .notNull()
-    .references(() => business.id, { onDelete: "cascade" }),
+    .$defaultFn(() => createId()),
   language: text("language", { enum: languageEnum })
     .notNull()
     .default("english"),
@@ -22,16 +17,10 @@ export const agent = pgTable("agent", {
   })
     .notNull()
     .default("female"),
-  telephone: text("telephone").notNull(),
-  ...lifecycleDates,
+  telephone: text("telephone").unique(),
+  name: varchar("name", { length: 50 }),
+  assistantId: varchar("assistant_id", { length: 50 }),
 });
-
-// export const agentRelations = relations(agent, ({ one }) => ({
-//   business: one(business, {
-//     fields: [agent.businessId],
-//     references: [business.id],
-//   }),
-// }));
 
 export type Agent = typeof agent.$inferSelect;
 export type NewAgent = typeof agent.$inferInsert;

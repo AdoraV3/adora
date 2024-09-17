@@ -9,7 +9,7 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  verbose: true,
+  verbose: false,
   strict: true,
   tablesFilter: [`${dbPrefix}_*`],
 } satisfies Config;

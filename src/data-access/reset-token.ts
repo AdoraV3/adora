@@ -26,7 +26,7 @@ export async function getPasswordResetToken(token: string) {
 }
 
 export async function deletePasswordResetToken(token: string, trx = db) {
-  await trx.delete(resetToken).where(eq(resetToken.token, token));
+  return trx.delete(resetToken).where(eq(resetToken.token, token));
 }
 
 export async function verifyResetToken(token: string) {

@@ -57,7 +57,7 @@ export function SignUp({ token, name }: { token: string; name: string }) {
               Hi {name},
             </Text>
             <Text className="pt-2 pb-3 text-sm font-normal font-satoshi">
-              Welcome to Adora!,
+              Welcome to Adora!
             </Text>
 
             <Text className="text-black-100 font-satoshi font-normal pb-3 text-lg">
@@ -69,7 +69,7 @@ export function SignUp({ token, name }: { token: string; name: string }) {
             </Text>
 
             <Text className="text-black-100 font-satoshi font-normal pb-3 text-lg">
-              If you did not sign up to adora or if you have any questions,
+              If you did not sign up to Adora or if you have any questions,
               please contact our support at adora@support.com
             </Text>
 
@@ -92,7 +92,7 @@ export function SignUp({ token, name }: { token: string; name: string }) {
               Address: 734 States Street Mississauga
             </Text>
 
-            <Text className="text-base  pb-2 font-medium text-black-100 font-satoshi">
+            <Text className="text-base pb-2 font-medium text-black-100 font-satoshi">
               Ontario. Canada L5R 0B6
             </Text>
 

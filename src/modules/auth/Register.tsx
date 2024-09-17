@@ -61,7 +61,7 @@ export function Register() {
   };
 
   return (
-    <Shell className="w-full mt-10">
+    <Shell as="main" className="flex flex-col flex-1">
       <div className="h-[calc(95dvh-100px)] scrollbar-thin px-6 ">
         <PageHeader className="mb-10" title="Create an account" />
         <Form {...form}>

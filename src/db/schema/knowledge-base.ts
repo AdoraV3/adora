@@ -1,16 +1,21 @@
 import { createId } from "@paralleldrive/cuid2";
-import { text } from "drizzle-orm/pg-core";
+import { integer, text } from "drizzle-orm/pg-core";
 import { lifecycleDates, pgTable } from "../utils";
 import { business } from "./business";
 
 export const knowledgeBase = pgTable("knowledge_base", {
   id: text("id")
     .primaryKey()
-    .$defaultFn(() => createId())
-    .unique(),
-  transcript: text("transcript"),
+    .$defaultFn(() => createId()),
+  url: text("url"),
+  fileId: text("file_id"),
+  size: integer("size"),
+  originalName: text("original_name"),
   businessId: text("business_id")
     .notNull()
     .references(() => business.id, { onDelete: "cascade" }),
   ...lifecycleDates,
 });
+
+export type KnowledgeBase = typeof knowledgeBase.$inferSelect;
+export type NewKnowledgeBase = typeof knowledgeBase.$inferInsert;
