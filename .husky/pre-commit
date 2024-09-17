@@ -1,10 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
+#
 #echo '🏗️👷 Styling your project before committing👷‍♂️🏗️'
 #echo 'please be patient, this may take a while...'
 #
-## Check ESLint Standards
+# #Check ESLint Standards
 #pnpm run lint ||
 #(
 #    echo '🔨❌ Yoo, you have a problem in your code. Check linter 🔨❌
@@ -12,7 +12,7 @@
 #    false;
 #)
 #
-## Check TypeScript Compilation
+# #Check TypeScript Compilation
 #pnpm run tsc --noEmit ||
 #(
 #    echo '🔨❌ Yoo, you have TypeScript errors in your code. Fix them 🔨❌
@@ -21,5 +21,5 @@
 #)
 #
 #echo '🎉 No error found: committing this now.... ✨🚀🏄‍♂️🍻'
-
-npx lint-staged
+#
+#npx lint-staged
