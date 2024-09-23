@@ -91,7 +91,7 @@ export function DashboardNav() {
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
       <DynamicBreadcrumb
-        activeClasses="text-black-100"
+        activeClasses="text-[#575757]"
         homeElement="Menu"
         separator="/"
         capitalizeLinks
@@ -105,7 +105,7 @@ export function DashboardNav() {
       </p>
       <div className="flex gap-4 items-center">
         <Link href="/notification">
-          <Icons.Notification className="text-black-100" />
+          <Icons.Notification className="text-[#575757]" />
         </Link>
 
         <DropdownMenu>
@@ -119,7 +119,7 @@ export function DashboardNav() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="text-left">
-                  <p className="font-satoshi text-sm font-normal text-black-100">
+                  <p className="font-satoshi text-sm font-normal text-[#575757]">
                     {user?.profile?.name}
                   </p>
                   <p className="font-satoshi font-normal text-xs  text-gray-500 ">
@@ -144,7 +144,7 @@ export function DashboardNav() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="text-left">
-                  <p className="font-satoshi text-sm font-normal capitalize text-black-100">
+                  <p className="font-satoshi text-sm font-normal capitalize text-[#575757]">
                     {user?.profile?.name}
                   </p>
                   <p className="font-satoshi font-normal text-xs text-gray-500 ">

@@ -36,7 +36,7 @@ export function OverviewCard({
           {title}{" "}
         </p>
 
-        <div className="font-satoshi font-medium text-2xl text-black-100">
+        <div className="font-satoshi font-medium text-2xl text-[#575757]">
           {value}
         </div>
 

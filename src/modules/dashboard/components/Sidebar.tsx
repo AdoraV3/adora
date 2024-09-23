@@ -152,7 +152,7 @@ export function Sidebar({
             onClick={() => setIsOpen?.(!isOpen)}
             className="z-100 absolute rounded-full -right-5 top-2 mt-6 h-8 w-8 bg-white-100 px-2 shadow-sm"
           >
-            <Icons.ChevronLeft className="text-black-100" />
+            <Icons.ChevronLeft className="text-[#575757]" />
           </Button>
           <div className="mt-20 flex flex-col justify-between md:h-[75dvh]">
             <div>
@@ -272,7 +272,7 @@ export function Sidebar({
                         className={cn(
                           "my-5 flex items-center gap-2  px-4",
                           isActiveRoute &&
-                            "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                            "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-[#575757]",
                         )}
                         href={item.href ?? "/"}
                       >
@@ -281,7 +281,7 @@ export function Sidebar({
                           className={cn(
                             "text-gray-350",
                             isActiveRoute &&
-                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                              "bg-[hsla(210,13%,97%,0.5)] text-[#575757]",
                           )}
                         />
                         <p
@@ -290,7 +290,7 @@ export function Sidebar({
                               isOpen ? "block" : "hidden"
                             }`,
                             isActiveRoute &&
-                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                              "bg-[hsla(210,13%,97%,0.5)] text-[#575757]",
                           )}
                         >
                           Link

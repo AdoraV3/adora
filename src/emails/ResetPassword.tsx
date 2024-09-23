@@ -54,13 +54,13 @@ export function ResetPassword({
               alt="Adora"
               className="flex items-center justify-center"
             />
-            <Text className="text-black-100">Hi {name},</Text>
+            <Text className="text-[#575757]">Hi {name},</Text>
             <Text className="py-2 text-sm font-normal font-poppins">
               Password reset instructions, if you didn&apos;t initiate this
               process, please change your password immediately.
             </Text>
 
-            <Text className="text-black-100 font-satoshi font-bold text-3xl pb-3">
+            <Text className="text-[#575757] font-satoshi font-bold text-3xl pb-3">
               {token}
             </Text>
             <Hr />

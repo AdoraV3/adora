@@ -13,7 +13,7 @@ export function About() {
       <div className=" text-center pt-10 max-w-4xl mx-auto">
         <BlurIn
           word="  Empowering businesses to thrive"
-          className="font-normal font-coreC text-black-100 text-5xl "
+          className="font-normal font-coreC text-[#575757] text-5xl "
         />
 
         <p className="font-normal font-satoshi text-lg text-gray-2 mt-2">

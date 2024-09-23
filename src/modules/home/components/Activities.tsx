@@ -3,7 +3,7 @@ import ActivityItem from "./ActivityItem";
 export function Activities() {
   return (
     <div>
-      <h5 className="font-medium text-2xl text-black-100 font-satoshi">
+      <h5 className="font-medium text-2xl text-[#575757] font-satoshi">
         Activity
       </h5>
 

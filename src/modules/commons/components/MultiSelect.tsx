@@ -22,7 +22,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 const multiSelectVariants = cva(
-  "m-1 transition text-black-100 ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+  "m-1 transition text-[#575757] ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
   {
     variants: {
       variant: {
@@ -179,7 +179,7 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > maxCount && (
                     <Badge
                       className={cn(
-                        "!text-black-100 border-foreground/1 hover:bg-transparent",
+                        "!text-[#575757] border-foreground/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
                         multiSelectVariants({ variant, className }),
                       )}
@@ -265,7 +265,7 @@ export const MultiSelect = React.forwardRef<
                         className={cn(
                           "mr-2 flex h-4 w-4 items-center justify-center rounded-sm ",
                           isSelected
-                            ? " text-black-100"
+                            ? " text-[#575757]"
                             : "opacity-50 [&_svg]:invisible",
                         )}
                       >

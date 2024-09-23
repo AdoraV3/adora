@@ -28,7 +28,7 @@ export function Hero() {
   return (
     <section className="pt-10">
       <div className="px-4 md:px-20">
-        <h1 className="font-normal mb-3 flex items-center gap-3  tracking-tight font-coreC  text-black-100 text-xl md:text-5xl ">
+        <h1 className="font-normal mb-3 flex items-center gap-3  tracking-tight font-coreC  text-[#575757] text-xl md:text-5xl ">
           <span className="bg-gradient-to-b text-transparent from-black-100 to-primary  bg-clip-text">
             AI{" "}
           </span>{" "}

@@ -56,7 +56,7 @@ export function Pagination({
         previousLabel="Prev"
         renderOnZeroPageCount={null}
         containerClassName="flex justify-center items-center gap-2 mt-10"
-        pageClassName="bg-white-100 border   border-[hsla(0,0%,93%,1)] text-black-100  items-center mr-2 md:mr-3  h-8 w-8 flex justify-center rounded-md"
+        pageClassName="bg-white-100 border   border-[hsla(0,0%,93%,1)] text-[#575757]  items-center mr-2 md:mr-3  h-8 w-8 flex justify-center rounded-md"
         activeClassName="text-white-100 !bg-primary"
         forcePage={currentPage - 1}
       />

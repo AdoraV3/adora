@@ -50,7 +50,7 @@ function LoadingState({
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex flex-col gap-0.5 text-xs font-normal text-gray-600">
-          <p className="font-semibold text-black-100">Uploading</p>
+          <p className="font-semibold text-[#575757]">Uploading</p>
 
           <p className="capitalize">
             {formatNumber((uploadProgress.progress ?? 0) / 100, {
@@ -92,7 +92,7 @@ export function SuccessState({ file, onReset, className }: SuccessStateProps) {
         className="flex flex-col gap-1 text-xs font-normal text-gray-600"
         title={file.name}
       >
-        <p className="line-clamp-1 font-semibold text-black-100">{file.name}</p>
+        <p className="line-clamp-1 font-semibold text-[#575757]">{file.name}</p>
 
         <p>{formatSize(file.size)}</p>
       </div>

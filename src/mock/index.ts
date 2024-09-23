@@ -81,25 +81,33 @@ export const FAQs: Array<FAQ> = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, recusandae similique. Voluptates nihil, amet accusamus quos natus perferendis excepturi reiciendis, voluptas dicta consequuntur enim laborum dignissimos nam distinctio? In, saepe.",
     id: 6,
   },
+  {
+    title: "What happens if I exceed the usage limits of my plan?",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, recusandae similique. Voluptates nihil, amet accusamus quos natus perferendis excepturi reiciendis, voluptas dicta consequuntur enim laborum dignissimos nam distinctio? In, saepe.",
+    id: 7,
+  },
 ];
 
 export const BRANDS = [
-  "/images/Cowrywise.png",
-  "/images/kuda.png",
-  "/images/asu.png",
-  "/images/filmhouse.png",
   "/images/airpeace.png",
-  "/images/ariiya.png",
-  "/images/betway.png",
-  "/images/bolt.png",
-  "/images/carbon.png",
-  "/images/iroko.png",
-  "/images/dominos.png",
-  "/images/smile.png",
-  "/images/axa.png",
-  "/images/piggyvest.png",
-  "/images/ibom-ait.png",
-  "/images/bolt.png",
+  "/images/filmhouse.svg",
+  "/images/piggyvest.svg",
+  "/images/ibom-ait.svg",
+  "/images/kuda.svg",
+  "/images/ariiya.svg",
+  "/images/dominos.svg",
+  "/images/mtn.svg",
+  "/images/lirs.svg",
+  "/images/bolt.svg",
+  "/images/betway.svg",
+  "/images/carbon.svg",
+  "/images/axa.svg",
+  "/images/asu.svg",
+  "/images/gigm.svg",
+  "/images/iroko.svg",
+  "/images/smile.svg",
+  "/images/cowrywise.svg",
 ];
 
 export const VOICES: Array<Option> = [

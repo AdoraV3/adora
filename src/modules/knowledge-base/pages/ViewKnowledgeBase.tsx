@@ -24,7 +24,7 @@ export function ViewKnowledgeBase({
   return (
     <Card className="mt-10 flex flex-1 flex-col  shadow-350 h-[31rem] rounded-3xl bg-white-100">
       <CardContent className="p-20 flex flex-1 mt-auto gap-6 flex-col">
-        <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-black-100">
+        <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-[#575757]">
           Customer Support Knowledge Base
         </h4>
         <div
@@ -37,7 +37,7 @@ export function ViewKnowledgeBase({
             className="flex flex-col gap-1 text-xs font-normal text-gray-600"
             title={file.name}
           >
-            <p className="line-clamp-1 font-semibold text-black-100">
+            <p className="line-clamp-1 font-semibold text-[#575757]">
               {file.name}
             </p>
             <p>{formatSize(file.size)}</p>

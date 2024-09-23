@@ -43,7 +43,7 @@ export function ImportPhoneNumberModal(props: ImportPhoneNumberModalProps) {
       <Modal.Content className="rounded-[10px] " title="import phone number">
         <div className="flex flex-1 flex-col gap-5">
           <div className="flex flex-col gap-5">
-            <h6 className="font-medium text-center font-satoshi text-black-100 text-xl">
+            <h6 className="font-medium text-center font-satoshi text-[#575757] text-xl">
               Get AI Assistant Number
             </h6>
             <Link

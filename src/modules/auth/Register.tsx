@@ -161,7 +161,7 @@ export function Register() {
           </form>
         </Form>
         <div className="text-center mt-2">
-          <p className="font-satoshi text-base font-normal text-black-100">
+          <p className="font-satoshi text-base font-normal text-[#575757]">
             Already have an account?
             <span>
               <Link href="/login" className="text-primary">

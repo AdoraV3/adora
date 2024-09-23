@@ -50,7 +50,7 @@ export default function VerifyOtp() {
   return (
     <div className="flex flex-col justify-between flex-1">
       <div className="text-center flex-1 flex flex-col gap-2">
-        <h6 className="font-semibold text-4xl font-coreC text-black-100 md:text-4xl">
+        <h6 className="font-semibold text-4xl font-coreC text-[#575757] md:text-4xl">
           Verify Email
         </h6>
         <div className="font-bold text-sm  font-satoshi">

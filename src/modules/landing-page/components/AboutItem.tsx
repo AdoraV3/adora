@@ -33,7 +33,7 @@ export function AboutItem({
         >
           <BlurIn
             word={title}
-            className="text-3xl mb-2 font-coreC font-normal text-black-100"
+            className="text-3xl mb-2 font-coreC font-normal text-[#575757]"
           />
 
           <BlurIn

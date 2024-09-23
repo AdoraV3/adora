@@ -213,7 +213,7 @@ export function CreateOutboundCall() {
                         <SelectLabel>Call Cycles</SelectLabel>
                         {[1, 3, 4]?.map(el => (
                           <SelectItem
-                            className="text-black-100 font-satoshi font-normal text-base"
+                            className="text-[#575757] font-satoshi font-normal text-base"
                             key={el}
                             value={el?.toString()}
                           >

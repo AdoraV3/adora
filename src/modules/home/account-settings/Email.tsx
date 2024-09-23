@@ -14,12 +14,12 @@ export function Email() {
 
   return (
     <div className="max-w-lg">
-      <h3 className="font-medium text-lg my-10 font-satoshi text-black-100">
+      <h3 className="font-medium text-lg my-10 font-satoshi text-[#575757]">
         Email{" "}
       </h3>
 
       <div className="mb-10">
-        <h6 className="text-black-100 font-medium text-sm mb-2 font-satoshi">
+        <h6 className="text-[#575757] font-medium text-sm mb-2 font-satoshi">
           Current email
         </h6>
         <p className="text-gray-2 font-satoshi font-normal text-xs">
@@ -40,7 +40,7 @@ export function Email() {
             <div className="flex gap-4">
               <Icons.Warning className="h-6 w-6" />
               <div>
-                <h6 className="text-black-100 font-medium text-sm mb-2 font-satoshi">
+                <h6 className="text-[#575757] font-medium text-sm mb-2 font-satoshi">
                   Connected account
                 </h6>
                 <p className="font-satoshi text-gray-2 font-normal">
@@ -55,7 +55,7 @@ export function Email() {
       )}
 
       <div>
-        <h6 className="text-black-100 mb-3 font-medium text-sm font-satoshi">
+        <h6 className="text-[#575757] mb-3 font-medium text-sm font-satoshi">
           Email notifications
         </h6>
         <p className="text-sm text-gray-2 font-normal font-satoshi">

@@ -46,7 +46,7 @@ export function VerifyOtpModal({
     <Modal isOpen={isOpen} isOpenChange={onClose}>
       <Modal.Content className="shadow-none rounded-md" title="Verify its you">
         <div className="text-center">
-          <h6 className="font-semibold text-4xl font-coreC text-black-100 md:text-4xl">
+          <h6 className="font-semibold text-4xl font-coreC text-[#575757] md:text-4xl">
             Verify Email
           </h6>
           <p className="font-bold text-sm mt-2 font-satoshi">

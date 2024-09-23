@@ -3,14 +3,14 @@ import { HowItWorksItem } from "./HowItWorksItem";
 
 export function HowItWorks() {
   return (
-    <section className="grid py-20 items-center md:grid-cols-2 px-4 md:px-12 gap-5">
+    <section className="grid items-center gap-5 px-4 py-20 md:grid-cols-2 md:px-12">
       <div>
         <BlurIn
           word=" How it Works"
-          className="text-black-100 font-coreC text-4xl pb-2"
+          className="pb-2 font-coreC text-4xl text-[#575757]"
         />
 
-        <p className="max-w-sm font-satoshi text-gray-2 font-normal text-lg">
+        <p className="max-w-sm font-satoshi text-lg font-normal text-gray-2">
           Thousands of organizations of all sizes trust Adora to grow their
           business.
         </p>

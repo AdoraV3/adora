@@ -23,7 +23,7 @@ export function Pricing() {
         <div>
           <BlurIn
             word="Plans & Pricing"
-            className="font-normal mb-2 font-coreC  text-black-100 text-5xl "
+            className="font-normal mb-2 font-coreC  text-[#575757] text-5xl "
           />
 
           <p className="font-normal text-gray-2 font-satoshi text-lg">

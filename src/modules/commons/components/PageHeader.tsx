@@ -9,7 +9,7 @@ export function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
     <div className="pt-10 md:pt-20">
       <BlurIn
-        className=" text-xl md:text-4xl text-black-100 font-normal pb-3 font-coreC "
+        className=" text-xl md:text-4xl text-[#575757] font-normal pb-3 font-coreC "
         word={title}
       />
 

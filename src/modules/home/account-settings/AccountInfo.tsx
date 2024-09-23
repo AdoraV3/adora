@@ -35,12 +35,12 @@ export function AccountInfo() {
 
   return (
     <div className="pt-10">
-      <h6 className="text-4xl text-black-100 font-normal pb-3 font-coreC ">
+      <h6 className="text-4xl text-[#575757] font-normal pb-3 font-coreC ">
         <PageHeader title="Account Info" />
       </h6>
       <section className="grid grid-cols-2 gap-10 mt-2 max-w-2xl">
         <div className="flex gap-3 items-center">
-          <h6 className="font-medium text-sm text-black-100 font-satoshi">
+          <h6 className="font-medium text-sm text-[#575757] font-satoshi">
             {businessProfile?.name}
           </h6>
 
@@ -55,7 +55,7 @@ export function AccountInfo() {
           <h6 className="font-normal mb-1 font-satoshi text-sm text-gray-2">
             Joined account on
           </h6>
-          <p className="text-black-100 font-satoshi font-medium text-sm">
+          <p className="text-[#575757] font-satoshi font-medium text-sm">
             {formatDate(
               businessProfile?.createdAt ?? new Date(),
               "MMMM, dd yyyy",
@@ -66,13 +66,13 @@ export function AccountInfo() {
           <h6 className="font-normal mb-1 font-satoshi text-sm text-gray-2">
             Subscription
           </h6>
-          <p className="text-black-100 capitalize mb-1 font-satoshi font-medium text-sm">
+          <p className="text-[#575757] capitalize mb-1 font-satoshi font-medium text-sm">
             {subscription?.plan ?? "basic"} plan
           </p>
-          <p className="text-black-100 mb-1 font-satoshi font-medium text-sm">
+          <p className="text-[#575757] mb-1 font-satoshi font-medium text-sm">
             5 agents
           </p>
-          <p className="text-black-100 mb-1 font-satoshi font-medium text-sm">
+          <p className="text-[#575757] mb-1 font-satoshi font-medium text-sm">
             100-300 customer base
           </p>
         </div>
@@ -81,7 +81,7 @@ export function AccountInfo() {
           <h6 className="font-normal mb-1 font-satoshi text-sm text-gray-2">
             Account registration date
           </h6>
-          <p className="text-black-100 font-satoshi font-medium text-sm">
+          <p className="text-[#575757] font-satoshi font-medium text-sm">
             {formatDate(
               businessProfile?.createdAt ?? new Date(),
               "MMMM, dd yyyy",

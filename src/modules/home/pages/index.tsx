@@ -17,7 +17,7 @@ export function Home() {
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex mt-10 justify-between">
-        <h2 className="font-satoshi font-medium text-2xl text-black-100">
+        <h2 className="font-satoshi font-medium text-2xl text-[#575757]">
           Overview
         </h2>
 
@@ -42,7 +42,7 @@ export function Home() {
           impression={
             <div className="flex gap-2 mt-2 items-center">
               <Icons.ArrowRightUp className="text-green-100" />
-              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
+              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
                 12% increase from last month
               </p>
             </div>
@@ -56,7 +56,7 @@ export function Home() {
           impression={
             <div className="flex gap-2 mt-2 items-center">
               <Icons.ArrowRightDown className="text-red-100" />
-              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
+              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
                 10% decrease from last month
               </p>
             </div>
@@ -70,7 +70,7 @@ export function Home() {
           impression={
             <div className="flex gap-2 mt-2 items-center">
               <Icons.ArrowRightUp className="!text-green-100" />
-              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
+              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
                 12% increase from last month
               </p>
             </div>

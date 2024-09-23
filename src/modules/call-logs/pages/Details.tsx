@@ -39,7 +39,7 @@ export function Details() {
         </div>
       </div>
 
-      <ul className="mt-10 list-disc px-4 prose prose-bullet:text-black-100  max-w-none prose-full prose-li:text-black-100 font-satoshi font-normal text-sm">
+      <ul className="mt-10 list-disc px-4 prose prose-bullet:text-[#575757]  max-w-none prose-full prose-li:text-[#575757] font-satoshi font-normal text-sm">
         <li>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit
           odit commodi quibusdam natus voluptatem quasi quo laboriosam! Ipsum

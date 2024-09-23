@@ -7,40 +7,36 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { NAVBAR_ITEMS } from "@/mock";
 import { useGetLocation } from "@/modules/commons/hooks/useGetLocation";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // const { data: session } = useSession();
   useGetLocation();
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <div className="py-4 sticky  bg-white-100 z-20 top-0 ">
+      <div className="py-4 sticky bg-white-100 z-20 top-0 ">
         <header
           className={`flex justify-between bg-white-100 shadow-[0px_6px_30px_6px_hsla(0,0%,0%,0.05)] mx-4 md:mx-16  rounded-[20px] py-3   items-center  px-4 md:px-12 `}
         >
           <div className="flex gap-16 w-full  items-center">
             <div>
               <Link className="flex gap-3 items-center" href="/">
-                Logo
-                <p className="font-bold text-3xl  text-black-100 font-satoshi ">
-                  Adora
-                </p>
+                <Image src={"/images/adoralogo.png"} className="w-full h-10" width={200} height={50} />
               </Link>
             </div>
 
-            <ul className="md:flex hidden relative font-gotham text-base font-normal text-black-100 items-center gap-8">
+            <ul className="md:flex hidden relative font-gotham text-base font-normal text-[#575757] items-center gap-8">
               {NAVBAR_ITEMS?.map(el => {
                 return (
                   <div key={el.title}>
                     <Link
                       className={cn(
-                        "font-normal font-satoshi text-lg text-black-100",
+                        "font-normal font-satoshi text-lg text-center text-[#575757]",
                         {
                           "text-primary font-bold": pathname === el.href,
                         },
@@ -65,11 +61,11 @@ export function Navbar() {
             </Button>
           </SheetTrigger>
 
-          <div className=" hidden md:flex gap-3">
+          <div className=" hidden lg:flex gap-3">
             <Link
               href="/login"
               className={cn(
-                "text-primary  font-satoshi font-normal text-base",
+                "text-primary font-satoshi font-normal text-base",
                 buttonVariants({ variant: "outline", size: "sm" }),
               )}
             >
@@ -88,12 +84,12 @@ export function Navbar() {
         </header>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 lg:hidden" />
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 md:hidden" />
       )}
 
       <SheetContent
         side="right"
-        className="pl-1 pr-0  bg-white-100 text-black-100"
+        className="pl-1 pr-0 bg-white-100 text-[#575757]"
       >
         <div className="px-7">
           <Link
@@ -104,7 +100,9 @@ export function Navbar() {
           >
             <span className="">
               {" "}
-              <Link href="/">Logo</Link>
+              <Link href="/">
+                <Image src={"/images/adoralogo.png"} className="w-full h-10" width={200} height={50} />
+              </Link>
             </span>
           </Link>
         </div>
@@ -114,7 +112,7 @@ export function Navbar() {
               return (
                 <li key={el.title}>
                   <Link
-                    className="font-normal font-satoshi text-lg text-black-100"
+                    className="font-normal font-satoshi text-lg text-[#575757] hover:text-2xl"
                     href={el.href ?? "/"}
                   >
                     {el.title}

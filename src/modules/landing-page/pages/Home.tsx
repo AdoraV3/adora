@@ -1,4 +1,5 @@
 import { CreateAccount } from "../CreateAccount";
+import Testimonials from "../Testimonials";
 import { Brands } from "../components/Brands";
 import Faq from "../components/Faq";
 import { Footer } from "../components/Footer";
@@ -19,6 +20,7 @@ export function Home() {
 
       <Brands />
       <CreateAccount />
+      <Testimonials />
       <Faq />
       <Footer />
     </>

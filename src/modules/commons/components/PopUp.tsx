@@ -64,7 +64,7 @@ export function PopUp({
         <Modal.Footer className="mt-5 flex flex-row gap-4">
           <Button
             variant="ghost"
-            className="rounded-full border border-gray-800 bg-background px-6 font-sfPro text-sm font-semibold text-[hsla(234,8%,49%,1)] hover:bg-background hover:text-black-100 md:px-12 "
+            className="rounded-full border border-gray-800 bg-background px-6 font-sfPro text-sm font-semibold text-[hsla(234,8%,49%,1)] hover:bg-background hover:text-[#575757] md:px-12 "
             size="sm"
             onClick={() => isOpenChange(false)}
           />

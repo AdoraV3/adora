@@ -142,7 +142,7 @@ export function ChangePassword() {
         <Button
           isLoading={sendResetOTPHandler.isPending}
           onClick={form.handleSubmit(onSubmit)}
-          className="mt-10 text-black-100 px-6 border border-input bg-gray-650"
+          className="mt-10 text-[#575757] px-6 border border-input bg-gray-650"
         >
           Change Password
         </Button>

@@ -41,7 +41,7 @@ export function SubscriptionTab() {
       </div>
       <div className="grid border border-[hsla(220,31%,94%,1)] divide-x divide-[hsla(220,31%,94%,1)] grid-cols-3">
         <div className="px-5 py-4">
-          <h6 className="font-satoshi capitalize mb-2 font-medium text-lg text-black-100">
+          <h6 className="font-satoshi capitalize mb-2 font-medium text-lg text-[#575757]">
             {subscription?.plan ?? "basic"} Plan
           </h6>
           {/* <p className="font-normal text-sm text-gray-2 font-satoshi">
@@ -49,7 +49,7 @@ export function SubscriptionTab() {
           </p> */}
         </div>
         {/* <div className="px-5 py-4">
-          <h6 className="font-satoshi mb-2 font-medium text-lg text-black-100">
+          <h6 className="font-satoshi mb-2 font-medium text-lg text-[#575757]">
             5 Agents
           </h6>
           <p className="font-normal text-sm text-gray-2 font-satoshi">
@@ -61,7 +61,7 @@ export function SubscriptionTab() {
         </div> */}
         {business?.subscriptionEndDate && (
           <div className="px-5 py-4">
-            <h6 className="font-satoshi mb-2 font-medium text-lg text-black-100">
+            <h6 className="font-satoshi mb-2 font-medium text-lg text-[#575757]">
               Days Left
             </h6>
             <p className="font-normal text-sm text-gray-2 font-satoshi">

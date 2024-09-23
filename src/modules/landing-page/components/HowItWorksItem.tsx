@@ -19,7 +19,7 @@ export function HowItWorksItem({
     >
       <h6
         className={cn(
-          "text-black-100 px-6  border-black-100 border-l-2  font-bold font-satoshi text-2xl",
+          "text-[#575757] px-6  border-black-100 border-l-2  font-bold font-satoshi text-2xl",
           {
             "text-primary border-primary ": isActive,
           },
@@ -28,7 +28,7 @@ export function HowItWorksItem({
         {title}{" "}
       </h6>
 
-      <p className="font-normal px-6 font-satoshi text-base text-black-100">
+      <p className="font-normal px-6 font-satoshi text-base text-[#575757]">
         {subTitle}{" "}
       </p>
     </div>
