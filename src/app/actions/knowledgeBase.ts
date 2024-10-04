@@ -12,7 +12,7 @@ import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
 import { fileUploadSchema } from "@/modules/knowledge-base/validation";
 import { ZSAError } from "zsa";
-import { deleteVapiKnowledgeBase, updateAssistant } from "./vapi";
+import { deleteVapiKnowledgeBase, updateAssistantKnowledgeBase } from "./vapi";
 
 export const getKnowledgeBaseAction = authenticationProcedure
   .createServerAction()
@@ -44,7 +44,7 @@ export const createKnowledgeBaseAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Agent not found");
     }
 
-    await updateAssistant(agent?.assistantId, fileId);
+    await updateAssistantKnowledgeBase(agent?.assistantId, fileId);
     const [newKnowledgeBase] = await createKnowledgeBase({
       fileId,
       url,

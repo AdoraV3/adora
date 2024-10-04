@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export function Details() {
   return (
     <div className="pt-10">
-      <div className="flex justify-between items-start">
+      <div className="flex  justify-between items-start">
         <div>
           <h2 className="font-bold capitalize text-lg font-satoshi text-[hsla(214,24%,20%,1)] ">
             agent X

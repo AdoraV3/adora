@@ -13,12 +13,17 @@ import {
 import { getAccount } from "@/data-access/account";
 import { createAgent } from "@/data-access/agents";
 import { db } from "@/db";
-import { subscription, user as userTable } from "@/db/schema";
+import {
+  subscription,
+  systemPrompt as systemPromptTable,
+  user as userTable,
+} from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
 import { createTransaction } from "@/lib/create-transaction";
 import { googleOAuthClient } from "@/lib/googleAuth";
 import { authenticationProcedure } from "@/lib/procedures";
+import { assistantConfig } from "@/mock";
 import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
 import { generateCodeVerifier, generateState } from "arctic";
 import { and, eq } from "drizzle-orm";
@@ -26,16 +31,21 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { ZSAError, createServerAction } from "zsa";
-import { createAssistant } from "./vapi/assistant";
+import { createAssistant } from "./vapi";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
   .handler(async ({ input }) => {
+    const categoryId = "bypwo5ayo1b5yi952ocezipg";
     const { password, email, name, businessName } = input;
     const passwordHash = await new Argon2id().hash(password);
 
     const result = await db.query.user.findFirst({
       where: eq(userTable.email, email),
+    });
+
+    const categoryResult = await db.query.systemPrompt.findFirst({
+      where: eq(systemPromptTable.id, categoryId),
     });
 
     if (result) {
@@ -52,16 +62,26 @@ export const signupAction = createServerAction()
       throw new ZSAError("NOT_FOUND", "Subscription not found");
     }
     const payload = {
-      name: businessName,
-      firstMessage: `Hello, I'm a ${businessName} AI agent. How can I help you today?`,
+      ...assistantConfig,
+      model: {
+        ...assistantConfig.model,
+        messages: [
+          {
+            role: "system",
+            content: categoryResult?.systemPrompt,
+          },
+        ],
+      },
+      name: "Adora",
+      firstMessage: `Hello, Thank you for calling ${businessName}. My name is Adora How may I help you today?`,
     };
-    const response = await createAssistant(payload);
 
+    const response = await createAssistant(payload);
     await createTransaction(async trx => {
       const [newAgent] = await createAgent(
         {
           assistantId: response.id,
-          name: businessName,
+          name: "Adora",
         },
         trx,
       );

@@ -5,7 +5,7 @@ async function main() {
   const start = Date.now();
 
   await seeds.subscription();
-  // await seeds.agent();
+  await seeds.systemPrompt();
 
   const end = Date.now();
 

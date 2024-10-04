@@ -339,8 +339,6 @@ export const assistantConfig = {
     provider: "openai",
     voiceId: "onyx", // Default voice
   },
-
-  // firstMessage: "Hello! How can I assist you today?",
   endCallMessage: "Thank you for using our service. Goodbye!",
   endCallFunctionEnabled: true, // Allows the assistant to end the call
 };

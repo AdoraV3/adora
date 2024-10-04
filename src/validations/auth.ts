@@ -56,6 +56,7 @@ export const registerSchema = z
         message: "Business name must be at least 3 characters long",
       })
       .max(100),
+    category: z.string().optional(),
     name: z
       .string()
       .min(3, {

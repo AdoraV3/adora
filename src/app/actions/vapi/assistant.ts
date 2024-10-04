@@ -12,6 +12,7 @@ export const createAssistant = async (body: Partial<Business>) => {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.VAPI_API_KEY}`,
+      // eslint-disable-next-line sonarjs/no-duplicate-string
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
@@ -25,7 +26,10 @@ export const createAssistant = async (body: Partial<Business>) => {
   return data;
 };
 
-export const updateAssistant = async (id: string, body: string) => {
+export const updateAssistantKnowledgeBase = async (
+  id: string,
+  body: string,
+) => {
   const payload = {
     ...assistantConfig,
     model: {
@@ -45,5 +49,21 @@ export const updateAssistant = async (id: string, body: string) => {
     body: JSON.stringify(payload),
   });
 
+  return response.json();
+};
+
+export const updateAssistant = async (id: string, body: Partial<Business>) => {
+  const payload = {
+    ...assistantConfig,
+    ...body,
+  };
+  const response = await fetch(`https://api.vapi.ai/assistant/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${env.VAPI_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
   return response.json();
 };
