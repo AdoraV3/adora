@@ -1,75 +1,61 @@
+import { getAgentAction } from "@/app/actions/agent";
+import { getCallsAction } from "@/app/actions/call-log";
+import { InboundPhoneCall } from "@/app/actions/vapi/type";
 import { Icons } from "@/components/icons";
+import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { DataTable } from "@/modules/commons/components";
-import { Pagination } from "@/modules/commons/components/Pagination";
+import { ColumnDef } from "@tanstack/react-table";
+import { addDays, formatDate } from "date-fns";
 import Link from "next/link";
 import { useMemo } from "react";
 
-export function RecentCallLogs() {
-  const data = [
-    {
-      id: 1,
-      agent: "Agent X",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      transcript:
-        "Client: Hi there, I'm  trouble placing an order on your website. Every time I get to the checkout ...",
-    },
-    {
-      id: 2,
-      agent: "Agent Y",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      transcript:
-        "Client: Hi there, I'm having trouble placing order on your website. Every time I get to the checkout ...",
-    },
-    {
-      id: 3,
-      agent: "Agent Z",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      transcript:
-        "Client: Hi there, Im having trouble placing an order on your website. Every time I get to the checkout ...",
-    },
-    {
-      id: 4,
-      agent: "Agent A",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      transcript:
-        "Client: Hi there, I'm having trouble placing an order on your website. Every time I get to the checkout ...",
-    },
-    {
-      id: 5,
-      agent: "Agent B",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      transcript:
-        "Client: Hi there, I'm having trouble placing an order on your website. Every time I get to the checkout ...",
-    },
-  ];
-  const columns = useMemo(() => {
+interface RecentCallLogsProps {
+  type: "recent" | "past";
+}
+export function RecentCallLogs({ type }: RecentCallLogsProps) {
+  const { data: agent } = useServerActionQuery(getAgentAction, {
+    input: undefined,
+    queryKey: ["getAgent"],
+  });
+
+  const columns: ColumnDef<InboundPhoneCall>[] = useMemo(() => {
     return [
       {
-        size: 100,
         accessorKey: "agent",
         header: "Agents",
-        cell: () => {
-          return <Link href="/call-logs/1">Agent X </Link>;
+        cell: ({ row }) => {
+          const { id } = row.original;
+          return (
+            <Link className="w-max whitespace-nowrap" href={`/call-logs/${id}`}>
+              {agent?.data.name}
+            </Link>
+          );
         },
       },
       {
-        size: 100,
         accessorKey: "date",
         header: "Date",
+        cell: ({ row }) => (
+          <p className="w-max">
+            {formatDate(row.original.createdAt, "dd MMM, yyyy")}{" "}
+          </p>
+        ),
       },
       {
-        size: 100,
         accessorKey: "time",
         header: "Time",
+        cell: ({ row }) => (
+          <p className="w-max">
+            {formatDate(row.original.createdAt, "h:mm a")}{" "}
+          </p>
+        ),
       },
       {
         accessorKey: "transcript",
         header: "Conversation Transcription",
+        cell: ({ row }) => {
+          return <p className="line-clamp-2">{row.original.summary} </p>;
+        },
       },
       {
         id: "actions",
@@ -84,16 +70,29 @@ export function RecentCallLogs() {
         },
       },
     ];
-  }, []);
+  }, [agent?.data.name]);
+
+  const { data: call } = useServerActionQuery(getCallsAction, {
+    input: {
+      assistantId: agent?.data.assistantId ?? "",
+      createdAtGe:
+        type === "recent" ? addDays(new Date(), -7).toISOString() : undefined,
+      createdAtLe:
+        type === "past" ? addDays(new Date(), -7).toISOString() : undefined,
+    },
+    queryKey: ["getCallLogs", type],
+    enabled: !!agent?.data.assistantId,
+  });
+
   return (
     <>
       <DataTable
         tableClassName="max-w-4xl mt-20"
         headerClassName="text-center"
-        data={data}
+        data={call?.data ?? []}
         columns={columns}
       />
-      <Pagination totalDocs={20} totalPageCount={5} />
+      {/* <Pagination totalDocs={20} totalPageCount={5} /> */}
     </>
   );
 }

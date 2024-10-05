@@ -322,13 +322,6 @@ export const assistantConfig = {
   model: {
     provider: "openai",
     model: "gpt-4", // Using GPT-4 as the model
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are an AI assistant. You are here to help the user with their inquiries.",
-      },
-    ],
     knowledgeBase: {
       provider: "canonical",
       topK: 10,
@@ -336,9 +329,8 @@ export const assistantConfig = {
     },
   },
   voice: {
-    provider: "openai",
-    voiceId: "onyx", // Default voice
+    provider: "11labs",
+    voiceId: "TWUKKXAylkYxxlPe4gx0", // Default voice
   },
-  endCallMessage: "Thank you for using our service. Goodbye!",
   endCallFunctionEnabled: true, // Allows the assistant to end the call
 };

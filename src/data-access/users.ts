@@ -16,8 +16,8 @@ import { Argon2id } from "oslo/password";
 import { cache } from "react";
 import { ZSAError } from "zsa";
 
-export async function createAccount(data: NewAccount) {
-  return db
+export async function createAccount(data: NewAccount, trx = db) {
+  return trx
     .insert(account)
     .values({
       ...data,
@@ -84,11 +84,11 @@ export async function createPasswordResetToken(userId: User["id"]) {
   return token;
 }
 
-export const createVerifyEmailToken = async (userId: string) => {
+export const createVerifyEmailToken = async (userId: string, trx = db) => {
   const token = generateOTP();
   const tokenExpiresAt = new Date(Date.now() + TOKEN_TTL);
 
-  await db
+  await trx
     .insert(verifyEmailToken)
     .values({
       userId,

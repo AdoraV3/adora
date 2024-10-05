@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Adora",
+    "language": "English",
+    "gender": "female",
+    "provider": "11labs",
+    "createdVoiceId": "TWUKKXAylkYxxlPe4gx0"
+  },
+  {
+    "name": "Adora",
+    "language": "English",
+    "voice": "male",
+    "provider": "11labs",
+    "createdVoiceId": "TWUKKXAylkYxxlPe4gx0"
+  }
+]

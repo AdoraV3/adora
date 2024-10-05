@@ -33,6 +33,11 @@ export function Register() {
   });
   const router = useRouter();
 
+  // const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
+  //   input: undefined,
+  //   queryKey: ["getPhoneNumbers"],
+  // });
+
   const [isPending, startTransition] = useTransition();
   const signUpHandler = useServerActionMutation(signupAction, {
     onSuccess: () => {

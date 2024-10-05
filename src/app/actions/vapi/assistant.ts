@@ -26,27 +26,14 @@ export const createAssistant = async (body: Partial<Business>) => {
   return data;
 };
 
-export const updateAssistantKnowledgeBase = async (
-  id: string,
-  body: string,
-) => {
-  const payload = {
-    ...assistantConfig,
-    model: {
-      ...assistantConfig.model,
-      knowledgeBase: {
-        ...assistantConfig.model.knowledgeBase,
-        fileIds: [body], // Update with the new fileIds
-      },
-    },
-  };
+export const updateAssistantKnowledgeBase = async (id: string, body: any) => {
   const response = await fetch(`https://api.vapi.ai/assistant/${id}`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${env.VAPI_API_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(body),
   });
 
   return response.json();

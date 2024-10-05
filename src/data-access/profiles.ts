@@ -2,8 +2,8 @@ import { db } from "@/db";
 import { NewProfile, Profile, User, profile } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export async function createProfile(data: NewProfile) {
-  return db
+export async function createProfile(data: NewProfile, trx = db) {
+  return trx
     .insert(profile)
     .values({
       ...data,

@@ -15,6 +15,13 @@
       "when": 1727866346792,
       "tag": "0001_conscious_vapor",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1728128934409,
+      "tag": "0002_open_vindicator",
+      "breakpoints": true
     }
   ]
 }

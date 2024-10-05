@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { Agent, NewAgent, agent } from "@/db/schema";
+import { Agent, NewAgent, agent, availablePhoneNumber } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function createAgent(data: NewAgent, trx = db) {
@@ -23,4 +23,10 @@ export async function updateAgent(agentId: Agent["id"], data: Partial<Agent>) {
 }
 export async function getAgents() {
   return db.query.agent.findMany();
+}
+
+export async function getAgentPhoneNumber(phoneNumberId: Agent["id"]) {
+  return db.query.availablePhoneNumber.findFirst({
+    where: eq(availablePhoneNumber.id, phoneNumberId),
+  });
 }
