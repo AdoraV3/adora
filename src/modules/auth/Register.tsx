@@ -25,6 +25,16 @@ import {
   Shell,
 } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { SYSTEM_PROMPTS } from "@/mock";
 
 export function Register() {
   const form = useForm<RegisterSchemaType>({
@@ -66,8 +76,8 @@ export function Register() {
   };
 
   return (
-    <Shell as="main" className="flex flex-col flex-1">
-      <div className="h-[calc(95dvh-100px)] scrollbar-thin px-6 w-[95%] mx-auto">
+    <Shell as="main" className="flex flex-1 flex-col">
+      <div className="mx-auto h-[calc(95dvh-100px)] w-[95%] px-6 scrollbar-thin">
         <PageHeader className="mb-10" title="Create an account" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -75,7 +85,7 @@ export function Register() {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem id="name" className="mb-6 relative">
+                <FormItem id="name" className="relative mb-6">
                   <FormControl>
                     <div className="relative">
                       <FloatingInput placeholder="John Doe" {...field} />
@@ -90,7 +100,7 @@ export function Register() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem id="email" className="mb-6 relative">
+                <FormItem id="email" className="relative mb-6">
                   <FormControl>
                     <div className="relative">
                       <FloatingInput placeholder="john@doe.com" {...field} />
@@ -105,11 +115,47 @@ export function Register() {
               control={form.control}
               name="businessName"
               render={({ field }) => (
-                <FormItem id="email" className="mb-6 relative">
+                <FormItem id="email" className="relative mb-6">
                   <FormControl>
                     <div className="relative">
                       <FloatingInput placeholder="Paystack" {...field} />
                       <FloatingLabel>Business Name</FloatingLabel>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem id="email" className="relative mb-6">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingLabel>Business Category</FloatingLabel>
+                      <Select>
+                        <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
+                          <SelectValue
+                            placeholder="Category"
+                            className="!text-[#8c8c8c40]"
+                          />
+                        </SelectTrigger>
+                        <SelectContent sideOffset={5}>
+                          <SelectGroup>
+                            <SelectLabel className="text-[#8c8c8c80]">Select a business category</SelectLabel>
+                            {SYSTEM_PROMPTS?.map(el => (
+                              <SelectItem
+                                className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                                key={el.value}
+                                value={el.value}
+                              >
+                                {el.label}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -165,7 +211,7 @@ export function Register() {
             </Button>
           </form>
         </Form>
-        <div className="text-center mt-2">
+        <div className="mt-2 text-center">
           <p className="font-satoshi text-base font-normal text-[#575757]">
             Already have an account?
             <span>
@@ -181,14 +227,14 @@ export function Register() {
             <span className="w-full border-t border-gray-400" />
           </div>
           <div className="relative flex justify-center font-satoshi  font-normal ">
-            <span className="bg-white-100 text-sm font-normal font-satoshi px-2 uppercase text-muted-foreground">
+            <span className="bg-white-100 px-2 font-satoshi text-sm font-normal uppercase text-muted-foreground">
               or
             </span>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <Button
-            className="text-gray-2 font-medium text-lg "
+            className="text-lg font-medium text-gray-2 "
             variant="outline"
             icon={<Icons.Google />}
             onClick={handleGoogleSignIn}
@@ -205,15 +251,15 @@ export function Register() {
           </Button> */}
         </div>
 
-        <div className=" divide-x  mt-6 divide-primary text-center">
+        <div className=" mt-6  divide-x divide-primary text-center">
           <Link
-            className="text-primary pr-3 font-medium text-lg font-satoshi"
+            className="pr-3 font-satoshi text-lg font-medium text-primary"
             href="/"
           >
             Terms of Use
           </Link>
           <Link
-            className="text-primary font-medium pl-3 text-lg font-satoshi"
+            className="pl-3 font-satoshi text-lg font-medium text-primary"
             href="/"
           >
             Privacy Policy
