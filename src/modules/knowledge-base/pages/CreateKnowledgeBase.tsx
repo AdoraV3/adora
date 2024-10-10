@@ -23,7 +23,7 @@ export function CreateKnowledgeBase() {
     {
       onSuccess: () =>
         toast.success("Successfully added!", {
-          description: "You have successfully your knowledge base",
+          description: "You have successfully updated your knowledge base",
         }),
       onError: error => {
         toast.error(error?.message);

@@ -1,7 +1,7 @@
 "use client";
 
 import { getSubscriptionAction } from "@/app/actions";
-import { getAgentAction } from "@/app/actions/agent";
+import { getAgentPhoneNumberAction } from "@/app/actions/agent";
 import { logOutAction } from "@/app/actions/auth";
 import { getBusinessAction } from "@/app/actions/business";
 import { getUserAction } from "@/app/actions/user";
@@ -25,7 +25,6 @@ import { DynamicBreadcrumb } from "@/modules/commons/components";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import { getInitials } from "@/modules/commons/utils/helpers";
-import { ImportPhoneNumberModal } from "@/modules/home/components/phone-number/ImportPhoneNumberModal";
 import { env } from "env.mjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,9 +36,9 @@ export function DashboardNav() {
     queryKey: ["getUser"],
   });
 
-  const { data: agent } = useServerActionQuery(getAgentAction, {
+  const { data: agent } = useServerActionQuery(getAgentPhoneNumberAction, {
     input: undefined,
-    queryKey: ["getAgent"],
+    queryKey: ["getAgentPhoneNumber"],
   });
 
   const { data: businessData } = useServerActionQuery(getBusinessAction, {
@@ -82,11 +81,11 @@ export function DashboardNav() {
   const disclosure = useDisclosure();
 
   useEffect(() => {
-    if (!agent?.data?.telephone) {
+    if (!agent?.data?.phoneNumber) {
       disclosure.onOpen();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [agent?.data?.telephone]);
+  }, [agent?.data?.phoneNumber]);
 
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
@@ -100,7 +99,7 @@ export function DashboardNav() {
       <p className="font-satoshi text-gray-550   text-sm font-medium">
         Agent Number:
         <span className="font-bold text-sm text-blue-300 ml-2">
-          012-333-444
+          {agent?.data?.phoneNumber ?? "Unassigned"}
         </span>{" "}
       </p>
       <div className="flex gap-4 items-center">
@@ -207,7 +206,7 @@ export function DashboardNav() {
         </DropdownMenu>
       </div>
 
-      <ImportPhoneNumberModal {...disclosure} />
+      {/* <ImportPhoneNumberModal {...disclosure} /> */}
     </nav>
   );
 }

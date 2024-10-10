@@ -29,10 +29,10 @@ export function CallLogs() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="recent">
-        <RecentCallLogs />
+        <RecentCallLogs type="recent" />
       </TabsContent>
       <TabsContent value="past">
-        <RecentCallLogs />{" "}
+        <RecentCallLogs type="past" />{" "}
       </TabsContent>
     </Tabs>
   );

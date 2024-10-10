@@ -1,12 +1,12 @@
 import * as schema from "@/db/schema";
 import { db } from "..";
-import agents from "./data/agents.json";
+import voices from "./data/voices.json";
 
-export async function agent() {
+export async function voice() {
   await Promise.all(
-    (agents as schema.Agent[]).map(async el => {
+    (voices as schema.Voice[]).map(async el => {
       return db
-        .insert(schema.agent)
+        .insert(schema.voice)
         .values({
           ...el,
         })

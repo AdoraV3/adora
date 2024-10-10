@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { account } from "./account";
 import { accountPreference } from "./accountPreference";
 import { agent } from "./agent";
+import { availablePhoneNumber } from "./availablePhoneNumber";
 import { business } from "./business";
 import { callLog } from "./call-log";
 import { knowledgeBase } from "./knowledge-base";
@@ -11,6 +12,7 @@ import { subscription } from "./subscription";
 import { user } from "./user";
 import { userBusiness } from "./userBusiness";
 import { verifyEmailToken } from "./verifyEmailToken";
+import { voice } from "./voice";
 
 export const businessRelations = relations(business, ({ many, one }) => ({
   knowledgeBase: many(knowledgeBase),
@@ -35,6 +37,14 @@ export const agentRelations = relations(agent, ({ one }) => ({
   business: one(business, {
     fields: [agent.id],
     references: [business.agentId],
+  }),
+  phoneNumber: one(availablePhoneNumber, {
+    fields: [agent.phoneNumberId],
+    references: [availablePhoneNumber.id],
+  }),
+  voice: one(voice, {
+    fields: [agent.voiceId],
+    references: [voice.id],
   }),
 }));
 

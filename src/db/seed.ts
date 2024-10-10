@@ -5,7 +5,9 @@ async function main() {
   const start = Date.now();
 
   await seeds.subscription();
-  // await seeds.agent();
+  await seeds.systemPrompt();
+  await seeds.voice();
+  // await seeds.availablePhoneNumber();
 
   const end = Date.now();
 

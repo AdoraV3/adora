@@ -8,6 +8,20 @@
       "when": 1722097284496,
       "tag": "0000_chemical_emma_frost",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1727866346792,
+      "tag": "0001_conscious_vapor",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1728128934409,
+      "tag": "0002_open_vindicator",
+      "breakpoints": true
     }
   ]
 }

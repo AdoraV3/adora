@@ -1,6 +1,5 @@
 "use client";
 
-import { Icons } from "@/components/icons";
 import { Toaster } from "@/components/ui/sonner";
 import { TailwindIndicator } from "@/modules/commons/components/TailwindIndicator";
 import {
@@ -16,11 +15,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <>
       <TailwindIndicator />
-      <Toaster
-        icons={{ success: <Icons.Success className="w-8 h-8 mr-5" /> }}
-        className="bg-red-300"
-        position="top-right"
-      />
+      <Toaster position="top-right" />
       <QueryClientProvider client={client}>
         <HydrationBoundary>{children}</HydrationBoundary>
         <ReactQueryDevtools

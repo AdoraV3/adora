@@ -12,13 +12,21 @@ import {
 
 import { getAccount } from "@/data-access/account";
 import { createAgent } from "@/data-access/agents";
+import { updatePhoneNumber } from "@/data-access/availablePhoneNumber";
+import { getVoice } from "@/data-access/voices";
 import { db } from "@/db";
-import { subscription, user as userTable } from "@/db/schema";
+import {
+  availablePhoneNumber,
+  subscription,
+  systemPrompt as systemPromptTable,
+  user as userTable,
+} from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
 import { createTransaction } from "@/lib/create-transaction";
 import { googleOAuthClient } from "@/lib/googleAuth";
 import { authenticationProcedure } from "@/lib/procedures";
+import { assistantConfig } from "@/mock";
 import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
 import { generateCodeVerifier, generateState } from "arctic";
 import { and, eq } from "drizzle-orm";
@@ -26,11 +34,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { ZSAError, createServerAction } from "zsa";
-import { createAssistant } from "./vapi/assistant";
+import { createAssistant, updateVapiPhoneNumber } from "./vapi";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
   .handler(async ({ input }) => {
+    const categoryId = "y98v27l2jt1jficxxkopbozr";
+    const selectedPhoneNumberId = "h24oavsvf2t23qhx8khh19k6";
+    const selectedVoice = "ca9tbdzulr7zkhscbg8l17bt";
     const { password, email, name, businessName } = input;
     const passwordHash = await new Argon2id().hash(password);
 
@@ -38,12 +49,26 @@ export const signupAction = createServerAction()
       where: eq(userTable.email, email),
     });
 
+    const categoryResult = await db.query.systemPrompt.findFirst({
+      where: eq(systemPromptTable.id, categoryId),
+    });
+
     if (result) {
       throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
     }
-    const [newUser] = await createUser({
-      email,
-    });
+
+    const isPhoneNumberAvailable =
+      await db.query.availablePhoneNumber.findFirst({
+        where: and(
+          eq(availablePhoneNumber.id, selectedPhoneNumberId),
+          eq(availablePhoneNumber.isAssigned, false),
+        ),
+      });
+
+    if (!isPhoneNumberAvailable) {
+      throw new ZSAError("NOT_AUTHORIZED", "Phone number not available");
+    }
+
     const basicSubscription = await db.query.subscription.findFirst({
       where: eq(subscription.plan, "basic"),
     });
@@ -52,17 +77,53 @@ export const signupAction = createServerAction()
       throw new ZSAError("NOT_FOUND", "Subscription not found");
     }
     const payload = {
-      name: businessName,
-      firstMessage: `Hello, I'm a ${businessName} AI agent. How can I help you today?`,
+      ...assistantConfig,
+      model: {
+        ...assistantConfig.model,
+        messages: [
+          {
+            role: "system",
+            content: categoryResult?.systemPrompt,
+          },
+        ],
+      },
+      name: `Adora-${businessName}`,
+      firstMessage: `Hello, Thank you for calling ${businessName}. My name is Adora How may I help you today?`,
     };
+
     const response = await createAssistant(payload);
 
+    const voice = await getVoice(selectedVoice);
+    if (!voice) {
+      throw new ZSAError("NOT_FOUND", "Selected voice not available");
+    }
+
+    updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
+      assistantId: response.id,
+    });
+    let token = "";
     await createTransaction(async trx => {
+      const [newUser] = await createUser(
+        {
+          email,
+        },
+        trx,
+      );
       const [newAgent] = await createAgent(
         {
           assistantId: response.id,
-          name: businessName,
+          name: `Adora-${businessName}`,
+          phoneNumberId: selectedPhoneNumberId,
+          voiceId: voice.id,
+          provider: voice.provider,
+          categoryId,
         },
+        trx,
+      );
+
+      await updatePhoneNumber(
+        selectedPhoneNumberId,
+        { isAssigned: true, dateAssigned: new Date()?.toISOString() },
         trx,
       );
 
@@ -75,20 +136,27 @@ export const signupAction = createServerAction()
         },
         trx,
       );
+
+      await createProfile(
+        {
+          userId: newUser.userId,
+          name,
+        },
+        trx,
+      );
+
+      await createAccount(
+        {
+          userId: newUser.userId,
+          type: "email",
+          password: passwordHash,
+        },
+        trx,
+      );
+
+      token = await createVerifyEmailToken(newUser.userId, trx);
     });
 
-    await createProfile({
-      userId: newUser.userId,
-      name,
-    });
-
-    await createAccount({
-      userId: newUser.userId,
-      type: "email",
-      password: passwordHash,
-    });
-
-    const token = await createVerifyEmailToken(newUser.userId);
     await sendVerificationEmail({
       token,
       to: "stemitope370@gmail.com",
