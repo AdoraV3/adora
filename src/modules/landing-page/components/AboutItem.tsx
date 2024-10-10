@@ -18,7 +18,7 @@ export function AboutItem({
 }: AboutItemProps) {
   return (
     <Card className="pb-0 ">
-      <CardContent className="grid px-0 grid-cols-2  gap-10 items-center">
+      <CardContent className="flex flex-col gap-y-2 md:grid px-0 grid-cols-2 gap-10 items-center">
         <AspectRatio ratio={16 / 9}>
           <BlurImage
             src={image}

@@ -22,6 +22,7 @@ import {
 import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { BOTTOM_SIDEBAR_ITEM } from "@/mock";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen?: boolean;
@@ -144,7 +145,10 @@ export function Sidebar({
           className={cn("flex w-full flex-col gap-2 px-6 ", className)}
           {...props}
         >
-          <p className="text-center">Logo</p>
+            
+          <Image src={"/images/adora.png"} 
+        className="h-auto w-14" width={200} height={50} alt="logo.png" />
+        
           {/* <Icons.Logo isOpen={isOpen} size={48} className="px-4" /> */}
           <Button
             style={{ zIndex: 99999 }}

@@ -114,6 +114,7 @@ export function Navbar() {
                   <Link
                     className="font-normal font-satoshi text-lg text-[#575757] hover:text-2xl"
                     href={el.href ?? "/"}
+                    onClick={() => setIsOpen(false)}
                   >
                     {el.title}
                   </Link>

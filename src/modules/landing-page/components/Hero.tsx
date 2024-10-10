@@ -1,56 +1,65 @@
 import WordRotate from "@/components/animations/rotate";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { hoverAnimation } from "@/utils/animations";
 import Image from "next/image";
 
 const words = [
-  "E-commerce",
   "Logistics",
   "Healthcare",
   "Real Estate",
   "Education",
   "Finance",
+  "Hospitality",
   "Insurance",
   "Retail",
-  "Hospitality",
   "Travel",
   "Telecom",
   "Utilities",
   "Agriculture",
   "Media",
-  "Entertainment",
   "Government",
+  "E-commerce",
+  "Entertainment",
   "Non-profit",
   "Businesses",
 ];
 
 export function Hero() {
   return (
-    <section className="pt-10">
-      <div className="px-4 md:px-20">
-        <h1 className="font-normal mb-3 flex items-center gap-3  tracking-tight font-coreC  text-[#575757] text-xl md:text-5xl ">
-          <span className="bg-gradient-to-b text-transparent from-black-100 to-primary  bg-clip-text">
+    <section className="relative w-full pt-10">
+      <div className="flex flex-col items-center px-4 md:px-20">
+        <h1 className="mb-3 flex flex-row flex-wrap  items-center gap-3 text-center  font-coreC text-2xl  font-normal tracking-tight text-[#575757] md:text-5xl">
+          <span className="hidden md:block bg-gradient-to-b from-black-100 to-primary bg-clip-text  text-transparent">
             AI{" "}
           </span>{" "}
-          Customer Support Solutions For <WordRotate words={words} />
+          <span className="md:hidden">AI</span> Customer Support Solutions For <WordRotate words={words} />
+        
         </h1>
 
-        <p className="text-gray-2 max-w-3xl mx-auto text-center font-coreC text-lg font-light">
+        <p className="mx-auto max-w-3xl text-center font-coreC text-lg font-light text-gray-2">
           Adora is ideal for various business use cases including front desk,
           outbound sales, lead generation, transportation, logistics and more.
         </p>
       </div>
 
-      <div className="flex mt-10 justify-center">
-        <Button className="flex gap-2 items-center">
+      <div className="mt-10 flex justify-center">
+        <Button className="flex items-center gap-2">
           <p>Get Started for free</p>
           <Icons.ArrowRight />
         </Button>
       </div>
 
-      <div className=" h-[230px] md:h-[460px]  relative">
-        <Image src="/images/hero-wavy.png" alt="hero" fill />
+      <div className=" relative h-[230px]  md:h-[460px]">
+        <Image src="/images/hero-wavy.svg" alt="hero" fill />
       </div>
+      <Image
+        src="/images/letstalk.svg"
+        width={100}
+        height={60}
+        alt="hero"
+        className={`hidden md:block absolute right-[8%] top-[42%] h-10 w-auto cursor-pointer ${hoverAnimation}`}
+      />
     </section>
   );
 }

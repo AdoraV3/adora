@@ -62,7 +62,7 @@ export function Register() {
 
   return (
     <Shell as="main" className="flex flex-col flex-1">
-      <div className="h-[calc(95dvh-100px)] scrollbar-thin px-6 ">
+      <div className="h-[calc(95dvh-100px)] scrollbar-thin px-6 w-[95%] mx-auto">
         <PageHeader className="mb-10" title="Create an account" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>

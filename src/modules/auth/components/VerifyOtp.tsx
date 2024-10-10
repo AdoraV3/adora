@@ -61,7 +61,7 @@ export default function VerifyOtp() {
 
       <Form {...form}>
         <form
-          className="flex  items-center  flex-1 flex-col"
+          className="flex  items-center px-6  flex-1 flex-col"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField

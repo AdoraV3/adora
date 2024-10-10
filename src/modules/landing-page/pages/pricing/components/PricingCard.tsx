@@ -23,7 +23,7 @@ export function PricingCard({
 }: PricingCardProps) {
   return (
     <Card
-      className={cn(" h-max rounded-2xl text-gray-2 py-4 ", {
+      className={cn(" h-max rounded-2xl text-gray-2 py-4 shadow-md", {
         "bg-[hsla(25,64%,24%,1)] text-white-100 shadow-[0px_42px_34px_0px_hsla(25,64%,36%,0.28)] ":
           isPopular,
       })}

@@ -34,7 +34,6 @@ export function Login() {
   });
 
   const { queryParams, createQueryStrings } = useQueryParams();
-
   const from = queryParams.get("from");
 
   const [isPending, startTransition] = useTransition();
@@ -74,7 +73,7 @@ export function Login() {
 
   return (
     <Shell as="main" className="flex w-full flex-col flex-1">
-      <div className="w-full flex flex-col flex-1 gap-5">
+      <div className="flex flex-col flex-1 gap-5 px-6 w-[95%] sm:w-full mx-auto">
         <PageHeader className="mb-2" title="Welcome back" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
