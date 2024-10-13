@@ -62,7 +62,6 @@ export function Register() {
   });
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
-    signUpHandler.mutate(data);
   };
 
   const handleGoogleSignIn = () => {
@@ -74,6 +73,19 @@ export function Register() {
       }
     });
   };
+  const agent_voice = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+  ];
+  const agent_phones = [
+    { value: "01-928-2973-90", label: "01-928-2973-90" },
+    { value: "01-928-2973-91", label: "01-928-2973-91" },
+    { value: "01-928-2973-91", label: "01-928-2973-92" },
+    { value: "01-928-2973-93", label: "01-928-2973-93" },
+    { value: "01-928-2973-94", label: "01-928-2973-94" },
+    { value: "01-928-2973-95", label: "01-928-2973-95" },
+    { value: "01-928-2973-96", label: "01-928-2973-96" },
+  ];
 
   return (
     <Shell as="main" className="flex flex-1 flex-col">
@@ -143,8 +155,116 @@ export function Register() {
                         </SelectTrigger>
                         <SelectContent sideOffset={5}>
                           <SelectGroup>
-                            <SelectLabel className="text-[#8c8c8c80]">Select a business category</SelectLabel>
+                            <SelectLabel className="text-[#8c8c8c80]">
+                              Select a business category
+                            </SelectLabel>
                             {SYSTEM_PROMPTS?.map(el => (
+                              <SelectItem
+                                className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                                key={el.value}
+                                value={el.value}
+                              >
+                                {el.label}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="locationRegion"
+              render={({ field }) => (
+                <FormItem id="location" className="relative mb-6">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingInput placeholder="Europe" {...field} />
+                      <FloatingLabel>Location Region</FloatingLabel>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="agentName"
+              render={({ field }) => (
+                <FormItem id="agentName" className="relative mb-6">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingInput placeholder="007" {...field} />
+                      <FloatingLabel>Agent Name</FloatingLabel>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="voice"
+              render={({ field }) => (
+                <FormItem id="voice" className="relative mb-6">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingLabel>Agent Voice</FloatingLabel>
+                      <Select>
+                        <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
+                          <SelectValue
+                            placeholder="male"
+                            className="!text-[#8c8c8c40]"
+                          />
+                        </SelectTrigger>
+                        <SelectContent sideOffset={5}>
+                          <SelectGroup>
+                            <SelectLabel className="text-[#8c8c8c80]">
+                              Select a voice
+                            </SelectLabel>
+                            {agent_voice?.map(el => (
+                              <SelectItem
+                                className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                                key={el.value}
+                                value={el.value}
+                              >
+                                {el.label}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem id="phone" className="relative mb-6">
+                  <FormControl>
+                    <div className="relative">
+                      <FloatingLabel>Agent Phone</FloatingLabel>
+                      <Select>
+                        <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
+                          <SelectValue
+                            placeholder="000 111 222"
+                            className="!text-[#8c8c8c40]"
+                          />
+                        </SelectTrigger>
+                        <SelectContent sideOffset={5}>
+                          <SelectGroup>
+                            <SelectLabel className="text-[#8c8c8c80]">
+                              Select an agent phone
+                            </SelectLabel>
+                            {agent_phones?.map(el => (
                               <SelectItem
                                 className="font-satoshi text-base font-normal text-[#8c8c8c]"
                                 key={el.value}

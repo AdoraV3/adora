@@ -8,13 +8,16 @@ import { HowItWorks } from "../components/HowItWorks";
 import { Navbar } from "../components/Navbar";
 import Revolution from "../components/Revolution";
 import { UseCases } from "../components/UseCases";
+import { WhyLove } from "../components/WhyLove";
 
 export function Home() {
   return (
     <>
       <Navbar />
       <Hero />
-      <Revolution />
+      {/* <Revolution /> */}
+
+      <WhyLove />
       <HowItWorks />
       <UseCases />
 
