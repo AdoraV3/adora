@@ -2,7 +2,7 @@
 
 import { FAQs } from "@/mock";
 import { useState } from "react";
-import { FaAngleRight, FaAngleDown } from "react-icons/fa";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 export default function Faq() {
   const [selected, setselected] = useState<number>(0);
@@ -56,9 +56,9 @@ export default function Faq() {
                 } mb-auto ml-auto rounded-full p-2 shadow-xl`}
               >
                 {selected === index ? (
-                  <FaAngleRight color="#fff" size={24} />
+                  <ChevronRight color="#fff" size={24} />
                 ) : (
-                  <FaAngleDown color="#fff" size={24} />
+                  <ChevronLeft color="#fff" size={24} />
                 )}
               </button>
             </div>

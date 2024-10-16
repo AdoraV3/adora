@@ -11,7 +11,7 @@ export default function NumberCounter({ value, label }: NumberCounterProps) {
       <h6 className="text-brown-200  mb-0 md:mb-2 font-coreC font-semibold text-6xl">
         <NumberTicker value={value} />
       </h6>
-      <p className="font-satoshi font-normal text-[#575757] text-lg mb-4 md:mb-0">
+      <p className="font-satoshi font-normal text-black-100 text-lg mb-4 md:mb-0">
         {label}{" "}
       </p>
     </div>

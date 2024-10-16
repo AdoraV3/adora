@@ -8,14 +8,14 @@ export function AiInfo() {
     <Card className="relative mt-10 rounded-md bg-white-100 shadow-350 md:h-[14.7rem]">
       <CardContent className="flex flex-col justify-between md:flex-row ">
         <div className="p-4">
-          <h5 className="font-satoshi text-2xl font-medium text-[#575757]">
+          <h5 className="font-satoshi text-2xl font-medium text-black-100">
             AI Assistant
           </h5>
           <div className="mt-3 flex items-center gap-2">
             <p className="font-satoshi text-xs font-normal text-[hsla(0,0%,47%,1)] ">
               Voice:
             </p>
-            <Badge className="bg-[hsla(28,62%,96%,1)] font-satoshi text-sm font-medium text-[#575757] ">
+            <Badge className="bg-[hsla(28,62%,96%,1)] font-satoshi text-sm font-medium text-black-100 ">
               Female
             </Badge>
           </div>

@@ -30,7 +30,7 @@ export function RevolutionItem({
         <div
           className={cn(variant === "reverse" ? "order-first" : "order-last")}
         >
-          <h6 className="text-3xl mb-2 font-coreC font-normal text-[#575757]">
+          <h6 className="text-3xl mb-2 font-coreC font-normal text-black-100">
             {title}{" "}
           </h6>
           <p className="text-gray-2 tracking-tight font-normal font-satoshi text-lg">

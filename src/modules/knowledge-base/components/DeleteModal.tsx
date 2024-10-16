@@ -22,7 +22,7 @@ export function DeleteModal({
         <div className="flex  gap-5">
           <Icons.Delete2 />
           <div>
-            <h6 className="text-lg text-[#575757] font-bold">
+            <h6 className="text-lg text-black-100 font-bold">
               Delete knowledge base
             </h6>
             <p className="font-normal text-sm font-satoshi text-gray-750">

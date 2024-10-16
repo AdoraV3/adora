@@ -17,7 +17,7 @@ export function Home() {
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] overflow-x-scroll">
       <div className="mt-10 flex w-full justify-between">
-        <h2 className="font-satoshi text-2xl font-medium text-[#575757]">
+        <h2 className="font-satoshi text-2xl font-medium text-black-100">
           Overview
         </h2>
 
@@ -42,7 +42,7 @@ export function Home() {
           impression={
             <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightUp className="text-green-100" />
-              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
+              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 12% increase from last month
               </p>
             </div>
@@ -56,7 +56,7 @@ export function Home() {
           impression={
             <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightDown className="text-red-100" />
-              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
+              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 10% decrease from last month
               </p>
             </div>
@@ -70,7 +70,7 @@ export function Home() {
           impression={
             <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightUp className="!text-green-100" />
-              <p className="font-satoshi text-[10px] font-normal text-[#575757] ">
+              <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 12% increase from last month
               </p>
             </div>

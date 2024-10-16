@@ -35,7 +35,7 @@ export function PageLoader({
           aria-hidden="true"
         />
 
-        <h3 className="text-large my-5 text-center font-medium text-[#575757]">
+        <h3 className="text-large my-5 text-center font-medium text-black-100">
           {text}{" "}
         </h3>
       </div>

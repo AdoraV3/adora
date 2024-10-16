@@ -1,9 +1,8 @@
 "use client";
-
 import React from "react";
 import Image from "next/image";
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import Carousel from "react-multi-carousel";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import "react-multi-carousel/lib/styles.css";
 
 const Testimonials = () => {
@@ -86,7 +85,7 @@ const Testimonials = () => {
           }`}
           onClick={() => previous()}
         >
-          <BsChevronLeft size={16} color={"rgb(209 213 219)"} />
+          <ChevronLeft size={16} color={"rgb(209 213 219)"} />
         </button>
         <button
           type="button"
@@ -95,7 +94,7 @@ const Testimonials = () => {
           }`}
           onClick={() => next()}
         >
-          <BsChevronRight size={16} color={"rgb(209 213 219)"} />
+          <ChevronRight size={16} color={"rgb(209 213 219)"} />
         </button>
       </div>
     );
@@ -103,7 +102,7 @@ const Testimonials = () => {
 
   return (
     <div className="bg-white w-full px-6 pb-[10rem] pt-20 md:px-14 lg:px-24 ">
-      <h6 className="mb-2 font-coreC text-xl font-normal text-[#575757] md:text-4xl">
+      <h6 className="mb-2 font-coreC text-xl font-normal text-black-100 md:text-4xl">
         Testimonials
       </h6>
 

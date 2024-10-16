@@ -75,7 +75,7 @@ export function CreateKnowledgeBase() {
         />
       ) : (
         <div className="col-span-2 max-w-4xl space-y-2">
-          <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-[#575757]">
+          <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-black-100">
             Customer Support Knowledge Base
           </h4>
           <Label className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">

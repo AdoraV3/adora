@@ -153,7 +153,7 @@ export function Edit() {
                 </FormLabel>
                 <Select value={field.value} onValueChange={field.onChange}>
                   <FormControl>
-                    <SelectTrigger className=" py-3 border-none text-[#575757] focus-visible:border-none">
+                    <SelectTrigger className=" py-3 border-none text-black-100 focus-visible:border-none">
                       <SelectValue placeholder="Country" />
                     </SelectTrigger>
                   </FormControl>
@@ -162,7 +162,7 @@ export function Edit() {
                       <SelectLabel>All Countries</SelectLabel>
                       {countries?.map(el => (
                         <SelectItem
-                          className="text-[#575757] font-satoshi font-normal text-base"
+                          className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
                           value={el.value}
                         >
@@ -201,7 +201,7 @@ export function Edit() {
                       <SelectLabel>All Countries</SelectLabel>
                       {countries?.map(el => (
                         <SelectItem
-                          className="text-[#575757] font-satoshi font-normal text-base"
+                          className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
                           value={el.value?.toString()}
                         >
@@ -238,7 +238,7 @@ export function Edit() {
         </div>
 
         <Button
-          className="mt-10 bg-brown-50 text-[#575757] px-6 border border-input "
+          className="mt-10 bg-brown-50 text-black-100 px-6 border border-input "
           onClick={form.handleSubmit(onSubmit)}
           isLoading={updateProfileHandler.isPending}
         >

@@ -83,7 +83,7 @@ export function Hero() {
         </button>
       </div>
       {/* <div className="flex flex-col items-center px-4 md:px-20">
-        <h1 className="mb-3 flex flex-row flex-wrap  items-center gap-3 text-center  font-coreC text-2xl  font-normal tracking-tight text-[#575757] md:text-5xl">
+        <h1 className="mb-3 flex flex-row flex-wrap  items-center gap-3 text-center  font-coreC text-2xl  font-normal tracking-tight text-black-100 md:text-5xl">
           <span className="hidden bg-gradient-to-b from-black-100 to-primary bg-clip-text text-transparent  md:block">
             AI{" "}
           </span>{" "}

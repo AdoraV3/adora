@@ -64,7 +64,7 @@ export default function AgentDetails() {
                   }}
                   value={value}
                 >
-                  <SelectTrigger className=" py-3 border bg-white-100 text-[#575757] focus-visible:border-none">
+                  <SelectTrigger className=" py-3 border bg-white-100 text-black-100 focus-visible:border-none">
                     <SelectValue placeholder="Voice" />
                   </SelectTrigger>
                   <SelectContent sideOffset={5}>
@@ -72,7 +72,7 @@ export default function AgentDetails() {
                       <SelectLabel>Voice</SelectLabel>
                       {VOICES?.map(el => (
                         <SelectItem
-                          className="text-[#575757] font-satoshi font-normal text-base"
+                          className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
                           value={el.value}
                         >
@@ -102,7 +102,7 @@ export default function AgentDetails() {
                   value={value}
                   disabled
                 >
-                  <SelectTrigger className=" py-3 border bg-white-100 text-[#575757] focus-visible:border-none">
+                  <SelectTrigger className=" py-3 border bg-white-100 text-black-100 focus-visible:border-none">
                     <SelectValue placeholder="Language" />
                   </SelectTrigger>
                   <SelectContent sideOffset={5}>
@@ -110,7 +110,7 @@ export default function AgentDetails() {
                       <SelectLabel>Language</SelectLabel>
                       {LANGUAGES?.map(el => (
                         <SelectItem
-                          className="text-[#575757] font-satoshi font-normal text-base"
+                          className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
                           value={el.value}
                         >

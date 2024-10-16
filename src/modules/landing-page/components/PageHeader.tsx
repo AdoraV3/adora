@@ -11,7 +11,7 @@ export function PageHeader({ title, subTitle, className }: PageHeaderProps) {
     <div className={className}>
       <BlurIn
         word={title}
-        className="font-normal mb-2 font-coreC  text-[#575757] text-5xl "
+        className="font-normal mb-2 font-coreC  text-black-100 text-5xl "
       />
 
       <p className="font-normal text-gray-2 font-satoshi text-lg">

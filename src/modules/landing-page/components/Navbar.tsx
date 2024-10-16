@@ -30,13 +30,13 @@ export function Navbar() {
               </Link>
             </div>
 
-            <ul className="md:flex hidden relative font-gotham text-base font-normal text-[#575757] items-center gap-8">
+            <ul className="md:flex hidden relative font-gotham text-base font-normal text-black-100 items-center gap-8">
               {NAVBAR_ITEMS?.map(el => {
                 return (
                   <div key={el.title}>
                     <Link
                       className={cn(
-                        "font-normal font-satoshi text-lg text-center text-[#575757]",
+                        "font-normal font-satoshi text-lg text-center text-black-100",
                         {
                           "text-primary font-bold": pathname === el.href,
                         },
@@ -89,7 +89,7 @@ export function Navbar() {
 
       <SheetContent
         side="right"
-        className="pl-1 pr-0 bg-white-100 text-[#575757]"
+        className="pl-1 pr-0 bg-white-100 text-black-100"
       >
         <div className="px-7">
           <Link
@@ -112,7 +112,7 @@ export function Navbar() {
               return (
                 <li key={el.title}>
                   <Link
-                    className="font-normal font-satoshi text-lg text-[#575757] hover:text-2xl"
+                    className="font-normal font-satoshi text-lg text-black-100 hover:text-2xl"
                     href={el.href ?? "/"}
                     onClick={() => setIsOpen(false)}
                   >

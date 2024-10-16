@@ -7,7 +7,7 @@ export function HowItWorks() {
       <div>
         <BlurIn
           word=" How it Works"
-          className="pb-2 font-coreC text-4xl text-[#575757]"
+          className="pb-2 font-coreC text-4xl text-black-100"
         />
 
         <p className="max-w-sm font-satoshi text-lg font-normal text-gray-2">

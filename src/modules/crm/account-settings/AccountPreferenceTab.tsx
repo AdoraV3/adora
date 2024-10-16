@@ -21,7 +21,7 @@ export function AccountPreferenceTab() {
       />
 
       <div className="mt-6 ">
-        <h6 className="font-medium mb-2 text-sm text-[#575757] font-satoshi">
+        <h6 className="font-medium mb-2 text-sm text-black-100 font-satoshi">
           Language & Region
         </h6>
         <p className="text-gray-2 font-normal font-satoshi text-sm">
@@ -43,7 +43,7 @@ export function AccountPreferenceTab() {
                 <SelectLabel>All Countries</SelectLabel>
                 {LANGUAGES?.map(el => (
                   <SelectItem
-                    className="text-[#575757] font-satoshi font-normal text-base"
+                    className="text-black-100 font-satoshi font-normal text-base"
                     key={el.value}
                     value={el.value}
                   >
@@ -67,7 +67,7 @@ export function AccountPreferenceTab() {
                 <SelectLabel>Time zone</SelectLabel>
                 {LANGUAGES?.map(el => (
                   <SelectItem
-                    className="text-[#575757] font-satoshi font-normal text-base"
+                    className="text-black-100 font-satoshi font-normal text-base"
                     key={el.value}
                     value={el.value}
                   >

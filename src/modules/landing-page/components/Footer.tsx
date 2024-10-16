@@ -1,9 +1,7 @@
 import Image from "next/image";
-import { FaFacebook } from "react-icons/fa";
-import { CiTwitter } from "react-icons/ci";
-import { FaLinkedin } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
 import { hoverAnimation, hoverFooterAnimation } from "@/utils/animations";
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+
 
 export function Footer() {
   return (
@@ -16,10 +14,10 @@ export function Footer() {
 
              
             <div className="flex flex-row mt-10 gap-4 items-center">
-              <FaFacebook size={28} className={hoverFooterAnimation} />
-              <CiTwitter size={28} className={hoverFooterAnimation} />
-              <FaLinkedin size={28} className={hoverFooterAnimation} />
-              <FaInstagram size={28} className={hoverFooterAnimation} />
+              <Facebook size={28} className={hoverFooterAnimation} />
+              <Twitter size={28} className={hoverFooterAnimation} />
+              <Linkedin size={28} className={hoverFooterAnimation} />
+              <Instagram size={28} className={hoverFooterAnimation} />
             </div>
           </div>
         </div>
@@ -28,13 +26,13 @@ export function Footer() {
             Home
           </h6>
 
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             Pricing
           </p>
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             About Us
           </p>
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             Legal
           </p>
         </div>
@@ -42,19 +40,19 @@ export function Footer() {
           <h6 className="text-[#1C1C1C] font-satoshi font-bold text-base">
             Contact us
           </h6>
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             734 States Street Mississauga Ontario Canada.
           </p>
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             noreply@poulina.io
           </p>
-          <p className="font-satoshi font-normal text-base text-[#575757]">
+          <p className="font-satoshi font-normal text-base text-black-100">
             3065510212
           </p>
         </div>
       </div>
 
-      <p className="text-center font-normal text-xs text-[#575757] font-satoshi">
+      <p className="text-center font-normal text-xs text-black-100 font-satoshi">
         © {new Date().getFullYear()} Adora. All Rights Reserved.
       </p>
     </footer>

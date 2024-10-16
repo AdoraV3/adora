@@ -23,7 +23,7 @@ export function WhyLove() {
             />
             <div>
               <p className="font-light text-2xl ">{title}</p>
-              <p className="font-extralight text-[#575757]">{text}</p>
+              <p className="font-extralight text-black-100">{text}</p>
             </div>
           </div>
         ))}

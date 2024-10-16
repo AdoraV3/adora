@@ -11,7 +11,7 @@ export function CreateAccount() {
         <h6 className="mb-2 text-center font-satoshi text-2xl font-normal text-gray-2  md:text-left">
           Try Adora Now
         </h6>
-        <p className="text-center font-coreC text-lg font-normal text-[#575757] md:text-left  md:text-3xl">
+        <p className="text-center font-coreC text-lg font-normal text-black-100 md:text-left  md:text-3xl">
           Start transforming your business
         </p>
       </div>
