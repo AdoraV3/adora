@@ -31,7 +31,7 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     href: "/outbound-calls",
   },
   { title: "Payment", href: "/payment", icon: "Wallet" },
-  { title: "Database API", href: "/database", icon: "Api" },
+  { title: "CRM Integration", href: "/crm-integration", icon: "Crm" },
   {
     title: "Settings",
     href: "/account-settings?tab=accountInfo",

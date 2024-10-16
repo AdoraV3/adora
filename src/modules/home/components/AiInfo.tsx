@@ -5,32 +5,33 @@ import Image from "next/image";
 
 export function AiInfo() {
   return (
-    <Card className="shadow-350 mt-10 h-[14.7rem] relative rounded-md bg-white-100">
-      <CardContent className="flex justify-between ">
+    <Card className="relative mt-10 rounded-md bg-white-100 shadow-350 md:h-[14.7rem]">
+      <CardContent className="flex flex-col justify-between md:flex-row ">
         <div className="p-4">
-          <h5 className="font-medium text-2xl font-satoshi text-[#575757]">
+          <h5 className="font-satoshi text-2xl font-medium text-[#575757]">
             AI Assistant
           </h5>
-          <div className="flex mt-3 items-center gap-2">
-            <p className="font-satoshi font-normal text-xs text-[hsla(0,0%,47%,1)] ">
+          <div className="mt-3 flex items-center gap-2">
+            <p className="font-satoshi text-xs font-normal text-[hsla(0,0%,47%,1)] ">
               Voice:
             </p>
-            <Badge className="bg-[hsla(28,62%,96%,1)] font-medium text-sm font-satoshi text-[#575757] ">
+            <Badge className="bg-[hsla(28,62%,96%,1)] font-satoshi text-sm font-medium text-[#575757] ">
               Female
             </Badge>
           </div>
-          <Button size="sm" className="mt-20">
+          <Button size="sm" className="mt-14 whitespace-nowrap">
             View Languages{" "}
           </Button>
         </div>
-
-        <Image
-          className="absolute right-0 -top-12"
-          src="/images/ai.png"
-          alt="ai"
-          width={319.41}
-          height={311}
-        />
+        <div className="w-full">
+          <Image
+            src="/images/ai.png"
+            alt="ai"
+            width={200}
+            height={200}
+            className="h-[50%] w-[50%] md:absolute md:-top-12 md:right-0 md:h-full md:w-auto"
+          />
+        </div>
       </CardContent>
     </Card>
   );

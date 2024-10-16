@@ -74,7 +74,7 @@ function MobileLink({ children, href, disabled, className }: MobileLinkProps) {
         href={href}
         className={cn(
           "flex w-full p-2 font-satoshi text-sm font-normal text-foreground/70 transition-colors",
-          href === pathname && "bg-white-100 rounded-[10px] text-primary ",
+          href === pathname && "rounded-[10px] bg-white-100 text-primary ",
           disabled && "pointer-events-none opacity-60",
           className,
         )}
@@ -145,16 +145,20 @@ export function Sidebar({
           className={cn("flex w-full flex-col gap-2 px-6 ", className)}
           {...props}
         >
-            
-          <Image src={"/images/adora.png"} 
-        className="h-auto w-14" width={200} height={50} alt="logo.png" />
-        
+          <Image
+            src={"/images/adora.png"}
+            className="h-auto w-14"
+            width={200}
+            height={50}
+            alt="logo.png"
+          />
+
           {/* <Icons.Logo isOpen={isOpen} size={48} className="px-4" /> */}
           <Button
             style={{ zIndex: 99999 }}
             variant="ghost"
             onClick={() => setIsOpen?.(!isOpen)}
-            className="z-100 absolute rounded-full -right-5 top-2 mt-6 h-8 w-8 bg-white-100 px-2 shadow-sm"
+            className="z-100 absolute -right-5 top-2 mt-6 h-8 w-8 rounded-full bg-white-100 px-2 shadow-sm"
           >
             <Icons.ChevronLeft className="text-[#575757]" />
           </Button>
@@ -171,7 +175,7 @@ export function Sidebar({
                     className={cn(
                       "",
                       isActiveRoute &&
-                        "bg-white-100 text-primary rounded-[10px] ",
+                        "rounded-[10px] bg-white-100 text-primary ",
                     )}
                     key={item.title}
                   >
@@ -189,9 +193,9 @@ export function Sidebar({
                           <AccordionTrigger
                             // onClick={() => setIsOpen?.(true)}
                             className={cn(
-                              `flex flex-row py-3 justify-between text-white-100 gap-2  px-4 text-sm capitalize ${
+                              `flex flex-row justify-between gap-2 px-4 py-3  text-sm capitalize text-white-100 ${
                                 isActiveParentLink
-                                  ? "bg-white-100 rounded-[10px] text-primary "
+                                  ? "rounded-[10px] bg-white-100 text-primary "
                                   : ""
                               } `,
                               isOpen && "  ",
@@ -217,7 +221,7 @@ export function Sidebar({
                       <Link
                         key={item.title}
                         className={cn(
-                          "mb-4 flex justify-between py-3 px-3",
+                          "mb-4 flex justify-between px-3 py-3",
                           isActiveRoute && "rounded-[10px]   text-primary",
                           // !isOpen && "px-4",
                         )}
@@ -242,7 +246,6 @@ export function Sidebar({
                 );
               })}
             </div>
-
             <div>
               {BOTTOM_SIDEBAR_ITEM?.map(item => {
                 const Icon = Icons[item.icon ?? "Dashboard"];
@@ -254,7 +257,7 @@ export function Sidebar({
                       <button
                         onClick={() => logOutHandler.mutate(undefined)}
                         type="button"
-                        className="flex  cursor-pointer py-3 hover:bg-[hsla(25,64%,36%,0.25)] gap-2 px-4"
+                        className="flex  cursor-pointer gap-2 px-4 py-3 hover:bg-[hsla(25,64%,36%,0.25)]"
                       >
                         <Icon
                           size={35}
@@ -262,7 +265,7 @@ export function Sidebar({
                         />
                         <p
                           className={cn(
-                            `font-sfPro text-sm font-normal  text-gray-350 ${
+                            `font-sfPro text-gray-350 text-sm  font-normal ${
                               isOpen ? "block" : "hidden"
                             }`,
                           )}
@@ -290,7 +293,7 @@ export function Sidebar({
                         />
                         <p
                           className={cn(
-                            `font-sfPro text-base font-medium text-gray-350 ${
+                            `font-sfPro text-gray-350 text-base font-medium ${
                               isOpen ? "block" : "hidden"
                             }`,
                             isActiveRoute &&

@@ -79,7 +79,8 @@ DataTableProps<TData, TValue>) {
 
   return (
     <div
-      className={cn("min-h-full rounded-lg bg-white-100 ", containerClassName)}
+      className={cn("min-h-full rounded-lg bg-white-100 overflow-x-hidden w-full", containerClassName)}
+  
     >
       {/* <div className="flex items-center mb-6 justify-between">
         <SearchInput
@@ -104,7 +105,7 @@ DataTableProps<TData, TValue>) {
       ) : table?.getRowModel().rows?.length ? (
         <Table
           style={{ width: "100%" }}
-          className={cn("  w-full pt-2", tableClassName)}
+          className={cn("table-auto overflow-hidden w-full pt-2", tableClassName)}
         >
           <TableHeader
             className={cn("text-primary whitespace-nowrap", headerClassName)}
