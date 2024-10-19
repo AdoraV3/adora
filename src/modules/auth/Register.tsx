@@ -1,6 +1,8 @@
 "use client";
 
 import { getGoogleOauthConsentUrl, signupAction } from "@/app/actions/auth";
+import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
+import { getVoicesAction } from "@/app/actions/voice";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +12,20 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  useServerActionMutation,
+  useServerActionQuery,
+} from "@/lib/hooks/server-action-hooks";
+import { SYSTEM_PROMPTS } from "@/mock";
 import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -25,16 +40,7 @@ import {
   Shell,
 } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { SYSTEM_PROMPTS } from "@/mock";
+import { formatPhoneNumber } from "./helpers";
 
 export function Register() {
   const form = useForm<RegisterSchemaType>({
@@ -43,10 +49,15 @@ export function Register() {
   });
   const router = useRouter();
 
-  // const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
-  //   input: undefined,
-  //   queryKey: ["getPhoneNumbers"],
-  // });
+  const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
+    input: undefined,
+    queryKey: ["getPhoneNumbers"],
+  });
+
+  const { data: voices } = useServerActionQuery(getVoicesAction, {
+    input: undefined,
+    queryKey: ["getVoices"],
+  });
 
   const [isPending, startTransition] = useTransition();
   const signUpHandler = useServerActionMutation(signupAction, {
@@ -62,6 +73,7 @@ export function Register() {
   });
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
+    signUpHandler.mutate(data);
   };
 
   const handleGoogleSignIn = () => {
@@ -73,19 +85,6 @@ export function Register() {
       }
     });
   };
-  const agent_voice = [
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
-  ];
-  const agent_phones = [
-    { value: "01-928-2973-90", label: "01-928-2973-90" },
-    { value: "01-928-2973-91", label: "01-928-2973-91" },
-    { value: "01-928-2973-91", label: "01-928-2973-92" },
-    { value: "01-928-2973-93", label: "01-928-2973-93" },
-    { value: "01-928-2973-94", label: "01-928-2973-94" },
-    { value: "01-928-2973-95", label: "01-928-2973-95" },
-    { value: "01-928-2973-96", label: "01-928-2973-96" },
-  ];
 
   return (
     <Shell as="main" className="flex flex-1 flex-col">
@@ -176,7 +175,7 @@ export function Register() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="locationRegion"
               render={({ field }) => (
@@ -190,7 +189,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="agentName"
@@ -214,8 +213,11 @@ export function Register() {
                   <FormControl>
                     <div className="relative">
                       <FloatingLabel>Agent Voice</FloatingLabel>
-                      <Select>
-                        <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="bg-white-100 capitalize peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
                           <SelectValue
                             placeholder="male"
                             className="!text-[#8c8c8c40]"
@@ -226,13 +228,13 @@ export function Register() {
                             <SelectLabel className="text-[#8c8c8c80]">
                               Select a voice
                             </SelectLabel>
-                            {agent_voice?.map(el => (
+                            {voices?.data?.map(el => (
                               <SelectItem
-                                className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                                key={el.value}
-                                value={el.value}
+                                className="font-satoshi capitalize text-base font-normal text-[#8c8c8c]"
+                                key={el.id}
+                                value={el.id}
                               >
-                                {el.label}
+                                {el.gender}
                               </SelectItem>
                             ))}
                           </SelectGroup>
@@ -252,7 +254,10 @@ export function Register() {
                   <FormControl>
                     <div className="relative">
                       <FloatingLabel>Agent Phone</FloatingLabel>
-                      <Select>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
                           <SelectValue
                             placeholder="000 111 222"
@@ -264,13 +269,13 @@ export function Register() {
                             <SelectLabel className="text-[#8c8c8c80]">
                               Select an agent phone
                             </SelectLabel>
-                            {agent_phones?.map(el => (
+                            {phones?.data?.map(el => (
                               <SelectItem
                                 className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                                key={el.value}
-                                value={el.value}
+                                key={el.id}
+                                value={el.id}
                               >
-                                {el.label}
+                                {formatPhoneNumber(el.phoneNumber)}
                               </SelectItem>
                             ))}
                           </SelectGroup>

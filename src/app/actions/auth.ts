@@ -39,10 +39,16 @@ import { createAssistant, updateVapiPhoneNumber } from "./vapi";
 export const signupAction = createServerAction()
   .input(registerSchema)
   .handler(async ({ input }) => {
-    const categoryId = "y98v27l2jt1jficxxkopbozr";
-    const selectedPhoneNumberId = "h24oavsvf2t23qhx8khh19k6";
-    const selectedVoice = "ca9tbdzulr7zkhscbg8l17bt";
-    const { password, email, name, businessName } = input;
+    const {
+      password,
+      email,
+      name,
+      businessName,
+      category,
+      voice,
+      phone,
+      agentName,
+    } = input;
     const passwordHash = await new Argon2id().hash(password);
 
     const result = await db.query.user.findFirst({
@@ -50,7 +56,7 @@ export const signupAction = createServerAction()
     });
 
     const categoryResult = await db.query.systemPrompt.findFirst({
-      where: eq(systemPromptTable.id, categoryId),
+      where: eq(systemPromptTable.id, category),
     });
 
     if (result) {
@@ -60,7 +66,7 @@ export const signupAction = createServerAction()
     const isPhoneNumberAvailable =
       await db.query.availablePhoneNumber.findFirst({
         where: and(
-          eq(availablePhoneNumber.id, selectedPhoneNumberId),
+          eq(availablePhoneNumber.id, phone),
           eq(availablePhoneNumber.isAssigned, false),
         ),
       });
@@ -87,14 +93,14 @@ export const signupAction = createServerAction()
           },
         ],
       },
-      name: `Adora-${businessName}`,
+      name: agentName,
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is Adora How may I help you today?`,
     };
 
     const response = await createAssistant(payload);
 
-    const voice = await getVoice(selectedVoice);
-    if (!voice) {
+    const findVoice = await getVoice(voice);
+    if (!findVoice) {
       throw new ZSAError("NOT_FOUND", "Selected voice not available");
     }
 
@@ -112,17 +118,17 @@ export const signupAction = createServerAction()
       const [newAgent] = await createAgent(
         {
           assistantId: response.id,
-          name: `Adora-${businessName}`,
-          phoneNumberId: selectedPhoneNumberId,
-          voiceId: voice.id,
-          provider: voice.provider,
-          categoryId,
+          name: agentName,
+          phoneNumberId: phone,
+          voiceId: findVoice.id,
+          provider: findVoice.provider,
+          categoryId: category,
         },
         trx,
       );
 
       await updatePhoneNumber(
-        selectedPhoneNumberId,
+        phone,
         { isAssigned: true, dateAssigned: new Date()?.toISOString() },
         trx,
       );

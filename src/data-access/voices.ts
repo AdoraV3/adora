@@ -7,3 +7,7 @@ export async function getVoice(voiceId: Voice["id"]) {
     where: eq(voice.id, voiceId),
   });
 }
+
+export async function getVoices() {
+  return db.query.voice.findMany();
+}

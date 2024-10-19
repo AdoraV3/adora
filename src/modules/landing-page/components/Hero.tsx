@@ -1,6 +1,3 @@
-import WordRotate from "@/components/animations/rotate";
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
 import { hoverAnimation } from "@/utils/animations";
 import Image from "next/image";
 
@@ -61,7 +58,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto mt-20">
+      <div className="mx-auto animate-pulse mt-20">
         <Image
           src="/images/mic.png"
           width={100}
