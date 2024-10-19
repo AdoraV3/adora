@@ -2,15 +2,15 @@
   {
     "name": "Adora",
     "language": "English",
-    "gender": "female",
+    "gender": "male",
     "provider": "11labs",
-    "createdVoiceId": "TWUKKXAylkYxxlPe4gx0"
+    "createdVoiceId": "mrh6BGtvw1pAXXEjIsOg"
   },
   {
     "name": "Adora",
     "language": "English",
-    "voice": "male",
+    "voice": "female",
     "provider": "11labs",
-    "createdVoiceId": "TWUKKXAylkYxxlPe4gx0"
+    "createdVoiceId": "yMCzJDgejP3dqCBHGGS4"
   }
 ]

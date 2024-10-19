@@ -84,6 +84,8 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
     enabled: !!agent?.data.assistantId,
   });
 
+  console.log({ call, agent });
+
   return (
     <>
       <DataTable

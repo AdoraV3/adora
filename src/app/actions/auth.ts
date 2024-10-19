@@ -82,6 +82,11 @@ export const signupAction = createServerAction()
     if (!basicSubscription) {
       throw new ZSAError("NOT_FOUND", "Subscription not found");
     }
+    const findVoice = await getVoice(voice);
+    if (!findVoice) {
+      throw new ZSAError("NOT_FOUND", "Selected voice not available");
+    }
+
     const payload = {
       ...assistantConfig,
       model: {
@@ -94,15 +99,15 @@ export const signupAction = createServerAction()
         ],
       },
       name: agentName,
+      voice: {
+        ...assistantConfig.voice,
+        provider: findVoice.provider,
+        voiceId: findVoice?.createdVoiceId,
+      },
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is Adora How may I help you today?`,
     };
 
     const response = await createAssistant(payload);
-
-    const findVoice = await getVoice(voice);
-    if (!findVoice) {
-      throw new ZSAError("NOT_FOUND", "Selected voice not available");
-    }
 
     updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
       assistantId: response.id,

@@ -8,16 +8,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { RecentCallLogs } from "@/modules/call-logs/components/RecentCallLogs";
 import { AiInfo } from "../components/AiInfo";
 import { OverviewCard } from "../components/OverviewCard";
-import { RecentCalls } from "../components/RecentCalls";
 
 export function Home() {
   // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
-    <section className="bg-[hsla(0, 0%, 100%,0.34)] overflow-x-scroll">
-      <div className="mt-10 flex w-full justify-between">
-        <h2 className="font-satoshi text-2xl font-medium text-black-100">
+    <section className="bg-[hsla(0,0%,100%,0.34)] flex flex-col gap-12 ">
+      <div className="flex justify-between">
+        <h2 className="font-satoshi font-medium text-2xl text-black-100">
           Overview
         </h2>
 
@@ -86,7 +86,10 @@ export function Home() {
 
       <AiInfo />
       {/* <Activities /> */}
-        <RecentCalls />
+      <div className="space-y-3">
+        <h6 className="font-medium text-xl text-black-100">Recent Call Logs</h6>
+        <RecentCallLogs type="recent" />
+      </div>
     </section>
   );
 }

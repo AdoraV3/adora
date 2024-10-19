@@ -37,6 +37,7 @@ export const getAgentAction = authenticationProcedure
     if (!business || !business.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
+
     const agentDetails = await getAgent(business.agentId);
 
     if (!agentDetails) {

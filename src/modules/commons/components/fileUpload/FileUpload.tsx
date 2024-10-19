@@ -208,7 +208,7 @@ export function FileUpload({
             <Button
               variant="ghost"
               className={cn(
-                "h-auto cursor-pointer rounded-lg  bg-transparent px-0 py-1.5 text-sm text-black-100 hover:text-black-100",
+                "h-auto cursor-pointer mr-1 rounded-lg  bg-transparent px-0 py-1.5 text-sm text-black-100 hover:text-black-100",
                 {
                   "text-gray-70": !canUpload,
                 },
@@ -223,7 +223,7 @@ export function FileUpload({
                 accept={supportedFormats.join(",")}
                 onChange={e => onFileChange(e.target.files)}
               />
-              Click to upload
+              Click to upload{" "}
             </Button>
             or drag and drop
           </p>
