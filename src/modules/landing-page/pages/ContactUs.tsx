@@ -32,10 +32,10 @@ export function ContactUs() {
 
       <div className="flex gap-5 bg-brown-200 md:flex-row flex-col p-6 md:p-10 my-20 justify-between items-center">
         <div>
-          <h6 className="font-coreC  mb-3 font-normal text-2xl text-white-200">
+          <h6 className="font-coreC  mb-3 font-normal text-lg sm:text-2xl text-white-200">
             Try Adora Now
           </h6>
-          <p className="font-medium  text-white-100 text-4xl font-coreC">
+          <p className="font-medium  text-white-100 text-2xl md:text-4xl font-coreC">
             Start transforming your business
           </p>
         </div>

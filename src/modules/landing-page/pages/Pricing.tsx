@@ -19,7 +19,7 @@ export function Pricing() {
   const isYearly = view === "yearly";
   return (
     <div className="my-10">
-      <div className="flex justify-between  max-w-6xl mx-auto items-center">
+      <div className="flex flex-col sm:flex-row md:justify-between px-10 max-w-6xl mx-auto items-center">
         <div>
           <BlurIn
             word="Plans & Pricing"
@@ -32,7 +32,7 @@ export function Pricing() {
           </p>
         </div>
 
-        <div className="uppercase border border-primary rounded-full">
+        <div className="mt-10 sm:mt-0 uppercase border border-primary rounded-full">
           <Button
             size="sm"
             className={cn(
@@ -62,7 +62,7 @@ export function Pricing() {
           </Button>
         </div>
       </div>
-      <section className="grid md:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] mt-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] sm:mt-8">
         {PRICING_PLANS.map(plan => {
           return (
             <PricingCard

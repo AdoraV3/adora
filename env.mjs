@@ -30,7 +30,6 @@ export const env = createEnv({
     NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK: z.string().url(),
     NEXT_PUBLIC_VAPI_API_KEY: z.string(),
   },
-
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,

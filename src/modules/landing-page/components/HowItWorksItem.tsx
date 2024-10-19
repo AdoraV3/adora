@@ -17,11 +17,12 @@ export function HowItWorksItem({
         "border-primary": isActive,
       })}
     >
+      <div className={cn("h-8 -left-[1.9px] absolute w-1 bg-[#575757]", {"bg-[#975221]": isActive} )} />
       <h6
         className={cn(
-          "text-black-100 px-6  border-black-100 border-l-2  font-bold font-satoshi text-2xl",
+          "text-black-100 px-6  border-black-100 font-bold font-satoshi text-2xl",
           {
-            "text-primary border-primary ": isActive,
+            "text-primary": isActive,
           },
         )}
       >

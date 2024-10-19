@@ -26,7 +26,7 @@ export function ResetPassword() {
   const onSubmit: SubmitHandler<ResetPasswordSchemaType> = () => {};
 
   return (
-    <Shell className="w-full mt-10">
+    <Shell className="px-6 w-[95%] sm:w-full mx-auto mt-10">
       <div>
         <PageHeader
           className="my-10"

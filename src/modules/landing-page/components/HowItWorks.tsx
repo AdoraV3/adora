@@ -3,14 +3,14 @@ import { HowItWorksItem } from "./HowItWorksItem";
 
 export function HowItWorks() {
   return (
-    <section className="grid py-20 items-center md:grid-cols-2 px-4 md:px-12 gap-5">
+    <section className="grid items-center gap-5 px-4 py-20 md:grid-cols-2 md:px-12">
       <div>
         <BlurIn
           word=" How it Works"
-          className="text-black-100 font-coreC text-4xl pb-2"
+          className="pb-2 font-coreC text-4xl text-black-100"
         />
 
-        <p className="max-w-sm font-satoshi text-gray-2 font-normal text-lg">
+        <p className="max-w-sm font-satoshi text-lg font-normal text-gray-2">
           Thousands of organizations of all sizes trust Adora to grow their
           business.
         </p>
@@ -18,21 +18,21 @@ export function HowItWorks() {
 
       <div>
         <HowItWorksItem
-          subTitle="Our team will work closely with you to understand your business needs and tailor a customized solution that fits your requirements."
-          title="Consultation"
+          subTitle="Choose a phone number, voice, language, give it a name to create a custom AI agent that reflects your brand."
+          title="Set Up Your AI Agent"
           isActive
         />
         <HowItWorksItem
-          subTitle="We’ll seamlessly integrate Adora into your existing systems, ensuring minimal disruption to your operations."
-          title="Implementation"
+          subTitle="Add company information and scripts to empower your AI agent with the tools to handle customer inquiries like a pro."
+          title="Upload to Knowledge Base"
         />
         <HowItWorksItem
-          subTitle="Our AI agents undergo rigorous training to ensure they’re equipped to handle a wide range of customer inquiries and interactions."
-          title="Training"
+          subTitle="Make your assigned phone number available to your customers and watch as incoming calls are resolved instantly with speed and efficiency." 
+          title="Go Live"
         />
         <HowItWorksItem
-          subTitle="Once implemented, our team will provide ongoing support to ensure everything runs smoothly, allowing you to focus on what you do best – growing your business."
-          title="Launch & Support"
+          subTitle="Handle over 1 million concurrent calls with our Kubernetes-based infrastructure designed for scalability and high availability."
+          title="Scale with Ease"
         />
       </div>
     </section>

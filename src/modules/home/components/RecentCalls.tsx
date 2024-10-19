@@ -84,7 +84,7 @@ export function RecentCalls() {
     ];
   }, []);
   return (
-    <section className="mt-20 max-w-4xl">
+    <section className="mt-20 w-full md:max-w-4xl overflow-hidden ">
       <PageHeader title="Recent Call Logs" />
 
       <DataTable headerClassName="text-center" data={data} columns={columns} />

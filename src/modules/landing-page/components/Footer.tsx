@@ -1,28 +1,28 @@
-import { Icons } from "@/components/icons";
+import Image from "next/image";
+import { hoverAnimation, hoverFooterAnimation } from "@/utils/animations";
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+
 
 export function Footer() {
   return (
-    <footer>
+    <footer className="pb-6">
       <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
         <div>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-2 items-center">
-              <p>Logo</p>
+              
+              <Image src={"/images/adoralogo.png"} className="-ml-3 w-32 h-10" width={200} height={50} alt="logo.png" />
 
-              <p className="font-bold text-4xl text-black-100 font-urbanist">
-                Adora
-              </p>
-            </div>
-            <div className="flex mt-10 gap-2 items-center">
-              <Icons.Facebook />
-              <Icons.Twitter />
-              <Icons.LinkedIn />
-              <Icons.Instagram />
+             
+            <div className="flex flex-row mt-10 gap-4 items-center">
+              <Facebook size={28} className={hoverFooterAnimation} />
+              <Twitter size={28} className={hoverFooterAnimation} />
+              <Linkedin size={28} className={hoverFooterAnimation} />
+              <Instagram size={28} className={hoverFooterAnimation} />
             </div>
           </div>
         </div>
         <div className="space-y-3">
-          <h6 className="text-black-100 font-satoshi font-bold text-base">
+          <h6 className="text-[#1C1C1C] font-satoshi font-bold text-base">
             Home
           </h6>
 
@@ -37,7 +37,7 @@ export function Footer() {
           </p>
         </div>
         <div className="space-y-3">
-          <h6 className="text-black-100 font-satoshi font-bold text-base">
+          <h6 className="text-[#1C1C1C] font-satoshi font-bold text-base">
             Contact us
           </h6>
           <p className="font-satoshi font-normal text-base text-black-100">

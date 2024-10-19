@@ -13,9 +13,10 @@ export function AccountSettings() {
   const { queryParams } = useQueryParams();
   const activeTab = queryParams.get("tab") ?? "accountInfo";
   return (
+    <div className="overflow-hidden">
     <Tabs
       defaultValue={activeTab}
-      className="w-full  sticky top-5 z-10 py-5 bg-white-100"
+      className="w-full overflow-x-scroll sticky top-5 z-10 py-5 bg-white-100"
     >
       <TabsList className="border-b justify-start border-input w-full">
         <TabsTrigger
@@ -76,5 +77,6 @@ export function AccountSettings() {
       </TabsContent>
       <TabsContent value="password">Change your password here.</TabsContent>
     </Tabs>
+    </div>
   );
 }

@@ -10,13 +10,13 @@ export function UseCases() {
           className="text-black-100 text-left font-coreC text-4xl pb-2"
           word="Uses Cases"
         />
-        <p className="max-w-sm font-satoshi text-gray-2 font-normal text-lg">
+        <p className="max-w-md font-satoshi text-gray-2 font-normal text-lg mb-5">
           A glimpse into how Adora streamlines various aspects of customer
           service across different industries.
         </p>
       </div>
 
-      <div className="mt-5 grid md:grid-cols-2 md:px-20 gap-6">
+      <div className="mt-5 grid md:grid-cols-2 md:px-12 gap-6">
         {USE_CASES.map(el => (
           <UseCaseItem
             key={el.title}

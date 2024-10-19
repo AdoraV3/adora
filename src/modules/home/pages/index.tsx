@@ -15,14 +15,14 @@ import { RecentCalls } from "../components/RecentCalls";
 export function Home() {
   // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
-    <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
-      <div className="flex mt-10 justify-between">
-        <h2 className="font-satoshi font-medium text-2xl text-black-100">
+    <section className="bg-[hsla(0, 0%, 100%,0.34)] overflow-x-scroll">
+      <div className="mt-10 flex w-full justify-between">
+        <h2 className="font-satoshi text-2xl font-medium text-black-100">
           Overview
         </h2>
 
         <Select>
-          <SelectTrigger className="w-[120px] bg-white-100 border-none">
+          <SelectTrigger className="w-[120px] border-none bg-white-100">
             <SelectValue placeholder="Days" />
           </SelectTrigger>
           <SelectContent>
@@ -33,14 +33,14 @@ export function Home() {
         </Select>
       </div>
 
-      <div className="md:grid-cols-4 grid divide-x-1  divide-[hsla(0,0%,85%,1)]">
+      <div className="divide-x-1 grid divide-[hsla(0,0%,85%,1)]  md:grid-cols-4">
         <OverviewCard
           iconBackground="bg-[hsla(285,62%,75%,1)] "
           icon="Expand"
           title="Total Interactions"
           value={5000}
           impression={
-            <div className="flex gap-2 mt-2 items-center">
+            <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightUp className="text-green-100" />
               <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 12% increase from last month
@@ -54,7 +54,7 @@ export function Home() {
           title="Resolution Rate"
           value="85%"
           impression={
-            <div className="flex gap-2 mt-2 items-center">
+            <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightDown className="text-red-100" />
               <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 10% decrease from last month
@@ -68,7 +68,7 @@ export function Home() {
           title="Average Resolution Time"
           value="2 minutes"
           impression={
-            <div className="flex gap-2 mt-2 items-center">
+            <div className="mt-2 flex items-center gap-2">
               <Icons.ArrowRightUp className="!text-green-100" />
               <p className="font-satoshi text-[10px] font-normal text-black-100 ">
                 12% increase from last month
@@ -86,8 +86,7 @@ export function Home() {
 
       <AiInfo />
       {/* <Activities /> */}
-
-      <RecentCalls />
+        <RecentCalls />
     </section>
   );
 }

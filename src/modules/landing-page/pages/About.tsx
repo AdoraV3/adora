@@ -9,21 +9,21 @@ import NumberCounter from "../components/NumberCounter";
 
 export function About() {
   return (
-    <main>
-      <div className=" text-center pt-10 max-w-4xl mx-auto">
+    <main className="px-6">
+      <div className=" mx-auto max-w-4xl pt-10 text-center">
         <BlurIn
           word="  Empowering businesses to thrive"
-          className="font-normal font-coreC text-black-100 text-5xl "
+          className="font-coreC text-5xl font-normal text-black-100 "
         />
 
-        <p className="font-normal font-satoshi text-lg text-gray-2 mt-2">
+        <p className="mt-2 font-satoshi text-lg font-normal text-gray-2">
           Adora is a state-of-the-art AI technology that solve customer base
           problems for ambitious businesses. Our mission is to shape businesses
           and be partners in success.
         </p>
       </div>
 
-      <div className="mt-20 px-20 space-y-3">
+      <div className="mt-20 space-y-3 md:px-20">
         <AboutItem
           variant="reverse"
           image="/images/who.png"
@@ -37,19 +37,19 @@ export function About() {
         />
       </div>
 
-      <div className="max-w-3xl mx-auto my-10 flex justify-between items-center">
+      <div className="flex flex-col md:flex-row mx-auto my-10 max-w-3xl items-center justify-between">
         <NumberCounter value={87} label="Satisfied Clients" />
         <NumberCounter value={150} label="Projects Completed" />
         <NumberCounter value={28} label="Accolades Earned​" />
         <NumberCounter value={56000} label="Lines of Code​" />
       </div>
 
-      <div className="flex gap-5 bg-brown-200 md:flex-row flex-col p-6 md:p-10 mb-20   justify-between items-center">
+      <div className="mb-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6   md:flex-row md:p-10">
         <div>
-          <h6 className="font-medium  mb-3 text-white-100 text-4xl font-coreC">
+          <h6 className="mb-3  font-coreC text-2xl sm:text-4xl font-medium text-white-100">
             Would you like to start a project with us?
           </h6>
-          <p className="font-coreC font-normal text-2xl text-white-200">
+          <p className="font-coreC text-lg sm:text-2xl font-normal text-white-200">
             Join us at Adora and revolutionize your approach to customer
             service.
           </p>
@@ -59,7 +59,7 @@ export function About() {
           href="/register"
           className={cn(
             buttonVariants({ variant: "default", size: "sm" }),
-            "px-6 bg-white-100 text-primary",
+            "bg-white-100 px-6 text-primary",
           )}
         >
           Contact Us

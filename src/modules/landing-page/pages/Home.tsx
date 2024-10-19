@@ -1,4 +1,5 @@
 import { CreateAccount } from "../CreateAccount";
+import Testimonials from "../Testimonials";
 import { Brands } from "../components/Brands";
 import Faq from "../components/Faq";
 import { Footer } from "../components/Footer";
@@ -7,18 +8,22 @@ import { HowItWorks } from "../components/HowItWorks";
 import { Navbar } from "../components/Navbar";
 import Revolution from "../components/Revolution";
 import { UseCases } from "../components/UseCases";
+import { WhyLove } from "../components/WhyLove";
 
 export function Home() {
   return (
     <>
       <Navbar />
       <Hero />
-      <Revolution />
+      {/* <Revolution /> */}
+
+      <WhyLove />
       <HowItWorks />
       <UseCases />
 
       <Brands />
       <CreateAccount />
+      <Testimonials />
       <Faq />
       <Footer />
     </>

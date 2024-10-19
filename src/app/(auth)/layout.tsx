@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PropsWithChildren } from "react";
 
 // interface AuthLayoutProps {
@@ -5,8 +6,14 @@ import { PropsWithChildren } from "react";
 // }
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
-    <div className="flex flex-col gap-20 flex-1 max-w-[25rem]  m-auto">
-      <nav className=" p-4 pb-6  md:p-6  text-center">Logo</nav>
+    <div className="m-auto flex sm:max-w-[25rem] flex-1 flex-col gap-5">
+      <Image
+        src={"/images/adora.png"}
+        className="mx-auto mt-4 h-auto w-14"
+        width={200}
+        height={50}
+        alt="logo.png"
+      />
 
       {children}
     </div>

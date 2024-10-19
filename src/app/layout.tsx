@@ -32,7 +32,6 @@ const CORE_SANS_C = localFont({
   ],
   variable: "--coreC-font",
 });
-
 const SATOSHI = localFont({
   src: [
     {
@@ -62,6 +61,20 @@ const SATOSHI = localFont({
 export const metadata = {
   title: "Adora",
   description: "AI Agent for your business",
+  keywords: "",
+  openGraph: {
+    url: "https://www.adora.com/",
+    siteName: "Adora",
+    images: "/images/adora.png",
+    type: "website",
+    countryName: "Nigeria",
+    title: "Adora",
+    description: "AI Agent for your business",
+    locale: "en_NG",
+  },
+  twitter: {
+    images: "/images/adora.png",
+  },
 };
 
 export default function RootLayout({

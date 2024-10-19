@@ -7,11 +7,11 @@ interface NumberCounterProps {
 
 export default function NumberCounter({ value, label }: NumberCounterProps) {
   return (
-    <div>
-      <h6 className="text-brown-200 mb-2 font-coreC font-semibold text-6xl">
+    <div className="text-center md:text-left">
+      <h6 className="text-brown-200  mb-0 md:mb-2 font-coreC font-semibold text-6xl">
         <NumberTicker value={value} />
       </h6>
-      <p className="font-satoshi font-normal text-black-100 text-lg">
+      <p className="font-satoshi font-normal text-black-100 text-lg mb-4 md:mb-0">
         {label}{" "}
       </p>
     </div>

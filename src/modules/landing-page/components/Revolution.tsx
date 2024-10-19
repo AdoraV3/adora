@@ -10,7 +10,7 @@ export default function Revolution() {
         subtitle="An AI intelligent assistant for exceptional customer experiences."
       />
 
-      <div className="flex-col mt-12  gap-5 max-w-4xl mx-auto flex">
+      <div className="mx-auto mt-16  flex max-w-4xl flex-col gap-5">
         {REVOLUTION_ITEMS?.map((el, i) => (
           <RevolutionItem
             title={el.title}
