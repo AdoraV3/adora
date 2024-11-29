@@ -318,6 +318,7 @@ export const SYSTEM_PROMPTS: Array<{
 
 export const PRICING_PLANS: Array<PricingPlan> = [
   {
+    id: 1,
     amount: {
       monthly: 0,
       yearly: 0,
@@ -340,6 +341,7 @@ export const PRICING_PLANS: Array<PricingPlan> = [
     actionLabel: "Choose Plan",
   },
   {
+    id: 2,
     amount: {
       monthly: 29,
       yearly: 290,
@@ -366,6 +368,7 @@ export const PRICING_PLANS: Array<PricingPlan> = [
     actionLabel: "Choose Plan",
   },
   {
+    id: 3,
     amount: {
       monthly: 99,
       yearly: 999,
@@ -396,6 +399,7 @@ export const PRICING_PLANS: Array<PricingPlan> = [
     actionLabel: "Choose Plan",
   },
   {
+    id: 4,
     amount: {
       monthly: 199,
       yearly: 1990,

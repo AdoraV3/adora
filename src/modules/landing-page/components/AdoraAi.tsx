@@ -6,7 +6,7 @@ import { useVapiCall } from "../hooks/useVapiWebCall";
 export function AdoraAi() {
   const { isCallActive, isReady, toggleCall } = useVapiCall();
   return (
-    <Button disabled={!isReady} onClick={toggleCall}>
+    <Button isLoading={!isReady} disabled={!isReady} onClick={toggleCall}>
       {isCallActive ? "End Call" : "Start Call"}
     </Button>
   );

@@ -10,36 +10,42 @@ import "react-multi-carousel/lib/styles.css";
 function Testimonials() {
   const testimony = [
     {
+      id: 1,
       name: "Dr. Nathan A.​",
       role: "Clinic Director, Healthy Minds Clinic​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
     {
+      id: 2,
       name: "Dr. Nathan k.​",
       role: "Clinic Director, Healthy Minds Clinic.​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
     {
+      id: 3,
       name: "Dr. Nathan k.​",
       role: "Clinic Director, Healthy Minds Clinic.​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
     {
+      id: 4,
       name: "Dr. Nathan k.​",
       role: "Clinic Director, Healthy Minds Clinic.​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
     {
+      id: 5,
       name: "Dr. Nathan k.​",
       role: "Clinic Director, Healthy Minds Clinic.​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
     {
+      id: 6,
       name: "Dr. Nathan k.​",
       role: "Clinic Director, Healthy Minds Clinic.​",
       image: "/images/user.png",

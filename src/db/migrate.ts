@@ -1,7 +1,7 @@
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 
 import { env } from "env.mjs";
-import { db } from ".";
+import { db } from "./index";
 
 export async function runMigrate() {
   console.warn("⏳ Running migrations...");

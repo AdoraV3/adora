@@ -1,8 +1,8 @@
 "use client";
 
 import { FAQs } from "@/mock";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
 
 export default function Faq() {
   const [selected, setselected] = useState<number>(0);
@@ -22,7 +22,7 @@ export default function Faq() {
         {FAQs?.map((el, index) => {
           return (
             <div
-              key={Number(index)}
+              key={el.id}
               className={`bg-[#EDE2DA26] mb-4 flex flex-row rounded-2xl px-4 py-6 md:px-6 md:py-6 ${
                 selected === index ? "shadow-2xl" : "shadow-sm"
               }`}
@@ -33,7 +33,7 @@ export default function Faq() {
                 </h3>
                 {selected === index && (
                   <p
-                    className={`leading-6 text-[#ffffff50] md:w-[80%] md:leading-8 
+                    className={`leading-6 text-[#ffffff50] md:w-[80%] md:leading-8
                   `}
                   >
                     {el.content}

@@ -19,6 +19,7 @@ export interface ListItem {
 }
 
 export interface PricingPlan {
+  id: number;
   amount: {
     monthly: number;
     yearly: number;

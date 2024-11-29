@@ -1,22 +1,23 @@
 "use client";
 
+import { getSubscriptionsAction } from "@/app/actions";
 import BlurIn from "@/components/animations/blur-in";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { cn } from "@/lib/utils";
-import { PRICING_PLANS } from "@/mock";
-import { useFormatNumber } from "@/modules/commons/hooks/useFormatNumber";
-import { useGetLocation } from "@/modules/commons/hooks/useGetLocation";
-import { getRegionalPrice } from "@/modules/commons/utils/helpers";
+import { renderQueryState } from "@/modules/commons/utils/renderQueryState";
 import Link from "next/link";
 import { useState } from "react";
-import { PricingCard } from "./pricing/components/PricingCard";
+import { PricingData } from "../components/PricingData";
 
 export function Pricing() {
-  const formatCurrency = useFormatNumber();
-  const { data } = useGetLocation();
+  const subscriptionQuery = useServerActionQuery(getSubscriptionsAction, {
+    input: undefined,
+    queryKey: ["getSubscriptions"],
+  });
 
   const [view, setView] = useState<"monthly" | "yearly">("monthly");
-  const isYearly = view === "yearly";
+
   return (
     <div className="my-10">
       <div className="flex flex-col sm:flex-row md:justify-between px-10 max-w-6xl mx-auto items-center">
@@ -62,28 +63,14 @@ export function Pricing() {
           </Button>
         </div>
       </div>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] sm:mt-8">
-        {PRICING_PLANS.map(plan => {
-          return (
-            <PricingCard
-              price={formatCurrency(
-                getRegionalPrice(plan, view, data?.country),
-                {
-                  style: "currency",
-                  currencyDisplay: "symbol",
-                  currency: data?.country === "Nigeria" ? "USD" : "NGN",
-                },
-              )}
-              key={plan.plan}
-              isYearly={isYearly}
-              features={plan.features}
-              plan={plan?.plan}
-              ctaText={plan.actionLabel}
-              isPopular={plan.isPopular}
-            />
-          );
-        })}
-      </section>
+      {renderQueryState(subscriptionQuery, {
+        LoadingStateView: <div>Loading...</div>,
+        ErrorStateView: () => <div>Error...</div>,
+        SuccessStateView: ({ data }) => {
+          return <PricingData subscriptions={data.subscriptions} view={view} />;
+        },
+      })}
+
       <div className="flex gap-5 bg-brown-200 justify-center flex-col p-6 md:p-10 my-5  items-center">
         <div className="text-center">
           <h6 className="font-medium  text-white-100 text-4xl font-coreC">

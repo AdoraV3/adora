@@ -1,18 +1,101 @@
 [
   {
+    "plan": "basic",
+    "period": "monthly",
+    "amount": 99,
+    "priceId": "",
+    "paymentProvider": "stripe",
+    "features": [
+      "125 Calls",
+      "Basic call handling",
+      "Email support",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      "Customized greeting."
+    ],
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo"
+  },
+  {
     "plan": "premium",
     "period": "monthly",
-    "amount": 10,
+    "amount": 100,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
-    "paymentProvider": "stripe"
+    "paymentProvider": "stripe",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
+    ]
+  },
+  {
+    "plan": "standard",
+    "period": "monthly",
+    "amount": 101,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe",
+    "features": [
+      "5000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+      "Advanced voice recognition.",
+      "Multilingual support Integration with Twilio for SMS and email notifications.",
+      "Phone support."
+    ]
+  },
+  {
+    "plan": "enterprise",
+    "period": "monthly",
+    "amount": 102,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe",
+    "features": [
+      "Unlimited Calls",
+      "Unlimited Contacts",
+      "All Premium features plus custom integrations.",
+      "Dedicated account manager.",
+      "SLA guarantees and personalized support.",
+      "24/7 Support",
+      "Customizable Voice & Language",
+      "Customizable Branding",
+      "Customizable Use Cases",
+      "Choice of 10 distinct voices.",
+      "Custom integration.",
+      "Detailed usage analytics.",
+      "Company operations in real-time."
+    ]
   },
   {
     "plan": "basic",
-    "period": "monthly",
-    "amount": 0,
+    "period": "yearly",
+    "amount": 99,
     "priceId": "",
-    "paymentProvider": ""
+    "paymentProvider": "stripe",
+    "features": [
+      "125 Calls",
+      "Basic call handling",
+      "Email support",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      "Customized greeting."
+    ],
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo"
   },
   {
     "plan": "premium",
@@ -20,7 +103,107 @@
     "amount": 100,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
-    "paymentProvider": "stripe"
+    "paymentProvider": "stripe",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
+    ]
+  },
+
+  {
+    "plan": "standard",
+    "period": "yearly",
+    "amount": 100,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe",
+    "features": [
+      "5000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+      "Advanced voice recognition.",
+      "Multilingual support Integration with Twilio for SMS and email notifications.",
+      "Phone support."
+    ]
+  },
+  {
+    "plan": "enterprise",
+    "period": "yearly",
+    "amount": 100,
+    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "paymentProvider": "stripe",
+    "features": [
+      "Unlimited Calls",
+      "Unlimited Contacts",
+      "All Premium features plus custom integrations.",
+      "Dedicated account manager.",
+      "SLA guarantees and personalized support.",
+      "24/7 Support",
+      "Customizable Voice & Language",
+      "Customizable Branding",
+      "Customizable Use Cases",
+      "Choice of 10 distinct voices.",
+      "Custom integration.",
+      "Detailed usage analytics.",
+      "Company operations in real-time."
+    ]
+  },
+  {
+    "plan": "basic",
+    "period": "monthly",
+    "amount": 1000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "125 Calls",
+      "Basic call handling",
+      "Email support",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      "Customized greeting."
+    ]
+  },
+  {
+    "plan": "standard",
+    "period": "monthly",
+    "amount": 2000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "5000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+      "Advanced voice recognition.",
+      "Multilingual support Integration with Twilio for SMS and email notifications.",
+      "Phone support."
+    ]
   },
   {
     "plan": "premium",
@@ -29,6 +212,128 @@
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
     "paymentProvider": "paystack",
-    "currency": "NGN"
+    "currency": "NGN",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
+    ]
+  },
+  {
+    "plan": "enterprise",
+    "period": "monthly",
+    "amount": 4000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "Unlimited Calls",
+      "Unlimited Contacts",
+      "All Premium features plus custom integrations.",
+      "Dedicated account manager.",
+      "SLA guarantees and personalized support.",
+      "24/7 Support",
+      "Customizable Voice & Language",
+      "Customizable Branding",
+      "Customizable Use Cases",
+      "Choice of 10 distinct voices.",
+      "Custom integration.",
+      "Detailed usage analytics.",
+      "Company operations in real-time."
+    ]
+  },
+  {
+    "plan": "basic",
+    "period": "yearly",
+    "amount": 1000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "125 Calls",
+      "Basic call handling",
+      "Email support",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      "Customized greeting."
+    ]
+  },
+  {
+    "plan": "standard",
+    "period": "yearly",
+    "amount": 2000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "5000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously.",
+      "Advanced voice recognition.",
+      "Multilingual support Integration with Twilio for SMS and email notifications.",
+      "Phone support."
+    ]
+  },
+  {
+    "plan": "premium",
+    "period": "yearly",
+    "amount": 3000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
+    ]
+  },
+  {
+    "plan": "enterprise",
+    "period": "yearly",
+    "amount": 4000,
+    "priceId": "PLN_q33i0c3oyb0s4ne",
+    "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
+    "paymentProvider": "paystack",
+    "currency": "NGN",
+    "features": [
+      "Unlimited Calls",
+      "Unlimited Contacts",
+      "All Premium features plus custom integrations.",
+      "Dedicated account manager.",
+      "SLA guarantees and personalized support.",
+      "24/7 Support",
+      "Customizable Voice & Language",
+      "Customizable Branding",
+      "Customizable Use Cases",
+      "Choice of 10 distinct voices.",
+      "Custom integration.",
+      "Detailed usage analytics.",
+      "Company operations in real-time."
+    ]
   }
 ]

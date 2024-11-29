@@ -1,17 +1,18 @@
 import BlurIn from "@/components/animations/blur-in";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { FeatureItem } from "./FeatureItem";
 
 interface PricingCardProps {
-  price: string;
-  plan: string;
-  features: string[];
+  price?: string;
+  plan?: string;
+  features?: string[];
   isYearly?: boolean;
-  ctaText: string;
+  ctaText?: string;
   isPopular?: boolean;
+  paymentLink: string;
 }
 export function PricingCard({
   plan,
@@ -20,6 +21,7 @@ export function PricingCard({
   features,
   ctaText,
   isPopular,
+  paymentLink,
 }: PricingCardProps) {
   return (
     <Card
@@ -43,27 +45,31 @@ export function PricingCard({
             /{isYearly ? "Yearly" : "Monthly"}{" "}
           </span>
         </p>
-        <BlurIn word={`${plan} Plan`} className="my-5 font-medium text-3xl" />
+        <BlurIn
+          word={`${plan} Plan`}
+          className="my-5 capitalize font-medium text-3xl"
+        />
 
         <div className="mb-4 space-y-5">
-          {features.map((feature, i) => (
+          {features?.map((feature, i) => (
             // eslint-disable-next-line react/no-array-index-key
             <FeatureItem key={i} text={feature} />
           ))}
         </div>
 
         <div className="flex mt-10 justify-center">
-          <Button
+          <Link
+            target="_blank"
+            href={paymentLink}
             className={cn(
-              "flex bg-[hsla(25,64%,12%,0.2)] text-brown-200 justify-center px-6 rounded-full",
+              "flex py-3 bg-[hsla(25,64%,12%,0.2)] text-brown-200 justify-center px-6 rounded-full",
               {
                 "bg-brown-200 !text-[hsla(0,0%,98%,1)] ": isPopular,
               },
             )}
-            size="sm"
           >
             {ctaText}{" "}
-          </Button>
+          </Link>
         </div>
       </CardContent>
     </Card>

@@ -30,7 +30,8 @@ export function useVapiCall() {
       }
       return undefined;
     };
-  }, [vapi]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleCall = async () => {
     if (!vapi) return;

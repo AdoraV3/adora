@@ -7,7 +7,7 @@ export const paymentProvider = ["stripe", "paystack"] as const;
 
 export const subscriptionPlanEnum = [
   "basic",
-  "starter",
+  "standard",
   "premium",
   "enterprise",
 ] as const;
@@ -29,6 +29,7 @@ export const subscription = pgTable("subscription", {
   paymentProvider: varchar("payment_provider", {
     enum: paymentProvider,
   }),
+  features: text("features").array().default([]),
 });
 
 export type Subscription = typeof subscription.$inferSelect;
