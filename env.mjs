@@ -29,6 +29,8 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: z.string().url(),
     NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK: z.string().url(),
     NEXT_PUBLIC_VAPI_API_KEY: z.string(),
+    NEXT_PUBLIC_VAPI_CLIENT_SDK: z.string(),
+    NEXT_PUBLIC_ADORA_AI: z.string(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -46,6 +48,8 @@ export const env = createEnv({
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     VAPI_API_KEY: process.env.VAPI_API_KEY,
     NEXT_PUBLIC_VAPI_API_KEY: process.env.NEXT_PUBLIC_VAPI_API_KEY,
+    NEXT_PUBLIC_VAPI_CLIENT_SDK: process.env.NEXT_PUBLIC_VAPI_CLIENT_SDK,
+    NEXT_PUBLIC_ADORA_AI: process.env.NEXT_PUBLIC_ADORA_AI,
     STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK:

@@ -7,7 +7,7 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 export default function Faq() {
   const [selected, setselected] = useState<number>(0);
   return (
-    <section className="bg-[#190E05] py-10">
+    <section className="bg-[#190E05] py-10">
       <div className="mx-auto mb-16 px-4 text-center md:max-w-[70%] md:px-12">
         <h6 className="mb-2 font-coreC text-xl font-normal text-[#fff] md:text-4xl">
           Frequently Asked Questions
@@ -24,9 +24,7 @@ export default function Faq() {
             <div
               key={Number(index)}
               className={`bg-[#EDE2DA26] mb-4 flex flex-row rounded-2xl px-4 py-6 md:px-6 md:py-6 ${
-                selected === index
-                  ? "shadow-2xl"
-                  : "shadow-sm"
+                selected === index ? "shadow-2xl" : "shadow-sm"
               }`}
             >
               <div>

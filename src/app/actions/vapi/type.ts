@@ -225,7 +225,7 @@ interface Tool {
 interface ToolMessage {
   type: string;
   content: string;
-  conditions: ToolMessageCondition[];
+  conditions?: ToolMessageCondition[];
 }
 
 interface ToolMessageCondition {
@@ -245,9 +245,9 @@ interface ToolFunction {
 }
 
 interface ToolServer {
-  timeoutSeconds: number;
+  timeoutSeconds?: number;
   url: string;
-  secret: string;
+  secret?: string;
 }
 
 interface KnowledgeBase {
@@ -399,4 +399,12 @@ export interface CallLogParam {
   limit?: number;
   createdAtGe: string;
   createdAtLe: string;
+}
+
+export interface CreateToolDTO {
+  async: boolean;
+  messages: ToolMessage[];
+  type: string;
+  function?: ToolFunction;
+  server: ToolServer;
 }

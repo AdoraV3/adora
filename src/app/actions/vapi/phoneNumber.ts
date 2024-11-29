@@ -44,6 +44,5 @@ export const updateVapiPhoneNumber = async (id: string, body: any) => {
     headers,
     body: JSON.stringify(body),
   });
-
   return response.json();
 };

@@ -5,7 +5,8 @@ import { Icons } from "@/components/icons";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { DataTable } from "@/modules/commons/components";
 import { ColumnDef } from "@tanstack/react-table";
-import { addDays, formatDate } from "date-fns";
+import { formatDate } from "date-fns/format";
+import { addDays } from "date-fns/addDays";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -83,8 +84,6 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
     queryKey: ["getCallLogs", type],
     enabled: !!agent?.data.assistantId,
   });
-
-  console.log({ call, agent });
 
   return (
     <>

@@ -1,7 +1,6 @@
+import { hoverFooterAnimation } from "@/utils/animations";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
-import { hoverAnimation, hoverFooterAnimation } from "@/utils/animations";
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-
 
 export function Footer() {
   return (
@@ -9,10 +8,14 @@ export function Footer() {
       <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
         <div>
           <div className="flex flex-col gap-1">
-              
-              <Image src={"/images/adoralogo.png"} className="-ml-3 w-32 h-10" width={200} height={50} alt="logo.png" />
+            <Image
+              src="/images/adoralogo.png"
+              className="-ml-3 w-32 h-10"
+              width={200}
+              height={50}
+              alt="logo.png"
+            />
 
-             
             <div className="flex flex-row mt-10 gap-4 items-center">
               <Facebook size={28} className={hoverFooterAnimation} />
               <Twitter size={28} className={hoverFooterAnimation} />

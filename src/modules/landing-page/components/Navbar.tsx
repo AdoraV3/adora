@@ -7,10 +7,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { NAVBAR_ITEMS } from "@/mock";
 import { useGetLocation } from "@/modules/commons/hooks/useGetLocation";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export function Navbar() {
   useGetLocation();
@@ -26,7 +26,13 @@ export function Navbar() {
           <div className="flex gap-16 w-full  items-center">
             <div>
               <Link className="flex gap-3 items-center" href="/">
-                <Image src={"/images/adoralogo.png"} className="w-full h-10" width={200} height={50} />
+                <Image
+                  alt="adora"
+                  src="/images/adoralogo.png"
+                  className="w-full h-10"
+                  width={200}
+                  height={50}
+                />
               </Link>
             </div>
 
@@ -101,7 +107,13 @@ export function Navbar() {
             <span className="">
               {" "}
               <Link href="/">
-                <Image src={"/images/adoralogo.png"} className="w-full h-10" width={200} height={50} />
+                <Image
+                  src="/images/adoralogo.png"
+                  className="w-full h-10"
+                  width={200}
+                  height={50}
+                  alt="adora"
+                />
               </Link>
             </span>
           </Link>

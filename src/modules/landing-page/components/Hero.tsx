@@ -1,26 +1,27 @@
 import { hoverAnimation } from "@/utils/animations";
 import Image from "next/image";
+import { AdoraAi } from "./AdoraAi";
 
-const words = [
-  "Logistics",
-  "Healthcare",
-  "Real Estate",
-  "Education",
-  "Finance",
-  "Hospitality",
-  "Insurance",
-  "Retail",
-  "Travel",
-  "Telecom",
-  "Utilities",
-  "Agriculture",
-  "Media",
-  "Government",
-  "E-commerce",
-  "Entertainment",
-  "Non-profit",
-  "Businesses",
-];
+// const words = [
+//   "Logistics",
+//   "Healthcare",
+//   "Real Estate",
+//   "Education",
+//   "Finance",
+//   "Hospitality",
+//   "Insurance",
+//   "Retail",
+//   "Travel",
+//   "Telecom",
+//   "Utilities",
+//   "Agriculture",
+//   "Media",
+//   "Government",
+//   "E-commerce",
+//   "Entertainment",
+//   "Non-profit",
+//   "Businesses",
+// ];
 
 export function Hero() {
   return (
@@ -43,7 +44,10 @@ export function Hero() {
             Conversations. Your Premier Solution for Customer Support & Inbound
             Call Automation.
           </p>
-          <button className="hover:bg-brown-600 rounded-2xl bg-[#975221] px-5 py-3 text-sm text-[#ffff] transition">
+          <button
+            type="button"
+            className="hover:bg-brown-600 rounded-2xl bg-[#975221] px-5 py-3 text-sm text-[#ffff] transition"
+          >
             Get Started for Free →
           </button>
 
@@ -58,7 +62,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto animate-pulse mt-20">
+      <div className="mx-auto  mt-20">
         <Image
           src="/images/mic.png"
           width={100}
@@ -66,14 +70,17 @@ export function Hero() {
           alt="hero"
           className={`mx-auto h-[180px] w-auto cursor-pointer rounded-2xl object-cover ${hoverAnimation}`}
         />
+        <AdoraAi />
       </div>
       <div className="flex flex-col ">
         <button
+          type="button"
           className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
         >
           Speak with the mic!
         </button>
         <button
+          type="button"
           className={`hover:bg-brown-600 mx-auto w-fit rounded-lg bg-[#975221] px-10 py-3 text-sm text-[#ffff] transition md:px-32 ${hoverAnimation}`}
         >
           Try demo for free
@@ -117,7 +124,7 @@ export function Hero() {
           width={100}
           height={60}
           alt="hero"
-          className={`mx-auto h-[500px] w-[90%] rounded-2xl object-cover`}
+          className="mx-auto h-[500px] w-[90%] rounded-2xl object-cover"
         />
       </div>
     </section>

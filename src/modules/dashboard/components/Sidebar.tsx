@@ -21,8 +21,8 @@ import {
 } from "@/components/ui/accordion";
 import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { BOTTOM_SIDEBAR_ITEM } from "@/mock";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen?: boolean;
@@ -74,6 +74,7 @@ function MobileLink({ children, href, disabled, className }: MobileLinkProps) {
         href={href}
         className={cn(
           "flex w-full p-2 font-satoshi text-sm font-normal text-foreground/70 transition-colors",
+          // eslint-disable-next-line sonarjs/no-duplicate-string
           href === pathname && "rounded-[10px] bg-white-100 text-primary ",
           disabled && "pointer-events-none opacity-60",
           className,
@@ -146,7 +147,7 @@ export function Sidebar({
           {...props}
         >
           <Image
-            src={"/images/adora.png"}
+            src="/images/adora.png"
             className="h-auto w-14"
             width={200}
             height={50}

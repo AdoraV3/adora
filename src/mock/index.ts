@@ -207,7 +207,7 @@ export const USE_CASES: Array<ListItem> = [
   {
     title: "Beauty Salon & Spa",
     description:
-     "Clients can inquire about appointments, schedules, or service details using natural language.  Adora understands their intent, retrieves information from your system, and provides real-time updates.",
+      "Clients can inquire about appointments, schedules, or service details using natural language.  Adora understands their intent, retrieves information from your system, and provides real-time updates.",
     image: "/images/professional.png",
   },
 ];
@@ -220,39 +220,39 @@ export const WHY_LOVE: Array<{
   {
     title: "Fast & Simple Setup",
     text: "Get your AI voice assistant running in minutes and seamlessly integrate it with your existing CRM for flawless AI-driven phone interactions.",
-    image: "/images/whylove/fast.png"
+    image: "/images/whylove/fast.png",
   },
   {
     title: "Cost-Efficient Automation",
     text: "Cut down expenses by automating routine calls, allowing your team to focus on high-priority task. Also easily expand your AI-powered call platform to manage more inbound and outbound calls without major costs or upfront commitments.",
-    image: "/images/whylove/cost.png"
+    image: "/images/whylove/cost.png",
   },
   {
     title: "24/7 Availability",
     text: "Ensure round-the-clock customer service with AI voice agents that never sleep, making sure you never miss a call.",
-    image: "/images/whylove/24.png"
+    image: "/images/whylove/24.png",
   },
   {
     title: "Customizable Knowledge Base",
     text: "Equip your AI assistant with the knowledge it needs to handle calls like a seasoned agent by uploading company scripts and information.",
-    image: "/images/whylove/customize.png"
+    image: "/images/whylove/customize.png",
   },
   {
     title: "Global Reach with Multilingual Capabilities",
     text: "Access over 300 languages, accents, and voices, allowing you to communicate with diverse audiences across multiple regions and languages.",
-    image: "/images/whylove/global.png"
+    image: "/images/whylove/global.png",
   },
   {
     title: "Seamless Integration",
     text: "Adora effortlessly integrates with over 3,000 platforms, making it easy to connect with the tools and workflows essential for smooth call center operations.",
-    image: "/images/whylove/seamless.png"
+    image: "/images/whylove/seamless.png",
   },
-]
+];
 
 export const SYSTEM_PROMPTS: Array<{
   label: string;
   value: string;
-  systemPrompt: string
+  systemPrompt: string;
 }> = [
   {
     label: "E-commerce",

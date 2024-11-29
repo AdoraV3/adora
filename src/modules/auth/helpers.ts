@@ -10,9 +10,8 @@ export function formatPhoneNumber(
     if (parsedNumber) {
       // Format for international use
       return parsedNumber.formatInternational();
-    } else {
-      return "Invalid phone number";
     }
+    return "Invalid phone number";
   } catch (error) {
     console.error("Error parsing phone number:", error);
     return "Error parsing phone number";

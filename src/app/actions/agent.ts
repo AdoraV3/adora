@@ -65,35 +65,3 @@ export const getAgentDetailsAction = authenticationProcedure
 
     return { success: true, data: returnedAgent };
   });
-
-// export const createPhoneNumberAction = authenticationProcedure
-//   .createServerAction()
-//   .input(phoneNumberImportSchema)
-//   .handler(async ({ ctx, input }) => {
-//     const { id } = ctx;
-//     const { phoneNumber, accountSID, authToken } = input;
-//     const business = await getBusiness(id);
-//     if (!business) {
-//       throw new ZSAError("NOT_FOUND", "Business not found.");
-//     }
-//     const agent = await getAgent(business?.agentId);
-
-//     if (!agent || !agent.assistantId) {
-//       throw new ZSAError("NOT_FOUND", "Agent not found.");
-//     }
-//     const payload = {
-//       // fallbackDestination: {
-//       //   // assistantId: agent.assistantId,
-//       //   type: "assistant",
-//       //   assistName: agent.name,
-//       // },
-//       provider: "twilio",
-//       number: phoneNumber.replace(/\s+/g, ""),
-//       twilioAccountSid: accountSID,
-//       twilioAuthToken: authToken,
-//       name: business.name,
-//       assistantId: agent.assistantId,
-//     };
-//     await createVapiPhoneNumber(payload);
-//     return { success: true, data: agent };
-//   });

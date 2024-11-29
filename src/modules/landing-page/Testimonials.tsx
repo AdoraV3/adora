@@ -1,15 +1,17 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+
 "use client";
-import React from "react";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Carousel from "react-multi-carousel";
-import { ChevronRight, ChevronLeft } from "lucide-react";
 import "react-multi-carousel/lib/styles.css";
 
-const Testimonials = () => {
+function Testimonials() {
   const testimony = [
     {
-      name: "Dr. Nathan k.​",
-      role: "Clinic Director, Healthy Minds Clinic.​",
+      name: "Dr. Nathan A.​",
+      role: "Clinic Director, Healthy Minds Clinic​",
       image: "/images/user.png",
       text: "Adora has transformed our patient care experience. The AI agents handle appointments and inquiries with such empathy and efficiency, our patients feel truly valued.​",
     },
@@ -66,13 +68,7 @@ const Testimonials = () => {
       items: 1,
     },
   };
-  const ButtonGroup: React.FC = ({
-    next,
-    previous,
-    goToSlide,
-    max,
-    ...rest
-  }: any) => {
+  function ButtonGroup({ next, previous, goToSlide, max, ...rest }: any) {
     const {
       carouselState: { currentSlide, slidesToShow },
     } = rest;
@@ -85,7 +81,7 @@ const Testimonials = () => {
           }`}
           onClick={() => previous()}
         >
-          <ChevronLeft size={16} color={"rgb(209 213 219)"} />
+          <ChevronLeft size={16} color="rgb(209 213 219)" />
         </button>
         <button
           type="button"
@@ -94,11 +90,11 @@ const Testimonials = () => {
           }`}
           onClick={() => next()}
         >
-          <ChevronRight size={16} color={"rgb(209 213 219)"} />
+          <ChevronRight size={16} color="rgb(209 213 219)" />
         </button>
       </div>
     );
-  };
+  }
 
   return (
     <div className="bg-white w-full px-6 pb-[10rem] pt-20 md:px-14 lg:px-24 ">
@@ -119,6 +115,7 @@ const Testimonials = () => {
           const { image, text, name, role } = data ?? {};
           return (
             <div
+              // eslint-disable-next-line react/no-array-index-key
               key={index}
               className="xs:w-[250px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[400px] md:px-4 lg:w-[450px] xl:w-[400px]"
             >
@@ -142,6 +139,6 @@ const Testimonials = () => {
       </Carousel>
     </div>
   );
-};
+}
 
 export default Testimonials;

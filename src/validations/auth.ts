@@ -1,3 +1,4 @@
+import { REQUIRED_FIELD } from "@/modules/commons/utils/constant";
 import * as z from "zod";
 
 export const authSchema = z.object({
@@ -103,3 +104,10 @@ export const changePasswordSchema = z
   });
 
 export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;
+
+export const toolSchema = z.object({
+  scenarioId: z.string(),
+  url: z.string().min(1, REQUIRED_FIELD).max(50).url(),
+});
+
+export type ToolSchemaType = z.infer<typeof toolSchema>;

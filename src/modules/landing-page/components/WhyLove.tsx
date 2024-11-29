@@ -1,4 +1,4 @@
-import { BRANDS, WHY_LOVE } from "@/mock";
+import { WHY_LOVE } from "@/mock";
 import { PageHeader } from "@/modules/commons/components/PageHeader";
 import Image from "next/image";
 
@@ -12,7 +12,10 @@ export function WhyLove() {
 
       <div className="mt-14 flex flex-col gap-x-6 gap-y-8">
         {WHY_LOVE.map(({ image, title, text }) => (
-          <div className="flex flex-row items-center rounded-lg px-5 py-5 border border-[#d9d9d9]" key={text}>
+          <div
+            className="flex flex-row items-center rounded-lg px-5 py-5 border border-[#d9d9d9]"
+            key={text}
+          >
             <Image
               width={200}
               height={200}

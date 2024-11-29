@@ -111,7 +111,7 @@ export function MobileNav({
                       type="multiple"
                       // defaultValue={sidebarItems.map(item => item.title)}
                       className="mb-6 w-full "
-                      onClick={()=>setIsOpen(false)}
+                      onClick={() => setIsOpen(false)}
                     >
                       <AccordionItem value={item.title}>
                         <AccordionTrigger
@@ -148,8 +148,7 @@ export function MobileNav({
                         "mb-8 flex items-center gap-2  px-4",
                         isActiveRoute && "bg-primary-light py-3 text-primary",
                       )}
-
-                      onClick={()=>setIsOpen(false)}
+                      onClick={() => setIsOpen(false)}
                       href={item.href ?? "/"}
                     >
                       <Icon

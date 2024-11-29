@@ -27,7 +27,7 @@ export function HowItWorks() {
           title="Upload to Knowledge Base"
         />
         <HowItWorksItem
-          subTitle="Make your assigned phone number available to your customers and watch as incoming calls are resolved instantly with speed and efficiency." 
+          subTitle="Make your assigned phone number available to your customers and watch as incoming calls are resolved instantly with speed and efficiency."
           title="Go Live"
         />
         <HowItWorksItem

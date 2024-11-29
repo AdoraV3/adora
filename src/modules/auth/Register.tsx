@@ -145,7 +145,10 @@ export function Register() {
                   <FormControl>
                     <div className="relative">
                       <FloatingLabel>Business Category</FloatingLabel>
-                      <Select>
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
                         <SelectTrigger className="bg-white peer mt-1 h-14 border border-gray-550 py-3 focus:border-primary ">
                           <SelectValue
                             placeholder="Category"
@@ -339,12 +342,10 @@ export function Register() {
         <div className="mt-2 text-center">
           <p className="font-satoshi text-base font-normal text-black-100">
             Already have an account?
-            <span>
-              <Link href="/login" className="text-primary">
-                {" "}
-                Login
-              </Link>
-            </span>{" "}
+            <Link href="/login" className="text-primary">
+              {" "}
+              Login
+            </Link>
           </p>
         </div>
         <div className="relative my-3">

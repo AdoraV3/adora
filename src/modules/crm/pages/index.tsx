@@ -1,17 +1,5 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { AiInfo } from "../components/AiInfo";
-import { OverviewCard } from "../components/OverviewCard";
-import { RecentCalls } from "../components/RecentCalls";
-
 export function CRM() {
   // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
@@ -26,6 +14,7 @@ export function CRM() {
                 href="https://Make.com"
                 target="_blank"
                 className="text-blue-700"
+                rel="noreferrer"
               >
                 Make.com
               </a>
@@ -42,7 +31,7 @@ export function CRM() {
                 </li>
                 <li>
                   Example: If using Salesforce, you might set actions like
-                  "Create a new lead" or "Update a contact" when triggered by
+                  Create a new lead or Update a contact when triggered by
                   certain events.
                 </li>
               </ul>
@@ -63,9 +52,8 @@ export function CRM() {
                   Select the data feeds you want to collect via the webhook.
                 </li>
                 <li>
-                  Example: You may choose to collect "new lead details,"
-                  "updated customer information," or "sales opportunities" from
-                  your CRM.
+                  Example: You may choose to collect new lead details, updated
+                  customer information, or sales opportunities from your CRM.
                 </li>
               </ul>
             </li>
@@ -87,6 +75,7 @@ export function CRM() {
               href="https://www.youtube.com/watch?v=-qjAF02iVG8"
               target="_blank"
               className="text-blue-700"
+              rel="noreferrer"
             >
               https://www.youtube.com/watch?v=-qjAF02iVG8
             </a>

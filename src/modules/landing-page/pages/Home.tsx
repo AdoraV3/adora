@@ -6,7 +6,6 @@ import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { HowItWorks } from "../components/HowItWorks";
 import { Navbar } from "../components/Navbar";
-import Revolution from "../components/Revolution";
 import { UseCases } from "../components/UseCases";
 import { WhyLove } from "../components/WhyLove";
 
