@@ -7,3 +7,7 @@ export async function getCategory(categoryId: SystemPrompt["id"]) {
     where: eq(systemPrompt.id, categoryId),
   });
 }
+
+export async function getCategories() {
+  return db.query.systemPrompt.findMany();
+}

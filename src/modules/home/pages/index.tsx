@@ -1,27 +1,18 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { RecentCallLogs } from "@/modules/call-logs/components/RecentCallLogs";
 import { AiInfo } from "../components/AiInfo";
-import { OverviewCard } from "../components/OverviewCard";
 
 export function Home() {
   // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
-    <section className="bg-[hsla(0,0%,100%,0.34)] flex flex-col gap-12 ">
+    <section className="bg-[hsla(0,0%,100%,0.34)] flex flex-col gap-6 ">
       <div className="flex justify-between">
         <h2 className="font-satoshi font-medium text-2xl text-black-100">
           Overview
         </h2>
 
-        <Select>
+        {/* <Select>
           <SelectTrigger className="w-[120px] border-none bg-white-100">
             <SelectValue placeholder="Days" />
           </SelectTrigger>
@@ -30,10 +21,10 @@ export function Home() {
             <SelectItem value="dark">Last Week</SelectItem>
             <SelectItem value="system">Yesterday</SelectItem>
           </SelectContent>
-        </Select>
+        </Select> */}
       </div>
 
-      <div className="divide-x-1 grid divide-[hsla(0,0%,85%,1)]  md:grid-cols-4">
+      {/* <div className="divide-x-1 grid divide-[hsla(0,0%,85%,1)]  md:grid-cols-4">
         <OverviewCard
           iconBackground="bg-[hsla(285,62%,75%,1)] "
           icon="Expand"
@@ -82,7 +73,7 @@ export function Home() {
           title="Customer Satisfaction Rating"
           value="2 minutes"
         />
-      </div>
+      </div> */}
 
       <AiInfo />
       {/* <Activities /> */}

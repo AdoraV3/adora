@@ -12,6 +12,10 @@ import { getCategory } from "@/data-access/systemPrompt";
 import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
 import { assistantConfig } from "@/mock";
+import {
+  RateLimitConfig,
+  RateLimiterUtility,
+} from "@/modules/commons/utils/RateLimiterUtility";
 import { fileUploadSchema } from "@/modules/knowledge-base/validation";
 import { ZSAError } from "zsa";
 import { deleteVapiKnowledgeBase, updateAssistantKnowledgeBase } from "./vapi";
@@ -32,6 +36,7 @@ export const createKnowledgeBaseAction = authenticationProcedure
   .createServerAction()
   .input(fileUploadSchema)
   .handler(async ({ input, ctx }) => {
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const { id } = ctx;
     const business = await getBusiness(id);
     const { id: fileId, url, originalName, size } = input;
@@ -104,6 +109,7 @@ export const updateKnowledgeBaseAction = authenticationProcedure
   .createServerAction()
   .input(fileUploadSchema)
   .handler(async ({ ctx, input }) => {
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const { id: fileId, url, originalName, size } = input;
     const { id } = ctx;
     const business = await getBusiness(id);

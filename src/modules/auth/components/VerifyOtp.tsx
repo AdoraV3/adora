@@ -105,6 +105,7 @@ export default function VerifyOtp() {
                 Didn’t receive code?{" "}
                 <span>
                   <Button
+                    type="button"
                     id="resendOtp"
                     isDisabled={isOtpValid}
                     variant="link"

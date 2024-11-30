@@ -10,6 +10,10 @@ import {
 import { getPlan } from "@/data-access/subscription";
 import { sendContactUsEmail } from "@/emails";
 import { authenticationProcedure } from "@/lib/procedures";
+import {
+  RateLimitConfig,
+  RateLimiterUtility,
+} from "@/modules/commons/utils/RateLimiterUtility";
 import { profileSchema } from "@/modules/home/components/profile/validation";
 import { contactUsSchema } from "@/modules/landing-page/validation";
 import { ZSAError, createServerAction } from "zsa";
@@ -63,6 +67,7 @@ export const getUserAction = authenticationProcedure
 export const sendContactUsAction = createServerAction()
   .input(contactUsSchema)
   .handler(async ({ input }) => {
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const { fullName, businessName, email, phoneNumber, message } = input;
     await sendContactUsEmail({
       name: fullName,

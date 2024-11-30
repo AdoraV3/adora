@@ -1,4 +1,5 @@
 import { Providers } from "@/services/Providers";
+import { Viewport } from "next";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -75,6 +76,10 @@ export const metadata = {
   twitter: {
     images: "/images/adora.png",
   },
+};
+
+export const viewport: Viewport = {
+  maximumScale: 1,
 };
 
 export default function RootLayout({

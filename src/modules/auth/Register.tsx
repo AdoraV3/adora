@@ -2,6 +2,7 @@
 
 import { getGoogleOauthConsentUrl, signupAction } from "@/app/actions/auth";
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
+import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getVoicesAction } from "@/app/actions/voice";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,6 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
-import { SYSTEM_PROMPTS } from "@/mock";
 import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -57,6 +57,11 @@ export function Register() {
   const { data: voices } = useServerActionQuery(getVoicesAction, {
     input: undefined,
     queryKey: ["getVoices"],
+  });
+
+  const { data: categories } = useServerActionQuery(getCategoriesAction, {
+    input: undefined,
+    queryKey: ["getCategories"],
   });
 
   const [isPending, startTransition] = useTransition();
@@ -160,11 +165,11 @@ export function Register() {
                             <SelectLabel className="text-[#8c8c8c80]">
                               Select a business category
                             </SelectLabel>
-                            {SYSTEM_PROMPTS?.map(el => (
+                            {categories?.data?.map(el => (
                               <SelectItem
                                 className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                                key={el.value}
-                                value={el.value}
+                                key={el.id ?? ""}
+                                value={el.id ?? ""}
                               >
                                 {el.label}
                               </SelectItem>

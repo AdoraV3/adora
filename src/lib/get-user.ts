@@ -34,7 +34,7 @@ export const getUser = async () => {
   }
 
   if (!sessionUser) {
-    throw new Error("No user found");
+    return null;
   }
   return db.query.user.findFirst({
     where: eq(userTable?.id, sessionUser.id),

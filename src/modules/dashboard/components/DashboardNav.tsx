@@ -25,7 +25,6 @@ import { DynamicBreadcrumb } from "@/modules/commons/components";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import { getInitials } from "@/modules/commons/utils/helpers";
-import { env } from "env.mjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -61,21 +60,23 @@ export function DashboardNav() {
   const { createQueryStrings } = useQueryParams();
   const router = useRouter();
   const handleUpgradePlan = () => {
-    if (user?.email) {
-      router.push(
-        `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}?${createQueryStrings({
-          prefilled_email: user?.email,
-        })}`,
-      );
-    } else {
-      router.push(
-        `/login?${createQueryStrings({
-          from: encodeURIComponent(
-            `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}`,
-          ),
-        })}`,
-      );
-    }
+    // if (user?.email) {
+    //   router.push(
+    //     `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}?${createQueryStrings({
+    //       prefilled_email: user?.email,
+    //     })}`,
+    //   );
+    // } else {
+    //   router.push(
+    //     `/login?${createQueryStrings({
+    //       from: encodeURIComponent(
+    //         `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}`,
+    //       ),
+    //     })}`,
+    //   );
+    // }
+
+    router.push("/pricing");
   };
 
   const disclosure = useDisclosure();

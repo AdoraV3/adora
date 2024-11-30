@@ -10,11 +10,16 @@ interface PricingDataProps {
 
 export function PricingData({ subscriptions, view }: PricingDataProps) {
   const formatCurrency = useFormatNumber();
-  const { data: locationData } = useGetLocation();
+  const { data: locationData, isPending } = useGetLocation();
   const selectedCurrency = locationData?.country === "Nigeria" ? "NGN" : "USD";
   const filteredSubscriptions = subscriptions?.filter(
-    el => el.period === view && el.currency === selectedCurrency,
+    el => el.period === view && el.currency === "USD",
   );
+
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="grid grid-cols-1 md:px-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] sm:mt-8">
       {filteredSubscriptions?.map(plan => (
@@ -30,7 +35,7 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
           plan={plan?.plan ?? ""}
           ctaText={plan.plan === "enterprise" ? "Contact Us" : "Choose Plan"}
           isPopular={plan.plan === "premium"}
-          paymentLink={plan.paymentLink ?? ""}
+          priceId={plan.priceId ?? ""}
         />
       ))}
     </section>

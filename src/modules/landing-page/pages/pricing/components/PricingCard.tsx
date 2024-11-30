@@ -1,8 +1,10 @@
+import { checkoutAction } from "@/app/actions";
 import BlurIn from "@/components/animations/blur-in";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { FeatureItem } from "./FeatureItem";
 
 interface PricingCardProps {
@@ -12,7 +14,7 @@ interface PricingCardProps {
   isYearly?: boolean;
   ctaText?: string;
   isPopular?: boolean;
-  paymentLink: string;
+  priceId?: string;
 }
 export function PricingCard({
   plan,
@@ -21,7 +23,7 @@ export function PricingCard({
   features,
   ctaText,
   isPopular,
-  paymentLink,
+  priceId,
 }: PricingCardProps) {
   return (
     <Card
@@ -58,18 +60,19 @@ export function PricingCard({
         </div>
 
         <div className="flex mt-10 justify-center">
-          <Link
-            target="_blank"
-            href={paymentLink}
-            className={cn(
-              "flex py-3 bg-[hsla(25,64%,12%,0.2)] text-brown-200 justify-center px-6 rounded-full",
-              {
-                "bg-brown-200 !text-[hsla(0,0%,98%,1)] ": isPopular,
-              },
-            )}
-          >
-            {ctaText}{" "}
-          </Link>
+          <form action={checkoutAction}>
+            <Input type="hidden" name="priceId" value={priceId} />
+            <Button
+              className={cn(
+                "flex  bg-[hsla(25,64%,12%,0.2)] text-brown-200 justify-center px-6 rounded-full",
+                {
+                  "bg-brown-200 !text-[hsla(0,0%,98%,1)] ": isPopular,
+                },
+              )}
+            >
+              {ctaText}{" "}
+            </Button>
+          </form>
         </div>
       </CardContent>
     </Card>
