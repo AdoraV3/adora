@@ -21,7 +21,7 @@ export function Navbar() {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <div className="py-4 sticky bg-white-100 z-20 top-0 ">
         <header
-          className={`flex justify-between bg-white-100 shadow-[0px_6px_30px_6px_hsla(0,0%,0%,0.05)] mx-4 md:mx-16  rounded-[20px] py-3   items-center  px-4 md:px-12 `}
+          className={`flex justify-between mx-4 md:mx-10  rounded-[20px] py-3 items-center `}
         >
           <div className="flex gap-16 w-full  items-center">
             <div>
