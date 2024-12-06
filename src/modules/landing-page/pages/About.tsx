@@ -26,12 +26,12 @@ export function About() {
       <div className="mt-20 space-y-3 md:px-20">
         <AboutItem
           variant="reverse"
-          image="/images/who.png"
+          image="/images/about1.png"
           title="Who We Are"
           description="We are Adora—an innovative force driving the future of customer service. Join us on our journey as we redefine what’s possible and create a world where every customer interaction leaves a lasting impression."
         />
         <AboutItem
-          image="/images/what.png"
+          image="/images/about2.png"
           title="What We Do"
           description="At Adora, we specialize in leveraging cutting-edge AI technology to transform customer service. We provide businesses with innovative solutions that combine the empathy of human agents with the efficiency and scalability of AI. From setting up AI-powered call centers to delivering personalized customer interactions, we’re dedicated to redefining the customer service experience for businesses worldwide."
         />
