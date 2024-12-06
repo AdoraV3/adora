@@ -7,10 +7,9 @@ import { cn } from "@/lib/utils";
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const FloatingInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <Input
-        type={type}
         className={cn(
           " border h-14 peer border-gray-550 focus:border-primary",
           className,
