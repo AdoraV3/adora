@@ -48,7 +48,7 @@ interface MobileLinkProps extends React.PropsWithChildren {
 function RouteLink({ routeIcon, isOpen, title }: RouteLinkProps) {
   const Icon = Icons[routeIcon ?? "Home"];
   return (
-    <div className="item-center  flex gap-3">
+    <div className="item-center flex gap-3">
       <Icon
         // className={cn("text-gray-100", isActive && " text-primary ")}
         size={35}
@@ -192,7 +192,6 @@ export function Sidebar({
                           value={item.title}
                         >
                           <AccordionTrigger
-                            // onClick={() => setIsOpen?.(true)}
                             className={cn(
                               `flex flex-row justify-between gap-2 px-4 py-3  text-sm capitalize text-white-100 ${
                                 isActiveParentLink
