@@ -20,6 +20,7 @@ import {
   MoreVertical,
   Plus,
   PlusCircle,
+  Presentation,
   Sliders,
   SlidersHorizontal,
   X,
@@ -28,7 +29,6 @@ import {
 } from "lucide-react";
 
 export type Icon = LucideIcon;
-
 export const Icons = {
   Close: X,
   Spinner: Loader2,
@@ -41,7 +41,7 @@ export const Icons = {
   ChevronsUpDown,
   ArrowUp,
   ArrowDown,
-
+  Appointment: ()=> <Presentation size={20} />,
   Menu,
   VerticalThreeDots: MoreVertical,
   HorizontalThreeDots: MoreHorizontal,

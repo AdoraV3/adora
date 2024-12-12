@@ -30,6 +30,11 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     icon: "OutboundCall",
     href: "/outbound-calls",
   },
+  {
+    title: "Appointment",
+    icon: "Appointment",
+    href: "/appointment",
+  },
   { title: "Payment", href: "/payment", icon: "Wallet" },
   { title: "CRM Integration", href: "/crm-integration", icon: "Crm" },
   {
