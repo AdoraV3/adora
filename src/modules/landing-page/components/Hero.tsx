@@ -50,7 +50,7 @@ export function Hero() {
           </p>
           <button
             type="button"
-            className="hover:bg-brown-600 rounded-2xl bg-[#975221] px-5 py-3 text-sm text-[#ffff] transition"
+            className="hover:bg-brown-600 rounded-lg bg-[#975221] px-5 py-3 text-sm text-[#ffff] transition"
           >
             Get Started for Free →
           </button>
@@ -127,7 +127,7 @@ export function Hero() {
           type="button"
           className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
         >
-          Speak with the mic!
+          Tap on the microphone to speak
         </button>
         <button
           type="button"

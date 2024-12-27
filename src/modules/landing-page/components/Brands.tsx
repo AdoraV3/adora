@@ -1,11 +1,31 @@
 import { BRANDS } from "@/mock";
 import { PageHeader } from "@/modules/commons/components/PageHeader";
 import Image from "next/image";
+import Marquee from "react-fast-marquee";
 
 export function Brands() {
   return (
     <section className="my-20 px-4 md:px-12">
       <PageHeader
+        title="Our Trusted Partners"
+        subtitle="We collaborate with industry-leading organizations to deliver cutting-edge solutions for your business."
+      />
+
+      <Marquee>
+        {BRANDS.map((brand, index) => (
+          <div className="flex h-32 flex-row items-center" key={index}>
+            <Image
+              className="w-4/5 h-20"
+              width={200}
+              height={200}
+              key={brand}
+              src={brand}
+              alt={brand}
+            />
+          </div>
+        ))}
+      </Marquee>
+      {/* <PageHeader
         title="Trusted by 50,000+ businesses"
         subtitle="Thousands of organizations of all sizes trust Adora to grow their business."
       />
@@ -22,8 +42,7 @@ export function Brands() {
               alt={brand}
             />
           </div>
-        ))}
-      </div>
+        ))} */}
     </section>
   );
 }

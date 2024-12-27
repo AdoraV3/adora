@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/modules/commons/components";
 import { Pagination } from "@/modules/commons/components/Pagination";
 import { SearchInput } from "@/modules/commons/components/SearchInput";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -84,7 +85,16 @@ export function OutboundCalls() {
 
   const router = useRouter();
   return (
-    <section className="mt-10 max-w-3xl">
+    <div className="w-full flex flex-col items-center mt-14">
+      <h1 className="font-3xl mb-4 font-bold font-coreC">Coming soon</h1>
+      <Image
+        src="/images/comingsoon.png"
+        alt="ai"
+        width={200}
+        height={200}
+        className="h-[320px] w-auto"
+      />
+      {/* <section className="mt-10 max-w-3xl">
       <div className="justify-between mb-5 flex items-center">
         <SearchInput
           className="w-[19.5rem] rounded-md border !border-[hsla(0,0%,2%,0.2)] h-10 "
@@ -109,6 +119,7 @@ export function OutboundCalls() {
       />
 
       <Pagination totalDocs={20} totalPageCount={4} />
-    </section>
+    </section> */}
+    </div>
   );
 }
