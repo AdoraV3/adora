@@ -4,7 +4,7 @@ import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { env } from "env.mjs";
 import { Lucia } from "lucia";
 
-const adapter = new DrizzlePostgreSQLAdapter(db, session, user);
+const adapter = new DrizzlePostgreSQLAdapter(db, session as any, user as any);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
@@ -19,7 +19,6 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-// IMPORTANT!
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
