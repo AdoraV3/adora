@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version-file: ".nvmrc" # Reads Node.js version from .nvmrc
-          cache: "pnpm" # Adds pnpm caching for faster installs
 
       # Step 3: Install pnpm
       - name: Install pnpm
