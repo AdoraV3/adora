@@ -44,15 +44,15 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install package dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Check linting and formatting
         # Custom script for checking the linting and formatting being in place
-        run: yarn run lint
+        run: pnpm run lint
 
       # Run test cases and this could ensure minimum coverage as well if set
       # - name: Execute test cases
       #   run: yarn run test
 
       - name: Execute build
-        run: yarn run build
+        run: pnpm run build
