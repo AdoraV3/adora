@@ -12,13 +12,12 @@ export function Brands() {
       />
 
       <Marquee>
-        {BRANDS.map((brand, index) => (
-          <div className="flex h-32 flex-row items-center" key={index}>
+        {BRANDS.map(brand => (
+          <div className="flex h-32 flex-row items-center" key={brand}>
             <Image
               className="w-4/5 h-20"
               width={200}
               height={200}
-              key={brand}
               src={brand}
               alt={brand}
             />
