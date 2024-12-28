@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { Hero } from "../components/Hero";
 import { HowItWorks } from "../components/HowItWorks";
 import { Navbar } from "../components/Navbar";
+import { Specialization } from "../components/Specialization";
 import { UseCases } from "../components/UseCases";
 import { WhyLove } from "../components/WhyLove";
 
@@ -17,6 +18,7 @@ export function Home() {
       {/* <Revolution /> */}
 
       <WhyLove />
+      <Specialization />
       <HowItWorks />
       <UseCases />
 
