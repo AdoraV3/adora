@@ -1,9 +1,11 @@
 import { getBusinessAction } from "@/app/actions/business";
 import { getSubscriptionAction } from "@/app/actions/subscription";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { cn } from "@/lib/utils";
 import { differenceInDays, formatDate } from "date-fns";
+import Link from "next/link";
 import AgentDetails from "./AgentDetails";
 import { PageHeader } from "./PageHeader";
 
@@ -69,12 +71,6 @@ export function AccountInfo() {
           <p className="text-black-100 capitalize mb-1 font-satoshi font-medium text-sm">
             {subscription?.plan ?? "basic"} plan
           </p>
-          <p className="text-black-100 mb-1 font-satoshi font-medium text-sm">
-            5 agents
-          </p>
-          <p className="text-black-100 mb-1 font-satoshi font-medium text-sm">
-            100-300 customer base
-          </p>
         </div>
 
         <div>
@@ -90,9 +86,15 @@ export function AccountInfo() {
         </div>
       </section>
 
-      <Button className="my-5 capitalize">
+      <Link
+        href="/profile"
+        className={cn(
+          buttonVariants({ variant: "default" }),
+          "my-5 bg-brown-300 capitalize",
+        )}
+      >
         Manage {businessProfile?.name}{" "}
-      </Button>
+      </Link>
 
       <section className="mt-10 max-w-3xl">
         <AgentDetails />

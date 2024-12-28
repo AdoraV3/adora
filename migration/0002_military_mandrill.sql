@@ -1,0 +1,1 @@
+ALTER TABLE "adora_account_preference" RENAME COLUMN "language" TO "country";

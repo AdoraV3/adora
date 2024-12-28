@@ -47,7 +47,7 @@ export const createKnowledgeBaseAction = authenticationProcedure
 
     const agent = await getAgent(business.agentId);
 
-    if (!agent || !agent.assistantId) {
+    if (!agent?.assistantId) {
       throw new ZSAError("NOT_FOUND", "Agent not found");
     }
 
@@ -95,7 +95,7 @@ export const deleteKnowledgeBaseAction = authenticationProcedure
     const knowledgeBase = await getKnowledgeBase(business?.id);
 
     await createTransaction(async trx => {
-      if (!knowledgeBase || !knowledgeBase.fileId) {
+      if (!knowledgeBase?.fileId) {
         throw new ZSAError("NOT_FOUND", "Knowledge base not found.");
       }
       await deleteVapiKnowledgeBase(knowledgeBase?.fileId);
@@ -119,12 +119,12 @@ export const updateKnowledgeBaseAction = authenticationProcedure
 
     const agent = await getAgent(business.agentId);
 
-    if (!agent || !agent.assistantId) {
+    if (!agent?.assistantId) {
       throw new ZSAError("NOT_FOUND", "Agent not found");
     }
     const knowledgeBase = await getKnowledgeBase(business?.id);
 
-    if (!knowledgeBase || !knowledgeBase.fileId) {
+    if (!knowledgeBase?.fileId) {
       throw new ZSAError("NOT_FOUND", "Knowledge base not found.");
     }
 

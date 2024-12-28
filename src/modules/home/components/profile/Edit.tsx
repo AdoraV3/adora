@@ -78,11 +78,11 @@ export function Edit() {
 
   useEffect(() => {
     form.reset({
-      businessCountry: businessProfile?.country || "",
-      businessName: businessProfile?.name || "",
-      country: user?.profile?.country || "",
-      phoneNumber: user?.profile?.phone || "",
-      name: user?.profile?.name || "",
+      businessCountry: businessProfile?.country ?? "",
+      businessName: businessProfile?.name ?? "",
+      country: user?.profile?.country ?? "",
+      phoneNumber: user?.profile?.phone ?? "",
+      name: user?.profile?.name ?? "",
     });
   }, [
     form,
@@ -183,11 +183,7 @@ export function Edit() {
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business Country
                 </FormLabel>
-                <Select
-                  // value={field.value}
-                  defaultValue={field.value}
-                  onValueChange={field.onChange}
-                >
+                <Select value={field.value} onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger className=" py-3 border-none text-black-300 focus-visible:border-none">
                       <SelectValue
@@ -203,7 +199,7 @@ export function Edit() {
                         <SelectItem
                           className="text-black-100 font-satoshi font-normal text-base"
                           key={el.value}
-                          value={el.value?.toString()}
+                          value={el.value}
                         >
                           {el.label}
                         </SelectItem>
@@ -221,7 +217,7 @@ export function Edit() {
             render={({ field }) => (
               <FormItem id="phoneNumber" className="mb-5">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Phone
+                  Business Phone Number
                 </FormLabel>
                 <FormControl>
                   <PhoneInput

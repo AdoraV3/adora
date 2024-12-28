@@ -13,7 +13,7 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
   const { data: locationData, isPending } = useGetLocation();
   const selectedCurrency = locationData?.country === "Nigeria" ? "NGN" : "USD";
   const filteredSubscriptions = subscriptions?.filter(
-    el => el.period === view && el.currency === "USD",
+    el => el.period === view && el.currency === selectedCurrency,
   );
 
   if (isPending) {

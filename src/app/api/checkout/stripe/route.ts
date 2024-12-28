@@ -1,12 +1,10 @@
 import { getBusiness, getSubscriberByEmail } from "@/data-access";
 import { stripe, updateSubscriptions } from "@/lib/stripe";
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
+  const { searchParams } = request.nextUrl;
   const sessionId = searchParams.get("session_id");
 
   if (!sessionId) {
@@ -22,7 +20,6 @@ export async function GET(request: NextRequest) {
       throw new Error("Invalid customer data from Stripe.");
     }
 
-    const customerId = session.customer.id;
     const subscriptionId =
       typeof session.subscription === "string"
         ? session.subscription
@@ -35,8 +32,6 @@ export async function GET(request: NextRequest) {
     const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
       expand: ["items.data.price.product"],
     });
-
-    console.log({ subscription: JSON.stringify(subscription.items.data) });
 
     const plan = subscription.items.data[0]?.price;
 

@@ -7,16 +7,18 @@ import { getAgent, getAgentPhoneNumber } from "@/data-access/agents";
 import { db } from "@/db";
 import { agent } from "@/db/schema";
 import { authenticationProcedure } from "@/lib/procedures";
+import { agentDetailsSchema } from "@/modules/home/account-settings/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { ZSAError } from "zsa";
+import { updateAssistant } from "./vapi";
 
 export const getAgentPhoneNumberAction = authenticationProcedure
   .createServerAction()
   .handler(async ({ ctx }) => {
     const { id } = ctx;
     const business = await getBusiness(id);
-    if (!business || !business.agentId) {
+    if (!business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
     const findAgent = await getAgent(business.agentId);
@@ -34,7 +36,7 @@ export const getAgentAction = authenticationProcedure
   .handler(async ({ ctx }) => {
     const { id } = ctx;
     const business = await getBusiness(id);
-    if (!business || !business.agentId) {
+    if (!business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
 
@@ -64,4 +66,62 @@ export const getAgentDetailsAction = authenticationProcedure
     }
 
     return { success: true, data: returnedAgent };
+  });
+
+export const getAgentWithVoiceAction = authenticationProcedure
+  .createServerAction()
+  .handler(async ({ ctx }) => {
+    const { id } = ctx;
+    const business = await getBusiness(id);
+    if (!business?.agentId) {
+      throw new ZSAError("NOT_FOUND", "Business not found.");
+    }
+
+    const agentDetails = await db.query.agent.findFirst({
+      where: eq(agent.id, business.agentId),
+      with: {
+        voice: true,
+        phoneNumber: true,
+      },
+    });
+
+    if (!agentDetails) {
+      throw new ZSAError("NOT_FOUND", "Agent not found.");
+    }
+
+    return { success: true, data: agentDetails };
+  });
+
+export const updateAssistantAction = authenticationProcedure
+  .createServerAction()
+  .input(agentDetailsSchema)
+  .handler(async ({ input, ctx }) => {
+    const { name, voice } = input;
+    const { id } = ctx;
+
+    const business = await getBusiness(id);
+    if (!business?.agentId) {
+      throw new ZSAError("NOT_FOUND", "Business not found.");
+    }
+
+    const findAgent = await db.query.agent.findFirst({
+      where: eq(agent.id, business.agentId),
+      with: {
+        voice: true,
+      },
+    });
+
+    if (!findAgent?.assistantId) {
+      throw new ZSAError("NOT_FOUND", "Agent not found.");
+    }
+
+    await updateAssistant(findAgent?.assistantId, { name });
+
+    await db
+      .update(agent)
+      .set({
+        name,
+        voiceId: voice,
+      })
+      .where(eq(agent.id, business.agentId));
   });

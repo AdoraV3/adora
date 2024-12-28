@@ -2,32 +2,13 @@
 
 import { hoverAnimation } from "@/utils/animations";
 import Image from "next/image";
-import { AdoraAi } from "./AdoraAi";
 import { useRouter } from "next/navigation";
-
-// const words = [
-//   "Logistics",
-//   "Healthcare",
-//   "Real Estate",
-//   "Education",
-//   "Finance",
-//   "Hospitality",
-//   "Insurance",
-//   "Retail",
-//   "Travel",
-//   "Telecom",
-//   "Utilities",
-//   "Agriculture",
-//   "Media",
-//   "Government",
-//   "E-commerce",
-//   "Entertainment",
-//   "Non-profit",
-//   "Businesses",
-// ];
+import { useVapiCall } from "../hooks/useVapiWebCall";
 
 export function Hero() {
   const router = useRouter();
+
+  const { isReady, toggleCall } = useVapiCall();
   return (
     <section className="relative w-full pt-10">
       <div className="mx-6 flex flex-col justify-between bg-gradient-to-r from-gray-50 to-gray-200 md:mx-8 lg:mx-12 md:flex-row">
@@ -74,7 +55,7 @@ export function Hero() {
             width={800}
             height={800}
             alt="hero"
-            className={`h-full w-full rounded-2xl object-cover`}
+            className="h-full w-full rounded-2xl object-cover"
           />
         </div>
 
@@ -92,23 +73,25 @@ export function Hero() {
               width={800}
               height={800}
               alt="hero"
-              className={`h-full w-full rounded-2xl object-cover`}
+              className="h-full w-full rounded-2xl object-cover"
             />
             <div className="absolute left-[15%] right-[15%] top-6 z-20 flex flex-row items-center justify-between">
-              <div
+              <button
+                type="button"
                 className={`flex cursor-pointer flex-row items-center gap-x-3 rounded-full bg-[#ffffff] px-8 py-3 ${hoverAnimation}`}
                 onClick={() => router.push("/register")}
               >
                 <p>Sign up</p>
                 <p>&rarr;</p>
-              </div>
-              <div
+              </button>
+              <button
+                type="button"
                 className={`flex cursor-pointer flex-row items-center gap-x-3 rounded-full border bg-[#ffffff00] px-8 py-3 ${hoverAnimation}`}
                 onClick={() => router.push("/login")}
               >
                 <p>Login</p>
                 <p>&rarr;</p>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -124,6 +107,8 @@ export function Hero() {
       </div>
       <div className="flex flex-col ">
         <button
+          onClick={toggleCall}
+          disabled={!isReady}
           type="button"
           className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
         >

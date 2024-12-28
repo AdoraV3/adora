@@ -1,7 +1,9 @@
+import { getBusiness } from "@/data-access";
 import { db } from "@/db";
-import { user as userTable } from "@/db/schema";
+import { Business, user as userTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { cache } from "react";
 import { lucia } from "./auth";
 
@@ -12,7 +14,7 @@ export const getUser = async () => {
   }
   const { session, user: sessionUser } = await lucia.validateSession(sessionId);
   try {
-    if (session && session.fresh) {
+    if (session?.fresh) {
       // refreshing their session cookie
       const sessionCookie = lucia.createSessionCookie(session.id);
       cookies().set(
@@ -48,3 +50,23 @@ export const getCurrentUser = cache(async () => {
   }
   return session?.id;
 });
+
+type ActionWithTeamFunction<T> = (
+  formData: FormData,
+  businessData: Business,
+) => Promise<T>;
+
+export function withBusiness<T>(action: ActionWithTeamFunction<T>) {
+  return async (formData: FormData): Promise<T> => {
+    const currentUser = await getUser();
+    if (!currentUser) {
+      redirect("/login");
+    }
+    const business = await getBusiness(currentUser.id);
+    if (!business) {
+      throw new Error("Business not found");
+    }
+
+    return action(formData, business);
+  };
+}
