@@ -3,7 +3,6 @@ name: Continuous Integration (CI)
 on:
   push:
     branches:
-      # We can define multiple branches as well
       - main
   pull_request:
     branches:
@@ -11,48 +10,41 @@ on:
 
 jobs:
   build:
-    # Defines the type of runner the job runs on
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout repository
       - name: Checkout to the repository
         uses: actions/checkout@v2
 
-      - name: Set up NodeJS environment
+      # Step 2: Set up Node.js environment using the version in .nvmrc
+      - name: Set up Node.js environment
         uses: actions/setup-node@v2
         with:
-          # Reads the node version from the .nvmrc file itself
-          node-version-file: ".nvmrc"
-          # The node version can be hard-coded
-          # node-version: 16
+          node-version-file: ".nvmrc" # Reads Node.js version from .nvmrc
+          cache: "pnpm" # Adds pnpm caching for faster installs
 
-      # Consider this as an add on to optimize the execution of actions
-      - name: Cache node modules
-        id: cache-npm
+      # Step 3: Install pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Step 4: Cache pnpm store
+      - name: Cache pnpm store
         uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key:
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{
-            hashFiles('**/package-lock.json') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-pnpm-store-
 
+      # Step 5: Install dependencies using pnpm
       - name: Install package dependencies
         run: pnpm install
 
+      # Step 6: Check linting and formatting
       - name: Check linting and formatting
-        # Custom script for checking the linting and formatting being in place
         run: pnpm run lint
 
-      # Run test cases and this could ensure minimum coverage as well if set
-      # - name: Execute test cases
-      #   run: yarn run test
-
+      # Step 7: Execute build
       - name: Execute build
         run: pnpm run build
