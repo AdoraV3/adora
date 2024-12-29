@@ -11,54 +11,45 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+      VAPI_API_KEY: ${{ secrets.VAPI_API_KEY }}
+      NEXT_PUBLIC_VAPI_API_KEY: ${{ secrets.NEXT_PUBLIC_VAPI_API_KEY }}
+      NEXT_PUBLIC_VAPI_CLIENT_SDK: ${{ secrets.NEXT_PUBLIC_VAPI_CLIENT_SDK }}
+      NEXT_PUBLIC_ADORA_AI: ${{ secrets.NEXT_PUBLIC_ADORA_AI }}
+      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
 
     steps:
-      # Step 1: Checkout repository
-      - name: Checkout to the repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up environment variables
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
-          VAPI_API_KEY: ${{ secrets.VAPI_API_KEY }}
-          NEXT_PUBLIC_VAPI_API_KEY: ${{ secrets.NEXT_PUBLIC_VAPI_API_KEY }}
-          NEXT_PUBLIC_VAPI_CLIENT_SDK:
-            ${{ secrets.NEXT_PUBLIC_VAPI_CLIENT_SDK }}
-          NEXT_PUBLIC_ADORA_AI: ${{ secrets.NEXT_PUBLIC_ADORA_AI }}
-          PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
-          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
-          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
-        run: |
-          echo "Environment variables are set!"
-
-      # Step 2: Set up Node.js environment using the version in .nvmrc
       - name: Set up Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version-file: ".nvmrc" # Reads Node.js version from .nvmrc
+          node-version-file: ".nvmrc"
 
-      # Step 3: Install pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Step 4: Cache pnpm store
       - name: Cache pnpm store
         uses: actions/cache@v3
         with:
@@ -67,14 +58,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      # Step 5: Install dependencies using pnpm
       - name: Install package dependencies
         run: pnpm install
 
-      # Step 6: Check linting and formatting
       - name: Check linting and formatting
         run: pnpm run lint
 
-      # Step 7: Execute build
       - name: Execute build
         run: pnpm run build
