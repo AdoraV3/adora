@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function VerifySuccess() {
@@ -10,9 +12,9 @@ export default function VerifySuccess() {
         account.
       </p>
 
-      <Button asChild>
-        <Link href="/sign-in">Sign In</Link>
-      </Button>
+      <Link className={buttonVariants({ variant: "default" })} href="/sign-in">
+        Sign In
+      </Link>
     </div>
   );
 }
