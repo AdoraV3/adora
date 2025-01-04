@@ -137,6 +137,5 @@ export const updateKnowledgeBaseAction = authenticationProcedure
       originalName,
     });
 
-    // await deleteKnowledgeBase(business?.id);
     return { success: true, data: knowledgeBase };
   });

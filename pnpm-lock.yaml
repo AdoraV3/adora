@@ -99,8 +99,8 @@ dependencies:
     specifier: ^1.33.0
     version: 1.34.3
   '@vapi-ai/server-sdk':
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.2.2
+    version: 0.2.2
   '@vapi-ai/web':
     specifier: ^2.1.7
     version: 2.1.8
@@ -3487,8 +3487,8 @@ packages:
       crypto-js: 4.2.0
     dev: false
 
-  /@vapi-ai/server-sdk@0.1.0:
-    resolution: {integrity: sha512-Tp1ujjU9m/nHCSVp95BjqA//FR+csmoPVDB3NkhTIK6a8A7jTDLgPGwrX0ONVfAxztD9H2gCaxjo/WZEbKFJ1w==}
+  /@vapi-ai/server-sdk@0.2.2:
+    resolution: {integrity: sha512-CUibRJx53QaD8D0WxhdD/WeW8+NnB9RceckIaJd6PWjxB8gcxEt2c+UsyM6MJQa6ts3PsJ9E4NPqqCSmXouhgw==}
     dependencies:
       form-data: 4.0.1
       form-data-encoder: 4.0.2

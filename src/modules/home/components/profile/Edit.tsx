@@ -125,7 +125,7 @@ export function Edit() {
             control={form.control}
             name="businessName"
             render={({ field }) => (
-              <FormItem className="mb-5 relative">
+              <FormItem key={field.value} className="mb-5 relative">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business name
                 </FormLabel>
@@ -147,7 +147,7 @@ export function Edit() {
             control={form.control}
             name="country"
             render={({ field }) => (
-              <FormItem>
+              <FormItem key={field.value}>
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Country of residence
                 </FormLabel>
@@ -179,7 +179,7 @@ export function Edit() {
             control={form.control}
             name="businessCountry"
             render={({ field }) => (
-              <FormItem>
+              <FormItem key={field.value}>
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business Country
                 </FormLabel>
@@ -215,7 +215,7 @@ export function Edit() {
             control={form.control}
             name="phoneNumber"
             render={({ field }) => (
-              <FormItem id="phoneNumber" className="mb-5">
+              <FormItem key={field.value} id="phoneNumber" className="mb-5">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business Phone Number
                 </FormLabel>

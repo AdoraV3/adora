@@ -52,53 +52,29 @@ export function DataTable<TData, TValue>({
   tableClassName,
   tableRowClassName,
   onRowClick,
-}: //   currentPage,
-//   fetchNextPage,
-//   fetchPreviousPage,
-//   id,
-DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, TValue>) {
   // const page = useSearchParams().get("page");
   const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    // getPaginationRowModel: getPaginationRowModel(),
-    // getFilteredRowModel: getFilteredRowModel(),
+
     onRowSelectionChange: setRowSelection,
     state: {
       rowSelection,
-      // sorting,
-      // pagination,
-      // columnFilters,
     },
-    // enableRowSelection: true,
+
     debugTable: process.env.NODE_ENV === "development",
-    // manualPagination: true,
   });
 
   return (
-    <div
+    <article
       className={cn(
         "min-h-full rounded-lg bg-white-100 overflow-x-hidden w-full",
         containerClassName,
       )}
     >
-      {/* <div className="flex items-center mb-6 justify-between">
-        <SearchInput
-          placeholder={placeholder ?? ""}
-          value={
-            (table?.getColumn(searchColumnValue)?.getFilterValue() as string) ??
-            ""
-          }
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            table.getColumn(searchColumnValue)?.setFilterValue(e.target.value)
-          }
-          type="search"
-          className="max-w-sm "
-        />
-      </div> */}
-
       {isLoading ? (
         <PageLoader
           className="flex h-96 items-center justify-center"
@@ -180,6 +156,6 @@ DataTableProps<TData, TValue>) {
           className="h-[600px] bg-white-100 py-20"
         />
       )}
-    </div>
+    </article>
   );
 }

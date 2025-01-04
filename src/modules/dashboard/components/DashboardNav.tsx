@@ -35,10 +35,13 @@ export function DashboardNav() {
     queryKey: ["getUser"],
   });
 
-  const { data: agent } = useServerActionQuery(getAgentPhoneNumberAction, {
-    input: undefined,
-    queryKey: ["getAgentPhoneNumber"],
-  });
+  const { data: agent, isPending } = useServerActionQuery(
+    getAgentPhoneNumberAction,
+    {
+      input: undefined,
+      queryKey: ["getAgentPhoneNumber"],
+    },
+  );
 
   const { data: businessData } = useServerActionQuery(getBusinessAction, {
     input: undefined,
@@ -86,7 +89,7 @@ export function DashboardNav() {
       <p className="font-satoshi text-gray-550   text-sm font-medium">
         Agent Number:
         <span className="font-bold text-sm text-blue-300 ml-2">
-          {agentPhoneNumber ?? "Unassigned"}
+          {isPending ? "Loading..." : agentPhoneNumber ?? "Unassigned"}
         </span>{" "}
       </p>
       <div className="flex gap-4 items-center">

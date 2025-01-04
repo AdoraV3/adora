@@ -27,7 +27,10 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
         cell: ({ row }) => {
           const { id } = row.original;
           return (
-            <Link className="w-max whitespace-nowrap" href={`/call-logs/${id}`}>
+            <Link
+              className="w-max whitespace-nowrap cursor-pointer underline"
+              href={`/call-logs/${id}`}
+            >
               {agent?.data.name}
             </Link>
           );
@@ -73,7 +76,7 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
     ];
   }, [agent?.data.name]);
 
-  const { data: call } = useServerActionQuery(getCallsAction, {
+  const { data: call, isPending } = useServerActionQuery(getCallsAction, {
     input: {
       assistantId: agent?.data.assistantId ?? "",
       createdAtGe:
@@ -90,6 +93,7 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
       tableClassName="max-w-4xl"
       headerClassName="text-center"
       data={call?.data ?? []}
+      isLoading={isPending}
       columns={columns}
     />
   );

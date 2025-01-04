@@ -1,5 +1,7 @@
 "use client";
 
+import { CrmWebhookForm } from "./CrmWebhookForm";
+
 export function CRM() {
   // const updateUserHandler = useServerActionMutation(updatePreferenceAction, {});
   return (
@@ -111,18 +113,7 @@ export function CRM() {
               />
             </div>
 
-            {/* Title */}
-            <h2
-              style={{ color: "#654321", fontSize: "18px", margin: "0 0 10px" }}
-            >
-              Paste Webhook URL
-            </h2>
-
-            {/* Description */}
-            <p style={{ color: "#555", fontSize: "14px", margin: "0" }}>
-              Copy the generated Webhook URL from Make.com and paste it in the
-              field here.
-            </p>
+            <CrmWebhookForm />
           </div>
         </div>
       </div>

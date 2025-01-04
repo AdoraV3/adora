@@ -11,7 +11,7 @@ import { agentDetailsSchema } from "@/modules/home/account-settings/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { ZSAError } from "zsa";
-import { updateAssistant } from "./vapi";
+// import { updateAssistant } from "./vapi";
 
 export const getAgentPhoneNumberAction = authenticationProcedure
   .createServerAction()
@@ -114,8 +114,6 @@ export const updateAssistantAction = authenticationProcedure
     if (!findAgent?.assistantId) {
       throw new ZSAError("NOT_FOUND", "Agent not found.");
     }
-
-    await updateAssistant(findAgent?.assistantId, { name });
 
     await db
       .update(agent)

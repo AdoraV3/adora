@@ -87,6 +87,19 @@ export const shadcnPlugin = plugin(
       "*": { "@apply border-border": {} },
       body: { "@apply  text-foreground": {} },
     });
+
+    addBase({
+      ".arrow-hide": {
+        "&::-webkit-inner-spin-button": {
+          "-webkit-appearance": "none",
+          margin: "0px",
+        },
+        "&::-webkit-outer-spin-button": {
+          "-webkit-appearance": "none",
+          margin: "0px",
+        },
+      },
+    });
   },
   // 2. Extend the tailwindCSS theme
   {
