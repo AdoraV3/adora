@@ -1,8 +1,11 @@
+"use client"
 import { hoverFooterAnimation } from "@/utils/animations";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export function Footer() {
+  const router = useRouter()
   return (
     <footer className="pb-6">
       <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
@@ -26,16 +29,16 @@ export function Footer() {
         </div>
         <div className="space-y-3">
           <h6 className="text-[#1C1C1C] font-satoshi font-bold text-base">
-            Home
+            Links
           </h6>
 
-          <p className="font-satoshi font-normal text-base text-black-100">
+          <p className="font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/pricing")}>
             Pricing
           </p>
-          <p className="font-satoshi font-normal text-base text-black-100">
+          <p className="font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/about")}>
             About Us
           </p>
-          <p className="font-satoshi font-normal text-base text-black-100">
+          <p className="font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/privacy")}>
             Legal
           </p>
         </div>
