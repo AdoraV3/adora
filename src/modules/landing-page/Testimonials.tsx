@@ -123,7 +123,7 @@ function Testimonials() {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              className="xs:w-[250px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[400px] md:px-4 lg:w-[450px] xl:w-[400px]"
+              className="xs:w-[250px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[400px] md:px-4 lg:w-[450px] xl:w-[350px]"
             >
               <Image
                 src={image}
