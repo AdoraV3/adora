@@ -35,7 +35,7 @@ export function Specialization() {
     <section className=" px-4 py-20 md:px-12">
       <div>
         <BlurIn
-          word=" We specialize on these customer support areas"
+          word=" We specialize in these customer support areas"
           className="pb-2 font-coreC text-4xl text-black-100"
         />
 
