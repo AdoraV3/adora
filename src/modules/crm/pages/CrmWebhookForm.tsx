@@ -23,7 +23,7 @@ export function CrmWebhookForm() {
   const onSubmit: SubmitHandler<WebhookFormSchemaType> = () => {};
   return (
     <section>
-      <h2 style={{ color: "#654321", fontSize: "18px", margin: "0 0 10px" }}>
+      <h2 className="text-black-100 font-lg font-bold mb-2">
         Paste Webhook URL
       </h2>
 
