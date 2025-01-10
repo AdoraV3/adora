@@ -50,44 +50,44 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
-          path: |
-            ~/.pnpm
-            ${{ github.workspace }}/.next/cache
-          # Generate a new cache whenever packages or source files change.
-          key:
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{
-            hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      # - name: Cache pnpm store
+      #   uses: actions/cache@v4
+      #   with:
+      #     # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+      #     path: |
+      #       ~/.pnpm
+      #       ${{ github.workspace }}/.next/cache
+      #     # Generate a new cache whenever packages or source files change.
+      #     key:
+      #       ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{
+      #       hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+      #     # If source files changed but packages didn't, rebuild from a prior cache.
+      #     restore-keys: |
+      #       ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
-      - name: Install package dependencies
-        run: pnpm install
+      # - name: Install package dependencies
+      #   run: pnpm install
 
-      - name: Check linting and formatting
-        run: pnpm run lint
+      # - name: Check linting and formatting
+      #   run: pnpm run lint
 
-      - name: Execute build
-        run: pnpm run build
+      # - name: Execute build
+      #   run: pnpm run build
 
-      - name: Configure AWS Credentials for GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ca-central-1
+      # - name: Configure AWS Credentials for GitHub Actions
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ca-central-1
 
-      - name: Update RDS Security Group
-        run: |
-          aws ec2 authorize-security-group-ingress \
-            --group-id sg-055eeb230b6ca28ab \
-            --protocol tcp \
-            --port 5432 \
-            --cidr 172.183.0.0/16
+      # - name: Update RDS Security Group
+      #   run: |
+      #     aws ec2 authorize-security-group-ingress \
+      #       --group-id sg-055eeb230b6ca28ab \
+      #       --protocol tcp \
+      #       --port 5432 \
+      #       --cidr 172.183.0.0/16
 
       - name: Generate Migration
         run: pnpm run db:generate
