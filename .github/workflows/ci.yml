@@ -78,4 +78,4 @@ jobs:
         run: pnpm run db:generate
 
       - name: Run Migration
-        run: pnpx db:migrate
+        run: pnpm run db:migrate
