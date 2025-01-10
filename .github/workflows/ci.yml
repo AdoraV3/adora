@@ -94,3 +94,6 @@ jobs:
 
       - name: Run Migration
         run: pnpm run db:migrate
+
+      - name: Run Seeding
+        run: pnpm run db:seed
