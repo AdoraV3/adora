@@ -74,8 +74,8 @@ jobs:
       - name: Execute build
         run: pnpm run build
 
-      - name: Apply all pending migrations to the database
-        # run: pnpm prisma migrate reset --force to reset the db after migration
-        run: pnpm db:generate && pnpm db:migrate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: Generate Migration
+        run: pnpm run db:generate
+
+      - name: Run Migration
+        run: pnpx db:migrate
