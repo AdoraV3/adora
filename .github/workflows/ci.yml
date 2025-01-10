@@ -95,5 +95,5 @@ jobs:
       - name: Run Migration
         run: pnpm run db:migrate
 
-      - name: Run Seeding
-        run: pnpm run db:seed
+      - name: Run DB Reset
+        run: pnpm run db:reset
