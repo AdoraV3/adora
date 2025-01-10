@@ -1,4 +1,5 @@
 import { Providers } from "@/services/Providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Viewport } from "next";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
@@ -91,6 +92,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${CORE_SANS_C.variable} ${SATOSHI.variable}`}>
         <Providers>
+          <SpeedInsights />
           <NextTopLoader color="hsla(25, 64%, 36%, 1)" />
           {children}
         </Providers>

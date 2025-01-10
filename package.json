@@ -55,6 +55,7 @@
     "@upstash/redis": "^1.33.0",
     "@vapi-ai/server-sdk": "^0.2.2",
     "@vapi-ai/web": "^2.1.7",
+    "@vercel/speed-insights": "^1.1.0",
     "arctic": "^1.9.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.7.6",

@@ -68,11 +68,11 @@ jobs:
       - name: Install package dependencies
         run: pnpm install
 
-      # - name: Check linting and formatting
-      #   run: pnpm run lint
+      - name: Check linting and formatting
+        run: pnpm run lint
 
-      # - name: Execute build
-      #   run: pnpm run build
+      - name: Execute build
+        run: pnpm run build
 
       # - name: Configure AWS Credentials for GitHub Actions
       #   uses: aws-actions/configure-aws-credentials@v4
@@ -89,11 +89,11 @@ jobs:
       #       --port 5432 \
       #       --cidr 172.183.0.0/16
 
-      - name: Generate Migration
-        run: pnpm run db:generate
+      # - name: Generate Migration
+      #   run: pnpm run db:generate
 
-      - name: Run Migration
-        run: pnpm run db:migrate
+      # - name: Run Migration
+      #   run: pnpm run db:migrate
 
-      - name: Run Seeding
-        run: pnpm run db:seed
+      # - name: Run Seeding
+      #   run: pnpm run db:seed
