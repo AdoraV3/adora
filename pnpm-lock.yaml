@@ -3496,7 +3496,7 @@ packages:
       js-base64: 3.7.2
       node-fetch: 2.7.0
       qs: 6.11.2
-      readable-stream: 4.6.0
+      readable-stream: 4.7.0
       url-join: 4.0.1
     transitivePeerDependencies:
       - encoding
@@ -7263,8 +7263,8 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /readable-stream@4.6.0:
-    resolution: {integrity: sha512-cbAdYt0VcnpN2Bekq7PU+k363ZRsPwJoEEJOEtSJQlJXzwaxt3FIo/uL+KeDSGIjJqtkwyge4KQgD2S2kd+CQw==}
+  /readable-stream@4.7.0:
+    resolution: {integrity: sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       abort-controller: 3.0.0

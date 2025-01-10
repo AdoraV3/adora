@@ -1,11 +1,12 @@
-"use client"
+"use client";
+
 import { hoverFooterAnimation } from "@/utils/animations";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export function Footer() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <footer className="pb-6">
       <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">
@@ -32,13 +33,25 @@ export function Footer() {
             Links
           </h6>
 
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/pricing")}>
+          <button
+            type="button"
+            className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer"
+            onClick={() => router.push("/pricing")}
+          >
             Pricing
           </button>
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/about")}>
+          <button
+            type="button"
+            className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer"
+            onClick={() => router.push("/about")}
+          >
             About Us
           </button>
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/privacy")}>
+          <button
+            type="button"
+            className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer"
+            onClick={() => router.push("/privacy")}
+          >
             Legal
           </button>
         </div>
