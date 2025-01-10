@@ -74,6 +74,21 @@ jobs:
       - name: Execute build
         run: pnpm run build
 
+      - name: Configure AWS Credentials for GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
+
+      - name: Update RDS Security Group
+        run: |
+          aws ec2 authorize-security-group-ingress \
+            --group-id sg-055eeb230b6ca28ab \
+            --protocol tcp \
+            --port 5432 \
+            --cidr 172.183.0.0/16
+
       - name: Generate Migration
         run: pnpm run db:generate
 
