@@ -26,7 +26,7 @@ export const env = createEnv({
     PAYSTACK_SECRET_KEY: z.string().min(1),
   },
   client: {
-    NEXT_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_URL: z.string().min(1),
     NEXT_PUBLIC_VAPI_API_KEY: z.string(),
     NEXT_PUBLIC_VAPI_CLIENT_SDK: z.string(),
     NEXT_PUBLIC_ADORA_AI: z.string(),
