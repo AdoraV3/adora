@@ -1,4 +1,4 @@
-import { createCallLogAction } from "@/app/actions/call-log";
+import { createAppointmentBookingToolAction } from "@/app/actions/call-log";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -24,7 +24,6 @@ export function AppointmentConfigForm(props: Readonly<Disclosure>) {
   const { isOpen, onClose } = props;
 
   const initialValues: AppointmentSchemaType = {
-    meetingLink: "",
     scenarioId: "",
     webhookUrl: "",
   };
@@ -34,14 +33,17 @@ export function AppointmentConfigForm(props: Readonly<Disclosure>) {
     resolver: zodResolver(appointmentSchema),
   });
 
-  const webhookHandler = useServerActionMutation(createCallLogAction, {
-    onSuccess: () => {
-      onClose();
-      form.reset(initialValues);
-      toast.success("Configurations saved successfully");
+  const webhookHandler = useServerActionMutation(
+    createAppointmentBookingToolAction,
+    {
+      onSuccess: () => {
+        onClose();
+        form.reset(initialValues);
+        toast.success("Configurations saved successfully");
+      },
+      onError: err => toast.error(err?.message),
     },
-    onError: err => toast.error(err?.message),
-  });
+  );
 
   const onSubmit: SubmitHandler<AppointmentSchemaType> = data => {
     webhookHandler.mutate(data);
@@ -102,29 +104,6 @@ export function AppointmentConfigForm(props: Readonly<Disclosure>) {
                           {...field}
                         />
                         <FloatingLabel>Webhook url</FloatingLabel>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                    <FormDescription className="font-normal mt-4 text-[hsla(0,0%,11%,0.8)] text-sm">
-                      Copy the generated Webhook URL from Make.com and paste it
-                      in the field here.
-                    </FormDescription>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="meetingLink"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="relative group focus:text-primary">
-                        <FloatingInput
-                          type="url"
-                          placeholder="Enter meeting link"
-                          {...field}
-                        />
-                        <FloatingLabel>Meeting Link</FloatingLabel>
                       </div>
                     </FormControl>
                     <FormMessage />

@@ -6,7 +6,7 @@ import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import Link from "next/link";
 import { RecentCallLogs } from "../components/RecentCallLogs";
-import { AppointmentConfigForm } from "./AppoinmentConfigForm";
+import { AppointmentConfigForm } from "./AppointmentConfigForm";
 
 export function CallLogs() {
   const { queryParams } = useQueryParams();
@@ -17,7 +17,7 @@ export function CallLogs() {
   return (
     <>
       <Tabs defaultValue={activeTab} className="w-full  py-5 ">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row gap-6 justify-between items-center">
           <TabsList className="bg-[hsla(0,0%,96%,1)] md:h-[3rem] ">
             <TabsTrigger
               className="font-medium rounded-md py-3  text-sm font-satoshi  data-[state=active]:border-none data-[state=active]:bg-white-100"
