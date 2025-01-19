@@ -32,15 +32,18 @@ export function Footer() {
             Links
           </h6>
 
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/pricing")}>
+<div className="flex flex-col space-y-4 ">
+
+          <button type="button" className="bg-none hover:scale-95 text-left font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/pricing")}>
             Pricing
           </button>
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/about")}>
+          <button type="button" className="bg-none hover:scale-95 text-left font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/about")}>
             About Us
           </button>
-          <button type="button" className="bg-none font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/privacy")}>
+          <button type="button" className="bg-none hover:scale-95 text-left font-satoshi font-normal text-base text-black-100 cursor-pointer" onClick={()=>router.push("/privacy")}>
             Legal
           </button>
+</div>
         </div>
         <div className="space-y-3">
           <h6 className="text-[#1C1C1C] font-satoshi font-bold text-base">

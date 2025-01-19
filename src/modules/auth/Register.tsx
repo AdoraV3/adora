@@ -142,7 +142,7 @@ export function Register() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="category"
               render={({ field }) => (
@@ -182,7 +182,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             {/* <FormField
               control={form.control}
               name="locationRegion"
@@ -198,7 +198,7 @@ export function Register() {
                 </FormItem>
               )}
             /> */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="agentName"
               render={({ field }) => (
@@ -212,8 +212,8 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="voice"
               render={({ field }) => (
@@ -253,8 +253,8 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
@@ -294,7 +294,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <FormField
               control={form.control}
@@ -385,13 +385,13 @@ export function Register() {
         <div className=" mt-6  divide-x divide-primary text-center">
           <Link
             className="pr-3 font-satoshi text-lg font-medium text-primary"
-            href="/"
+            href="/terms"
           >
             Terms of Use
           </Link>
           <Link
             className="pl-3 font-satoshi text-lg font-medium text-primary"
-            href="/"
+            href="/privacy"
           >
             Privacy Policy
           </Link>

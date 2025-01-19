@@ -13,9 +13,9 @@ export function Brands() {
 
       <Marquee>
         {BRANDS.map((brand, index) => (
-          <div className="flex h-32 flex-row items-center" key={index}>
+          <div className="flex h-30 flex-row items-center w-3/5 sm:w-3/5 md:w-3/5" key={index}>
             <Image
-              className="w-4/5 h-20"
+              className="w-full h-20 sm:h-20"
               width={200}
               height={200}
               key={brand}
