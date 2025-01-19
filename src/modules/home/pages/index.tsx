@@ -77,10 +77,11 @@ export function Home() {
 
       <AiInfo />
       {/* <Activities /> */}
-      <div className="space-y-3">
-        <h6 className="font-medium text-xl text-black-100">Recent Call Logs</h6>
-        <RecentCallLogs type="recent" />
-      </div>
+
+      <h6 className="font-medium text-xl mt-6 text-black-100">
+        Recent Call Logs
+      </h6>
+      <RecentCallLogs type="recent" />
     </section>
   );
 }

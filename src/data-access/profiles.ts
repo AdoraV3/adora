@@ -21,6 +21,5 @@ export async function updateProfile(
 export async function getProfile(userId: User["id"]) {
   return db.query.profile.findFirst({
     where: eq(profile.userId, userId),
-    with: {},
   });
 }

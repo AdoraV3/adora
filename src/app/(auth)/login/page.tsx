@@ -1,5 +1,10 @@
 import { Login } from "@/modules/auth/Login";
+import { Suspense } from "react";
 
 export default function page() {
-  return <Login />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Login />
+    </Suspense>
+  );
 }

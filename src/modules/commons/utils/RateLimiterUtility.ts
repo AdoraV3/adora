@@ -1,9 +1,8 @@
-import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { headers } from "next/headers";
 import { ZSAError } from "zsa";
 
-// Configuration for different rate limit types
 export const RateLimitConfig = {
   SIGNUP: {
     limit: 1,
@@ -18,8 +17,6 @@ export const RateLimitConfig = {
     window: "1 m",
   },
 };
-
-// Create a centralized rate limiter utility
 export class RateLimiterUtility {
   private static instances: { [key: string]: Ratelimit } = {};
 
@@ -52,7 +49,7 @@ export class RateLimiterUtility {
    */
   static async limit(
     config: { limit: number; window: string } = RateLimitConfig.SIGNUP,
-    errorMessage: string = "Too many requests",
+    errorMessage = "Too many requests",
   ): Promise<void> {
     const ip = headers().get("x-forwarded-for");
 

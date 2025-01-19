@@ -18,7 +18,6 @@ export function Brands() {
               className="w-full h-20 sm:h-20"
               width={200}
               height={200}
-              key={brand}
               src={brand}
               alt={brand}
             />

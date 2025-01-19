@@ -1,5 +1,6 @@
 import { PricingPlan } from "@/mock/types";
 import { FormatDateOptions, format } from "date-fns";
+import { parsePhoneNumber } from "libphonenumber-js";
 import { useFormatNumber } from "../hooks/useFormatNumber";
 
 export const getInitials = (name: string | undefined): string => {
@@ -53,4 +54,8 @@ export const getRegionalPrice = (
   // Check if there is a regional price for the specified country
   const regionalPrice = pricingPlan?.regionalPrices?.[country]?.[plan];
   return regionalPrice !== undefined ? regionalPrice : pricingPlan.amount[plan];
+};
+
+export const formatPhoneNumber = (phoneNumber: string) => {
+  return parsePhoneNumber(phoneNumber).formatInternational();
 };

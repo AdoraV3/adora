@@ -1,89 +1,81 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import { DataTable } from "@/modules/commons/components";
-import { Pagination } from "@/modules/commons/components/Pagination";
-import { SearchInput } from "@/modules/commons/components/SearchInput";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 
 export function OutboundCalls() {
-  const data = [
-    {
-      id: 1,
-      name: "Bola Johnson",
-      number: "08012345678",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      callCycle: 2,
-    },
-    {
-      id: 2,
-      name: "Craig David",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      number: "08012345678",
-      callCycle: 3,
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      number: "08012345678",
-      callCycle: 4,
-    },
-    {
-      id: 4,
-      name: "Sadio Mane",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      number: "08012345678",
-      callCycle: 20,
-    },
-    {
-      id: 5,
-      name: "David Luiz",
-      number: "08012345678",
-      date: "Jan-12-24",
-      time: "8:00 am",
-      callCycle: 0,
-    },
-  ];
-  const columns = useMemo(() => {
-    return [
-      {
-        accessorKey: "date",
-        header: "Date",
-      },
-      {
-        accessorKey: "time",
-        header: "Time",
-      },
-      {
-        accessorKey: "name",
-        header: "Name & Number",
-        cell: () => {
-          return (
-            <div>
-              <p className="mb-2 font-satoshi text-sm font-normal">
-                Ola Johnson
-              </p>
-              <p className="font-satoshi text-sm font-normal">08011122233</p>
-            </div>
-          );
-        },
-      },
-      {
-        accessorKey: "callCycle",
-        header: "Call Cycle",
-      },
-    ];
-  }, []);
+  // const data = [
+  //   {
+  //     id: 1,
+  //     name: "Bola Johnson",
+  //     number: "08012345678",
+  //     date: "Jan-12-24",
+  //     time: "8:00 am",
+  //     callCycle: 2,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Craig David",
+  //     date: "Jan-12-24",
+  //     time: "8:00 am",
+  //     number: "08012345678",
+  //     callCycle: 3,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "John Doe",
+  //     date: "Jan-12-24",
+  //     time: "8:00 am",
+  //     number: "08012345678",
+  //     callCycle: 4,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Sadio Mane",
+  //     date: "Jan-12-24",
+  //     time: "8:00 am",
+  //     number: "08012345678",
+  //     callCycle: 20,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "David Luiz",
+  //     number: "08012345678",
+  //     date: "Jan-12-24",
+  //     time: "8:00 am",
+  //     callCycle: 0,
+  //   },
+  // ];
+  // const columns = useMemo(() => {
+  //   return [
+  //     {
+  //       accessorKey: "date",
+  //       header: "Date",
+  //     },
+  //     {
+  //       accessorKey: "time",
+  //       header: "Time",
+  //     },
+  //     {
+  //       accessorKey: "name",
+  //       header: "Name & Number",
+  //       cell: () => {
+  //         return (
+  //           <div>
+  //             <p className="mb-2 font-satoshi text-sm font-normal">
+  //               Ola Johnson
+  //             </p>
+  //             <p className="font-satoshi text-sm font-normal">08011122233</p>
+  //           </div>
+  //         );
+  //       },
+  //     },
+  //     {
+  //       accessorKey: "callCycle",
+  //       header: "Call Cycle",
+  //     },
+  //   ];
+  // }, []);
 
-  const router = useRouter();
   return (
     <div className="w-full flex flex-col items-center mt-14">
       <h1 className="font-3xl mb-4 font-bold font-coreC">Coming soon</h1>

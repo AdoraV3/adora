@@ -1,6 +1,6 @@
 {
-  "id": "78905f31-573c-48cf-a89c-200f87eabfa2",
-  "prevId": "8c077204-07e7-47d7-a46a-cae0b67e3223",
+  "id": "893f933e-0856-4cfd-a75b-bede8e264fde",
+  "prevId": "0faa91fb-93d6-45cb-86d9-fbaf81584cb1",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -103,8 +103,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "language": {
-          "name": "language",
+        "country": {
+          "name": "country",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -835,8 +835,13 @@
           "name": "features",
           "type": "text[]",
           "primaryKey": false,
-          "notNull": false,
-          "default": []
+          "notNull": false
+        },
+        "total_allowed_calls": {
+          "name": "total_allowed_calls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -1059,11 +1064,11 @@
           "primaryKey": true,
           "notNull": true
         },
-        "label": {
-          "name": "label",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "language": {
           "name": "language",

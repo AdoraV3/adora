@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { differenceInDays, formatDate } from "date-fns";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PageHeader } from "./PageHeader";
 
 export function SubscriptionTab() {
@@ -25,6 +26,20 @@ export function SubscriptionTab() {
   );
 
   const subscription = subscriptionData?.data;
+
+  const router = useRouter();
+
+  const handleUpgrade = () => {
+    router.push("/pricing");
+  };
+
+  const remainingDays = differenceInDays(
+    business?.subscriptionEndDate ?? new Date(),
+    new Date(),
+  );
+
+  const daysLeft = remainingDays > 0 ? remainingDays : 0;
+
   if (isPending) return <div>Loading...</div>;
   return (
     <section className="pt-10">
@@ -34,8 +49,7 @@ export function SubscriptionTab() {
         </div>
         {business?.subscriptionEndDate && (
           <Badge className="bg-[hsla(25,64%,59%,1)] py-2 h-4 text-[10px] rounded-sm text-white-100 ">
-            {differenceInDays(business?.subscriptionEndDate, new Date())} days
-            left
+            {daysLeft > 0 ? daysLeft : 0} days left
           </Badge>
         )}
       </div>
@@ -62,10 +76,10 @@ export function SubscriptionTab() {
         {business?.subscriptionEndDate && (
           <div className="px-5 py-4">
             <h6 className="font-satoshi mb-2 font-medium text-lg text-black-100">
-              Days Left
+              {daysLeft} Days Left
             </h6>
             <p className="font-normal text-sm text-gray-2 font-satoshi">
-              Expires on{" "}
+              {remainingDays > 0 ? "Expires on" : "Expired on"}{" "}
               {formatDate(business?.subscriptionEndDate, "do, MMMM yyyy")}
             </p>
           </div>
@@ -79,13 +93,15 @@ export function SubscriptionTab() {
           </Link>{" "}
         </p>
 
-        <Button size="sm" variant="outline">
+        <Button onClick={handleUpgrade} size="sm" variant="outline">
           Choose a plan to purchase{" "}
         </Button>
       </div>
 
       {subscription?.plan !== "enterprise" && (
-        <Button className="mt-10 px-10">Upgrade Plan </Button>
+        <Button onClick={handleUpgrade} className="mt-10 px-10">
+          Upgrade Plan{" "}
+        </Button>
       )}
     </section>
   );

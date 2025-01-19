@@ -9,8 +9,8 @@
   {
     "name": "Adora",
     "language": "English",
-    "voice": "female",
     "provider": "11labs",
+    "gender": "female",
     "createdVoiceId": "yMCzJDgejP3dqCBHGGS4"
   }
 ]

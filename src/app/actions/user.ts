@@ -1,13 +1,13 @@
 "use server";
 
 import {
-  createBusiness,
   getBusiness,
   getUserByEmail,
   updateBusiness,
   updateProfile,
 } from "@/data-access";
-import { getPlan } from "@/data-access/subscription";
+import { db } from "@/db";
+import { agent } from "@/db/schema";
 import { sendContactUsEmail } from "@/emails";
 import { authenticationProcedure } from "@/lib/procedures";
 import {
@@ -16,44 +16,62 @@ import {
 } from "@/modules/commons/utils/RateLimiterUtility";
 import { profileSchema } from "@/modules/home/components/profile/validation";
 import { contactUsSchema } from "@/modules/landing-page/validation";
+import { VapiClient } from "@vapi-ai/server-sdk";
+import { eq } from "drizzle-orm";
+import { env } from "env.mjs";
 import { ZSAError, createServerAction } from "zsa";
 
 export const updateUserProfileAction = authenticationProcedure
   .createServerAction()
   .input(profileSchema)
   .handler(async ({ input, ctx }) => {
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const { id } = ctx;
     const { name, phoneNumber, country, businessName, businessCountry } = input;
+
     const profile = await updateProfile(id, {
       name,
       country,
       phone: phoneNumber,
     });
-    let businessProfile;
 
-    const findBusinessProfile = await getBusiness(id);
-    if (!findBusinessProfile) {
-      const basicPlan = await getPlan("basic");
+    const existingBusiness = await getBusiness(id);
 
-      if (!basicPlan) {
-        throw new ZSAError("NOT_FOUND", "Subscription not found");
-      }
-
-      businessProfile = await createBusiness({
-        name: businessName,
-        country: businessCountry,
-        userId: id,
-        subscriptionId: basicPlan.id,
-        agentId: "wo4lm1obd1tahizoxgj64ef3",
-      });
-    } else {
-      businessProfile = await updateBusiness(id, {
-        name: businessName,
-        country: businessCountry,
-      });
+    if (!existingBusiness) {
+      throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
-    return { data: { profile, businessProfile }, success: true };
+    const updatedBusinessInfo = await updateBusiness(id, {
+      name: businessName,
+      country: businessCountry,
+    });
+
+    const existingAgent = await db.query.agent.findFirst({
+      where: eq(agent.id, existingBusiness.agentId),
+      with: {
+        phoneNumber: true,
+      },
+    });
+
+    // await getAgent(existingBusiness.agentId);
+    if (!existingAgent?.assistantId) {
+      throw new ZSAError("NOT_FOUND", "Agent not found");
+    }
+
+    try {
+      const client = new VapiClient({ token: env.VAPI_API_KEY });
+
+      await client.phoneNumbers.update(existingAgent?.phoneNumber?.vapiId, {
+        fallbackDestination: {
+          type: "number",
+          number: phoneNumber,
+        },
+      });
+    } catch (error) {
+      console.error({ error });
+    }
+
+    return { data: { profile, updatedBusinessInfo }, success: true };
   });
 
 export const getUserAction = authenticationProcedure

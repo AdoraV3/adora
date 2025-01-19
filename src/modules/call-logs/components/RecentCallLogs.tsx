@@ -5,8 +5,8 @@ import { Icons } from "@/components/icons";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { DataTable } from "@/modules/commons/components";
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDate } from "date-fns/format";
 import { addDays } from "date-fns/addDays";
+import { formatDate } from "date-fns/format";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -27,7 +27,10 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
         cell: ({ row }) => {
           const { id } = row.original;
           return (
-            <Link className="w-max whitespace-nowrap" href={`/call-logs/${id}`}>
+            <Link
+              className="w-max whitespace-nowrap cursor-pointer underline"
+              href={`/call-logs/${id}`}
+            >
               {agent?.data.name}
             </Link>
           );
@@ -73,7 +76,7 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
     ];
   }, [agent?.data.name]);
 
-  const { data: call } = useServerActionQuery(getCallsAction, {
+  const { data: call, isPending } = useServerActionQuery(getCallsAction, {
     input: {
       assistantId: agent?.data.assistantId ?? "",
       createdAtGe:
@@ -86,14 +89,12 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
   });
 
   return (
-    <>
-      <DataTable
-        tableClassName="max-w-4xl mt-20"
-        headerClassName="text-center"
-        data={call?.data ?? []}
-        columns={columns}
-      />
-      {/* <Pagination totalDocs={20} totalPageCount={5} /> */}
-    </>
+    <DataTable
+      tableClassName="max-w-4xl"
+      headerClassName="text-center"
+      data={call?.data ?? []}
+      isLoading={isPending}
+      columns={columns}
+    />
   );
 }

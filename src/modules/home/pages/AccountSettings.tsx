@@ -16,7 +16,7 @@ export function AccountSettings() {
     <div className="overflow-hidden">
       <Tabs
         defaultValue={activeTab}
-        className="w-full overflow-x-hidden sticky top-5 z-10 py-5 bg-white-100"
+        className="w-full  sticky top-5 z-10 py-5 bg-white-100"
       >
         <TabsList className="border-b justify-start border-input w-full">
           <TabsTrigger

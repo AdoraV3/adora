@@ -21,9 +21,9 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
+import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { DynamicBreadcrumb } from "@/modules/commons/components";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
-import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import { getInitials } from "@/modules/commons/utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -35,10 +35,13 @@ export function DashboardNav() {
     queryKey: ["getUser"],
   });
 
-  const { data: agent } = useServerActionQuery(getAgentPhoneNumberAction, {
-    input: undefined,
-    queryKey: ["getAgentPhoneNumber"],
-  });
+  const { data: agent, isPending } = useServerActionQuery(
+    getAgentPhoneNumberAction,
+    {
+      input: undefined,
+      queryKey: ["getAgentPhoneNumber"],
+    },
+  );
 
   const { data: businessData } = useServerActionQuery(getBusinessAction, {
     input: undefined,
@@ -57,25 +60,8 @@ export function DashboardNav() {
   const logOutHandler = useServerActionMutation(logOutAction, {});
 
   const user = queryData?.data;
-  const { createQueryStrings } = useQueryParams();
   const router = useRouter();
   const handleUpgradePlan = () => {
-    // if (user?.email) {
-    //   router.push(
-    //     `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}?${createQueryStrings({
-    //       prefilled_email: user?.email,
-    //     })}`,
-    //   );
-    // } else {
-    //   router.push(
-    //     `/login?${createQueryStrings({
-    //       from: encodeURIComponent(
-    //         `${env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_LINK}`,
-    //       ),
-    //     })}`,
-    //   );
-    // }
-
     router.push("/pricing");
   };
 
@@ -87,6 +73,9 @@ export function DashboardNav() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [agent?.data?.phoneNumber]);
+
+  const agentPhoneNumber =
+    formatPhoneNumber(agent?.data?.phoneNumber as string) ?? "";
 
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
@@ -100,7 +89,7 @@ export function DashboardNav() {
       <p className="font-satoshi text-gray-550   text-sm font-medium">
         Agent Number:
         <span className="font-bold text-sm text-blue-300 ml-2">
-          {agent?.data?.phoneNumber ?? "Unassigned"}
+          {isPending ? "Loading..." : agentPhoneNumber ?? "Unassigned"}
         </span>{" "}
       </p>
       <div className="flex gap-4 items-center">

@@ -1,9 +1,10 @@
 import { CountryCode, parsePhoneNumber } from "libphonenumber-js";
 
 export function formatPhoneNumber(
-  phoneNumber: string,
-  defaultCountry?: CountryCode,
+  phoneNumber?: string,
+  defaultCountry: CountryCode = "US",
 ) {
+  if (!phoneNumber) return "No phone number provided";
   try {
     const parsedNumber = parsePhoneNumber(phoneNumber, defaultCountry);
 

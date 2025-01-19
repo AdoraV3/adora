@@ -1,3 +1,11 @@
+"use client";
+
+import {
+  getAgentWithVoiceAction,
+  updateAssistantAction,
+} from "@/app/actions/agent";
+import { getVoicesAction } from "@/app/actions/voice";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,176 +24,154 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { LANGUAGES, VOICES } from "@/mock";
-import { useForm } from "react-hook-form";
+import {
+  useServerActionMutation,
+  useServerActionQuery,
+} from "@/lib/hooks/server-action-hooks";
+import { formatPhoneNumber } from "@/modules/auth/helpers";
+import { FloatingInput, FloatingLabel } from "@/modules/commons/components";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { AgentDetailsSchemaType, agentDetailsSchema } from "./schema";
 
 export default function AgentDetails() {
-  const form = useForm();
+  const form = useForm<AgentDetailsSchemaType>({
+    mode: "onChange",
+    resolver: zodResolver(agentDetailsSchema),
+    defaultValues: {
+      voice: "",
+      number: "",
+      name: "",
+    },
+  });
+
+  const { data } = useServerActionQuery(getAgentWithVoiceAction, {
+    input: undefined,
+    queryKey: ["getAgentDetails"],
+  });
+
+  const { data: voices } = useServerActionQuery(getVoicesAction, {
+    input: undefined,
+    queryKey: ["getVoices"],
+  });
+
+  useEffect(() => {
+    if (data?.data && (voices?.data?.length ?? 0) > 0) {
+      form.reset({
+        voice: data?.data?.voiceId,
+        number: formatPhoneNumber(data?.data?.phoneNumber?.phoneNumber),
+        name: data?.data?.name ?? "",
+      });
+    }
+  }, [form.reset, data?.data, voices?.data]);
+
+  const updateAssistantHandler = useServerActionMutation(
+    updateAssistantAction,
+    {
+      onSuccess: () => {
+        toast.success("Assistant updated successfully");
+      },
+      onError: () => {
+        toast.error("Failed to update assistant");
+      },
+    },
+  );
+
+  const onSubmit: SubmitHandler<AgentDetailsSchemaType> = formValues => {
+    updateAssistantHandler.mutate(formValues);
+  };
   return (
-    <div className="border border-[#8E8E9320]  p-4 rounded-md shadow-lg">
-      <h2 className="mb-4 text-black text-xl">Fill in the AI Agent Information</h2>
+    <article className="space-y-4">
+      <h3 className="text-lg font-satoshi text-black-100 font-normal">
+        Fill in the AI Agent Information
+      </h3>
+
       <Form {...form}>
-        <form>
-          <div className="md:grid-col-2 grid items-center gap-5">
-            <FormField
-              control={form.control}
-              name="businessProvince"
-              render={({ field: { onChange, value } }) => (
-                <FormItem>
-                  <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                    Business Province
-                  </FormLabel>
-                  <Select
-                    disabled
-                    defaultValue={value}
-                    onValueChange={data => {
-                      onChange(data);
-                    }}
-                    value={value}
-                  >
-                    <SelectTrigger className=" border border-[#8E8E93] bg-white-100 py-3 text-black-100">
-                      <SelectValue placeholder="" />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        {VOICES?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal text-black-100"
-                            key={el.value}
-                            value={el.value}
-                          >
-                            {el.label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="businessPhone"
-              render={({ field }) => (
-                <FormItem className="relative">
-                  <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                    Business Phone Number
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        className="!border border-[#8E8E93] bg-white-100"
-                        placeholder=""
-                        disabled
-                        {...field}
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="aiVoice"
-              render={({ field: { onChange, value } }) => (
-                <FormItem>
-                  <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                    AI Voice
-                  </FormLabel>
-                  <Select
-                    disabled
-                    defaultValue={value}
-                    onValueChange={data => {
-                      onChange(data);
-                    }}
-                    value={value}
-                  >
-                    <SelectTrigger className=" border border-[#8E8E93] bg-white-100 py-3 text-black-100">
-                      <SelectValue placeholder="" />
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid gap-6 items-center md:grid-cols-2"
+        >
+          <FormField
+            control={form.control}
+            name="number"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+                  Agent Number
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="bg-white-100   !border border-[hsla(0,0%,91%,1)] "
+                    placeholder="Agent Number"
+                    readOnly
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="voice"
+            render={({ field: { onChange, value } }) => (
+              <FormItem key={value} className="relative">
+                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+                  Agent Voice
+                </FormLabel>
+                <FormControl>
+                  <Select onValueChange={onChange} value={value}>
+                    <SelectTrigger className=" py-3 capitalize border bg-white-100 text-black-100 focus-visible:border-none">
+                      <SelectValue placeholder="Voice" />
                     </SelectTrigger>
                     <SelectContent sideOffset={5}>
                       <SelectGroup>
                         <SelectLabel>Voice</SelectLabel>
-                        {VOICES?.map(el => (
+                        {voices?.data?.map(el => (
                           <SelectItem
-                            className="font-satoshi text-base font-normal text-black-100"
-                            key={el.value}
-                            value={el.value}
+                            className="font-satoshi capitalize text-base font-normal text-[#8c8c8c]"
+                            key={el.id}
+                            value={el.id}
                           >
-                            {el.label}
+                            {el.gender}
                           </SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                </FormItem>
-              )}
-            />
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="aiPhone"
-              render={({ field: { onChange, value } }) => (
-                <FormItem>
-                  <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                    AI Phone Number
-                  </FormLabel>
-                  <Select
-                    defaultValue={value}
-                    onValueChange={data => {
-                      onChange(data);
-                    }}
-                    value={value}
-                    disabled
-                  >
-                    <SelectTrigger className=" border border-[#8E8E93] bg-white-100 py-3 text-black-100">
-                      <SelectValue placeholder="" />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        <SelectLabel>Language</SelectLabel>
-                        {LANGUAGES?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal text-black-100"
-                            key={el.value}
-                            value={el.value}
-                          >
-                            {el.label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem id="name" className="relative  col-span-2">
+                <FormControl>
+                  <div className="relative">
+                    <FloatingInput placeholder="AI name" {...field} />
+                    <FloatingLabel>AI Name</FloatingLabel>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="aiName"
-              render={({ field }) => (
-                <FormItem className=" relative col-span-2">
-                  <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                    AI Name
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        className="!border border-[#8E8E93] bg-white-100"
-                        placeholder=""
-                        disabled
-                        {...field}
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <Button
+            isLoading={updateAssistantHandler.isPending}
+            type="submit"
+            className="mt-10 w-full col-span-2 text-black-100 px-6 border border-input bg-gray-650"
+          >
+            Save Changes
+          </Button>
         </form>
       </Form>
-    </div>
+    </article>
   );
 }

@@ -23,7 +23,7 @@ export function ViewKnowledgeBase({
 
   return (
     <Card className="mt-10 flex flex-1 flex-col  shadow-350 h-[31rem] rounded-3xl bg-white-100">
-      <CardContent className="p-20 flex flex-1 mt-auto gap-6 flex-col">
+      <CardContent className="md:p-20 p-4 flex flex-1 mt-auto gap-6 flex-col">
         <h4 className="font-satoshi my-3 underline-offset-2 underline font-medium text-base text-black-100">
           Customer Support Knowledge Base
         </h4>

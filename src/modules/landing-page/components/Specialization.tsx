@@ -1,4 +1,4 @@
-import BlurIn from "@/components/animations/blur-in"
+import BlurIn from "@/components/animations/blur-in";
 
 export function Specialization() {
   const data = [

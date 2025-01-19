@@ -48,7 +48,7 @@ interface MobileLinkProps extends React.PropsWithChildren {
 function RouteLink({ routeIcon, isOpen, title }: RouteLinkProps) {
   const Icon = Icons[routeIcon ?? "Home"];
   return (
-    <div className="item-center flex gap-3">
+    <div className="item-center  flex gap-3">
       <Icon
         // className={cn("text-gray-100", isActive && " text-primary ")}
         size={35}
@@ -125,7 +125,7 @@ export function Sidebar({
   bottomSidebarItems,
   setIsOpen,
   ...props
-}: SidebarNavProps) {
+}: Readonly<SidebarNavProps>) {
   // const segment = useSelectedLayoutSegment();
   const segment = useSelectedLayoutSegment();
   //   const router = useRouter();
@@ -192,6 +192,7 @@ export function Sidebar({
                           value={item.title}
                         >
                           <AccordionTrigger
+                            // onClick={() => setIsOpen?.(true)}
                             className={cn(
                               `flex flex-row justify-between gap-2 px-4 py-3  text-sm capitalize text-white-100 ${
                                 isActiveParentLink
@@ -246,68 +247,67 @@ export function Sidebar({
                 );
               })}
             </div>
-            <div>
-              {BOTTOM_SIDEBAR_ITEM?.map(item => {
-                const Icon = Icons[item.icon ?? "Dashboard"];
-                const isActiveRoute = item.href?.includes(String(segment));
 
-                return (
-                  <div key={item.title}>
-                    {item.isButton ? (
-                      <button
-                        onClick={() => logOutHandler.mutate(undefined)}
-                        type="button"
-                        className="flex  cursor-pointer gap-2 px-4 py-3 hover:bg-[hsla(25,64%,36%,0.25)]"
-                      >
-                        <Icon
-                          size={35}
-                          className={cn("text-[hsla(229,18%,64%,1)]")}
-                        />
-                        <p
-                          className={cn(
-                            `font-sfPro text-gray-350 text-sm  font-normal ${
-                              isOpen ? "block" : "hidden"
-                            }`,
-                          )}
-                        >
-                          Log out
-                        </p>
-                      </button>
-                    ) : (
-                      <Link
-                        key={item.title}
+            {BOTTOM_SIDEBAR_ITEM?.map(item => {
+              const Icon = Icons[item.icon ?? "Dashboard"];
+              const isActiveRoute = item.href?.includes(String(segment));
+
+              return (
+                <div className="bg-brown-200 opacity-20" key={item.title}>
+                  {item.isButton ? (
+                    <button
+                      onClick={() => logOutHandler.mutate(undefined)}
+                      type="button"
+                      className="flex  cursor-pointer gap-2 px-4 py-3 hover:bg-[hsla(25,64%,36%,0.25)]"
+                    >
+                      <Icon
+                        size={35}
+                        className={cn("text-[hsla(229,18%,64%,1)]")}
+                      />
+                      <p
                         className={cn(
-                          "my-5 flex items-center gap-2  px-4",
-                          isActiveRoute &&
-                            "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                          `font-sfPro text-gray-350 text-sm  font-normal ${
+                            isOpen ? "block" : "hidden"
+                          }`,
                         )}
-                        href={item.href ?? "/"}
                       >
-                        <Icon
-                          size={18}
-                          className={cn(
-                            "text-gray-350",
-                            isActiveRoute &&
-                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
-                          )}
-                        />
-                        <p
-                          className={cn(
-                            `font-sfPro text-gray-350 text-base font-medium ${
-                              isOpen ? "block" : "hidden"
-                            }`,
-                            isActiveRoute &&
-                              "bg-[hsla(210,13%,97%,0.5)] text-black-100",
-                          )}
-                        >
-                          Link
-                        </p>
-                      </Link>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                        Log out
+                      </p>
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.title}
+                      className={cn(
+                        "my-5 flex items-center gap-2  px-4",
+                        isActiveRoute &&
+                          "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                      )}
+                      href={item.href ?? "/"}
+                    >
+                      <Icon
+                        size={18}
+                        className={cn(
+                          "text-gray-350",
+                          isActiveRoute &&
+                            "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                        )}
+                      />
+                      <p
+                        className={cn(
+                          `font-sfPro text-gray-350 text-base font-medium ${
+                            isOpen ? "block" : "hidden"
+                          }`,
+                          isActiveRoute &&
+                            "bg-[hsla(210,13%,97%,0.5)] text-black-100",
+                        )}
+                      >
+                        Link
+                      </p>
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

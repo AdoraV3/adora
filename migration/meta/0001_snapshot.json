@@ -1,6 +1,6 @@
 {
-  "id": "3ad45d03-4b29-429f-ad03-43078834e288",
-  "prevId": "f3ce07d8-dcb2-47c1-934a-2cac8ebd4764",
+  "id": "e1ad78ac-0194-4350-b2af-4d68ef9e2c49",
+  "prevId": "d4089e71-08b9-4ed1-b99e-b49db99a1c28",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -60,8 +60,12 @@
           "name": "adora_account_user_id_adora_user_id_fk",
           "tableFrom": "adora_account",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -71,7 +75,9 @@
         "adora_account_google_id_unique": {
           "name": "adora_account_google_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["google_id"]
+          "columns": [
+            "google_id"
+          ]
         }
       }
     },
@@ -130,8 +136,12 @@
           "name": "adora_account_preference_user_id_adora_user_id_fk",
           "tableFrom": "adora_account_preference",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -156,16 +166,15 @@
           "notNull": true,
           "default": "'english'"
         },
-        "voice": {
-          "name": "voice",
+        "voice_id": {
+          "name": "voice_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'female'"
+          "notNull": true
         },
-        "telephone": {
-          "name": "telephone",
-          "type": "text",
+        "provider": {
+          "name": "provider",
+          "type": "varchar(200)",
           "primaryKey": false,
           "notNull": false
         },
@@ -180,18 +189,133 @@
           "type": "varchar(50)",
           "primaryKey": false,
           "notNull": false
+        },
+        "phone_number_id": {
+          "name": "phone_number_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "adora_agent_voice_id_adora_voice_id_fk": {
+          "name": "adora_agent_voice_id_adora_voice_id_fk",
+          "tableFrom": "adora_agent",
+          "tableTo": "adora_voice",
+          "columnsFrom": [
+            "voice_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "adora_agent_phone_number_id_adora_available_phone_numbers_id_fk": {
+          "name": "adora_agent_phone_number_id_adora_available_phone_numbers_id_fk",
+          "tableFrom": "adora_agent",
+          "tableTo": "adora_available_phone_numbers",
+          "columnsFrom": [
+            "phone_number_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "adora_agent_category_id_adora_system_prompt_id_fk": {
+          "name": "adora_agent_category_id_adora_system_prompt_id_fk",
+          "tableFrom": "adora_agent",
+          "tableTo": "adora_system_prompt",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.adora_available_phone_numbers": {
+      "name": "adora_available_phone_numbers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_assigned": {
+          "name": "is_assigned",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "date_assigned": {
+          "name": "date_assigned",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "vapi_id": {
+          "name": "vapi_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "adora_agent_telephone_unique": {
-          "name": "adora_agent_telephone_unique",
-          "nullsNotDistinct": false,
-          "columns": ["telephone"]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "public.adora_business": {
       "name": "adora_business",
@@ -292,8 +416,12 @@
           "name": "adora_business_user_id_adora_user_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -301,8 +429,12 @@
           "name": "adora_business_subscription_id_adora_subscription_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_subscription",
-          "columnsFrom": ["subscription_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "subscription_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -310,8 +442,12 @@
           "name": "adora_business_agent_id_adora_agent_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_agent",
-          "columnsFrom": ["agent_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "agent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -368,8 +504,12 @@
           "name": "adora_call_log_business_id_adora_business_id_fk",
           "tableFrom": "adora_call_log",
           "tableTo": "adora_business",
-          "columnsFrom": ["business_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "business_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -438,8 +578,12 @@
           "name": "adora_knowledge_base_business_id_adora_business_id_fk",
           "tableFrom": "adora_knowledge_base",
           "tableTo": "adora_business",
-          "columnsFrom": ["business_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "business_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -514,8 +658,12 @@
           "name": "adora_profile_user_id_adora_user_id_fk",
           "tableFrom": "adora_profile",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -572,8 +720,12 @@
           "name": "adora_reset_token_user_id_adora_user_id_fk",
           "tableFrom": "adora_reset_token",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -610,162 +762,12 @@
           "name": "adora_session_user_id_adora_user_id_fk",
           "tableFrom": "adora_session",
           "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.adora_user": {
-      "name": "adora_user",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email_verified": {
-          "name": "email_verified",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "adora_user_email_unique": {
-          "name": "adora_user_email_unique",
-          "nullsNotDistinct": false,
-          "columns": ["email"]
-        }
-      }
-    },
-    "public.adora_user_business": {
-      "name": "adora_user_business",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "business_id": {
-          "name": "business_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "adora_user_business_user_id_adora_user_id_fk": {
-          "name": "adora_user_business_user_id_adora_user_id_fk",
-          "tableFrom": "adora_user_business",
-          "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "adora_user_business_business_id_adora_business_id_fk": {
-          "name": "adora_user_business_business_id_adora_business_id_fk",
-          "tableFrom": "adora_user_business",
-          "tableTo": "adora_business",
-          "columnsFrom": ["business_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "adora_user_business_user_id_business_id_unique": {
-          "name": "adora_user_business_user_id_business_id_unique",
-          "nullsNotDistinct": false,
-          "columns": ["user_id", "business_id"]
-        }
-      }
-    },
-    "public.adora_verify_email_token": {
-      "name": "adora_verify_email_token",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "token": {
-          "name": "token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "adora_verify_email_token_user_id_adora_user_id_fk": {
-          "name": "adora_verify_email_token_user_id_adora_user_id_fk",
-          "tableFrom": "adora_verify_email_token",
-          "tableTo": "adora_user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -828,6 +830,271 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "features": {
+          "name": "features",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_allowed_calls": {
+          "name": "total_allowed_calls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.adora_system_prompt": {
+      "name": "adora_system_prompt",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "system_prompt": {
+          "name": "system_prompt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.adora_user": {
+      "name": "adora_user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email_verified": {
+          "name": "email_verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "adora_user_email_unique": {
+          "name": "adora_user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.adora_user_business": {
+      "name": "adora_user_business",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "adora_user_business_user_id_adora_user_id_fk": {
+          "name": "adora_user_business_user_id_adora_user_id_fk",
+          "tableFrom": "adora_user_business",
+          "tableTo": "adora_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "adora_user_business_business_id_adora_business_id_fk": {
+          "name": "adora_user_business_business_id_adora_business_id_fk",
+          "tableFrom": "adora_user_business",
+          "tableTo": "adora_business",
+          "columnsFrom": [
+            "business_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "adora_user_business_user_id_business_id_unique": {
+          "name": "adora_user_business_user_id_business_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "user_id",
+            "business_id"
+          ]
+        }
+      }
+    },
+    "public.adora_verify_email_token": {
+      "name": "adora_verify_email_token",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "adora_verify_email_token_user_id_adora_user_id_fk": {
+          "name": "adora_verify_email_token_user_id_adora_user_id_fk",
+          "tableFrom": "adora_verify_email_token",
+          "tableTo": "adora_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.adora_voice": {
+      "name": "adora_voice",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "language": {
+          "name": "language",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'english'"
+        },
+        "gender": {
+          "name": "gender",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'male'"
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_voice_id": {
+          "name": "created_voice_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},

@@ -9,7 +9,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LANGUAGES } from "@/mock";
-import { DeleteAccount } from "./DeleteAccount";
 import { PageHeader } from "./PageHeader";
 
 export function AccountPreferenceTab() {
@@ -80,7 +79,7 @@ export function AccountPreferenceTab() {
         </div>
       </div>
 
-      <DeleteAccount />
+      {/* <DeleteAccount /> */}
     </section>
   );
 }

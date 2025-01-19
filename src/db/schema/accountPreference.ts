@@ -14,7 +14,7 @@ export const accountPreference = pgTable("account_preference", {
       onDelete: "cascade",
     }),
   theme: text("theme"),
-  language: text("language"),
+  country: text("country"),
   timezone: text("timezone"),
   ...lifecycleDates,
 });

@@ -1,11 +1,12 @@
-"use client"
+"use client";
+
 import { hoverFooterAnimation } from "@/utils/animations";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export function Footer() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <footer className="pb-6">
       <div className="grid py-10 px-4 md:px-12 gap-10 border-t border-[hsla(0,0%,0%,0.1)] md:grid-cols-3">

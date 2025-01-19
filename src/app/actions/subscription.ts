@@ -1,13 +1,9 @@
 "use server";
 
 import { getSubscription, getSubscriptions } from "@/data-access/subscription";
-import { withBusiness } from "@/lib/auth";
+import { withBusiness } from "@/lib/get-user";
 import { authenticationProcedure } from "@/lib/procedures";
 import { createStripeCheckoutSession } from "@/lib/stripe";
-import {
-  RateLimitConfig,
-  RateLimiterUtility,
-} from "@/modules/commons/utils/RateLimiterUtility";
 import { z } from "zod";
 import { createServerAction } from "zsa";
 
@@ -31,16 +27,15 @@ export const getSubscriptionAction = authenticationProcedure
     const subscription = await getSubscription(input);
     return { success: true, data: subscription };
   });
+
 export const getSubscriptionsAction = createServerAction().handler(async () => {
   const subscriptions = await getSubscriptions();
   return { success: true, subscriptions };
 });
 
 export const checkoutAction = withBusiness(async (formData, business) => {
-  await RateLimiterUtility.limit(RateLimitConfig.SIGNUP);
   const priceId = formData.get("priceId") as string;
 
-  console.log("server price id", JSON.stringify(formData));
   if (!priceId) return;
   await createStripeCheckoutSession({ business, priceId });
 });

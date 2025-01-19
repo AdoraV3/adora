@@ -1,4 +1,5 @@
 import { BOTTOM_SIDEBAR_ITEM, SIDEBAR_ITEMS } from "@/mock";
+import { SubscriptionModal } from "@/modules/commons/components/SubscriptionModal";
 import { DashboardNav } from "@/modules/dashboard/components/DashboardNav";
 import { Navigation } from "@/modules/dashboard/components/Navigation";
 
@@ -16,6 +17,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <DashboardNav />
         {children}{" "}
       </Navigation>
+
+      <SubscriptionModal />
     </div>
   );
 }

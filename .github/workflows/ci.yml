@@ -3,7 +3,6 @@ name: Continuous Integration (CI)
 on:
   push:
     branches:
-      # We can define multiple branches as well
       - main
   pull_request:
     branches:
@@ -11,48 +10,90 @@ on:
 
 jobs:
   build:
-    # Defines the type of runner the job runs on
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+      VAPI_API_KEY: ${{ secrets.VAPI_API_KEY }}
+      NEXT_PUBLIC_VAPI_API_KEY: ${{ secrets.NEXT_PUBLIC_VAPI_API_KEY }}
+      NEXT_PUBLIC_VAPI_CLIENT_SDK: ${{ secrets.NEXT_PUBLIC_VAPI_CLIENT_SDK }}
+      NEXT_PUBLIC_ADORA_AI: ${{ secrets.NEXT_PUBLIC_ADORA_AI }}
+      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
 
     steps:
-      - name: Checkout to the repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up NodeJS environment
+      - name: Set up Node.js environment
         uses: actions/setup-node@v2
         with:
-          # Reads the node version from the .nvmrc file itself
           node-version-file: ".nvmrc"
-          # The node version can be hard-coded
-          # node-version: 16
 
-      # Consider this as an add on to optimize the execution of actions
-      - name: Cache node modules
-        id: cache-npm
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples.md#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ~/.pnpm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
           key:
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{
-            hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{
+            hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Install package dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Check linting and formatting
-        # Custom script for checking the linting and formatting being in place
-        run: yarn run lint
-
-      # Run test cases and this could ensure minimum coverage as well if set
-      # - name: Execute test cases
-      #   run: yarn run test
+        run: pnpm run lint
 
       - name: Execute build
-        run: yarn run build
+        run: pnpm run build
+
+      # - name: Configure AWS Credentials for GitHub Actions
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ca-central-1
+
+      # - name: Update RDS Security Group
+      #   run: |
+      #     aws ec2 authorize-security-group-ingress \
+      #       --group-id sg-055eeb230b6ca28ab \
+      #       --protocol tcp \
+      #       --port 5432 \
+      #       --cidr 172.183.0.0/16
+
+      # - name: Generate Migration
+      #   run: pnpm run db:generate
+
+      # - name: Run Migration
+      #   run: pnpm run db:migrate
+
+      # - name: Run Seeding
+      #   run: pnpm run db:seed

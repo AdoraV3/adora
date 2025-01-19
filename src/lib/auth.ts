@@ -1,13 +1,10 @@
-import { getBusiness } from "@/data-access";
 import { db } from "@/db";
-import { Business, session, user } from "@/db/schema";
+import { session, user } from "@/db/schema";
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { env } from "env.mjs";
 import { Lucia } from "lucia";
-import { redirect } from "next/navigation";
-import { getUser } from "./get-user";
 
-const adapter = new DrizzlePostgreSQLAdapter(db, session, user);
+const adapter = new DrizzlePostgreSQLAdapter(db, session as any, user as any);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
@@ -22,31 +19,8 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
-// IMPORTANT!
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
   }
-}
-
-type ActionWithTeamFunction<T> = (
-  formData: FormData,
-  businessData: Business,
-) => Promise<T>;
-
-export function withBusiness<T>(action: ActionWithTeamFunction<T>) {
-  return async (formData: FormData): Promise<T> => {
-    const user = await getUser();
-    if (!user) {
-      redirect("/login");
-    }
-    const business = await getBusiness(user.id);
-    if (!business) {
-      throw new Error("Business not found");
-    }
-
-    console.log("business", formData.get("priceId"));
-
-    return action(formData, business);
-  };
 }
