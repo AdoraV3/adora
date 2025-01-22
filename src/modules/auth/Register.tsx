@@ -11,16 +11,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/form"
 import {
   useServerActionMutation,
   useServerActionQuery,
@@ -38,7 +29,6 @@ import {
   Shell,
 } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
-import { formatPhoneNumber } from "./helpers";
 
 export function Register() {
   const form = useForm<RegisterSchemaType>({
@@ -46,21 +36,6 @@ export function Register() {
     resolver: zodResolver(registerSchema),
   });
   const router = useRouter();
-
-  const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
-    input: undefined,
-    queryKey: ["getPhoneNumbers"],
-  });
-
-  const { data: voices } = useServerActionQuery(getVoicesAction, {
-    input: undefined,
-    queryKey: ["getVoices"],
-  });
-
-  const { data: categories } = useServerActionQuery(getCategoriesAction, {
-    input: undefined,
-    queryKey: ["getCategories"],
-  });
 
   // const [isPending, startTransition] = useTransition();
   const signUpHandler = useServerActionMutation(signupAction, {

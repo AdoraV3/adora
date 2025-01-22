@@ -1,5 +1,5 @@
 import { BoxReveal } from "@/components/animations/box-reveal";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 interface UseCaseItemProps {
