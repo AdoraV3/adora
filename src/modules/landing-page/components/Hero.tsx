@@ -30,6 +30,7 @@ export function Hero() {
             Call Automation.
           </p>
           <button
+            onClick={()=>router.push("/register")}
             type="button"
             className="hover:bg-brown-600 rounded-lg bg-[#975221] px-5 py-3 text-sm text-[#ffff] transition"
           >
@@ -41,6 +42,7 @@ export function Hero() {
             src="/images/letstalk.svg"
             width={100}
             height={60}
+            onClick={()=>router.push("/contact-us")}
             alt="hero"
             className={`ml-auto hidden h-10 w-auto cursor-pointer md:block ${hoverAnimation}`}
           />
@@ -49,6 +51,15 @@ export function Hero() {
 
       {/* Images cards */}
       <div className="relative mt-6 mx-8 flex flex-col gap-4 md:mx-10 md:flex-row md:items-center lg:mx-12">
+          <Image
+            src="/images/heromain.svg"
+            width={800}
+            height={800}
+            alt="hero"
+            className={`h-full w-full rounded-2xl object-cover`}
+          />
+      </div>
+      {/* <div className="relative mt-6 mx-8 flex flex-col gap-4 md:mx-10 md:flex-row md:items-center lg:mx-12">
         <div className="w-auto md:h-[480px] md:w-[60%]">
           <Image
             src="/images/hero1.png"
@@ -95,7 +106,7 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mx-auto mt-20">
         <Image
           src="/images/mic.png"
@@ -116,6 +127,7 @@ export function Hero() {
         </button>
         <button
           type="button"
+            onClick={()=>router.push("/register")}
           className={`hover:bg-brown-600 mx-auto w-fit rounded-lg bg-[#975221] px-10 py-3 text-sm text-[#ffff] transition md:px-32 ${hoverAnimation}`}
         >
           Try demo for free

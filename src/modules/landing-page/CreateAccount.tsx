@@ -19,7 +19,7 @@ export function CreateAccount() {
       <Link
         href="/register"
         className={cn(
-          buttonVariants({ variant: "default", size: "sm" }),
+          buttonVariants({ variant: "default", size: "lg" }),
           "px-6",
         )}
       >

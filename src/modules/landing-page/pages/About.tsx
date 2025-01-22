@@ -56,7 +56,7 @@ export function About() {
         </div>
 
         <Link
-          href="/register"
+          href="/contact-us"
           className={cn(
             buttonVariants({ variant: "default", size: "sm" }),
             "bg-white-100 px-6 text-primary",

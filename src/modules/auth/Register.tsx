@@ -1,9 +1,5 @@
 "use client";
-
 import { signupAction } from "@/app/actions/auth";
-import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
-import { getCategoriesAction } from "@/app/actions/systemPrompt";
-import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,19 +7,9 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/form"
 import {
   useServerActionMutation,
-  useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
 import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,7 +24,6 @@ import {
   Shell,
 } from "../commons/components";
 import { PageHeader } from "./components/PageHeader";
-import { formatPhoneNumber } from "./helpers";
 
 export function Register() {
   const form = useForm<RegisterSchemaType>({
@@ -46,23 +31,6 @@ export function Register() {
     resolver: zodResolver(registerSchema),
   });
   const router = useRouter();
-
-  const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
-    input: undefined,
-    queryKey: ["getPhoneNumbers"],
-  });
-
-  const { data: voices } = useServerActionQuery(getVoicesAction, {
-    input: undefined,
-    queryKey: ["getVoices"],
-  });
-
-  const { data: categories } = useServerActionQuery(getCategoriesAction, {
-    input: undefined,
-    queryKey: ["getCategories"],
-  });
-
-  // const [isPending, startTransition] = useTransition();
   const signUpHandler = useServerActionMutation(signupAction, {
     onSuccess: () => {
       toast.success("Account created successfully", {
@@ -78,18 +46,6 @@ export function Register() {
   const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
     signUpHandler.mutate(data);
   };
-
-  // console.log({ form: form.getValues() });
-
-  // const handleGoogleSignIn = () => {
-  //   startTransition(async () => {
-  //     const res = await getGoogleOauthConsentUrl();
-
-  //     if (res.url) {
-  //       window.location.href = res.url;
-  //     }
-  //   });
-  // };
 
   return (
     <Shell as="main" className="flex flex-1 flex-col">
@@ -142,7 +98,7 @@ export function Register() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="category"
               render={({ field }) => (
@@ -182,7 +138,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             {/* <FormField
               control={form.control}
               name="locationRegion"
@@ -198,7 +154,7 @@ export function Register() {
                 </FormItem>
               )}
             /> */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="agentName"
               render={({ field }) => (
@@ -212,8 +168,8 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="voice"
               render={({ field }) => (
@@ -253,8 +209,8 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
@@ -294,7 +250,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <FormField
               control={form.control}
@@ -379,13 +335,13 @@ export function Register() {
         <div className=" mt-6  divide-x divide-primary text-center">
           <Link
             className="pr-3 font-satoshi text-lg font-medium text-primary"
-            href="/"
+            href="/terms"
           >
             Terms of Use
           </Link>
           <Link
             className="pl-3 font-satoshi text-lg font-medium text-primary"
-            href="/"
+            href="/privacy"
           >
             Privacy Policy
           </Link>

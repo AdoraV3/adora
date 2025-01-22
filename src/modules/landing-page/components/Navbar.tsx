@@ -25,7 +25,7 @@ export function Navbar() {
         >
           <div className="flex gap-16 w-full  items-center">
             <div>
-              <Link className="flex gap-3 items-center" href="/">
+              <Link className="flex gap-3 items-center scale-105" href="/">
                 <Image
                   alt="adora"
                   src="/images/adoralogo.png"
@@ -42,7 +42,7 @@ export function Navbar() {
                   <div key={el.title}>
                     <Link
                       className={cn(
-                        "font-normal font-satoshi text-lg text-center text-black-100",
+                        "font-normal font-satoshi text-lg text-center text-black-100 hover:scale-105 hover:text-primary",
                         {
                           "text-primary font-bold": pathname === el.href,
                         },

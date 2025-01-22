@@ -16,7 +16,7 @@ export function UseCases() {
         </p>
       </div>
 
-      <div className="mt-5 grid md:grid-cols-2 md:px-12 gap-6">
+      <div className="mt-5 w-full overflow-x-scroll flex flex-row mx-4 md:mx-8 md:px-4 gap-6 items-stretch">
         {USE_CASES.map(el => (
           <UseCaseItem
             key={el.title}
@@ -29,3 +29,4 @@ export function UseCases() {
     </div>
   );
 }
+

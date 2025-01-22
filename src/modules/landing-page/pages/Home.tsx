@@ -18,8 +18,8 @@ export function Home() {
       {/* <Revolution /> */}
 
       <WhyLove />
-      <Specialization />
       <HowItWorks />
+      <Specialization />
       <UseCases />
 
       <Brands />

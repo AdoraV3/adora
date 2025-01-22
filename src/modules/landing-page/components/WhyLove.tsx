@@ -6,14 +6,14 @@ export function WhyLove() {
   return (
     <section className="my-20 px-4 md:px-12">
       <PageHeader
-        title="Why You'll Love Adora AI Voice Assistants"
+        title="Why You'll Love Adora"
         subtitle="An AI intelligent assistant for exceptional customer experiences."
       />
 
-      <div className="mt-14 flex flex-col gap-x-6 gap-y-8">
+      <div className="mt-14 flex flex-col md:flex-wrap md:flex-row gap-x-6 gap-y-8">
         {WHY_LOVE.map(({ image, title, text }) => (
           <div
-            className="flex flex-row items-center rounded-lg px-5 py-5 border border-[#d9d9d9]"
+            className="flex flex-row items-center rounded-lg px-5 py-5 border border-[#d9d9d9] md:w-[48%]"
             key={text}
           >
             <Image
