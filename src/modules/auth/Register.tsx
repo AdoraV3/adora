@@ -1,9 +1,5 @@
 "use client";
-
 import { signupAction } from "@/app/actions/auth";
-import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
-import { getCategoriesAction } from "@/app/actions/systemPrompt";
-import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,7 +10,6 @@ import {
 } from "@/components/ui/form"
 import {
   useServerActionMutation,
-  useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
 import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,8 +31,6 @@ export function Register() {
     resolver: zodResolver(registerSchema),
   });
   const router = useRouter();
-
-  // const [isPending, startTransition] = useTransition();
   const signUpHandler = useServerActionMutation(signupAction, {
     onSuccess: () => {
       toast.success("Account created successfully", {
@@ -53,18 +46,6 @@ export function Register() {
   const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
     signUpHandler.mutate(data);
   };
-
-  // console.log({ form: form.getValues() });
-
-  // const handleGoogleSignIn = () => {
-  //   startTransition(async () => {
-  //     const res = await getGoogleOauthConsentUrl();
-
-  //     if (res.url) {
-  //       window.location.href = res.url;
-  //     }
-  //   });
-  // };
 
   return (
     <Shell as="main" className="flex flex-1 flex-col">
