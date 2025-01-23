@@ -1,4 +1,5 @@
 "use client";
+
 import { signupAction } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,10 +8,8 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form"
-import {
-  useServerActionMutation,
-} from "@/lib/hooks/server-action-hooks";
+} from "@/components/ui/form";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";

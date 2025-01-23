@@ -54,36 +54,37 @@ export const FAQs: Array<FAQ> = [
     title:
       "Can the solution be customized to suit my business’s specific needs?",
     content:
-   "Absolutely! Our AI agent is highly customizable, allowing us to tailor it to meet your business’s unique requirements, from workflows and integrations to branding and responses.",
+      "Absolutely! Our AI agent is highly customizable, allowing us to tailor it to meet your business’s unique requirements, from workflows and integrations to branding and responses.",
     id: 2,
   },
   {
     title: "Is it possible for Adora call to manage multiple branches?",
     content:
-    "Yes, Adora Call is designed to handle businesses with multiple branches seamlessly. You can set up branch-specific workflows, manage multiple locations, and provide a unified customer experience across all branches.",
+      "Yes, Adora Call is designed to handle businesses with multiple branches seamlessly. You can set up branch-specific workflows, manage multiple locations, and provide a unified customer experience across all branches.",
     id: 3,
   },
   {
     title: "Is there any setup fee involved?",
     content:
-   "o, there are no hidden setup fees. We believe in transparent pricing, and all costs will be outlined in your selected subscription plan.",id: 4,
+      "o, there are no hidden setup fees. We believe in transparent pricing, and all costs will be outlined in your selected subscription plan.",
+    id: 4,
   },
   {
     title: "Can I change my plan anytime",
     content:
-   "Yes, you can upgrade or downgrade your plan at any time to suit your business needs. Changes will be applied immediately or at the start of your next billing cycle, depending on your preference.",
+      "Yes, you can upgrade or downgrade your plan at any time to suit your business needs. Changes will be applied immediately or at the start of your next billing cycle, depending on your preference.",
     id: 5,
   },
   {
     title: "Is there a cancellation fee?",
     content:
-    "No, we do not charge any cancellation fees. You are free to cancel your subscription at any time without incurring additional costs.",
-id: 6,
+      "No, we do not charge any cancellation fees. You are free to cancel your subscription at any time without incurring additional costs.",
+    id: 6,
   },
   {
     title: "What happens if I exceed the usage limits of my plan?",
     content:
-    "If you exceed the usage limits of your plan, you’ll be notified and given the option to upgrade to a higher plan that accommodates your needs. We also provide detailed insights to help you monitor usage and make informed decisions.",
+      "If you exceed the usage limits of your plan, you’ll be notified and given the option to upgrade to a higher plan that accommodates your needs. We also provide detailed insights to help you monitor usage and make informed decisions.",
     id: 7,
   },
 ];
