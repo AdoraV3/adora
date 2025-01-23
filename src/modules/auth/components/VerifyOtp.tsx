@@ -20,6 +20,7 @@ import { useQueryParams } from "@/modules/commons/hooks/useQueryParams";
 import { OtpSchemaType, otpSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -32,6 +33,7 @@ export default function VerifyOtp() {
   const router = useRouter();
   const { queryParams } = useQueryParams();
   const email = queryParams.get("email");
+  const otp = queryParams.get("otp") ?? "";
   const verifyOtpHandler = useServerActionMutation(verifyEmailAction, {
     onSuccess: () => {
       toast.success("Email Verified Successfully", {
@@ -44,11 +46,15 @@ export default function VerifyOtp() {
     },
   });
   const onSubmit: SubmitHandler<OtpSchemaType> = data => {
-    verifyOtpHandler.mutate({ otp: data.otp });
+    verifyOtpHandler.mutate({ otp: data.otp }, {});
   };
 
+  useEffect(() => {
+    form.reset({ otp });
+  }, [otp, form]);
+
   return (
-    <div className="flex flex-col justify-between flex-1">
+    <div className="flex flex-col items-center justify-between flex-1">
       <div className="text-center flex-1 flex flex-col gap-2">
         <h6 className="font-semibold text-4xl font-coreC text-black-100 md:text-4xl">
           Verify Email
@@ -61,7 +67,7 @@ export default function VerifyOtp() {
 
       <Form {...form}>
         <form
-          className="flex  items-center px-6  flex-1 flex-col"
+          className="flex items-center px-6  flex-1 flex-col"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <FormField

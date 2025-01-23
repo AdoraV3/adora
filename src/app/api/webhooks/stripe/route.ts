@@ -1,4 +1,5 @@
 import { updateBusiness } from "@/data-access";
+import { unAssignPhoneNumber } from "@/data-access/availablePhoneNumber";
 import { getPlan } from "@/data-access/subscription";
 import { db } from "@/db";
 import { business as businessTable, user as userTable } from "@/db/schema";
@@ -100,6 +101,58 @@ export async function POST(req: Request) {
           subscriptionId: basicPlan?.id,
           subscriptionStartDate: undefined,
         });
+
+        await unAssignPhoneNumber(business?.id);
+
+        break;
+      }
+      case "customer.subscription.updated": {
+        // Placeholder for handling subscription updates (e.g., expired)
+        const subscription = event.data.object as Stripe.Subscription;
+
+        // console.log(
+        //   `Subscription updated for customer ${subscription.customer}: ${subscription.status}`,
+        // );
+
+        // Check for expiration or status changes (e.g., past_due, canceled)
+        if (
+          subscription.status === "past_due" ||
+          subscription.status === "canceled"
+        ) {
+          const business = await db.query.business.findFirst({
+            where: eq(
+              businessTable.stripeCustomerId,
+              subscription.customer as string,
+            ),
+          });
+
+          if (!business) {
+            return NextResponse.json({
+              status: 404,
+              error: "Business not found",
+            });
+          }
+
+          const basicPlan = await getPlan("basic");
+          if (!basicPlan) {
+            console.error("Basic plan not found");
+            return new Response("Basic plan configuration error", {
+              status: 500,
+            });
+          }
+
+          // Downgrade business to the basic plan
+          await updateBusiness(business.userId, {
+            subscriptionId: basicPlan.id,
+            subscriptionStartDate: undefined,
+          });
+
+          await unAssignPhoneNumber(business.id);
+
+          // console.log(
+          //   `Business ${business.id} downgraded due to subscription status`,
+          // );
+        }
 
         break;
       }

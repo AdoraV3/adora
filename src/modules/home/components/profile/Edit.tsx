@@ -25,7 +25,7 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
-import { PhoneInput } from "@/modules/commons/components";
+import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
 import { useEffect } from "react";
@@ -85,7 +85,7 @@ export function Edit() {
       name: user?.profile?.name ?? "",
     });
   }, [
-    form,
+    form.reset,
     businessProfile?.name,
     businessProfile?.country,
     user?.profile?.country,
@@ -215,15 +215,14 @@ export function Edit() {
             control={form.control}
             name="phoneNumber"
             render={({ field }) => (
-              <FormItem key={field.value} id="phoneNumber" className="mb-5">
+              <FormItem id="phoneNumber">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Business Phone Number
                 </FormLabel>
                 <FormControl>
-                  <PhoneInput
-                    id="phoneNumber"
-                    className="border-none bg-gray-650"
+                  <PhoneNumberInput
                     placeholder="Phone Number"
+                    className="border-none bg-gray-650"
                     {...field}
                   />
                 </FormControl>

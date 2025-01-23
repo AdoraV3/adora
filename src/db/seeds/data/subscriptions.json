@@ -3,7 +3,7 @@
     "plan": "basic",
     "period": "monthly",
     "amount": 99,
-    "priceId": "",
+    "priceId": "price_1QS08IEZh5HgtazOUSE9mIwZ",
     "paymentProvider": "stripe",
     "features": [
       "125 Calls",
@@ -13,14 +13,14 @@
       "24/7 answering, Call forwarding and Outbound calls.",
       "Customized greeting."
     ],
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo"
+    "paymentLink": "https://buy.stripe.com/bIYbMEfc86ix29qbIJ"
   },
   {
     "plan": "premium",
     "period": "monthly",
-    "amount": 100,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "amount": 399,
+    "priceId": "price_1QS0ASEZh5HgtazOC5a1lPmj",
+    "paymentLink": "https://buy.stripe.com/14k9EwbZW36lbK06ot",
     "paymentProvider": "stripe",
     "features": [
       "2000 Calls",
@@ -38,9 +38,9 @@
   {
     "plan": "standard",
     "period": "monthly",
-    "amount": 101,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "amount": 199,
+    "priceId": "price_1QS09PEZh5HgtazOXtkRKSB6",
+    "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0",
     "paymentProvider": "stripe",
     "features": [
       "5000 Calls",
@@ -84,8 +84,8 @@
   {
     "plan": "basic",
     "period": "yearly",
-    "amount": 99,
-    "priceId": "",
+    "amount": 1069,
+    "priceId": "price_1QS0FEEZh5HgtazOP4xeUInI",
     "paymentProvider": "stripe",
     "features": [
       "125 Calls",
@@ -95,14 +95,14 @@
       "24/7 answering, Call forwarding and Outbound calls.",
       "Customized greeting."
     ],
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo"
+    "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0"
   },
   {
     "plan": "premium",
     "period": "yearly",
-    "amount": 100,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "amount": 4309,
+    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
+    "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
     "paymentProvider": "stripe",
     "features": [
       "2000 Calls",
@@ -121,9 +121,9 @@
   {
     "plan": "standard",
     "period": "yearly",
-    "amount": 100,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
-    "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
+    "amount": 2149,
+    "priceId": "price_1QS0GHEZh5HgtazOh9DO5LM5",
+    "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
     "paymentProvider": "stripe",
     "features": [
       "5000 Calls",

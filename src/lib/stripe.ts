@@ -43,13 +43,18 @@ export async function createStripeCheckoutSession({
     mode: "subscription",
     success_url: `${env.NEXT_PUBLIC_URL}/api/checkout/stripe?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${env.NEXT_PUBLIC_URL}/pricing`,
-    customer: business.stripeCustomerId || undefined,
     client_reference_id: business.id.toString(),
     allow_promotion_codes: true,
-    subscription_data: {
-      trial_period_days: 3,
-    },
-    customer_email: findUser.email,
+    ...(!business?.isFreeTrial && {
+      subscription_data: {
+        trial_period_days: 3,
+      },
+    }),
+    ...(findUser.email
+      ? { customer_email: findUser.email }
+      : {
+          customer: business.stripeCustomerId ?? undefined,
+        }),
   });
 
   redirect(session.url!);
@@ -83,6 +88,7 @@ export async function updateSubscriptions(
         subscriptionId: findSubscription?.id,
         subscriptionStartDate: formatDateToCustomFormat(new Date()),
         subscriptionEndDate: formatDateToCustomFormat(endDate),
+        // isFreeTrial: false,
       });
     } else {
       // Handle one-time purchase logic here if necessary

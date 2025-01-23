@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
-import { PhoneInput } from "@/modules/commons/components";
+import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -117,19 +117,16 @@ export function ContactUsForm() {
           <FormField
             control={form.control}
             name="phoneNumber"
-            render={({ field: { onChange, value, ...rest } }) => (
+            render={({ field }) => (
               <FormItem id="phoneNumber" className="mb-5 col-span-2">
                 <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                   Phone
                 </FormLabel>
                 <FormControl>
-                  <PhoneInput
-                    // maxLength={phoneNumber.length < 13 ? 16 : 14}
-                    // id="phoneNumber"
-                    onChange={onChange}
+                  <PhoneNumberInput
                     className="bg-white-100 border-[hsla(0,0%,91%,1)]  border"
                     placeholder="Phone Number"
-                    {...rest}
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />

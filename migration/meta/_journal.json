@@ -29,6 +29,13 @@
       "when": 1735290371131,
       "tag": "0003_good_pestilence",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1737134712613,
+      "tag": "0004_greedy_unicorn",
+      "breakpoints": true
     }
   ]
 }

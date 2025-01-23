@@ -26,20 +26,21 @@ import { lucia } from "@/lib/auth";
 import { createTransaction } from "@/lib/create-transaction";
 import { googleOAuthClient } from "@/lib/googleAuth";
 import { authenticationProcedure } from "@/lib/procedures";
-import { assistantConfig } from "@/mock";
 import {
   RateLimitConfig,
   RateLimiterUtility,
 } from "@/modules/commons/utils/RateLimiterUtility";
 import { formatDateToCustomFormat } from "@/modules/commons/utils/helpers";
 import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
+import { VapiClient } from "@vapi-ai/server-sdk";
 import { generateCodeVerifier, generateState } from "arctic";
 import { and, eq } from "drizzle-orm";
+import { env } from "env.mjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { ZSAError, createServerAction } from "zsa";
-import { createAssistant, updateVapiPhoneNumber } from "./vapi";
+import { updateVapiPhoneNumber } from "./vapi";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
@@ -87,7 +88,7 @@ export const signupAction = createServerAction()
       where: eq(subscription.plan, "basic"),
     });
 
-    if (!basicSubscription) {
+    if (!basicSubscription?.priceId) {
       throw new ZSAError("NOT_FOUND", "Subscription not found");
     }
     const findVoice = await getVoice(voice);
@@ -95,32 +96,32 @@ export const signupAction = createServerAction()
       throw new ZSAError("NOT_FOUND", "Selected voice not available");
     }
 
-    const payload = {
-      ...assistantConfig,
+    const client = new VapiClient({ token: env.VAPI_API_KEY });
+
+    const newAssistant = await client.assistants.create({
       model: {
-        ...assistantConfig.model,
         messages: [
           {
             role: "system",
-            content: categoryResult?.systemPrompt,
+            content: categoryResult?.systemPrompt as string,
           },
         ],
+        model: "gpt-4",
+        provider: "openai",
       },
       name: agentName,
       voice: {
-        ...assistantConfig.voice,
-        provider: findVoice.provider,
+        provider: "11labs",
         voiceId: findVoice?.createdVoiceId,
       },
-      firstMessage: `Hello, Thank you for calling ${businessName}. My name is Adora How may I help you today?`,
-    };
-
-    const response = await createAssistant(payload);
+      firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
+    });
 
     updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-      assistantId: response.id,
+      assistantId: newAssistant?.id,
     });
     let token = "";
+
     await createTransaction(async trx => {
       const [newUser] = await createUser(
         {
@@ -130,7 +131,7 @@ export const signupAction = createServerAction()
       );
       const [newAgent] = await createAgent(
         {
-          assistantId: response.id,
+          assistantId: newAssistant.id,
           name: agentName,
           phoneNumberId: phone,
           voiceId: findVoice.id,
@@ -158,6 +159,7 @@ export const signupAction = createServerAction()
           agentId: newAgent.agentId,
           subscriptionStartDate: formatDateToCustomFormat(new Date()),
           subscriptionEndDate: formatDateToCustomFormat(subscriptionEndDate),
+          isFreeTrial: true,
         },
         trx,
       );

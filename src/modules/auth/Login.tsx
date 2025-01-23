@@ -31,7 +31,7 @@ export function Login() {
     resolver: zodResolver(authSchema),
   });
 
-  const { queryParams, createQueryStrings } = useQueryParams();
+  const { queryParams } = useQueryParams();
   const from = queryParams.get("from");
 
   // const [isPending, startTransition] = useTransition();
@@ -41,11 +41,7 @@ export function Login() {
     onSuccess: () => {
       if (from) {
         const redirectUrl = decodeURIComponent(from);
-        router.push(
-          `${redirectUrl}?${createQueryStrings({
-            prefilled_email: form.getValues("email"),
-          })}`,
-        );
+        router.push(redirectUrl);
         return;
       }
       router.push("/home");

@@ -1,5 +1,11 @@
 import { createId } from "@paralleldrive/cuid2";
-import { integer, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 import { lifecycleDates, pgTable } from "../utils";
 import { agent } from "./agent";
 import { subscription } from "./subscription";
@@ -32,6 +38,7 @@ export const business = pgTable("business", {
   agentId: text("agent_id")
     .notNull()
     .references(() => agent.id, { onDelete: "cascade" }),
+  isFreeTrial: boolean("is_free_trial").default(true),
   ...lifecycleDates,
 });
 

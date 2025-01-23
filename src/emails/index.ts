@@ -25,7 +25,7 @@ export async function sendVerificationEmail({
   token: string;
   name: string;
 }) {
-  const signUpHTML = render(SignUp({ token, name }));
+  const signUpHTML = render(SignUp({ token, name, email: to }));
 
   const mailOptions = {
     from: process.env.SMTP_FROM_EMAIL,

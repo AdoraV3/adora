@@ -53,16 +53,20 @@ export function SubscriptionModal() {
           <DialogTitle className="text-black-100 font-semibold font-lg">
             Upgrade Plan
           </DialogTitle>
+
           <DialogDescription className="font-normal pt-3 text-gray-750 text-sm font-satoshi">
-            It looks like you&apos;ve reached the limit of your current plan! To
-            continue enjoying Adora&apos;s full features, please upgrade or
-            renew your plan.
+            Your Free Trial as expired. To continue to use Adora, Please select
+            a subscription plan.
           </DialogDescription>
         </DialogHeader>
 
+        <p className="font-normal pt-3 text-gray-750 text-sm font-satoshi">
+          Access to the app will resume after selecting a plan
+        </p>
+
         <DialogFooter className="flex flex-end items-center mt-5 gap-3">
           <Button size="sm" onClick={handlePlanUpgrade}>
-            Upgrade Plan
+            Select Plan
           </Button>
         </DialogFooter>
       </DialogContent>

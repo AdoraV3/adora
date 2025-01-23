@@ -1,254 +1,114 @@
-/* eslint-disable no-param-reassign */
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
+"use client";
+
 import { cn } from "@/lib/utils";
-import parsePhoneNumberFromString, {
-  AsYouType,
-  type CarrierCode,
-  type CountryCallingCode,
-  type CountryCode,
-  type E164Number,
-  type NationalNumber,
-  type NumberType,
-} from "libphonenumber-js";
-import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-import * as RPNInput from "react-phone-number-input";
+import { ChevronDown, Phone } from "lucide-react";
+import React, { forwardRef, useId } from "react";
+import RPNInput, {
+  Country,
+  FlagProps,
+  getCountryCallingCode,
+} from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
-import { countries } from "./countries";
-import { useStateHistory } from "./use-state-history";
 
-export type Country = (typeof countries)[number];
+const PhoneInput = forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        className={cn(
+          "-ms-px rounded-s-none flex h-12  w-full rounded-md border border-[hsla(0,0%,91%,1)] px-3 py-2 text-base font-normal ring-offset-background  file:font-medium placeholder:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-background  shadow-none focus-visible:z-10",
+          className,
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
 
-export type PhoneData = {
-  phoneNumber?: E164Number;
-  countryCode?: CountryCode;
-  countryCallingCode?: CountryCallingCode;
-  carrierCode?: CarrierCode;
-  nationalNumber?: NationalNumber;
-  internationalNumber?: string;
-  possibleCountries?: string;
-  isValid?: boolean;
-  isPossible?: boolean;
-  uri?: string;
-  type?: NumberType;
+PhoneInput.displayName = "PhoneInput";
+
+type CountrySelectProps = {
+  disabled?: boolean;
+  value: Country;
+  onChange: (value: Country) => void;
+  options: { label: string; value: Country | undefined }[];
 };
 
-interface PhoneInputProps extends React.ComponentPropsWithoutRef<"input"> {
-  value?: string;
-  defaultCountry?: CountryCode;
-  inputClassName?: string;
-}
-
-export function getPhoneData(phone: string): PhoneData {
-  const asYouType = new AsYouType();
-  asYouType.input(phone);
-  const number = asYouType.getNumber();
-  return {
-    phoneNumber: number?.number,
-    countryCode: number?.country,
-    countryCallingCode: number?.countryCallingCode,
-    carrierCode: number?.carrierCode,
-    nationalNumber: number?.nationalNumber,
-    internationalNumber: number?.formatInternational(),
-    possibleCountries: number?.getPossibleCountries().join(", "),
-    isValid: number?.isValid(),
-    isPossible: number?.isPossible(),
-    uri: number?.getURI(),
-    type: number?.getType(),
-  };
-}
-
-export function PhoneInput({
-  value: valueProp,
-  defaultCountry = "US",
-  className,
-  inputClassName,
-  id,
-  required = true,
-  ...rest
-}: PhoneInputProps) {
-  const asYouType = new AsYouType();
-
-  const inputRef = React.useRef<HTMLInputElement>(null);
-
-  const [value, handlers, history] = useStateHistory(valueProp);
-
-  if (value && value.length > 0) {
-    defaultCountry =
-      parsePhoneNumberFromString(value)?.getPossibleCountries()[0] ||
-      defaultCountry;
-  }
-
-  const [openCommand, setOpenCommand] = React.useState(false);
-  const [countryCode, setCountryCode] =
-    React.useState<CountryCode>(defaultCountry);
-
-  const selectedCountry = countries.find(
-    country => country.iso2 === countryCode,
-  );
-
-  const initializeDefaultValue = () => {
-    if (value) {
-      return value;
-    }
-
-    return `+${selectedCountry?.phone_code}`;
-  };
-
-  const handleOnInput = (event: React.FormEvent<HTMLInputElement>) => {
-    asYouType.reset();
-
-    let { value: data } = event.currentTarget;
-    if (!data.startsWith("+")) {
-      data = `+${data}`;
-    }
-
-    const formattedValue = asYouType.input(data);
-    const number = asYouType.getNumber();
-    setCountryCode(number?.country || defaultCountry);
-    event.currentTarget.value = formattedValue;
-    handlers.set(formattedValue);
-  };
-
-  const handleOnPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    asYouType.reset();
-
-    const { clipboardData } = event;
-
-    if (clipboardData) {
-      const pastedData = clipboardData.getData("text/plain");
-      const formattedValue = asYouType.input(pastedData);
-      const number = asYouType.getNumber();
-      setCountryCode(number?.country || defaultCountry);
-      event.currentTarget.value = formattedValue;
-      handlers.set(formattedValue);
-    }
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if ((event.metaKey || event.ctrlKey) && event.key === "z") {
-      handlers.back();
-      if (
-        inputRef.current &&
-        history.current > 0 &&
-        history.history[history.current - 1] !== undefined
-      ) {
-        event.preventDefault();
-        inputRef.current.value = history.history[history.current - 1] || "";
-      }
-    }
-  };
-
-  function FlagComponent({ country, countryName }: RPNInput.FlagProps) {
-    const Flag = flags[country];
-
-    return (
-      <span className="flex h-4 w-6  overflow-hidden rounded-sm bg-foreground/20">
-        {Flag && <Flag title={countryName} />}
-      </span>
-    );
-  }
-  FlagComponent.displayName = "FlagComponent";
+function FlagComponent({ country, countryName }: FlagProps) {
+  const Flag = flags[country];
 
   return (
-    <div className={cn("flex gap-2", className)}>
-      <Popover open={openCommand} onOpenChange={setOpenCommand} modal>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={openCommand}
-            className="w-max items-center border-[hsla(0,0%,91%,1)] justify-between whitespace-nowrap"
-          >
-            {selectedCountry?.name ? (
-              <span className="relative top-0.5">{selectedCountry.emoji}</span>
-            ) : (
-              "Select country"
-            )}
-            <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0 w-max" align="start">
-          <Command>
-            <CommandInput placeholder="Search country..." />
-            <CommandList>
-              <CommandEmpty>No country found.</CommandEmpty>
-              <ScrollArea className="[&>[data-radix-scroll-area-viewport]]:max-h-[300px]">
-                <CommandGroup>
-                  {countries.map(country => {
-                    return (
-                      <CommandItem
-                        key={country.iso3}
-                        value={`${country.name} (+${country.phone_code})`}
-                        onSelect={() => {
-                          if (inputRef.current) {
-                            inputRef.current.value = `+${country.phone_code}`;
-                            handlers.set(`+${country.phone_code}`);
-                            inputRef.current.focus();
-                          }
-                          setCountryCode(country.iso2 as CountryCode);
-                          setOpenCommand(false);
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 size-4",
-                            countryCode === country.iso2
-                              ? "opacity-100"
-                              : "opacity-0",
-                          )}
-                        />
+    <span className="w-5 overflow-hidden rounded-sm">
+      {Flag ? (
+        <Flag title={countryName} />
+      ) : (
+        <Phone size={16} aria-hidden="true" />
+      )}
+    </span>
+  );
+}
 
-                        <FlagComponent
-                          country={country.name as CountryCode}
-                          countryName={country.name}
-                        />
+function CountrySelect({
+  disabled,
+  value,
+  onChange,
+  options,
+}: CountrySelectProps) {
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(event.target.value as Country);
+  };
 
-                        {country.name}
-                        <span className="text-gray-11 ml-1">
-                          (+{country.phone_code})
-                        </span>
-                      </CommandItem>
-                    );
-                  })}
-                </CommandGroup>
-              </ScrollArea>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-      <Input
-        ref={inputRef}
-        type="text"
-        pattern="^(\+)?[0-9\s]*$"
-        name="phone"
-        id={id}
-        placeholder="Phone"
-        defaultValue={initializeDefaultValue()}
-        onInput={handleOnInput}
-        onPaste={handleOnPaste}
-        onKeyDown={handleKeyDown}
-        required={required}
-        aria-required={required}
-        className={className}
-        {...rest}
-      />
+  return (
+    <div className="relative inline-flex items-center self-stretch rounded-s-lg border border-input bg-background py-2 pe-2 ps-3 text-muted-foreground transition-shadow focus-within:z-10 focus-within:border-ring focus-within:outline-none focus-within:ring-[3px] focus-within:ring-ring/20 hover:bg-accent hover:text-foreground has-[:disabled]:pointer-events-none has-[:disabled]:opacity-50">
+      <div className="inline-flex items-center gap-1" aria-hidden="true">
+        <FlagComponent country={value} countryName={value} aria-hidden="true" />
+        <span className="text-muted-foreground/80">
+          <ChevronDown size={16} strokeWidth={2} aria-hidden="true" />
+        </span>
+      </div>
+      <select
+        disabled={disabled}
+        value={value}
+        onChange={handleSelect}
+        className="absolute inset-0 text-sm opacity-0"
+        aria-label="Select country"
+      >
+        <option key="default" value="">
+          Select a country
+        </option>
+        {options
+          .filter(x => x.value)
+          .map((option, i) => (
+            <option key={option.value ?? `empty-${i}`} value={option.value}>
+              {option.label}{" "}
+              {option.value && `+${getCountryCallingCode(option.value)}`}
+            </option>
+          ))}
+      </select>
     </div>
+  );
+}
+
+type PhoneNumberInputProps = React.ComponentProps<typeof RPNInput>;
+
+export function PhoneNumberInput({
+  className,
+  ...props
+}: PhoneNumberInputProps) {
+  const id = useId();
+
+  return (
+    <RPNInput
+      className={cn(
+        " border border-input rounded-md flex bg-gray-650",
+        className,
+      )}
+      id={`phone-input-${id}`}
+      international
+      flagComponent={FlagComponent}
+      countrySelectComponent={CountrySelect}
+      inputComponent={PhoneInput}
+      {...props}
+    />
   );
 }

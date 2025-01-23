@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 // }
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
-    <div className="m-auto flex sm:max-w-[25rem] flex-1 flex-col gap-5">
+    <main className="mx-auto flex sm:max-w-[25rem] flex-1 justify-center items-center flex-col gap-5">
       <Image
         src="/images/adora.png"
         className="mx-auto mt-4 h-auto w-14"
@@ -16,6 +16,6 @@ export default function AuthLayout({ children }: PropsWithChildren) {
       />
 
       {children}
-    </div>
+    </main>
   );
 }

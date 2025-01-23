@@ -35,7 +35,6 @@ export const getSubscriptionsAction = createServerAction().handler(async () => {
 
 export const checkoutAction = withBusiness(async (formData, business) => {
   const priceId = formData.get("priceId") as string;
-
   if (!priceId) return;
   await createStripeCheckoutSession({ business, priceId });
 });

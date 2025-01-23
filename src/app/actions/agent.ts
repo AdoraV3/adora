@@ -8,7 +8,9 @@ import { db } from "@/db";
 import { agent } from "@/db/schema";
 import { authenticationProcedure } from "@/lib/procedures";
 import { agentDetailsSchema } from "@/modules/home/account-settings/schema";
+import { VapiClient } from "@vapi-ai/server-sdk";
 import { eq } from "drizzle-orm";
+import { env } from "env.mjs";
 import { z } from "zod";
 import { ZSAError } from "zsa";
 // import { updateAssistant } from "./vapi";
@@ -122,4 +124,10 @@ export const updateAssistantAction = authenticationProcedure
         voiceId: voice,
       })
       .where(eq(agent.id, business.agentId));
+
+    const client = new VapiClient({ token: env.VAPI_API_KEY });
+    await client.assistants.update(findAgent.assistantId, {
+      name,
+      firstMessage: `Hello, Thank you for calling ${business?.name}. My name is ${name} How may I help you today?`,
+    });
   });

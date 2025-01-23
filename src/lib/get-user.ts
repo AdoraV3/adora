@@ -60,7 +60,7 @@ export function withBusiness<T>(action: ActionWithTeamFunction<T>) {
   return async (formData: FormData): Promise<T> => {
     const currentUser = await getUser();
     if (!currentUser) {
-      redirect("/login");
+      redirect("/login?from=/pricing");
     }
     const business = await getBusiness(currentUser.id);
     if (!business) {

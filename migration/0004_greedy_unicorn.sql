@@ -1,0 +1,1 @@
+ALTER TABLE "adora_business" ADD COLUMN "is_free_trial" boolean DEFAULT false;

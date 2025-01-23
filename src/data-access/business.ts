@@ -9,7 +9,7 @@ export async function createBusiness(data: NewBusiness, trx = db) {
       ...data,
     })
     .onConflictDoNothing()
-    .returning({ businessId: business.userId });
+    .returning();
 }
 
 export async function updateBusiness(
