@@ -1,9 +1,7 @@
 "use server";
 
 import { getSubscription, getSubscriptions } from "@/data-access/subscription";
-import { withBusiness } from "@/lib/get-user";
 import { authenticationProcedure } from "@/lib/procedures";
-import { createStripeCheckoutSession } from "@/lib/stripe";
 import { z } from "zod";
 import { createServerAction } from "zsa";
 
@@ -31,10 +29,4 @@ export const getSubscriptionAction = authenticationProcedure
 export const getSubscriptionsAction = createServerAction().handler(async () => {
   const subscriptions = await getSubscriptions();
   return { success: true, subscriptions };
-});
-
-export const checkoutAction = withBusiness(async (formData, business) => {
-  const priceId = formData.get("priceId") as string;
-  if (!priceId) return;
-  await createStripeCheckoutSession({ business, priceId });
 });

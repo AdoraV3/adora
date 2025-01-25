@@ -3,11 +3,11 @@ import {
   REQUIRED_FIELD,
   phoneRegExp,
 } from "@/modules/commons/utils/constant";
+import { businessRegistrationSchema } from "@/validations/business";
 import z from "zod";
 
-export const profileSchema = z.object({
+export const profileSchema = businessRegistrationSchema.extend({
   name: z.string().min(1, REQUIRED_FIELD).max(50),
-  // lastName: z.string().min(1, INVALID_LAST_NAME).max(50),
   businessName: z.string().min(1, REQUIRED_FIELD).max(50),
   country: z.string().min(1, REQUIRED_FIELD).max(50),
   businessCountry: z.string().min(1, REQUIRED_FIELD).max(50),

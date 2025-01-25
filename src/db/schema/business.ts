@@ -40,6 +40,7 @@ export const business = pgTable("business", {
     .references(() => agent.id, { onDelete: "cascade" }),
   isFreeTrial: boolean("is_free_trial").default(true),
   ...lifecycleDates,
+  isProfileCompleted: boolean("is_profile_completed").default(false),
 });
 
 export type Business = typeof business.$inferSelect;

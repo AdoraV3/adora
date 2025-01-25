@@ -51,27 +51,12 @@ export const registerSchema = z
     email: authSchema.shape.email,
     password: authSchema.shape.password,
     confirmPassword: authSchema.shape.password,
-    businessName: z
-      .string()
-      .min(3, {
-        message: "Business name must be at least 3 characters long",
-      })
-      .max(100),
-    category: z.string(),
     name: z
       .string()
       .min(3, {
         message: "Full name must be at least 3 characters long",
       })
       .max(100),
-    agentName: z
-      .string()
-      .min(3, {
-        message: "Agent name must be at least 3 characters long",
-      })
-      .max(100),
-    voice: z.string(),
-    phone: z.string(),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: "Passwords do not match",

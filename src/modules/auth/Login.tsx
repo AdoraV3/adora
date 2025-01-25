@@ -1,6 +1,7 @@
 "use client";
 
-import { loginInAction } from "@/app/actions/auth";
+import { getGoogleOauthConsentUrl, loginInAction } from "@/app/actions/auth";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,6 +15,7 @@ import { AuthSchemaType, authSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
@@ -34,7 +36,7 @@ export function Login() {
   const { queryParams } = useQueryParams();
   const from = queryParams.get("from");
 
-  // const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
   const loginHandler = useServerActionMutation(loginInAction, {
@@ -56,14 +58,14 @@ export function Login() {
     loginHandler.mutate(data);
   };
 
-  // const handleGoogleSignIn = () => {
-  //   startTransition(async () => {
-  //     const res = await getGoogleOauthConsentUrl();
-  //     if (res.url) {
-  //       window.location.href = res.url;
-  //     }
-  //   });
-  // };
+  const handleGoogleSignIn = () => {
+    startTransition(async () => {
+      const res = await getGoogleOauthConsentUrl();
+      if (res.url) {
+        window.location.href = res.url;
+      }
+    });
+  };
 
   return (
     <Shell as="main" className="flex w-full flex-col flex-1">
@@ -141,7 +143,7 @@ export function Login() {
             </span>{" "}
           </p>
         </div>
-        {/* <div className="relative my-3">
+        <div className="relative my-3">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-400" />
           </div>
@@ -150,8 +152,8 @@ export function Login() {
               or
             </span>
           </div>
-        </div> */}
-        {/* <div className="flex flex-col gap-2">
+        </div>
+        <div className="flex flex-col gap-2">
           <Button
             onClick={handleGoogleSignIn}
             className="text-gray-2 font-medium text-lg "
@@ -161,8 +163,7 @@ export function Login() {
           >
             Continue with Google{" "}
           </Button>
-
-        </div> */}
+        </div>
 
         <div className=" divide-x  mt-6 divide-primary text-center">
           <Link

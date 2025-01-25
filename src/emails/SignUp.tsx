@@ -30,7 +30,7 @@ export function SignUp({
   name: string;
   email: string;
 }) {
-  const activationUrl = `${baseUrl}/auth/verify-email?otp=${token}&email=${email}`;
+  const activationUrl = `${baseUrl}/verify-email?otp=${token}&email=${email}`;
 
   return (
     <Html>
@@ -51,7 +51,7 @@ export function SignUp({
       //   },
       // }}
       >
-        <Body className="bg-[#FBF4EE] w-full">
+        <Body className="bg-[#FBF4EE] rounded-2xl w-full">
           <Container className="m-10">
             <Container className="flex flex-col gap-3">
               <Img

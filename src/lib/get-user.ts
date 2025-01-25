@@ -1,9 +1,7 @@
-import { getBusiness } from "@/data-access";
 import { db } from "@/db";
-import { Business, user as userTable } from "@/db/schema";
+import { user as userTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { cache } from "react";
 import { lucia } from "./auth";
 
@@ -50,23 +48,3 @@ export const getCurrentUser = cache(async () => {
   }
   return session?.id;
 });
-
-type ActionWithTeamFunction<T> = (
-  formData: FormData,
-  businessData: Business,
-) => Promise<T>;
-
-export function withBusiness<T>(action: ActionWithTeamFunction<T>) {
-  return async (formData: FormData): Promise<T> => {
-    const currentUser = await getUser();
-    if (!currentUser) {
-      redirect("/login?from=/pricing");
-    }
-    const business = await getBusiness(currentUser.id);
-    if (!business) {
-      throw new Error("Business not found");
-    }
-
-    return action(formData, business);
-  };
-}

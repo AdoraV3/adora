@@ -1,6 +1,7 @@
 "use client";
 
-import { signupAction } from "@/app/actions/auth";
+import { getGoogleOauthConsentUrl, signupAction } from "@/app/actions/auth";
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,6 +15,7 @@ import { RegisterSchemaType, registerSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
@@ -44,6 +46,17 @@ export function Register() {
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = data => {
     signUpHandler.mutate(data);
+  };
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleGoogleSignIn = () => {
+    startTransition(async () => {
+      const res = await getGoogleOauthConsentUrl();
+      if (res.url) {
+        window.location.href = res.url;
+      }
+    });
   };
 
   return (
@@ -82,7 +95,7 @@ export function Register() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="businessName"
               render={({ field }) => (
@@ -96,7 +109,7 @@ export function Register() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             {/* <FormField
               control={form.control}
               name="category"
@@ -312,13 +325,13 @@ export function Register() {
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-400" />
           </div>
-          {/* <div className="relative flex justify-center font-satoshi  font-normal ">
+          <div className="relative flex justify-center font-satoshi  font-normal ">
             <span className="bg-white-100 px-2 font-satoshi text-sm font-normal uppercase text-muted-foreground">
               or
             </span>
-          </div> */}
+          </div>
         </div>
-        {/* <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           <Button
             className="text-lg font-medium text-gray-2 "
             variant="outline"
@@ -328,8 +341,7 @@ export function Register() {
           >
             Continue with Google{" "}
           </Button>
-
-        </div> */}
+        </div>
 
         <div className=" mt-6  divide-x divide-primary text-center">
           <Link

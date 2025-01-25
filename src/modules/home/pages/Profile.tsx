@@ -4,9 +4,12 @@ import { getUserAction } from "@/app/actions/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { getInitials } from "@/modules/commons/utils/helpers";
+import { BusinessSetupModal } from "@/modules/dashboard/components/BusinessSetUpModal";
+import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { Edit } from "../components/profile/Edit";
 
 export function Profile() {
+  const disclosure = useDisclosure();
   const { data: queryData } = useServerActionQuery(getUserAction, {
     input: undefined,
     queryKey: ["getUser"],
@@ -33,6 +36,8 @@ export function Profile() {
       </div>
 
       <Edit />
+
+      <BusinessSetupModal {...disclosure} />
     </div>
   );
 }

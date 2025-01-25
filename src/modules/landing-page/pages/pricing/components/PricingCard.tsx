@@ -1,9 +1,9 @@
-import { checkoutAction } from "@/app/actions";
 import BlurIn from "@/components/animations/blur-in";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { checkoutAction } from "@/lib/checkout";
 import { cn } from "@/lib/utils";
 import { FeatureItem } from "./FeatureItem";
 
@@ -34,14 +34,14 @@ export function PricingCard({
     >
       <CardContent>
         {isPopular && (
-          <div className="mb-5 justify-end flex  ">
+          <div className="flex justify-end mb-5 ">
             <Badge className="bg-[hsla(25,64%,12%,1)] px-6 rounded-full uppercase text-primary">
               Most Popular
             </Badge>
           </div>
         )}
 
-        <p className="font-satoshi mt-10 font-bold text-3xl">
+        <p className="mt-10 text-3xl font-bold font-satoshi">
           {price}
           <span className="text-base font-normal">
             /{isYearly ? "Yearly" : "Monthly"}{" "}
@@ -49,7 +49,7 @@ export function PricingCard({
         </p>
         <BlurIn
           word={`${plan} Plan`}
-          className="my-5 capitalize font-medium text-3xl"
+          className="my-5 text-3xl font-medium capitalize"
         />
 
         <div className="mb-4 space-y-5">
@@ -59,7 +59,7 @@ export function PricingCard({
           ))}
         </div>
 
-        <div className="flex mt-10 justify-center">
+        <div className="flex justify-center mt-10">
           <form action={checkoutAction}>
             <Input type="hidden" name="priceId" value={priceId} />
             <Button

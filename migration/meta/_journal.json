@@ -36,6 +36,13 @@
       "when": 1737134712613,
       "tag": "0004_greedy_unicorn",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1737754522320,
+      "tag": "0005_complete_katie_power",
+      "breakpoints": true
     }
   ]
 }

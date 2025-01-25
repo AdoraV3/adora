@@ -2,7 +2,6 @@
 
 import {
   createAccount,
-  createBusiness,
   createProfile,
   createUser,
   createVerifyEmailToken,
@@ -11,16 +10,8 @@ import {
 } from "@/data-access";
 
 import { getAccount } from "@/data-access/account";
-import { createAgent } from "@/data-access/agents";
-import { updatePhoneNumber } from "@/data-access/availablePhoneNumber";
-import { getVoice } from "@/data-access/voices";
 import { db } from "@/db";
-import {
-  availablePhoneNumber,
-  subscription,
-  systemPrompt as systemPromptTable,
-  user as userTable,
-} from "@/db/schema";
+import { user as userTable } from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
 import { createTransaction } from "@/lib/create-transaction";
@@ -30,136 +21,35 @@ import {
   RateLimitConfig,
   RateLimiterUtility,
 } from "@/modules/commons/utils/RateLimiterUtility";
-import { formatDateToCustomFormat } from "@/modules/commons/utils/helpers";
 import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
-import { VapiClient } from "@vapi-ai/server-sdk";
 import { generateCodeVerifier, generateState } from "arctic";
 import { and, eq } from "drizzle-orm";
-import { env } from "env.mjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Argon2id } from "oslo/password";
 import { ZSAError, createServerAction } from "zsa";
-import { updateVapiPhoneNumber } from "./vapi";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
   .handler(async ({ input }) => {
-    const {
-      password,
-      email,
-      name,
-      businessName,
-      category,
-      voice,
-      phone,
-      agentName,
-    } = input;
+    const { password, email, name } = input;
 
     await RateLimiterUtility.limit(RateLimitConfig.SIGNUP);
 
     const passwordHash = await new Argon2id().hash(password);
 
-    const result = await db.query.user.findFirst({
+    const user = await db.query.user.findFirst({
       where: eq(userTable.email, email),
     });
 
-    const categoryResult = await db.query.systemPrompt.findFirst({
-      where: eq(systemPromptTable.id, category),
-    });
-
-    if (result) {
+    if (user) {
       throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
     }
 
-    const isPhoneNumberAvailable =
-      await db.query.availablePhoneNumber.findFirst({
-        where: and(
-          eq(availablePhoneNumber.id, phone),
-          eq(availablePhoneNumber.isAssigned, false),
-        ),
-      });
-
-    if (!isPhoneNumberAvailable) {
-      throw new ZSAError("NOT_AUTHORIZED", "Phone number not available");
-    }
-
-    const basicSubscription = await db.query.subscription.findFirst({
-      where: eq(subscription.plan, "basic"),
-    });
-
-    if (!basicSubscription?.priceId) {
-      throw new ZSAError("NOT_FOUND", "Subscription not found");
-    }
-    const findVoice = await getVoice(voice);
-    if (!findVoice) {
-      throw new ZSAError("NOT_FOUND", "Selected voice not available");
-    }
-
-    const client = new VapiClient({ token: env.VAPI_API_KEY });
-
-    const newAssistant = await client.assistants.create({
-      model: {
-        messages: [
-          {
-            role: "system",
-            content: categoryResult?.systemPrompt as string,
-          },
-        ],
-        model: "gpt-4",
-        provider: "openai",
-      },
-      name: agentName,
-      voice: {
-        provider: "11labs",
-        voiceId: findVoice?.createdVoiceId,
-      },
-      firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
-    });
-
-    updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-      assistantId: newAssistant?.id,
-    });
-    let token = "";
-
-    await createTransaction(async trx => {
+    createTransaction(async trx => {
       const [newUser] = await createUser(
         {
           email,
-        },
-        trx,
-      );
-      const [newAgent] = await createAgent(
-        {
-          assistantId: newAssistant.id,
-          name: agentName,
-          phoneNumberId: phone,
-          voiceId: findVoice.id,
-          provider: findVoice.provider,
-          categoryId: category,
-        },
-        trx,
-      );
-
-      await updatePhoneNumber(
-        phone,
-        { isAssigned: true, dateAssigned: new Date()?.toISOString() },
-        trx,
-      );
-
-      const endDate = new Date();
-      const subscriptionEndDate = new Date(endDate);
-      subscriptionEndDate.setDate(endDate.getDate() + 3);
-
-      await createBusiness(
-        {
-          name: businessName,
-          userId: newUser.userId,
-          subscriptionId: basicSubscription?.id,
-          agentId: newAgent.agentId,
-          subscriptionStartDate: formatDateToCustomFormat(new Date()),
-          subscriptionEndDate: formatDateToCustomFormat(subscriptionEndDate),
-          isFreeTrial: true,
         },
         trx,
       );
@@ -181,16 +71,15 @@ export const signupAction = createServerAction()
         trx,
       );
 
-      token = await createVerifyEmailToken(newUser.userId, trx);
-    });
+      const token = await createVerifyEmailToken(newUser.userId, trx);
 
-    await sendVerificationEmail({
-      token,
-      to: "stemitope370@gmail.com",
-      // to: email,
-      name,
+      await sendVerificationEmail({
+        token,
+        to: "stemitope370@gmail.com",
+        // to: email,
+        name,
+      });
     });
-
     return { success: true };
   });
 
@@ -213,7 +102,7 @@ export const loginInAction = createServerAction()
 
     const account = await getAccount(user?.id);
 
-    if (!account || !account?.password) {
+    if (!account?.password) {
       throw new ZSAError("NOT_AUTHORIZED", "Invalid email or password");
     }
 

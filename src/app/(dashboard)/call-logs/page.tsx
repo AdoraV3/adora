@@ -1,10 +1,7 @@
+import { withAuth } from "@/lib/withAuth";
 import { CallLogs } from "@/modules/call-logs/pages/CallLogs";
-import { Suspense } from "react";
 
-export default function page() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <CallLogs />
-    </Suspense>
-  );
+export default async function page() {
+  const AuthenticatedPage = await withAuth(CallLogs);
+  return <AuthenticatedPage />;
 }
