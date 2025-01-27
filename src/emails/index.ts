@@ -73,8 +73,8 @@ export async function sendContactUsEmail({
     ContactUs({ message, name, phone, email, businessName }),
   );
   const mailOptions = {
-    to: "stemitope370@gmail.com",
-    from: process.env.SMTP_FROM_EMAIL,
+    from: email,
+    to: process.env.SMTP_FROM_EMAIL,
     subject: `Message from ${name}`,
     html: contactUsHTML,
   };

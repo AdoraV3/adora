@@ -75,8 +75,7 @@ export const signupAction = createServerAction()
 
       await sendVerificationEmail({
         token,
-        to: "stemitope370@gmail.com",
-        // to: email,
+        to: email,
         name,
       });
     });

@@ -53,7 +53,7 @@ export async function resetPasswordAction(email: string) {
 
   await sendResetPasswordEmail({
     token,
-    to: "stemitope370@gmail.com",
+    to: email,
     name: profile?.name,
   });
   return { success: true };
