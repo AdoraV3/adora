@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Exclude public routes
 const publicRoutes = [
+  "/",
   "/login",
   "/register",
   "/forgot-password",
