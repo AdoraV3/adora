@@ -50,7 +50,7 @@ export function Specialization() {
         />
 
         <p className="max-w-sm font-satoshi text-gray-2 text-lg font-normal">
-          Adora Specializes in some areas
+          Adora specializes in some areas
         </p>
       </div>
       <div className="flex flex-col md:flex-row md:justify-between">
@@ -58,12 +58,12 @@ export function Specialization() {
           return (
             <div
               key={data?.title}
-              className="md:w-[49%] mt-4 px-4 pt-4 min-h-[260px] md:min-h-[190px] bg-white hover:bg-[#321B0B] border border-[#D9D9D9] hover:border-[#975221] rounded-lg hover:text-[#F2F2F7]"
+              className="md:w-[49%] mt-4 px-4 pt-4 min-h-[260px] md:min-h-[190px] bg-white hover:bg-[#321B0B] border border-[#D9D9D9] hover:border-[#975221] rounded-lg hover:text-[#ffffff]"
             >
-              <h2 className="font-semibold text-xl mb-2 font-coreC text-black hover:text-white">
+              <h2 className="font-semibold text-xl mb-2 font-coreC text-black">
                 {data?.title}
               </h2>
-              <p className="font-satoshi text-gray-2">{data?.text}</p>
+              <p className="font-satoshi text-black">{data?.text}</p>
             </div>
           );
         })}
@@ -75,10 +75,10 @@ export function Specialization() {
               key={data?.title}
               className="md:w-[32%] mt-4 px-4 pt-4 min-h-[220px] md:min-h-[190px] bg-white hover:bg-[#321B0B] border border-[#D9D9D9] hover:border-[#975221] rounded-lg hover:text-[#F2F2F7]"
             >
-              <h2 className="font-semibold text-xl mb-2 font-coreC text-black hover:text-white">
+              <h2 className="font-semibold text-xl mb-2 font-coreC text-black">
                 {data?.title}
               </h2>
-              <p className="font-satoshi text-gray-2">{data?.text}</p>
+              <p className="font-satoshi text-black">{data?.text}</p>
             </div>
           );
         })}
@@ -90,10 +90,10 @@ export function Specialization() {
               key={data?.title}
               className="md:w-[49%] mt-4 px-4 pt-4 min-h-[220px] md:min-h-[190px] bg-white hover:bg-[#321B0B] border border-[#D9D9D9] hover:border-[#975221] rounded-lg hover:text-[#F2F2F7]"
             >
-              <h2 className="font-semibold text-xl mb-2 font-coreC text-black hover:text-white">
+              <h2 className="font-semibold text-xl mb-2 font-coreC text-black">
                 {data?.title}
               </h2>
-              <p className="font-satoshi text-gray-2">{data?.text}</p>
+              <p className="font-satoshi text-black">{data?.text}</p>
             </div>
           );
         })}
