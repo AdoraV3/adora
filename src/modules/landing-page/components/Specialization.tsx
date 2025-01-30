@@ -33,14 +33,14 @@ export function Specialization() {
       text: "Handles subscription cancellation calls and offering incentives or loyalty rewards and discounts to retain customers considering cancelling a service",
     },
   ];
-  const [active, setactive] = useState(null)
-  const activate = (i:any) => {
-    if (active != i ) {
-      setactive(i)
-    } else {
-      setactive(active)
-    }
-  }
+  // [active, setactive] = useState(null)
+  // const activate = (i:any) => {
+  //   if (active !== i ) {
+  //     setactive(i)
+  //   } else {
+  //     setactive(active)
+  //   }
+  // }
   return (
     <section className=" px-4 py-20 md:px-12">
       <div>

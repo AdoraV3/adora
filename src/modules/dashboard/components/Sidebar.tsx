@@ -23,6 +23,7 @@ import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { BOTTOM_SIDEBAR_ITEM } from "@/mock";
 import Image from "next/image";
 import Link from "next/link";
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen?: boolean;
@@ -34,7 +35,8 @@ export interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
 interface RouteLinkProps {
   title: string;
   routeIcon: keyof typeof Icons;
-
+  classNameID?: string;
+  tooltipID?: string;
   isOpen: boolean;
 }
 
@@ -45,10 +47,10 @@ interface MobileLinkProps extends React.PropsWithChildren {
   //   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function RouteLink({ routeIcon, isOpen, title }: RouteLinkProps) {
+function RouteLink({ routeIcon, isOpen, title, classNameID, tooltipID }: RouteLinkProps) {
   const Icon = Icons[routeIcon ?? "Home"];
   return (
-    <div className="item-center  flex gap-3">
+    <div className={`item-center flex gap-3 ${classNameID}`} data-tooltip-id={tooltipID}>
       <Icon
         // className={cn("text-gray-100", isActive && " text-primary ")}
         size={35}
@@ -207,6 +209,13 @@ export function Sidebar({
                               isOpen={isOpen ?? false}
                               routeIcon={item.icon ?? "Dashboard"}
                               title={item.title}
+                              classNameID={item.title.replace(/\s+/g, "").toLowerCase()}
+                              tooltipID={item.title.replace(/\s+/g, "").toLowerCase()}
+                            />
+                            <ReactTooltip
+                              id={item.title.replace(/\s+/g, "").toLowerCase()}
+                              //anchorSelect={item.title.replace(/\s+/g, "").toLowerCase()}
+                              content="Hello world!"
                             />
                           </AccordionTrigger>
                           <AccordionContent
@@ -232,7 +241,16 @@ export function Sidebar({
                           isOpen={isOpen ?? false}
                           routeIcon={item.icon ?? "Dashboard"}
                           title={item.title}
+                          classNameID={item.title.replace(/\s+/g, "").toLowerCase()}
+                          tooltipID={item.title.replace(/\s+/g, "").toLowerCase()}
                         />
+                        <ReactTooltip
+                          id={item.title.replace(/\s+/g, "").toLowerCase()}
+                          className="max-w-[230px]"
+                          //anchorSelect={item.title.replace(/\s+/g, "").toLowerCase()}
+                          content={item?.tooltip}
+                        />
+                      
                         {/* <p
                         className={cn(
                           "min-h-6 min-w-4 flex items-center justify-center rounded-[6px] bg-[hsla(4,91%,58%,1)] px-3 py-2 font-satoshi text-sm font-medium text-white-100",
@@ -258,7 +276,7 @@ export function Sidebar({
                     <button
                       onClick={() => logOutHandler.mutate(undefined)}
                       type="button"
-                      className="flex  cursor-pointer gap-2 px-4 py-3 hover:bg-[hsla(25,64%,36%,0.25)]"
+                      className="flex  cursor-pointer gap-2 px-4 py-3 hover:bg-[hsla(35,64%,36%,0)]"
                     >
                       <Icon
                         size={35}
@@ -280,7 +298,7 @@ export function Sidebar({
                       className={cn(
                         "my-5 flex items-center gap-2  px-4",
                         isActiveRoute &&
-                          "rounded-[10px]  bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100",
+                          "rounded-[10px] bg-[hsla(210,13%,97%,0.5)] py-3 text-black-100 ",
                       )}
                       href={item.href ?? "/"}
                     >

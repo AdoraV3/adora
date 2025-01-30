@@ -12,11 +12,13 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     title: "Call Logs",
     href: "/call-logs",
     icon: "Call",
+    tooltip: "View detailed records of all inbound and outbound calls handled by your Agent, including timestamps, durations, and caller information for easy tracking and analysis."
   },
   {
     title: "Knowledge Base",
     href: "/knowledge-base",
     icon: "KnowledgeBase",
+    tooltip: "Upload, manage and access a centralized repository of frequently asked questions, company operations information, and customer support scripts to assist in resolving inquiries efficiently."
     // items: [
     //   { title: "View Knowledge Base", href: "/knowledge-base" },
     //   {
@@ -29,13 +31,15 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     title: "Outbound Calls",
     icon: "OutboundCall",
     href: "/outbound-calls",
+    tooltip: "Initiate and monitor outgoing calls directly from the dashboard, with tools to schedule, log, and manage customer interactions in real time."
   },
   // { title: "Payment", href: "/payment", icon: "Wallet" },
-  { title: "CRM Integration", href: "/crm-integration", icon: "Crm" },
+  { title: "CRM Integration", href: "/crm-integration", icon: "Crm", tooltip: "Connect Adora with your Customer Relationship Management (CRM) system to sync customer data, streamline workflows, and improve engagement tracking." },
   {
     title: "Settings",
     href: "/account-settings?tab=accountInfo",
     icon: "Settings",
+    tooltip: "Customize your Adora system preferences, manage user accounts, and configure integrations to optimize the platform for your business needs."
   },
 ];
 

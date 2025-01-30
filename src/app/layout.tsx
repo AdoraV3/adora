@@ -4,6 +4,7 @@ import { Viewport } from "next";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import 'react-tooltip/dist/react-tooltip.css'
 
 const CORE_SANS_C = localFont({
   src: [

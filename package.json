@@ -92,6 +92,7 @@
     "react-multi-carousel": "^2.8.5",
     "react-paginate": "^8.2.0",
     "react-phone-number-input": "^3.4.3",
+    "react-tooltip": "^5.28.0",
     "resend": "^3.4.0",
     "server-only": "^0.0.1",
     "sonner": "^1.4.41",
