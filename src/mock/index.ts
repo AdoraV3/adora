@@ -163,13 +163,13 @@ export const NAVBAR_ITEMS: Array<NavItem> = [
   },
   {
     href: "/about",
-    title: "About Us",
-    label: "About Us",
+    title: "About",
+    label: "About",
   },
   {
     href: "/contact-us",
-    title: "Contact Us",
-    label: "Contact Us",
+    title: "Contact",
+    label: "Contact",
   },
 ];
 

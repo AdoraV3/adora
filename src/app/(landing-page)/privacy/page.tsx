@@ -112,7 +112,7 @@ const page = () => {
     },
     {
       title: "Contact Us",
-      content: ["Email: info@adoratech.ai, ", "Phone: 3065510212"],
+      content: ["Email: info@adoratech.ai, ", "Phone: +1 (306) 551-0212"],
     },
   ];
 

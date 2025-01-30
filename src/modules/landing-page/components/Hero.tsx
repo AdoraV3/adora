@@ -24,10 +24,10 @@ export function Hero() {
 
         {/* Right Section */}
         <div className="flex flex-col items-center space-y-4 md:w-[40%] md:items-start">
-          <p className="max-w-xs text-center text-sm text-gray-700 md:text-left">
-            Enhance Your Service with AI-Powered, Real-Time, Human-Like
-            Conversations. Your Premier Solution for Customer Support & Inbound
-            Call Automation.
+          <p className="max-w-xs text-center text-sm text-[#575757] md:text-left">
+            Enhance your service with AI-powered, real-time, human-like
+            conversations. Your premier solution for customer support & inbound
+            call automation.
           </p>
           <button
             onClick={() => router.push("/register")}

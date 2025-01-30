@@ -65,12 +65,12 @@ function Testimonials() {
       breakpoint: { max: 900, min: 600 },
       items: 2,
     },
-    tablet: {
-      breakpoint: { max: 600, min: 400 },
-      items: 2,
-    },
+    // tablet: {
+    //   breakpoint: { max: 600, min: 400 },
+    //   items: 2,
+    // },
     mobile: {
-      breakpoint: { max: 400, min: 0 },
+      breakpoint: { max: 600, min: 0 },
       items: 1,
     },
   };
@@ -103,7 +103,7 @@ function Testimonials() {
   }
 
   return (
-    <div className="bg-white w-full px-6 pb-[10rem] pt-20 md:px-14 lg:px-24 ">
+    <div className="bg-white w-full px-6 pb-[10rem] pt-20 md:px-14 lg:px-24 overflow-hidden">
       <h6 className="mb-2 font-coreC text-xl font-normal text-black-100 md:text-4xl">
         Testimonials
       </h6>
@@ -129,7 +129,7 @@ function Testimonials() {
                 src={image}
                 height={200}
                 width={200}
-                className="absolute -top-[20%] right-[42%] h-20 w-20 rounded-xl object-cover"
+                className="absolute -top-[20%] right-[38%] md:right-[42%] h-20 w-20 rounded-xl object-cover"
                 alt={image}
               />
               <p className="text-md w-full text-center font-light text-[#050505]">

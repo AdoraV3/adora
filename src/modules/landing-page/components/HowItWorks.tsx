@@ -6,7 +6,7 @@ export function HowItWorks() {
     <section className="grid items-center gap-5 px-4 py-20 md:grid-cols-2 md:px-12">
       <div>
         <BlurIn
-          word=" How it Works"
+          word=" How it works"
           className="pb-2 font-coreC text-4xl text-black-100"
         />
 
@@ -19,20 +19,20 @@ export function HowItWorks() {
       <div>
         <HowItWorksItem
           subTitle="Choose a phone number, voice, language, give it a name to create a custom AI agent that reflects your brand."
-          title="Set Up Your AI Agent"
+          title="Set up your AI agent"
           isActive
         />
         <HowItWorksItem
           subTitle="Add company information and scripts to empower your AI agent with the tools to handle customer inquiries like a pro."
-          title="Upload to Knowledge Base"
+          title="Upload to knowledge base"
         />
         <HowItWorksItem
           subTitle="Make your assigned phone number available to your customers and watch as incoming calls are resolved instantly with speed and efficiency."
-          title="Go Live"
+          title="Go live"
         />
         <HowItWorksItem
           subTitle="Handle over 1 million concurrent calls with our Kubernetes-based infrastructure designed for scalability and high availability."
-          title="Scale with Ease"
+          title="Scale with ease"
         />
       </div>
     </section>
