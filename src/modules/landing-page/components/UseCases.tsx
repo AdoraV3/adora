@@ -8,7 +8,7 @@ export function UseCases() {
       <div className="px-4 md:px-12">
         <BlurIn
           className="text-black-100 text-left font-coreC text-4xl pb-2"
-          word="Uses Cases"
+          word="Use Cases"
         />
         <p className="max-w-md font-satoshi text-gray-2 font-normal text-lg mb-5">
           A glimpse into how Adora streamlines various aspects of customer

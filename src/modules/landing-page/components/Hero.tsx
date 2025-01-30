@@ -8,7 +8,8 @@ import { useVapiCall } from "../hooks/useVapiWebCall";
 export function Hero() {
   const router = useRouter();
 
-  const { isReady, toggleCall } = useVapiCall();
+  const { isReady, toggleCall, isCallActive } = useVapiCall();
+  console.log(isCallActive, 'isCallActive')
   return (
     <section className="relative w-full pt-10">
       <div className="mx-6 flex flex-col justify-between bg-gradient-to-r from-gray-50 to-gray-200 md:mx-8 lg:mx-12 md:flex-row">
