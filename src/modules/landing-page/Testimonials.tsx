@@ -65,12 +65,12 @@ function Testimonials() {
       breakpoint: { max: 900, min: 600 },
       items: 2,
     },
-    // tablet: {
-    //   breakpoint: { max: 600, min: 400 },
-    //   items: 2,
-    // },
+    tablet: {
+      breakpoint: { max: 600, min: 550 },
+      items: 2,
+    },
     mobile: {
-      breakpoint: { max: 600, min: 0 },
+      breakpoint: { max: 550, min: 0 },
       items: 1,
     },
   };
@@ -123,7 +123,7 @@ function Testimonials() {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              className="w-[270px] xs:w-[250px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[400px] md:px-4 lg:w-[450px] xl:w-[350px]"
+              className="w-[270px] xs:w-[300px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[350px] md:px-4 lg:w-[300px] xl:w-[350px]"
             >
               <Image
                 src={image}
