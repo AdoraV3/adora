@@ -7,7 +7,7 @@ export const profileSchema = businessRegistrationSchema.extend({
   businessName: z.string().min(1, REQUIRED_FIELD).max(50),
   country: z.string().min(1, REQUIRED_FIELD).max(50),
   businessCountry: z.string().min(1, REQUIRED_FIELD).max(50),
-  phoneNumber: z.string().min(5, REQUIRED_FIELD).max(20),
+  phoneNumber: z.string().min(5, REQUIRED_FIELD).max(50),
 });
 
 export type ProfileSchemaType = z.infer<typeof profileSchema>;
