@@ -60,12 +60,8 @@
           "name": "adora_account_user_id_adora_user_id_fk",
           "tableFrom": "adora_account",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -75,9 +71,7 @@
         "adora_account_google_id_unique": {
           "name": "adora_account_google_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "google_id"
-          ]
+          "columns": ["google_id"]
         }
       }
     },
@@ -136,12 +130,8 @@
           "name": "adora_account_preference_user_id_adora_user_id_fk",
           "tableFrom": "adora_account_preference",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -223,12 +213,8 @@
           "name": "adora_agent_voice_id_adora_voice_id_fk",
           "tableFrom": "adora_agent",
           "tableTo": "adora_voice",
-          "columnsFrom": [
-            "voice_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["voice_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -236,12 +222,8 @@
           "name": "adora_agent_phone_number_id_adora_available_phone_numbers_id_fk",
           "tableFrom": "adora_agent",
           "tableTo": "adora_available_phone_numbers",
-          "columnsFrom": [
-            "phone_number_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["phone_number_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -249,12 +231,8 @@
           "name": "adora_agent_category_id_adora_system_prompt_id_fk",
           "tableFrom": "adora_agent",
           "tableTo": "adora_system_prompt",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -430,12 +408,8 @@
           "name": "adora_business_user_id_adora_user_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -443,12 +417,8 @@
           "name": "adora_business_subscription_id_adora_subscription_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_subscription",
-          "columnsFrom": [
-            "subscription_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["subscription_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -456,12 +426,8 @@
           "name": "adora_business_agent_id_adora_agent_id_fk",
           "tableFrom": "adora_business",
           "tableTo": "adora_agent",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["agent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -518,12 +484,8 @@
           "name": "adora_call_log_business_id_adora_business_id_fk",
           "tableFrom": "adora_call_log",
           "tableTo": "adora_business",
-          "columnsFrom": [
-            "business_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["business_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -592,12 +554,8 @@
           "name": "adora_knowledge_base_business_id_adora_business_id_fk",
           "tableFrom": "adora_knowledge_base",
           "tableTo": "adora_business",
-          "columnsFrom": [
-            "business_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["business_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -672,12 +630,8 @@
           "name": "adora_profile_user_id_adora_user_id_fk",
           "tableFrom": "adora_profile",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -734,12 +688,8 @@
           "name": "adora_reset_token_user_id_adora_user_id_fk",
           "tableFrom": "adora_reset_token",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -776,12 +726,8 @@
           "name": "adora_session_user_id_adora_user_id_fk",
           "tableFrom": "adora_session",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -942,9 +888,7 @@
         "adora_user_email_unique": {
           "name": "adora_user_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     },
@@ -971,12 +915,8 @@
           "name": "adora_user_business_user_id_adora_user_id_fk",
           "tableFrom": "adora_user_business",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -984,12 +924,8 @@
           "name": "adora_user_business_business_id_adora_business_id_fk",
           "tableFrom": "adora_user_business",
           "tableTo": "adora_business",
-          "columnsFrom": [
-            "business_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["business_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -999,10 +935,7 @@
         "adora_user_business_user_id_business_id_unique": {
           "name": "adora_user_business_user_id_business_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "user_id",
-            "business_id"
-          ]
+          "columns": ["user_id", "business_id"]
         }
       }
     },
@@ -1055,12 +988,8 @@
           "name": "adora_verify_email_token_user_id_adora_user_id_fk",
           "tableFrom": "adora_verify_email_token",
           "tableTo": "adora_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
