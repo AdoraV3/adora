@@ -6,7 +6,7 @@ export function WhyLove() {
   return (
     <section className="my-20 px-4 md:px-12">
       <PageHeader
-        title="Why You'll Love Adora"
+        title="Why you'll love Adora"
         subtitle="An AI intelligent assistant for exceptional customer experiences."
       />
 

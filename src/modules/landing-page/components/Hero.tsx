@@ -8,7 +8,8 @@ import { useVapiCall } from "../hooks/useVapiWebCall";
 export function Hero() {
   const router = useRouter();
 
-  const { isReady, toggleCall } = useVapiCall();
+  const { isReady, toggleCall, isCallActive } = useVapiCall();
+  
   return (
     <section className="relative w-full pt-10">
       <div className="mx-6 flex flex-col justify-between bg-gradient-to-r from-gray-50 to-gray-200 md:mx-8 lg:mx-12 md:flex-row">
@@ -24,10 +25,10 @@ export function Hero() {
 
         {/* Right Section */}
         <div className="flex flex-col items-center space-y-4 md:w-[40%] md:items-start">
-          <p className="max-w-xs text-center text-sm text-gray-700 md:text-left">
-            Enhance Your Service with AI-Powered, Real-Time, Human-Like
-            Conversations. Your Premier Solution for Customer Support & Inbound
-            Call Automation.
+          <p className="max-w-xs text-center text-sm text-[#575757] md:text-left">
+            Enhance your service with AI-powered, real-time, human-like
+            conversations. Your premier solution for customer support & inbound
+            call automation.
           </p>
           <button
             onClick={() => router.push("/register")}
@@ -117,6 +118,18 @@ export function Hero() {
         />
       </div>
       <div className="flex flex-col ">
+        {
+          isCallActive ? 
+
+        <button
+          onClick={toggleCall}
+          type="button"
+          className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
+        >
+          End call
+        </button>
+          :
+        
         <button
           onClick={toggleCall}
           disabled={!isReady}
@@ -125,6 +138,7 @@ export function Hero() {
         >
           Tap on the microphone to speak
         </button>
+}
         <button
           type="button"
           onClick={() => router.push("/register")}

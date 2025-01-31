@@ -97,7 +97,7 @@ export function Navbar() {
         side="right"
         className="pl-1 pr-0 bg-white-100 text-black-100"
       >
-        <div className="px-7">
+        <div className="pl-5">
           <Link
             aria-label="Home"
             href="/"
@@ -134,6 +134,28 @@ export function Navbar() {
               );
             })}
           </ul>
+
+          {/* Login button */}
+          <div className=" flex flex-col mt-10 md:hidden gap-3">
+            <Link
+              href="/login"
+              className={cn(
+                "text-primary font-satoshi font-normal text-base mr-auto",
+                buttonVariants({ variant: "outline", size: "sm" }),
+              )}
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className={cn(
+                buttonVariants({ variant: "default", size: "sm" }),
+                "text-white-100 px-10 bg-brown-200 whitespace-nowrap font-satoshi mr-auto",
+              )}
+            >
+              Register
+            </Link>
+          </div>
         </ScrollArea>
       </SheetContent>
     </Sheet>

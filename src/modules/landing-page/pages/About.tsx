@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AboutItem } from "../components/AboutItem";
-import NumberCounter from "../components/NumberCounter";
 
 export function About() {
   return (
@@ -27,29 +26,22 @@ export function About() {
         <AboutItem
           variant="reverse"
           image="/images/about1.png"
-          title="Who We Are"
+          title="Who we are"
           description="We are Adora—an innovative force driving the future of customer service. Join us on our journey as we redefine what’s possible and create a world where every customer interaction leaves a lasting impression."
         />
         <AboutItem
           image="/images/about2.png"
-          title="What We Do"
+          title="What we do"
           description="At Adora, we specialize in leveraging cutting-edge AI technology to transform customer service. We provide businesses with innovative solutions that combine the empathy of human agents with the efficiency and scalability of AI. From setting up AI-powered call centers to delivering personalized customer interactions, we’re dedicated to redefining the customer service experience for businesses worldwide."
         />
       </div>
 
-      <div className="flex flex-col md:flex-row mx-auto my-10 max-w-3xl items-center justify-between">
-        <NumberCounter value={87} label="Satisfied Clients" />
-        <NumberCounter value={150} label="Projects Completed" />
-        <NumberCounter value={28} label="Accolades Earned​" />
-        <NumberCounter value={56000} label="Lines of Code​" />
-      </div>
-
-      <div className="mb-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6   md:flex-row md:p-10">
+      <div className="mb-20 mt-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6 md:flex-row md:p-10">
         <div>
-          <h6 className="mb-3  font-coreC text-2xl sm:text-4xl font-medium text-white-100">
+          <h6 className="mb-3  font-coreC text-2xl font-medium text-white-100 sm:text-4xl">
             Would you like to start a project with us?
           </h6>
-          <p className="font-coreC text-lg sm:text-2xl font-normal text-white-200">
+          <p className="font-coreC text-lg font-normal text-white-200 sm:text-2xl">
             Join us at Adora and revolutionize your approach to customer
             service.
           </p>
