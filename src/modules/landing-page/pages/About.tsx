@@ -36,13 +36,6 @@ export function About() {
         />
       </div>
 
-      {/* <div className="flex flex-col md:flex-row mx-auto my-10 max-w-3xl items-center justify-between">
-        <NumberCounter value={87} label="Satisfied Clients" />
-        <NumberCounter value={150} label="Projects Completed" />
-        <NumberCounter value={28} label="Accolades Earned​" />
-        <NumberCounter value={56000} label="Lines of Code​" />
-      </div> */}
-
       <div className="mb-20 mt-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6 md:flex-row md:p-10">
         <div>
           <h6 className="mb-3  font-coreC text-2xl font-medium text-white-100 sm:text-4xl">
