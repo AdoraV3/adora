@@ -9,7 +9,7 @@ export interface NavItem {
   label?: string;
   description?: string;
   isButton?: boolean;
-  tooltip?: string
+  tooltip?: string;
 }
 
 export interface NavItemWithChildren extends NavItem {

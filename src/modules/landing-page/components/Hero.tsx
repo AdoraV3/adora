@@ -9,7 +9,7 @@ export function Hero() {
   const router = useRouter();
 
   const { isReady, toggleCall, isCallActive } = useVapiCall();
-  
+
   return (
     <section className="relative w-full pt-10">
       <div className="mx-6 flex flex-col justify-between bg-gradient-to-r from-gray-50 to-gray-200 md:mx-8 lg:mx-12 md:flex-row">
@@ -118,27 +118,24 @@ export function Hero() {
         />
       </div>
       <div className="flex flex-col ">
-        {
-          isCallActive ? 
-
-        <button
-          onClick={toggleCall}
-          type="button"
-          className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
-        >
-          End call
-        </button>
-          :
-        
-        <button
-          onClick={toggleCall}
-          disabled={!isReady}
-          type="button"
-          className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
-        >
-          Tap on the microphone to speak
-        </button>
-}
+        {isCallActive ? (
+          <button
+            onClick={toggleCall}
+            type="button"
+            className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
+          >
+            End call
+          </button>
+        ) : (
+          <button
+            onClick={toggleCall}
+            disabled={!isReady}
+            type="button"
+            className={`hover:bg-brown-600 mx-auto my-10 w-fit rounded-lg border border-[#975221] bg-[#fff] px-5 py-3 text-sm text-[#975221] transition ${hoverAnimation}`}
+          >
+            Tap on the microphone to speak
+          </button>
+        )}
         <button
           type="button"
           onClick={() => router.push("/register")}

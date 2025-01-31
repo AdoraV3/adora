@@ -1,4 +1,5 @@
 "use client";
+
 /* eslint-disable */
 /* prettier-ignore */
 import BlurIn from "@/components/animations/blur-in";
