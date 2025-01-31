@@ -1,4 +1,5 @@
 "use client";
+//
 import BlurIn from "@/components/animations/blur-in";
 import { HowItWorksItem } from "./HowItWorksItem";
 import { useEffect, useRef, useState } from "react";
@@ -21,16 +22,17 @@ export function HowItWorks() {
     return isIntersecting;
   }
 
-  const ref1 = useRef<HTMLDivElement>(null);
+  const UNI_REF = useRef<HTMLDivElement>(null);
+  const ref1 = UNI_REF;
   const isVisible1 = useIsVisible(ref1);
 
-  const ref2 = useRef<HTMLDivElement>(null);
+  const ref2 = UNI_REF;
   const isVisible2 = useIsVisible(ref2);
 
-  const ref3 = useRef<HTMLDivElement>(null);
+  const ref3 = UNI_REF;
   const isVisible3 = useIsVisible(ref3);
 
-  const ref4 = useRef<HTMLDivElement>(null);
+  const ref4 = UNI_REF;
   const isVisible4 = useIsVisible(ref3);
 
   return (

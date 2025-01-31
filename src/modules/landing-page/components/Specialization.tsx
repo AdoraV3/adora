@@ -1,6 +1,5 @@
 "use client"
 import BlurIn from "@/components/animations/blur-in";
-import { useState } from "react";
 
 export function Specialization() {
   const container = [

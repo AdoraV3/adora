@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { AboutItem } from "../components/AboutItem";
-import NumberCounter from "../components/NumberCounter";
 
 export function About() {
   return (
@@ -44,12 +43,12 @@ export function About() {
         <NumberCounter value={56000} label="Lines of Code​" />
       </div> */}
 
-      <div className="mt-20 mb-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6 md:flex-row md:p-10">
+      <div className="mb-20 mt-20 flex flex-col items-center justify-between gap-5 bg-brown-200 p-6 md:flex-row md:p-10">
         <div>
-          <h6 className="mb-3  font-coreC text-2xl sm:text-4xl font-medium text-white-100">
+          <h6 className="mb-3  font-coreC text-2xl font-medium text-white-100 sm:text-4xl">
             Would you like to start a project with us?
           </h6>
-          <p className="font-coreC text-lg sm:text-2xl font-normal text-white-200">
+          <p className="font-coreC text-lg font-normal text-white-200 sm:text-2xl">
             Join us at Adora and revolutionize your approach to customer
             service.
           </p>
