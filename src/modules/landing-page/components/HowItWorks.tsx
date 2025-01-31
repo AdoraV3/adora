@@ -1,5 +1,6 @@
 "use client";
-//
+/* eslint-disable */
+/* prettier-ignore */
 import BlurIn from "@/components/animations/blur-in";
 import { HowItWorksItem } from "./HowItWorksItem";
 import { useEffect, useRef, useState } from "react";
