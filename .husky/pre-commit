@@ -4,6 +4,14 @@
 echo '🏗️👷 Styling your project before committing👷‍♂️🏗️'
 echo 'please be patient, this may take a while...'
 
+# Run Prettier to format files
+echo '✨ Running Prettier...'
+pnpm prettier --write . || (
+   echo '🔨❌ Prettier formatting failed! Run `pnpm prettier --write .` manually and fix any issues.';
+   false;
+)
+
+
 #Check ESLint Standards
 pnpm run lint ||
 (
