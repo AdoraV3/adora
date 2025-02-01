@@ -7,7 +7,13 @@ export function Appointment() {
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex min-h-screen flex-col md:flex-row md:justify-between">
+        
         <div className="pl-4 pt-8 md:w-[58%]">
+
+        <h2 className="font-lg mb-2 font-bold text-black-100 text-left">
+             Create your appointment
+            </h2>
+
           <div
             style={{
               border: "1px solid #eee",
@@ -17,24 +23,11 @@ export function Appointment() {
               textAlign: "center",
               boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
               fontFamily: "Arial, sans-serif",
+              background: "#f2f2f270"
             }}
             className=""
           >
-            {/* Icon */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "10px",
-              }}
-            >
-              <img
-                src="/images/pay-by-check.png"
-                alt="Webhook icon"
-                style={{ height: "40px", width: "40px" }}
-              />
-            </div>
+           
 
             <CrmWebhookForm />
           </div>

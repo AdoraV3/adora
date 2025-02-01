@@ -8,7 +8,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { FloatingInput, FloatingLabel } from "@/modules/commons/components";
+import { FloatingInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { WebhookFormSchemaType, webhookFormSchema } from "../schema";
@@ -22,10 +22,6 @@ export function CrmWebhookForm() {
   const onSubmit: SubmitHandler<WebhookFormSchemaType> = () => {};
   return (
     <section>
-      <h2 className="font-lg mb-2 font-bold text-black-100">
-        Paste Webhook URL
-      </h2>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -35,12 +31,15 @@ export function CrmWebhookForm() {
               <FormItem>
                 <FormControl>
                   <div className="group relative focus:text-primary">
+                    <p className="mb-2 text-left font-light text-[#00000090]">
+                      Webhook URL
+                    </p>
                     <FloatingInput
                       type="url"
-                      placeholder="Enter webhook url"
+                      placeholder="Paste"
                       {...field}
+                      className="bg-[#ffffff] border-[1px] border-[#8c8c8c]"
                     />
-                    <FloatingLabel>Webhook url</FloatingLabel>
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -50,7 +49,7 @@ export function CrmWebhookForm() {
 
           <div className="mx-auto mt-5 flex w-[80%] flex-row items-center justify-between">
             <Button
-              className="mt-5 w-[48%] border border-[#DDE4F0] bg-[#FDFAFF] text-[#653716]"
+              className="mt-5 w-[48%] border border-[#DDE4F060] bg-[#FDFAFF] text-[#653716]"
               type="submit"
             >
               Close
