@@ -62,13 +62,14 @@ export function Footer() {
             Contact us
           </h6>
           <p className="font-satoshi font-normal text-base text-black-100">
-            734 States Street Mississauga,<br /> Ontario Canada.
+            734 States Street Mississauga,
+            <br /> Ontario Canada.
           </p>
           <p className="font-satoshi font-normal text-base text-black-100">
             info@adora3.com
           </p>
           <p className="font-satoshi font-normal text-base text-black-100">
-          +1 (306) 551-0212
+            +1 (306) 551-0212
           </p>
         </div>
       </div>

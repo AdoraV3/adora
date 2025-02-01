@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import BlurIn from "@/components/animations/blur-in";
 
 export function Specialization() {

@@ -9,7 +9,6 @@ interface PricingDataProps {
 
 export function PricingData({ subscriptions, view }: PricingDataProps) {
   const formatCurrency = useFormatNumber();
-  // const { data: locationData, isPending } = useGetLocation();
   const selectedCurrency = "USD";
   const filteredSubscriptions = subscriptions?.filter(
     el => el.period === view && el.currency === selectedCurrency,

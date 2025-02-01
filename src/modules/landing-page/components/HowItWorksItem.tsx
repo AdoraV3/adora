@@ -13,14 +13,20 @@ export function HowItWorksItem({
 }: HowItWorksItemProps) {
   return (
     <div
-      className={cn(" md:border-dashed relative pb-6 md:border-l md:border-black-100", {
-        "md:border-primary": isActive,
-      })}
+      className={cn(
+        " md:border-dashed relative pb-6 md:border-l md:border-black-100",
+        {
+          "md:border-primary": isActive,
+        },
+      )}
     >
       <div
-        className={cn("hidden md:block h-8 -left-[1.9px] absolute w-1 bg-[#575757]", {
-          "bg-[#975221]": isActive,
-        })}
+        className={cn(
+          "hidden md:block h-8 -left-[1.9px] absolute w-1 bg-[#575757]",
+          {
+            "bg-[#975221]": isActive,
+          },
+        )}
       />
       <h6
         className={cn(

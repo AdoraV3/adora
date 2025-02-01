@@ -13,6 +13,7 @@ import { NextRequest, NextResponse } from "next/server";
 //   "/terms",
 // ];
 
+
 export async function middleware(req: NextRequest) {
   console.log(req)
   //const { pathname } = req.nextUrl;
