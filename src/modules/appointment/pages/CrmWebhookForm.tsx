@@ -38,7 +38,7 @@ export function CrmWebhookForm() {
                       type="url"
                       placeholder="Paste"
                       {...field}
-                      className="bg-[#ffffff] border-[1px] border-[#8c8c8c]"
+                      className="border-[1px] border-[#8c8c8c] bg-[#ffffff]"
                     />
                   </div>
                 </FormControl>

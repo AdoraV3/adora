@@ -103,7 +103,7 @@ function Testimonials() {
   }
 
   return (
-    <div className="bg-white w-full px-6 pb-[10rem] pt-20 md:px-14 lg:px-24 overflow-hidden">
+    <div className="bg-white w-full overflow-hidden px-6 pb-[10rem] pt-20 md:px-14 lg:px-24">
       <h6 className="mb-2 font-coreC text-xl font-normal text-black-100 md:text-4xl">
         Testimonials
       </h6>
@@ -123,13 +123,13 @@ function Testimonials() {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              className="w-[100%] xs:w-[300px] relative  mr-4 rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[300px] md:mr-6 md:w-[350px] md:px-4 lg:w-[300px] xl:w-[350px]"
+              className="xs:w-[90%] relative mr-4  w-[100%] rounded-[5rem] border bg-[#00000005] px-3 pb-5 pt-10 sm:w-[320px] md:mr-6 md:w-[100%] md:px-4 lg:w-[95%] xl:w-[350px]"
             >
               <Image
                 src={image}
                 height={200}
                 width={200}
-                className="absolute -top-[20%] right-[36%] md:right-[42%] h-20 w-20 rounded-full border-2 border-[#97522180] object-cover"
+                className="absolute -top-[20%] right-[36%] h-20 w-20 rounded-full border-2 border-[#97522180] object-cover md:right-[42%]"
                 alt={image}
               />
               <p className="text-md w-full text-center font-light text-[#050505]">
