@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Exclude public routes
-const publicRoutes = [
-  "/login",
-  "/register",
-  "/forgot-password",
-  "/verify-email",
-  "/reset-password",
-  "/pricing",
-  "/contact-us",
-  "/about-us",
-  "/terms",
-];
+// const publicRoutes = [
+//   "/login",
+//   "/register",
+//   "/forgot-password",
+//   "/verify-email",
+//   "/reset-password",
+//   "/pricing",
+//   "/contact-us",
+//   "/about-us",
+//   "/terms",
+// ];
 
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  //const { pathname } = req.nextUrl;
   // if (publicRoutes.includes(pathname)) {
   //   return NextResponse.next();
   // }
