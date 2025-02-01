@@ -40,7 +40,8 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     title: "Appointment",
     icon: "Appointment",
     href: "/appointment",
-    tooltip: "Track and manage customer appointments scheduled by your agent, ensuring seamless coordination and improved customer experience." 
+    tooltip:
+      "Track and manage customer appointments scheduled by your agent, ensuring seamless coordination and improved customer experience.",
   },
   // { title: "Payment", href: "/payment", icon: "Wallet" },
   {

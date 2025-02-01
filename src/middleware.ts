@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Exclude public routes
 const publicRoutes = [
+  "/",
   "/login",
   "/register",
   "/forgot-password",
@@ -9,12 +10,22 @@ const publicRoutes = [
   "/reset-password",
   "/pricing",
   "/contact-us",
-  "/about-us",
+  "/about",
   "/terms",
 ];
+const PUBLIC_FILE = /\.(.*)$/;
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/static") ||
+    PUBLIC_FILE.test(pathname)
+  ) {
+    return NextResponse.next();
+  }
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
