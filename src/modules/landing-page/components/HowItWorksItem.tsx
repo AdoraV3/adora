@@ -12,11 +12,7 @@ export function HowItWorksItem({
   isActive,
 }: HowItWorksItemProps) {
   return (
-    <div
-      className={cn(
-        "relative pb-6 ",
-      )}
-    >
+    <div className={cn("relative pb-6 ")}>
       {/* <div
         className={cn(
           "hidden md:block h-8 -left-[1.9px] absolute w-1 bg-[#575757]",
@@ -27,7 +23,7 @@ export function HowItWorksItem({
       /> */}
       <h6
         className={cn(
-          "text-black-100 border-black-100 font-bold font-satoshi text-2xl",
+          "border-black-100 font-satoshi text-2xl font-bold text-black-100",
           {
             "md:text-primary": isActive,
           },
@@ -36,7 +32,7 @@ export function HowItWorksItem({
         {title}{" "}
       </h6>
 
-      <p className="font-normal font-satoshi text-base text-black-100">
+      <p className="font-satoshi text-base font-normal text-black-100">
         {subTitle}{" "}
       </p>
     </div>
