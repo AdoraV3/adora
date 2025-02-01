@@ -33,6 +33,12 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     href: "/outbound-calls",
     tooltip: "Initiate and monitor outgoing calls directly from the dashboard, with tools to schedule, log, and manage customer interactions in real time."
   },
+  {
+    title: "Appointment",
+    icon: "Appointment",
+    href: "/appointment",
+    tooltip: "Track and manage customer appointments scheduled by your agent, ensuring seamless coordination and improved customer experience." 
+  },
   // { title: "Payment", href: "/payment", icon: "Wallet" },
   { title: "CRM Integration", href: "/crm-integration", icon: "Crm", tooltip: "Connect Adora with your Customer Relationship Management (CRM) system to sync customer data, streamline workflows, and improve engagement tracking." },
   {
