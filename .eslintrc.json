@@ -13,7 +13,6 @@
     "plugin:import/typescript",
     "plugin:sonarjs/recommended",
     "plugin:security/recommended",
-    "plugin:react-hooks/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",

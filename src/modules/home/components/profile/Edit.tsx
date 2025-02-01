@@ -187,7 +187,7 @@ export function Edit() {
           control={form.control}
           name="businessName"
           render={({ field }) => (
-            <FormItem key={field.value} className="relative">
+            <FormItem id="businessName" className="relative">
               <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
                 Business name
               </FormLabel>
