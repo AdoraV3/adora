@@ -44,18 +44,19 @@ export function CrmWebhookForm() {
                     <FloatingLabel>Webhook url</FloatingLabel>
                   </div>
                 </FormControl>
-                <FormDescription className="font-normal text-[hsla(0,0%,11%,0.8)] text-sm">
-                  Copy the generated Webhook URL from Make.com and paste it in
-                  the field here.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <Button className="w-full mt-5" type="submit">
-            Save
+<div className="flex flex-row items-center justify-between w-[80%] mx-auto mt-5">
+          <Button className="w-[48%] mt-5 border-[#DDE4F0] bg-[#FDFAFF] text-primary" type="submit">
+            Close
           </Button>
+          <Button className="w-[48%] mt-5" type="submit">
+            Submit
+          </Button>
+</div>
         </form>
       </Form>
     </section>

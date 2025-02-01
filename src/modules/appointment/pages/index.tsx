@@ -13,7 +13,7 @@ export function Appointment() {
               border: "1px solid #eee",
               borderRadius: "8px",
               padding: "20px",
-              maxWidth: "300px",
+              maxWidth: "95%",
               textAlign: "center",
               boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
               fontFamily: "Arial, sans-serif",
