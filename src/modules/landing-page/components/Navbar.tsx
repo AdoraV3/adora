@@ -23,16 +23,15 @@ export function Navbar() {
           className={`flex justify-between mx-4 md:mx-10  rounded-[20px] py-3 items-center `}
         >
           <div className="flex gap-16 w-full  items-center">
-          
-              <Link className="flex gap-3 items-center scale-105" href="/">
-                <Image
-                  alt="adora"
-                  src="/images/adoralogo.png"
-                  className="w-[110px] h-[38px] md:h-10"
-                  width={200}
-                  height={50}
-                />
-              </Link>
+            <Link className="flex gap-3 items-center scale-105" href="/">
+              <Image
+                alt="adora"
+                src="/images/adoralogo.png"
+                className="w-[110px] h-[38px] md:h-10"
+                width={200}
+                height={50}
+              />
+            </Link>
 
             <ul className="md:flex hidden relative font-gotham text-base font-normal text-black-100 items-center gap-8">
               {NAVBAR_ITEMS?.map(el => {
