@@ -10,7 +10,7 @@ const publicRoutes = [
   "/reset-password",
   "/pricing",
   "/contact-us",
-  "/about-us",
+  "/about",
   "/terms",
 ];
 const PUBLIC_FILE = /\.(.*)$/;
