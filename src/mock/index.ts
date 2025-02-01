@@ -36,6 +36,12 @@ export const SIDEBAR_ITEMS: Array<MainNavItem> = [
     tooltip:
       "Initiate and monitor outgoing calls directly from the dashboard, with tools to schedule, log, and manage customer interactions in real time.",
   },
+  {
+    title: "Appointment",
+    icon: "Appointment",
+    href: "/appointment",
+    tooltip: "Track and manage customer appointments scheduled by your agent, ensuring seamless coordination and improved customer experience." 
+  },
   // { title: "Payment", href: "/payment", icon: "Wallet" },
   {
     title: "CRM Integration",
