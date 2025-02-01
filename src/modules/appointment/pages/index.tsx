@@ -7,7 +7,7 @@ export function Appointment() {
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex min-h-screen flex-col md:flex-row md:justify-between">
-      <div className="pl-4 pt-8 md:w-[58%]">
+        <div className="pl-4 pt-8 md:w-[58%]">
           <div
             style={{
               border: "1px solid #eee",
@@ -39,9 +39,9 @@ export function Appointment() {
             <CrmWebhookForm />
           </div>
         </div>
-       
+
         <div className="hidden min-h-screen bg-[#8d8d8d30] md:block md:w-[0.25%]" />
-        <div className="md:pr-3 pt-8 md:w-[40.5%]">
+        <div className="pt-8 md:w-[40.5%] md:pr-3">
           <h1 className="text-xl">Steps to Connect Adora to your CRM</h1>
           <ol style={{ lineHeight: "1.8" }} className="mt-4 list-decimal pl-4">
             <li>
