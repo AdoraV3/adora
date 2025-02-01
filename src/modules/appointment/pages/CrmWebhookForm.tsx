@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -23,7 +22,7 @@ export function CrmWebhookForm() {
   const onSubmit: SubmitHandler<WebhookFormSchemaType> = () => {};
   return (
     <section>
-      <h2 className="text-black-100 font-lg font-bold mb-2">
+      <h2 className="font-lg mb-2 font-bold text-black-100">
         Paste Webhook URL
       </h2>
 
@@ -35,7 +34,7 @@ export function CrmWebhookForm() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="relative group focus:text-primary">
+                  <div className="group relative focus:text-primary">
                     <FloatingInput
                       type="url"
                       placeholder="Enter webhook url"
@@ -49,14 +48,17 @@ export function CrmWebhookForm() {
             )}
           />
 
-<div className="flex flex-row items-center justify-between w-[80%] mx-auto mt-5">
-          <Button className="w-[48%] mt-5 border-[#DDE4F0] bg-[#FDFAFF] text-primary" type="submit">
-            Close
-          </Button>
-          <Button className="w-[48%] mt-5" type="submit">
-            Submit
-          </Button>
-</div>
+          <div className="mx-auto mt-5 flex w-[80%] flex-row items-center justify-between">
+            <Button
+              className="mt-5 w-[48%] border border-[#DDE4F0] bg-[#FDFAFF] text-[#653716]"
+              type="submit"
+            >
+              Close
+            </Button>
+            <Button className="mt-5 w-[48%] bg-[#653716]" type="submit">
+              Submit
+            </Button>
+          </div>
         </form>
       </Form>
     </section>
