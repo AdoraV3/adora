@@ -14,7 +14,6 @@ const publicRoutes = [
   "/terms",
 ];
 const PUBLIC_FILE = /\.(.*)$/;
-
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
