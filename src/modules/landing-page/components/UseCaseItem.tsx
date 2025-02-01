@@ -9,7 +9,7 @@ interface UseCaseItemProps {
 }
 export function UseCaseItem({ title, image, description }: UseCaseItemProps) {
   return (
-    <Card className="basis-[39rem] min-w-[37rem] flex-1">
+    <Card className="basis-[39rem] min-w-full md:min-w-[37rem] flex-1">
       <div className="cursor-pointer flex-1 rounded-[10px] h-full bg-[#F5F3F3] hover:bg-[hsla(25,64%,36%,0.12)]">
         <BoxReveal delay={0.01} duration={0.01} boxColor="hsla(25,64%,24%,1)">
           <CardContent className="p-4">

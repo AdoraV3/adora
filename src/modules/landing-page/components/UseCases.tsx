@@ -4,7 +4,7 @@ import { UseCaseItem } from "./UseCaseItem";
 
 export function UseCases() {
   return (
-    <div className="mt-10 md:mt-20  md:ps-12 pe-4">
+    <div className="mt-10 md:mt-20 px-4 md:ps-12 md:pe-4">
       <BlurIn
         className="text-black-100 text-left font-coreC text-4xl pb-2"
         word="Use Cases"
