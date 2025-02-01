@@ -14,11 +14,11 @@ export function Brands() {
       <Marquee>
         {BRANDS.map(brand => (
           <div
-            className="flex h-30 flex-row items-center w-3/5 sm:w-3/5 md:w-3/5"
+            className="flex h-30 flex-row items-center mx-auto w-3/5 sm:w-3/5 md:w-3/5"
             key={brand}
           >
             <Image
-              className="w-full h-20 sm:h-20"
+              className="w-full h-20 sm:h-20 "
               width={200}
               height={200}
               src={brand}
