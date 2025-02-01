@@ -35,7 +35,15 @@ export function BoxReveal({
   }, [isInView, mainControls, slideControls]);
 
   return (
-    <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }}>
+    <div
+      ref={ref}
+      style={{
+        position: "relative",
+        width,
+        overflow: "hidden",
+        flex: "1 1 0%",
+      }}
+    >
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 75 },
@@ -47,6 +55,7 @@ export function BoxReveal({
           duration: duration || 0.5,
           delay: delay ?? 0.25,
         }}
+        className="flex-1"
       >
         {children}
       </motion.div>
@@ -72,5 +81,3 @@ export function BoxReveal({
     </div>
   );
 }
-
-export default BoxReveal;
