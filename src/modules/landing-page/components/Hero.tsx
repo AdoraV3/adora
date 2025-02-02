@@ -19,7 +19,7 @@ export function Hero() {
             Adora: Customer Service AI Agent
           </h4>
           <h1 className="mt-2 text-3xl font-bold text-gray-900 md:text-5xl">
-            Revolutionize Your <br /> Customer Experience.
+            Revolutionize Your <br /> Customer Experience
           </h1>
         </div>
 
