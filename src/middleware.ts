@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
   const authCookie = req.cookies.get("adora-auth-cookie");
   if (!authCookie?.value) {
     // Redirect unauthenticated users to login
-    // return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
   return NextResponse.next();
 }
