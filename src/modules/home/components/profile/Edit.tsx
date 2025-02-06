@@ -7,9 +7,9 @@ import {
   updateBusinessAction,
 } from "@/app/actions/business";
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
-import { getCategoriesAction } from "@/app/actions/systemPrompt";
+// import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getUserAction } from "@/app/actions/user";
-import { getVoicesAction } from "@/app/actions/voice";
+// import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -97,22 +97,45 @@ export function Edit() {
     queryKey: ["getPhoneNumbers"],
   });
 
-  const { data: voices } = useServerActionQuery(getVoicesAction, {
-    input: undefined,
-    queryKey: ["getVoices"],
-  });
+  // const { data: voices } = useServerActionQuery(getVoicesAction, {
+  //   input: undefined,
+  //   queryKey: ["getVoices"],
+  // });
 
-  const { data: categories } = useServerActionQuery(getCategoriesAction, {
-    input: undefined,
-    queryKey: ["getCategories"],
-  });
+  // const { data: categories } = useServerActionQuery(getCategoriesAction, {
+  //   input: undefined,
+  //   queryKey: ["getCategories"],
+  // });
 
   // const { data: profile } = useServerActionQuery(getProfile, {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
-  const agentVoices = [{}, {}]
-  console.log(voices)
+  const agentVoices = [
+    { id: "male", gender: "Male" },
+    { id: "female", gender: "Female" },
+  ];
+  const businessCategory = [
+    { id: "retail", label: "Retail" },
+    { id: "health", label: "Healthcare" },
+    { id: "food", label: "Food & Beverage" },
+    { id: "hospitality", label: "Hospitality & Tourism" },
+    { id: "finance", label: "Financial Services" },
+    { id: "telecommunication", label: "Telecommunications" },
+    { id: "technology", label: "Technology & Software" },
+    { id: "automotive", label: "Automotive" },
+    { id: "education", label: "Education & E-learning" },
+    { id: "housing", label: "Real Estate & Housing" },
+    { id: "entertainment", label: "Entertainment & Media" },
+    { id: "transportation", label: "Transportation & Logistics" },
+    { id: "enerrgy", label: "Energy & Utilities" },
+    { id: "personal", label: "Personal & Professional care" },
+    { id: "government", label: "Government & Public services" },
+    { id: "npo", label: "Non-Profit Organization" },
+    { id: "arts", label: "Arts & Recreation" },
+    { id: "agric", label: "Agriculture & Agribusiness" },
+  ];
+
   const form = useForm<ProfileSchemaType>({
     mode: "all",
     resolver: zodResolver(profileSchema),
@@ -159,7 +182,7 @@ export function Edit() {
   return (
     <Form {...form}>
       <form
-        className="grid items-center max-w-3xl gap-5 mt-20 bg-white-100 md:grid-cols-2"
+        className="mt-20 grid max-w-3xl items-center gap-5 bg-white-100 md:grid-cols-2"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -167,7 +190,7 @@ export function Edit() {
           name="name"
           render={({ field }) => (
             <FormItem id="email" className="relative">
-              <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Full Name
               </FormLabel>
               <FormControl>
@@ -189,7 +212,7 @@ export function Edit() {
           name="businessName"
           render={({ field }) => (
             <FormItem id="businessName" className="relative">
-              <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Business name
               </FormLabel>
               <FormControl>
@@ -211,7 +234,7 @@ export function Edit() {
           name="country"
           render={({ field }) => (
             <FormItem key={field.value}>
-              <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Country of residence
               </FormLabel>
               <Select value={field.value} onValueChange={field.onChange}>
@@ -225,7 +248,7 @@ export function Edit() {
                     <SelectLabel>All Countries</SelectLabel>
                     {countries?.map(el => (
                       <SelectItem
-                        className="text-base font-normal text-black-100 font-satoshi"
+                        className="font-satoshi text-base font-normal text-black-100"
                         key={el.value}
                         value={el.value}
                       >
@@ -243,12 +266,12 @@ export function Edit() {
           name="businessCountry"
           render={({ field }) => (
             <FormItem key={field.value}>
-              <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Business Country
               </FormLabel>
               <Select value={field.value} onValueChange={field.onChange}>
                 <FormControl>
-                  <SelectTrigger className="border-none text-black-300 focus-visible:border-none">
+                  <SelectTrigger className="text-black-300 border-none focus-visible:border-none">
                     <SelectValue
                       placeholder="Country"
                       aria-label={field.value}
@@ -260,7 +283,7 @@ export function Edit() {
                     <SelectLabel>All Countries</SelectLabel>
                     {countries?.map(el => (
                       <SelectItem
-                        className="text-base font-normal text-black-100 font-satoshi"
+                        className="font-satoshi text-base font-normal text-black-100"
                         key={el.value}
                         value={el.value}
                       >
@@ -279,8 +302,8 @@ export function Edit() {
           name="businessPhoneNumber"
           render={({ field }) => (
             <FormItem id="phoneNumber">
-              <div className="relative group" />
-              <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
+              <div className="group relative" />
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Business Phone Number
               </FormLabel>
               <FormControl>
@@ -304,7 +327,7 @@ export function Edit() {
                 <div className="relative">
                   <FloatingLabel>Business Category</FloatingLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger className="h-12 bg-white border peer border-gray-550 focus:border-primary ">
+                    <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
                       <SelectValue
                         placeholder="Category"
                         className="!text-[#8c8c8c40]"
@@ -315,7 +338,7 @@ export function Edit() {
                         <SelectLabel className="text-[#8c8c8c80]">
                           Select a business category
                         </SelectLabel>
-                        {categories?.data?.map(el => (
+                        {businessCategory?.map(el => (
                           <SelectItem
                             className="font-satoshi text-base font-normal text-[#8c8c8c]"
                             key={el.id ?? ""}
@@ -362,7 +385,7 @@ export function Edit() {
                 <div className="relative">
                   <FloatingLabel>Agent Voice</FloatingLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className="h-12 capitalize border bg-white-100 peer border-gray-550 focus:border-primary ">
+                    <SelectTrigger className="peer h-12 border border-gray-550 bg-white-100 capitalize focus:border-primary ">
                       <SelectValue
                         placeholder="male"
                         className="!text-[#8c8c8c40]"
@@ -373,9 +396,9 @@ export function Edit() {
                         <SelectLabel className="text-[#8c8c8c80]">
                           Select a voice
                         </SelectLabel>
-                        {voices?.data?.map(el => (
+                        {agentVoices?.map(el => (
                           <SelectItem
-                            className="font-satoshi capitalize text-base font-normal text-[#8c8c8c]"
+                            className="font-satoshi text-base font-normal capitalize text-[#8c8c8c]"
                             key={el.id}
                             value={el.id}
                           >
@@ -402,7 +425,7 @@ export function Edit() {
                   <div className="relative">
                     <FloatingLabel>Agent Phone</FloatingLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="h-12 bg-white border peer border-gray-550 focus:border-primary ">
+                      <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
                         <SelectValue
                           placeholder="Select Phone Number"
                           className="!text-[#8c8c8c40]"
@@ -434,7 +457,7 @@ export function Edit() {
         )}
 
         <Button
-          className="col-span-2 px-6 border ma bg-brown-50 text-black-100 border-input "
+          className="ma col-span-2 border border-input bg-brown-50 px-6 text-black-100 "
           onClick={form.handleSubmit(onSubmit)}
           isLoading={
             updateProfileHandler.isPending || createProfileHandler.isPending
