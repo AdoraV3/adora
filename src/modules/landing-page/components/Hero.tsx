@@ -8,7 +8,7 @@ import { useVapiCall } from "../hooks/useVapiWebCall";
 export function Hero() {
   const router = useRouter();
 
-  const { isReady, toggleCall, isCallActive } = useVapiCall();
+  const { toggleCall, isCallActive } = useVapiCall();
 
   return (
     <section className="relative w-full pt-10">
