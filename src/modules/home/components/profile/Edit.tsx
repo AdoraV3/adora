@@ -111,7 +111,8 @@ export function Edit() {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
-
+  const agentVoices = [{}, {}]
+  console.log(voices)
   const form = useForm<ProfileSchemaType>({
     mode: "all",
     resolver: zodResolver(profileSchema),
