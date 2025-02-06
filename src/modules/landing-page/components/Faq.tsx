@@ -1,7 +1,7 @@
 "use client";
 
 import { FAQs } from "@/mock";
-import { ChevronDownIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDownIcon, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export default function Faq() {
