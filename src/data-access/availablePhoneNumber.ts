@@ -56,11 +56,12 @@ export async function unAssignPhoneNumber(businessId: string) {
   }
 
   const phoneNumber = await getPhoneNumber(agent?.phoneNumberId);
-  if (!phoneNumber?.vapiId) {
+  if (!phoneNumber?.id) {
     throw new ZSAError("NOT_FOUND", "Phone number not found.");
   }
-  await updatePhoneNumber(phoneNumber?.vapiId, {
+  await updatePhoneNumber(phoneNumber?.id, {
     isAssigned: false,
+    dateAssigned: null,
   });
 
   await updateBusiness(businessId, {

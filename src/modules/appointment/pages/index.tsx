@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CrmWebhookForm } from "./CrmWebhookForm";
 import { Button } from "@/components/ui/button";
+import { CrmWebhookForm } from "./CrmWebhookForm";
 
 export function Appointment() {
   function Step({ text, linkText, linkHref, suffix, isBold, last }: any) {
@@ -49,9 +49,7 @@ export function Appointment() {
             <p className="text-center text-[#975221]">
               Step {stage} of <span className="text-[#83898C]">2</span>
             </p>
-            <div
-              className={`relative mt-2 h-[5px] w-full rounded-full bg-[#83898C80]`}
-            >
+            <div className="relative mt-2 h-[5px] w-full rounded-full bg-[#83898C80]">
               <div
                 className={`left-0 top-0 h-full w-${stage}/2 rounded-full bg-[#653716] `}
               />
