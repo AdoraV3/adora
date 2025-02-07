@@ -1,7 +1,7 @@
 "use client";
 
 import { FAQs } from "@/mock";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDownIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export default function Faq() {
@@ -54,9 +54,9 @@ export default function Faq() {
                 } mb-auto ml-auto rounded-full p-2 shadow-xl`}
               >
                 {selected === index ? (
-                  <ChevronRight color="#fff" size={24} />
+                  <ChevronDownIcon color="#fff" size={24} />
                 ) : (
-                  <ChevronLeft color="#fff" size={24} />
+                  <ChevronRight color="#fff" size={24} />
                 )}
               </button>
             </div>
