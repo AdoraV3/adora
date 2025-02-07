@@ -11,8 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export function Navbar() {
-  // useGetLocation();
+export async function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -63,6 +62,16 @@ export function Navbar() {
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
+
+          <Link
+            href="/home"
+            className={cn(
+              buttonVariants({ variant: "default", size: "sm" }),
+              "text-white-100 px-10 bg-brown-200 whitespace-nowrap font-satoshi",
+            )}
+          >
+            Dashboard
+          </Link>
 
           <div className=" hidden lg:flex gap-3">
             <Link

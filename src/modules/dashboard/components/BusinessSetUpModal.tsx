@@ -14,7 +14,7 @@ import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
 import { Disclosure } from "@/modules/commons/hooks/useDisclosure";
 import { useEffect } from "react";
 
-export function BusinessSetupModal(props: Disclosure) {
+export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const { isOpen, onClose, onOpen } = props;
   const { data } = useServerActionQuery(getBusinessAction, {
     input: undefined,
@@ -24,10 +24,10 @@ export function BusinessSetupModal(props: Disclosure) {
   const business = data?.data;
 
   useEffect(() => {
-    if (!business?.isProfileCompleted) {
+    if (business && !business?.isProfileCompleted) {
       onOpen();
     }
-  }, [business?.isProfileCompleted]);
+  }, [business]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
