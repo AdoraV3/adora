@@ -89,14 +89,14 @@ jobs:
       #       --port 5432 \
       #       --cidr 172.183.0.0/16
 
-      - name: Generate Migration
-        run: pnpm run db:generate
+      # - name: Generate Migration
+      #   run: pnpm run db:generate
 
-      - name: Run Migration
-        run: pnpm run db:migrate
+      # - name: Run Migration
+      #   run: pnpm run db:migrate
 
       # - name: Run DB Reset
       #   run: pnpm run db:reset
 
-      # - name: Run Seeding
-      #   run: pnpm run db:seed
+      - name: Run Seeding
+        run: pnpm run db:seed
