@@ -7,9 +7,9 @@ import {
   updateBusinessAction,
 } from "@/app/actions/business";
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
-import { getCategoriesAction } from "@/app/actions/systemPrompt";
+// import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getUserAction } from "@/app/actions/user";
-import { getVoicesAction } from "@/app/actions/voice";
+// import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -97,25 +97,50 @@ export function Edit() {
     queryKey: ["getPhoneNumbers"],
   });
 
-  const { data: voices } = useServerActionQuery(getVoicesAction, {
-    input: undefined,
-    queryKey: ["getVoices"],
-  });
+  // const { data: voices } = useServerActionQuery(getVoicesAction, {
+  //   input: undefined,
+  //   queryKey: ["getVoices"],
+  // });
 
-  const { data: categories } = useServerActionQuery(getCategoriesAction, {
-    input: undefined,
-    queryKey: ["getCategories"],
-  });
+  // const { data: categories } = useServerActionQuery(getCategoriesAction, {
+  //   input: undefined,
+  //   queryKey: ["getCategories"],
+  // });
 
   // const { data: profile } = useServerActionQuery(getProfile, {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
+  const agentVoices = [
+    { id: "male", gender: "Male" },
+    { id: "female", gender: "Female" },
+  ];
+  const businessCategory = [
+    { id: "retail", label: "Retail" },
+    { id: "health", label: "Healthcare" },
+    { id: "food", label: "Food & Beverage" },
+    { id: "hospitality", label: "Hospitality & Tourism" },
+    { id: "finance", label: "Financial Services" },
+    { id: "telecommunication", label: "Telecommunications" },
+    { id: "technology", label: "Technology & Software" },
+    { id: "automotive", label: "Automotive" },
+    { id: "education", label: "Education & E-learning" },
+    { id: "housing", label: "Real Estate & Housing" },
+    { id: "entertainment", label: "Entertainment & Media" },
+    { id: "transportation", label: "Transportation & Logistics" },
+    { id: "enerrgy", label: "Energy & Utilities" },
+    { id: "personal", label: "Personal & Professional care" },
+    { id: "government", label: "Government & Public services" },
+    { id: "npo", label: "Non-Profit Organization" },
+    { id: "arts", label: "Arts & Recreation" },
+    { id: "agric", label: "Agriculture & Agribusiness" },
+  ];
 
   const form = useForm<ProfileSchemaType>({
     mode: "all",
     resolver: zodResolver(profileSchema),
   });
+
   const businessProfile = data?.data;
 
   const isProfileCompleted = businessProfile?.isProfileCompleted;
@@ -151,239 +176,273 @@ export function Edit() {
     agentData?.data?.voiceId,
     agentData?.data?.phoneNumberId,
   ]);
+
   if (isPending || loadingUser || loadingAgent) return <div>Loading...</div>;
 
   return (
-    <article className=" max-w-3xl w-full gap-10 flex flex-1 flex-col mt-20 bg-white-100">
-      <Form {...form}>
-        <form
-          className="w-full grid gap-5 items-center md:grid-cols-2"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem id="email" className="relative">
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Full Name
-                </FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      className="border-none bg-gray-650"
-                      placeholder="John Doe"
-                      {...field}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="businessName"
-            render={({ field }) => (
-              <FormItem id="businessName" className="relative">
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Business name
-                </FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      className="border-none bg-gray-650"
-                      placeholder="Stripe"
-                      {...field}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem key={field.value}>
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Country of residence
-                </FormLabel>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger className="border-none text-black-100 focus-visible:border-none">
-                      <SelectValue placeholder="Country" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent sideOffset={5}>
-                    <SelectGroup>
-                      <SelectLabel>All Countries</SelectLabel>
-                      {countries?.map(el => (
-                        <SelectItem
-                          className="text-base font-normal text-black-100 font-satoshi"
-                          key={el.value}
-                          value={el.value}
-                        >
-                          {el.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="businessCountry"
-            render={({ field }) => (
-              <FormItem key={field.value}>
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Business Country
-                </FormLabel>
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger className="border-none text-black-300 focus-visible:border-none">
-                      <SelectValue
-                        placeholder="Country"
-                        aria-label={field.value}
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent sideOffset={5}>
-                    <SelectGroup>
-                      <SelectLabel>All Countries</SelectLabel>
-                      {countries?.map(el => (
-                        <SelectItem
-                          className="text-base font-normal text-black-100 font-satoshi"
-                          key={el.value}
-                          value={el.value}
-                        >
-                          {el.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="businessPhoneNumber"
-            render={({ field }) => (
-              <FormItem id="phoneNumber">
-                <div className="relative group" />
-                <FormLabel className="font-normal text-[hsla(0,0%,11%,0.8)] text-base font-satoshi">
-                  Business Phone Number
-                </FormLabel>
-                <FormControl>
-                  <PhoneNumberInput
-                    placeholder="Phone Number"
-                    className="h-12 border-none bg-gray-650"
+    <Form {...form}>
+      <form
+        className="mt-20 grid max-w-3xl items-center gap-5 bg-white-100 md:grid-cols-2"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem id="email" className="relative">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Full Name
+              </FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    className="border-none bg-gray-650"
+                    placeholder="John Doe"
                     {...field}
                   />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
+        <FormField
+          control={form.control}
+          name="businessName"
+          render={({ field }) => (
+            <FormItem id="businessName" className="relative">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Business name
+              </FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    className="border-none bg-gray-650"
+                    placeholder="Stripe"
+                    {...field}
+                  />
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="country"
+          render={({ field }) => (
+            <FormItem key={field.value}>
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Country of residence
+              </FormLabel>
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger className="border-none text-black-100 focus-visible:border-none">
+                    <SelectValue placeholder="Country" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent sideOffset={5}>
+                  <SelectGroup>
+                    <SelectLabel>All Countries</SelectLabel>
+                    {countries?.map(el => (
+                      <SelectItem
+                        className="font-satoshi text-base font-normal text-black-100"
+                        key={el.value}
+                        value={el.value}
+                      >
+                        {el.label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="businessCountry"
+          render={({ field }) => (
+            <FormItem key={field.value}>
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Business Country
+              </FormLabel>
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger className="text-black-300 border-none focus-visible:border-none">
+                    <SelectValue
+                      placeholder="Country"
+                      aria-label={field.value}
+                    />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent sideOffset={5}>
+                  <SelectGroup>
+                    <SelectLabel>All Countries</SelectLabel>
+                    {countries?.map(el => (
+                      <SelectItem
+                        className="font-satoshi text-base font-normal text-black-100"
+                        key={el.value}
+                        value={el.value}
+                      >
+                        {el.label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="businessPhoneNumber"
+          render={({ field }) => (
+            <FormItem id="phoneNumber">
+              <div className="group relative" />
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Business Phone Number
+              </FormLabel>
+              <FormControl>
+                <PhoneNumberInput
+                  placeholder="Phone Number"
+                  className="h-12 border-none bg-gray-650"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem key={field.value} id="category">
+              <FormControl>
+                <div className="relative">
+                  <FloatingLabel>Business Category</FloatingLabel>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
+                      <SelectValue
+                        placeholder="Category"
+                        className="!text-[#8c8c8c40]"
+                      />
+                    </SelectTrigger>
+                    <SelectContent sideOffset={5}>
+                      <SelectGroup>
+                        <SelectLabel className="text-[#8c8c8c80]">
+                          Select a business category
+                        </SelectLabel>
+                        {businessCategory?.map(el => (
+                          <SelectItem
+                            className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                            key={el.id ?? ""}
+                            value={el.id ?? ""}
+                          >
+                            {el.label}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="agentName"
+          render={({ field }) => (
+            <FormItem id="agentName">
+              <FormControl>
+                <div className="relative">
+                  <FloatingInput
+                    className="h-12"
+                    placeholder="Enter agent name"
+                    {...field}
+                  />
+                  <FloatingLabel>Agent Name</FloatingLabel>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="voice"
+          render={({ field }) => (
+            <FormItem key={field.value} id="voice" className="relative">
+              <FormControl>
+                <div className="relative">
+                  <FloatingLabel>Agent Voice</FloatingLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className="peer h-12 border border-gray-550 bg-white-100 capitalize focus:border-primary ">
+                      <SelectValue
+                        placeholder="male"
+                        className="!text-[#8c8c8c40]"
+                      />
+                    </SelectTrigger>
+                    <SelectContent sideOffset={5}>
+                      <SelectGroup>
+                        <SelectLabel className="text-[#8c8c8c80]">
+                          Select a voice
+                        </SelectLabel>
+                        {agentVoices?.map(el => (
+                          <SelectItem
+                            className="font-satoshi text-base font-normal capitalize text-[#8c8c8c]"
+                            key={el.id}
+                            value={el.id}
+                          >
+                            {el.gender}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {!isProfileCompleted && (
           <FormField
             control={form.control}
-            name="category"
+            name="phoneNumber"
             render={({ field }) => (
-              <FormItem key={field.value} id="category">
+              <FormItem id="phone" className="relative">
                 <FormControl>
                   <div className="relative">
-                    <FloatingLabel className="bg-white-100 z-10">
-                      Business Category
-                    </FloatingLabel>
-                    <Select
-                      disabled={isProfileCompleted ?? false}
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      <SelectTrigger className="h-12 bg-white border peer border-gray-550 focus:border-primary ">
+                    <FloatingLabel>Agent Phone</FloatingLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
                         <SelectValue
-                          placeholder="Category"
+                          placeholder="Select Phone Number"
                           className="!text-[#8c8c8c40]"
                         />
                       </SelectTrigger>
                       <SelectContent sideOffset={5}>
                         <SelectGroup>
                           <SelectLabel className="text-[#8c8c8c80]">
-                            Select a business category
+                            Select an agent phone
                           </SelectLabel>
-                          {categories?.data?.map(el => (
+                          {phones?.data?.map(el => (
                             <SelectItem
                               className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                              key={el.id ?? ""}
-                              value={el.id ?? ""}
-                            >
-                              {el.label}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="agentName"
-            render={({ field }) => (
-              <FormItem id="agentName">
-                <FormControl>
-                  <div className="relative">
-                    <FloatingInput
-                      className="h-12"
-                      placeholder="Enter agent name"
-                      {...field}
-                    />
-                    <FloatingLabel>Agent Name</FloatingLabel>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="voice"
-            render={({ field }) => (
-              <FormItem key={field.value} id="voice" className="relative">
-                <FormControl>
-                  <div className="relative">
-                    <FloatingLabel>Agent Voice</FloatingLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="h-12 capitalize border bg-white-100 peer border-gray-550 focus:border-primary ">
-                        <SelectValue
-                          placeholder="male"
-                          className="!text-[#8c8c8c40]"
-                        />
-                      </SelectTrigger>
-                      <SelectContent sideOffset={5}>
-                        <SelectGroup>
-                          <SelectLabel className="text-[#8c8c8c80]">
-                            Select a voice
-                          </SelectLabel>
-                          {voices?.data?.map(el => (
-                            <SelectItem
-                              className="font-satoshi capitalize text-base font-normal text-[#8c8c8c]"
                               key={el.id}
                               value={el.id}
                             >
-                              {el.gender}
+                              {formatPhoneNumber(el.phoneNumber)}
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -395,61 +454,18 @@ export function Edit() {
               </FormItem>
             )}
           />
+        )}
 
-          {!isProfileCompleted && (
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem id="phone" className="relative">
-                  <FormControl>
-                    <div className="relative">
-                      <FloatingLabel>Agent Phone</FloatingLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="h-12 bg-white border peer border-gray-550 focus:border-primary ">
-                          <SelectValue
-                            placeholder="Select Phone Number"
-                            className="!text-[#8c8c8c40]"
-                          />
-                        </SelectTrigger>
-                        <SelectContent sideOffset={5}>
-                          <SelectGroup>
-                            <SelectLabel className="text-[#8c8c8c80]">
-                              Select an agent phone
-                            </SelectLabel>
-                            {phones?.data?.map(el => (
-                              <SelectItem
-                                className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                                key={el.id}
-                                value={el.id}
-                              >
-                                {formatPhoneNumber(el.phoneNumber)}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
-        </form>
         <Button
+          className="ma col-span-2 border border-input bg-brown-50 px-6 text-black-100 "
           onClick={form.handleSubmit(onSubmit)}
-          className="w-full mt-auto px-6 border ma bg-brown-50 text-black-100 border-input "
           isLoading={
             updateProfileHandler.isPending || createProfileHandler.isPending
           }
         >
           Save Changes
         </Button>
-      </Form>
-    </article>
+      </form>
+    </Form>
   );
 }

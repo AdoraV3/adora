@@ -19,24 +19,24 @@ export function Pricing() {
 
   return (
     <div className="my-10">
-      <div className="flex flex-col sm:flex-row md:justify-between px-10 max-w-6xl mx-auto items-center">
+      <div className="mx-auto flex max-w-6xl flex-col items-center px-10 sm:flex-row md:justify-between">
         <div>
           <BlurIn
             word="Plans & Pricing"
-            className="font-normal mb-2 font-coreC  text-black-100 text-5xl "
+            className="mb-2 font-coreC text-5xl  font-normal text-black-100 "
           />
 
-          <p className="font-normal text-gray-2 font-satoshi text-lg">
+          <p className="font-satoshi text-lg font-normal text-gray-2">
             Navigate flexible pricing, designed to accommodate your distinct
             needs.
           </p>
         </div>
 
-        <div className="mt-10 sm:mt-0 uppercase border border-primary rounded-full">
+        <div className="mt-10 rounded-full border border-primary uppercase sm:mt-0">
           <Button
             size="sm"
             className={cn(
-              "uppercase text-primary rounded-full bg-white-100 font-medium w-[110px] text-xs  ",
+              "w-[110px] rounded-full bg-white-100 text-xs font-medium uppercase text-primary  ",
               {
                 "bg-primary text-white-100": view === "monthly",
               },
@@ -50,7 +50,7 @@ export function Pricing() {
             size="sm"
             variant="ghost"
             className={cn(
-              "uppercase text-primary  rounded-full bg-white-100 font-medium w-[110px] text-xs ",
+              "w-[110px] rounded-full  bg-white-100 text-xs font-medium uppercase text-primary ",
               {
                 "bg-primary text-white-100": view === "yearly",
               },
@@ -70,12 +70,12 @@ export function Pricing() {
         },
       })}
 
-      <div className="flex gap-5 bg-brown-200 justify-center flex-col p-6 md:p-10 my-5  items-center">
+      <div className="my-5 flex flex-col items-center justify-center gap-5 bg-brown-200 p-6  md:p-10">
         <div className="text-center">
-          <h6 className="font-medium  text-white-100 text-4xl font-coreC">
+          <h6 className="font-coreC  text-4xl font-medium text-white-100">
             Need Help?
           </h6>
-          <p className="font-satoshi  text-center mb-3 font-normal text-sm text-[hsla(0,0%,81%,1)] ">
+          <p className="mb-3  text-center font-satoshi text-sm font-normal text-[hsla(0,0%,81%,1)] ">
             We Offer 24 Hours Service from Mon-Sat
           </p>
         </div>
@@ -84,7 +84,7 @@ export function Pricing() {
           href="/contact-us"
           className={cn(
             buttonVariants({ variant: "default", size: "sm" }),
-            "px-10 bg-white-100 text-primary",
+            "bg-white-100 px-10 text-primary",
           )}
         >
           Contact Us

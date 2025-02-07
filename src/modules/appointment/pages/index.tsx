@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { CrmWebhookForm } from "./CrmWebhookForm";
 
 export function Appointment() {
@@ -35,7 +37,7 @@ export function Appointment() {
       </div>
     );
   }
-  // const stage = 1
+  const [stage, setstage] = useState<number>(1);
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex min-h-screen flex-col md:flex-row md:justify-between">
@@ -45,38 +47,90 @@ export function Appointment() {
           </h2>
           <div className="my-4 max-w-[95%]">
             <p className="text-center text-[#975221]">
-              Step 1 of <span className="text-[#83898C]">2</span>
+              Step {stage} of <span className="text-[#83898C]">2</span>
             </p>
             <div className="relative mt-2 h-[5px] w-full rounded-full bg-[#83898C80]">
               <div
-                className={`left-0 top-0 h-full w-1/2 rounded-full bg-[#653716] `}
+                className={`left-0 top-0 h-full w-${stage}/2 rounded-full bg-[#653716] `}
               />
             </div>
           </div>
-          <div className="flex flex-row items-center gap-x-3 ">
-            <div className="rounded-full bg-[#F8E8DD] px-4 py-1">
-              <p className="font-thin ">Step 1</p>
+          {/* Step 1 */}
+          {stage === 1 && (
+            <div>
+              <div className="flex flex-row items-center gap-x-3 ">
+                <div className="rounded-full bg-[#F8E8DD] px-4 py-1">
+                  <p className="font-thin ">Step {stage}</p>
+                </div>
+                <h3>Set Up Calendar Availability</h3>
+              </div>
+              <p className="my-4 text-[#1C1C1C80]">
+                Fill all necessary process to complete this.
+              </p>
+              <div
+                style={{
+                  border: "1px solid #eee",
+                  borderRadius: "8px",
+                  padding: "20px",
+                  maxWidth: "95%",
+                  textAlign: "left",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  background: "#f2f2f270",
+                }}
+                className=""
+              >
+                <p className="mb-2 text-2xl font-semibold text-[#1C1C1C]">
+                  Download Template
+                </p>
+                <p className="mb-4 font-thin">
+                  Get the make.com template here on Adora.
+                </p>
+                <Button
+                  className="mt-5 w-full bg-[#653716]"
+                  type="button"
+                  onClick={() => setstage(2)}
+                >
+                  Submit
+                </Button>
+                <Button
+                  className="mt-3 w-full bg-transparent text-[#653716]"
+                  type="button"
+                >
+                  Close
+                </Button>
+              </div>
             </div>
-            <h3>Set Up Calendar Availability</h3>
-          </div>
-          <p className="my-4 text-[#1C1C1C80]">
-            Fill all necessary process to complete this.
-          </p>
-          <div
-            style={{
-              border: "1px solid #eee",
-              borderRadius: "8px",
-              padding: "20px",
-              maxWidth: "95%",
-              textAlign: "center",
-              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-              fontFamily: "Arial, sans-serif",
-              background: "#f2f2f270",
-            }}
-            className=""
-          >
-            <CrmWebhookForm />
-          </div>
+          )}
+
+          {/* Step 2 */}
+          {stage === 2 && (
+            <div>
+              <div className="flex flex-row items-center gap-x-3 ">
+                <div className="rounded-full bg-[#F8E8DD] px-4 py-1">
+                  <p className="font-thin ">Step {stage}</p>
+                </div>
+                <h3>Set Up Calendar Availability</h3>
+              </div>
+              <p className="my-4 text-[#1C1C1C80]">
+                Fill all necessary process to complete this.
+              </p>
+              <div
+                style={{
+                  border: "1px solid #eee",
+                  borderRadius: "8px",
+                  padding: "20px",
+                  maxWidth: "95%",
+                  textAlign: "center",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  fontFamily: "Arial, sans-serif",
+                  background: "#f2f2f270",
+                }}
+                className=""
+              >
+                <CrmWebhookForm />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="hidden min-h-screen bg-[#8d8d8d30] md:block md:w-[0.25%]" />
