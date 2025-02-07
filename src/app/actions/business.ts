@@ -65,6 +65,7 @@ export const createBusinessAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Subscription not found");
     }
     const findVoice = await getVoice(voice);
+
     if (!findVoice) {
       throw new ZSAError("NOT_FOUND", "Selected voice not available");
     }

@@ -10,6 +10,7 @@ import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
 // import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getUserAction } from "@/app/actions/user";
 // import { getVoicesAction } from "@/app/actions/voice";
+import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -97,10 +98,10 @@ export function Edit() {
     queryKey: ["getPhoneNumbers"],
   });
 
-  // const { data: voices } = useServerActionQuery(getVoicesAction, {
-  //   input: undefined,
-  //   queryKey: ["getVoices"],
-  // });
+  const { data: voices } = useServerActionQuery(getVoicesAction, {
+    input: undefined,
+    queryKey: ["getVoices"],
+  });
 
   // const { data: categories } = useServerActionQuery(getCategoriesAction, {
   //   input: undefined,
@@ -111,10 +112,7 @@ export function Edit() {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
-  const agentVoices = [
-    { id: "male", gender: "Male" },
-    { id: "female", gender: "Female" },
-  ];
+
   const businessCategory = [
     { id: "retail", label: "Retail" },
     { id: "health", label: "Healthcare" },
@@ -182,7 +180,7 @@ export function Edit() {
   return (
     <Form {...form}>
       <form
-        className="mt-20 grid max-w-3xl items-center gap-5 bg-white-100 md:grid-cols-2"
+        className="mt-20 md:grid max-w-3xl items-center gap-5 bg-white-100 grid-cols-2"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -396,7 +394,7 @@ export function Edit() {
                         <SelectLabel className="text-[#8c8c8c80]">
                           Select a voice
                         </SelectLabel>
-                        {agentVoices?.map(el => (
+                        {voices?.data?.map(el => (
                           <SelectItem
                             className="font-satoshi text-base font-normal capitalize text-[#8c8c8c]"
                             key={el.id}
