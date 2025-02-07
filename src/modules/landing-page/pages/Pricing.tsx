@@ -15,6 +15,7 @@ export function Pricing() {
     input: undefined,
     queryKey: ["getSubscriptions"],
   });
+
   const [view, setView] = useState<"monthly" | "yearly">("monthly");
 
   return (

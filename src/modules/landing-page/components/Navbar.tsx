@@ -63,16 +63,6 @@ export async function Navbar() {
             </Button>
           </SheetTrigger>
 
-          <Link
-            href="/home"
-            className={cn(
-              buttonVariants({ variant: "default", size: "sm" }),
-              "text-white-100 px-10 bg-brown-200 whitespace-nowrap font-satoshi",
-            )}
-          >
-            Dashboard
-          </Link>
-
           <div className=" hidden lg:flex gap-3">
             <Link
               href="/login"

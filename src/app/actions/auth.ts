@@ -121,6 +121,7 @@ export const loginInAction = createServerAction()
       sessionCookie.value,
       sessionCookie.attributes,
     );
+    cookies().set("auth-status", "logged-in");
     return { user, success: true };
   });
 
