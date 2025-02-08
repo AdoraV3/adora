@@ -7,7 +7,7 @@ import {
   updateBusinessAction,
 } from "@/app/actions/business";
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
-// import { getCategoriesAction } from "@/app/actions/systemPrompt";
+import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getUserAction } from "@/app/actions/user";
 // import { getVoicesAction } from "@/app/actions/voice";
 import { getVoicesAction } from "@/app/actions/voice";
@@ -103,36 +103,19 @@ export function Edit() {
     queryKey: ["getVoices"],
   });
 
-  // const { data: categories } = useServerActionQuery(getCategoriesAction, {
-  //   input: undefined,
-  //   queryKey: ["getCategories"],
-  // });
+  const { data: categories } = useServerActionQuery(getCategoriesAction, {
+    input: undefined,
+    queryKey: ["getCategories"],
+  });
 
   // const { data: profile } = useServerActionQuery(getProfile, {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
-
-  const businessCategory = [
-    { id: "retail", label: "Retail" },
-    { id: "health", label: "Healthcare" },
-    { id: "food", label: "Food & Beverage" },
-    { id: "hospitality", label: "Hospitality & Tourism" },
-    { id: "finance", label: "Financial Services" },
-    { id: "telecommunication", label: "Telecommunications" },
-    { id: "technology", label: "Technology & Software" },
-    { id: "automotive", label: "Automotive" },
-    { id: "education", label: "Education & E-learning" },
-    { id: "housing", label: "Real Estate & Housing" },
-    { id: "entertainment", label: "Entertainment & Media" },
-    { id: "transportation", label: "Transportation & Logistics" },
-    { id: "enerrgy", label: "Energy & Utilities" },
-    { id: "personal", label: "Personal & Professional care" },
-    { id: "government", label: "Government & Public services" },
-    { id: "npo", label: "Non-Profit Organization" },
-    { id: "arts", label: "Arts & Recreation" },
-    { id: "agric", label: "Agriculture & Agribusiness" },
-  ];
+  // const agentVoices = [
+  //   { id: "male", gender: "Male" },
+  //   { id: "female", gender: "Female" },
+  // ];
 
   const form = useForm<ProfileSchemaType>({
     mode: "all",
@@ -336,11 +319,11 @@ export function Edit() {
                         <SelectLabel className="text-[#8c8c8c80]">
                           Select a business category
                         </SelectLabel>
-                        {businessCategory?.map(el => (
+                        {categories?.data?.map(el => (
                           <SelectItem
                             className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                            key={el.id ?? ""}
-                            value={el.id ?? ""}
+                            key={el.value ?? ""}
+                            value={el.value ?? ""}
                           >
                             {el.label}
                           </SelectItem>
