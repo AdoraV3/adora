@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const { isOpen, onClose, onOpen } = props;
-  const { data } = useServerActionQuery(getBusinessAction, {
+  const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
     queryKey: ["getBusiness"],
   });
@@ -24,7 +24,7 @@ export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const business = data?.data;
 
   useEffect(() => {
-    if (!business?.isProfileCompleted) {
+    if (!isPending && !business?.isProfileCompleted) {
       onOpen();
     }
   }, [business, onOpen]);

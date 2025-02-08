@@ -115,7 +115,6 @@ export function Edit() {
   const businessProfile = data?.data;
 
   const isProfileCompleted = businessProfile?.isProfileCompleted;
-
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
@@ -134,7 +133,7 @@ export function Edit() {
       agentName: agentData?.data?.name ?? "",
       category: agentData?.data?.categoryId ?? "",
       businessPhoneNumber: user?.profile?.phone ?? "",
-      voice: agentData?.data?.voiceId ?? "test",
+      voice: agentData?.data?.voiceId ?? "",
     });
   }, [
     form.reset,
@@ -312,8 +311,8 @@ export function Edit() {
                         {categories?.data?.map(el => (
                           <SelectItem
                             className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                            key={el.value ?? ""}
-                            value={el.value ?? ""}
+                            key={el.id ?? ""}
+                            value={el.id ?? ""}
                           >
                             {el.label}
                           </SelectItem>
