@@ -45,6 +45,8 @@ export function Appointment() {
   const [stageA, setstageA] = useState<number>(1);
   // Toggle calendar
   const [stageC, setstageC] = useState<number>(1);
+  const borderC = "1px solid #eee";
+  const shadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
 
   const handleDownloadA = () => {
     const jsonData = JSON.stringify(appointmentData, null, 2); // Convert to JSON string
@@ -106,12 +108,12 @@ export function Appointment() {
               </p>
               <div
                 style={{
-                  border: "1px solid #eee",
+                  border: borderC,
                   borderRadius: "8px",
                   padding: "20px",
                   maxWidth: "95%",
                   textAlign: "left",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  boxShadow: shadow,
                   background: "#f2f2f270",
                 }}
                 className=""
@@ -183,12 +185,12 @@ export function Appointment() {
               </p>
               <div
                 style={{
-                  border: "1px solid #eee",
+                  border: borderC,
                   borderRadius: "8px",
                   padding: "20px",
                   maxWidth: "95%",
                   textAlign: "left",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                  boxShadow: shadow,
                   background: "#f2f2f270",
                 }}
                 className=""
@@ -230,13 +232,12 @@ export function Appointment() {
               </p>
               <div
                 style={{
-                  border: "1px solid #eee",
+                  border: borderC,
                   borderRadius: "8px",
                   padding: "20px",
                   maxWidth: "95%",
-                  textAlign: "center",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-                  fontFamily: "Arial, sans-serif",
+                  textAlign: "left",
+                  boxShadow: shadow,
                   background: "#f2f2f270",
                 }}
                 className=""
