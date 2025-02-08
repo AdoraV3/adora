@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { WebhookFormSchemaType, webhookFormSchema } from "../schema";
 
-export function CrmWebhookForm() {
+export function CrmWebhookForm({ setstage }: any) {
   const form = useForm<WebhookFormSchemaType>({
     mode: "onChange",
     resolver: zodResolver(webhookFormSchema),
@@ -49,8 +49,9 @@ export function CrmWebhookForm() {
 
           <div className="mx-auto mt-5 flex w-[80%] flex-row items-center justify-between">
             <Button
+              onClick={() => setstage(1)}
               className="mt-5 w-[48%] border border-[#DDE4F060] bg-[#FDFAFF] text-[#653716]"
-              type="submit"
+              type="button"
             >
               Close
             </Button>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { CrmWebhookForm } from "./CrmWebhookForm";
 import { Button } from "@/components/ui/button";
+import { CrmWebhookForm } from "./CrmWebhookForm";
+import appointmentData from "../../../db/seeds/data/appointment_booking.json";
 
 export function Appointment() {
   function Step({ text, linkText, linkHref, suffix, isBold, last }: any) {
@@ -38,6 +39,20 @@ export function Appointment() {
     );
   }
   const [stage, setstage] = useState<number>(1);
+  const handleDownload = () => {
+    const jsonData = JSON.stringify(appointmentData, null, 2); // Convert to JSON string
+    const blob = new Blob([jsonData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.json"; // File name
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setstage(2);
+  };
   return (
     <section className="bg-[hsla(0, 0%, 100%,0.34)] ">
       <div className="flex min-h-screen flex-col md:flex-row md:justify-between">
@@ -90,9 +105,9 @@ export function Appointment() {
                 <Button
                   className="mt-5 w-full bg-[#653716]"
                   type="button"
-                  onClick={() => setstage(2)}
+                  onClick={handleDownload}
                 >
-                  Submit
+                  Download
                 </Button>
                 <Button
                   className="mt-3 w-full bg-transparent text-[#653716]"
@@ -129,7 +144,7 @@ export function Appointment() {
                 }}
                 className=""
               >
-                <CrmWebhookForm />
+                <CrmWebhookForm setstage={setstage} />
               </div>
             </div>
           )}
