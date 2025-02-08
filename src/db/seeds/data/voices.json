@@ -1,14 +1,10 @@
 [
   {
-    "name": "Adora",
-    "language": "English",
     "gender": "male",
     "provider": "11labs",
     "createdVoiceId": "mrh6BGtvw1pAXXEjIsOg"
   },
   {
-    "name": "Adora",
-    "language": "English",
     "provider": "11labs",
     "gender": "female",
     "createdVoiceId": "pBZVCk298iJlHAcHQwLr"

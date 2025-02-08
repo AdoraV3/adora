@@ -59,8 +59,8 @@
   {
     "plan": "enterprise",
     "period": "monthly",
-    "subtitlle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
-    "amount": "Custom",
+    "subtitle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
+    "amount": 1000,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",

@@ -9,7 +9,6 @@ import {
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
 import { getCategoriesAction } from "@/app/actions/systemPrompt";
 import { getUserAction } from "@/app/actions/user";
-// import { getVoicesAction } from "@/app/actions/voice";
 import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
@@ -107,15 +106,6 @@ export function Edit() {
     input: undefined,
     queryKey: ["getCategories"],
   });
-
-  // const { data: profile } = useServerActionQuery(getProfile, {
-  //   input: undefined,
-  //   queryKey: ["getCategories"],
-  // });
-  // const agentVoices = [
-  //   { id: "male", gender: "Male" },
-  //   { id: "female", gender: "Female" },
-  // ];
 
   const form = useForm<ProfileSchemaType>({
     mode: "all",
