@@ -112,10 +112,10 @@ export function Edit() {
   //   input: undefined,
   //   queryKey: ["getCategories"],
   // });
-  const agentVoices = [
-    { id: "male", gender: "Male" },
-    { id: "female", gender: "Female" },
-  ];
+  // const agentVoices = [
+  //   { id: "male", gender: "Male" },
+  //   { id: "female", gender: "Female" },
+  // ];
 
   const form = useForm<ProfileSchemaType>({
     mode: "all",
