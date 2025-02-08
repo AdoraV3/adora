@@ -50,12 +50,16 @@ export function CrmWebhookForm({ setstage }: any) {
           <div className="mx-auto mt-5 flex w-[80%] flex-row items-center justify-between">
             <Button
               onClick={() => setstage(1)}
-              className="mt-5 w-[48%] border border-[#DDE4F060] bg-[#FDFAFF] text-[#653716]"
               type="button"
+              className="mt-5 w-[48%] border border-[#DDE4F060] bg-[#FDFAFF] text-[#653716]"
             >
               Close
             </Button>
-            <Button className="mt-5 w-[48%] bg-[#653716]" type="submit">
+            <Button
+              className="mt-5 w-[48%] bg-[#653716]"
+              onClick={() => setstage(2)}
+              type="button"
+            >
               Submit
             </Button>
           </div>
