@@ -121,6 +121,7 @@ export const loginInAction = createServerAction()
       sessionCookie.value,
       sessionCookie.attributes,
     );
+
     return { user, success: true };
   });
 

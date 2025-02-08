@@ -24,10 +24,10 @@ export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const business = data?.data;
 
   useEffect(() => {
-    if (business && !business?.isProfileCompleted) {
+    if (!business?.isProfileCompleted) {
       onOpen();
     }
-  }, [business]);
+  }, [business, onOpen]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
