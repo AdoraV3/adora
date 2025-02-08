@@ -128,9 +128,7 @@ export function Hero() {
             End call
           </button>
         ) : (
-          <p
-            className={`mx-auto mb-2 mt-6 text-center text-sm font-thin text-[#000000]`}
-          >
+          <p className="mx-auto mb-2 mt-6 text-center text-sm font-thin text-[#000000]">
             Tap on the microphone to speak
           </p>
         )}

@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       }
       case "customer.subscription.deleted": {
         const subscription = await stripe.subscriptions.retrieve(
-          (event.data.object as Stripe.Subscription).id,
+          event.data.object.id,
         );
 
         const business = await db.query.business.findFirst({
@@ -107,14 +107,8 @@ export async function POST(req: Request) {
         break;
       }
       case "customer.subscription.updated": {
-        // Placeholder for handling subscription updates (e.g., expired)
-        const subscription = event.data.object as Stripe.Subscription;
+        const subscription = event.data.object;
 
-        // console.log(
-        //   `Subscription updated for customer ${subscription.customer}: ${subscription.status}`,
-        // );
-
-        // Check for expiration or status changes (e.g., past_due, canceled)
         if (
           subscription.status === "past_due" ||
           subscription.status === "canceled"
@@ -148,10 +142,6 @@ export async function POST(req: Request) {
           });
 
           await unAssignPhoneNumber(business.id);
-
-          // console.log(
-          //   `Business ${business.id} downgraded due to subscription status`,
-          // );
         }
 
         break;
