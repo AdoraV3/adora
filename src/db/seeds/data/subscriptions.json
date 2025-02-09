@@ -93,26 +93,7 @@
     ],
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0"
   },
-  {
-    "plan": "premium",
-    "period": "yearly",
-    "amount": 4309,
-    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
-    "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
-    "paymentProvider": "stripe",
-    "features": [
-      "2000 Calls",
-      "Custom call scripts.",
-      "Priority email support.",
-      "Full conversational AI technology.",
-      "24/7 answering, Call forwarding and Outbound calls.",
-      " Customized greeting.",
-      "Company operations in real-time.",
-      "Multiple languages and voice choices.",
-      "Detailed usage analytics.",
-      "Answers multiple calls simultaneously."
-    ]
-  },
+ 
 
   {
     "plan": "standard",
@@ -135,6 +116,26 @@
       "Advanced voice recognition.",
       "Multilingual support Integration with Twilio for SMS and email notifications.",
       "Phone support."
+    ]
+  },
+  {
+    "plan": "premium",
+    "period": "yearly",
+    "amount": 4309,
+    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
+    "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
+    "paymentProvider": "stripe",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
     ]
   },
   {
