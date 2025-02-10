@@ -163,7 +163,7 @@ export function Edit() {
   return (
     <Form {...form}>
       <form
-        className="mt-20 md:grid max-w-3xl items-center gap-5 bg-white-100 grid-cols-2"
+        className="mt-20 flex flex-col md:grid max-w-3xl md:items-center gap-y-6 md:gap-5 bg-white-100 grid-cols-2"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
