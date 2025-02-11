@@ -291,7 +291,7 @@
   {
     "plan": "premium",
     "period": "yearly",
-    "amount": 3000,
+    "amount": 4309,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
     "paymentProvider": "paystack",
@@ -312,7 +312,7 @@
   {
     "plan": "enterprise",
     "period": "yearly",
-    "amount": 4000,
+    "amount": "Custom",
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
     "paymentProvider": "paystack",
