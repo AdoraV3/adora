@@ -8,8 +8,6 @@ export const voice = pgTable("voice", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text("name").notNull(),
-  language: text("language").default("english"),
   gender: text("gender", {
     enum: genderEnum,
   }).default("male"),

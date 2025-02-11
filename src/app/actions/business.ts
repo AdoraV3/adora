@@ -41,6 +41,7 @@ export const createBusinessAction = authenticationProcedure
       voice,
       category,
       country,
+      businessPhoneNumber,
       businessCountry,
     } = input;
     const { id: userId } = ctx;
@@ -105,7 +106,7 @@ export const createBusinessAction = authenticationProcedure
           assistantId: newAssistant.id,
           name: agentName,
           phoneNumberId: phone,
-          voiceId: findVoice.id,
+          voiceId: voice,
           provider: findVoice.provider,
           categoryId: category,
         },
@@ -124,7 +125,7 @@ export const createBusinessAction = authenticationProcedure
 
       updateProfile(userId, {
         country,
-        phone,
+        phone: businessPhoneNumber,
       });
 
       await createBusiness(

@@ -16,18 +16,18 @@ import { useEffect } from "react";
 
 export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const { isOpen, onClose, onOpen } = props;
-  const { data } = useServerActionQuery(getBusinessAction, {
+  const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
     queryKey: ["getBusiness"],
   });
 
-  const business = data?.data;
+  const business = data?.data ?? null;
 
   useEffect(() => {
-    if (!business?.isProfileCompleted) {
+    if (!isPending && !business?.isProfileCompleted) {
       onOpen();
     }
-  }, [business, onOpen]);
+  }, [business, onOpen, isPending]);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

@@ -95,6 +95,9 @@ jobs:
       # - name: Run Migration
       #   run: pnpm run db:migrate
 
+      # - name: Run MDB Push
+      #   run: pnpm run db:push
+
       # - name: Run DB Reset
       #   run: pnpm run db:reset
 
