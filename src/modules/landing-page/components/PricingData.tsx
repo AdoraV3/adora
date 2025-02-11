@@ -15,15 +15,20 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
   );
 
   return (
-    <section className="grid grid-cols-1 md:px-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] sm:mt-8">
+    <section className="shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] grid grid-cols-1 gap-4 rounded-2xl bg-white-100 p-5 sm:mt-8 sm:grid-cols-2 md:grid-cols-3 md:px-20 lg:grid-cols-4">
       {filteredSubscriptions?.map(plan => (
         <PricingCard
-          price={formatCurrency(plan.amount ?? 0, {
-            style: "currency",
-            currencyDisplay: "symbol",
-            currency: "USD",
-          })}
+          price={
+            typeof plan.amount === "string"
+              ? plan.amount
+              : formatCurrency(plan.amount ?? 0, {
+                  style: "currency",
+                  currencyDisplay: "symbol",
+                  currency: "USD",
+                })
+          }
           key={plan.id}
+          description={plan?.description ?? ""}
           isYearly={view === "yearly"}
           features={plan.features ?? []}
           plan={plan?.plan ?? ""}

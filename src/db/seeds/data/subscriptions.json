@@ -2,7 +2,7 @@
   {
     "plan": "basic",
     "period": "monthly",
-    "subtitle": "For small businesses taking their first steps toward AI-powered customer support.",
+    "description": "For small businesses taking their first steps toward AI-powered customer support.",
     "amount": 99,
     "priceId": "price_1QS08IEZh5HgtazOUSE9mIwZ",
     "paymentProvider": "stripe",
@@ -19,7 +19,7 @@
   {
     "plan": "standard",
     "period": "monthly",
-    "subtitle": "Ideal for businesses looking for more flexibility and functionality.",
+    "description": "Ideal for businesses looking for more flexibility and functionality.",
     "amount": 199,
     "priceId": "price_1QS09PEZh5HgtazOXtkRKSB6",
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0",
@@ -39,7 +39,7 @@
   {
     "plan": "pro",
     "period": "monthly",
-    "subtitle": "Designed for growing businesses that need advanced capabilities and scalability.",
+    "description": "Designed for growing businesses that need advanced capabilities and scalability.",
     "amount": 399,
     "priceId": "price_1QS0ASEZh5HgtazOC5a1lPmj",
     "paymentLink": "https://buy.stripe.com/14k9EwbZW36lbK06ot",
@@ -59,7 +59,7 @@
   {
     "plan": "enterprise",
     "period": "monthly",
-    "subtitlle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
+    "description": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
     "amount": "Custom",
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
