@@ -54,7 +54,7 @@ export default function VerifyOtp() {
   }, [otp, form]);
 
   return (
-    <div className="flex flex-col items-center justify-between flex-1">
+    <div className="flex flex-col items-center my-auto justify-between ">
       <div className="text-center flex-1 flex flex-col gap-2">
         <h6 className="font-semibold text-4xl font-coreC text-black-100 md:text-4xl">
           Verify Email
