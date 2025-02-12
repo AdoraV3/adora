@@ -11,7 +11,7 @@ export const knowledgeBase = pgTable("knowledge_base", {
   fileId: text("file_id"),
   size: integer("size"),
   originalName: text("original_name"),
-  vapiKnowledgeBaseId: text("vapi_knowledge_base_id").notNull(),
+  vapiKnowledgeBaseId: text("vapi_knowledge_base_id").notNull().default(""),
   businessId: text("business_id")
     .notNull()
     .references(() => business.id, { onDelete: "cascade" }),
