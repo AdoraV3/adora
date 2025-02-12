@@ -222,7 +222,32 @@ export const updateBusinessAction = authenticationProcedure
     });
 
     const client = new VapiClient({ token: env.VAPI_API_KEY });
+
+    //   messages: [
+    //     {
+    //       role: "system",
+    //       content: categoryResult?.systemPrompt as string,
+    //     },
+    //   ],
+    //   model: "gpt-4",
+    //   provider: "openai",
+    //   toolIds: [newTool.id],
+    // },
+
+    const assistant = await client.assistants.get(agent.assistantId);
+
     await client.assistants.update(agent.assistantId, {
       name: agentName,
+      model: {
+        ...assistant.model,
+        messages: [
+          {
+            role: "system",
+            content: categoryResult?.systemPrompt as string,
+          },
+        ],
+        provider: assistant.model?.provider as any,
+        model: assistant.model?.model as any,
+      },
     });
   });
