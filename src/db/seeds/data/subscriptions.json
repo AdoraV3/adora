@@ -79,7 +79,7 @@
   {
     "plan": "basic",
     "period": "yearly",
-    "subtitlle": "",
+    "description": "",
     "amount": 1069,
     "priceId": "price_1QS0FEEZh5HgtazOP4xeUInI",
     "paymentProvider": "stripe",
@@ -93,11 +93,10 @@
     ],
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0"
   },
- 
-
   {
     "plan": "standard",
     "period": "yearly",
+    "description": "",
     "amount": 2149,
     "priceId": "price_1QS0GHEZh5HgtazOh9DO5LM5",
     "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
@@ -121,6 +120,7 @@
   {
     "plan": "premium",
     "period": "yearly",
+    "description": "",
     "amount": 4309,
     "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
     "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
@@ -141,6 +141,7 @@
   {
     "plan": "enterprise",
     "period": "yearly",
+    "description": "",
     "amount": 100,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
@@ -164,6 +165,7 @@
   {
     "plan": "basic",
     "period": "monthly",
+    "description": "",
     "amount": 1000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -181,6 +183,7 @@
   {
     "plan": "standard",
     "period": "monthly",
+    "description": "",
     "amount": 2000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -205,6 +208,7 @@
   {
     "plan": "premium",
     "period": "monthly",
+    "description": "",
     "amount": 3000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -226,6 +230,7 @@
   {
     "plan": "enterprise",
     "period": "monthly",
+    "description": "",
     "amount": 4000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -250,6 +255,7 @@
   {
     "plan": "basic",
     "period": "yearly",
+    "description": "",
     "amount": 1000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -267,6 +273,7 @@
   {
     "plan": "standard",
     "period": "yearly",
+    "description": "",
     "amount": 2000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -291,6 +298,7 @@
   {
     "plan": "premium",
     "period": "yearly",
+    "description": "",
     "amount": 4309,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
