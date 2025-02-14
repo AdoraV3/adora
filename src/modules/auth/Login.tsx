@@ -168,13 +168,13 @@ export function Login() {
         <div className=" divide-x  mt-6 divide-primary text-center">
           <Link
             className="text-primary pr-3 font-medium text-lg font-satoshi"
-            href="/"
+            href="/terms"
           >
             Terms of Use
           </Link>
           <Link
             className="text-primary font-medium pl-3 text-lg font-satoshi"
-            href="/"
+            href="/privacy"
           >
             Privacy Policy
           </Link>

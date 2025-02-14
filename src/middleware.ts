@@ -12,6 +12,7 @@ const publicRoutes = [
   "/contact-us",
   "/about",
   "/terms",
+  "/privacy"
 ];
 
 const authRoutes = ["/login", "/register"];

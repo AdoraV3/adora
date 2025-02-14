@@ -2,7 +2,7 @@
   {
     "plan": "basic",
     "period": "monthly",
-    "subtitle": "For small businesses taking their first steps toward AI-powered customer support.",
+    "description": "For small businesses taking their first steps toward AI-powered customer support.",
     "amount": 99,
     "priceId": "price_1QS08IEZh5HgtazOUSE9mIwZ",
     "paymentProvider": "stripe",
@@ -19,7 +19,7 @@
   {
     "plan": "standard",
     "period": "monthly",
-    "subtitle": "Ideal for businesses looking for more flexibility and functionality.",
+    "description": "Ideal for businesses looking for more flexibility and functionality.",
     "amount": 199,
     "priceId": "price_1QS09PEZh5HgtazOXtkRKSB6",
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0",
@@ -39,7 +39,7 @@
   {
     "plan": "pro",
     "period": "monthly",
-    "subtitle": "Designed for growing businesses that need advanced capabilities and scalability.",
+    "description": "Designed for growing businesses that need advanced capabilities and scalability.",
     "amount": 399,
     "priceId": "price_1QS0ASEZh5HgtazOC5a1lPmj",
     "paymentLink": "https://buy.stripe.com/14k9EwbZW36lbK06ot",
@@ -59,8 +59,8 @@
   {
     "plan": "enterprise",
     "period": "monthly",
-    "subtitle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
-    "amount": 1000,
+    "description": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
+    "amount": 0,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",
@@ -79,7 +79,7 @@
   {
     "plan": "basic",
     "period": "yearly",
-    "subtitlle": "",
+    "description": "",
     "amount": 1069,
     "priceId": "price_1QS0FEEZh5HgtazOP4xeUInI",
     "paymentProvider": "stripe",
@@ -94,29 +94,9 @@
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0"
   },
   {
-    "plan": "premium",
-    "period": "yearly",
-    "amount": 4309,
-    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
-    "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
-    "paymentProvider": "stripe",
-    "features": [
-      "2000 Calls",
-      "Custom call scripts.",
-      "Priority email support.",
-      "Full conversational AI technology.",
-      "24/7 answering, Call forwarding and Outbound calls.",
-      " Customized greeting.",
-      "Company operations in real-time.",
-      "Multiple languages and voice choices.",
-      "Detailed usage analytics.",
-      "Answers multiple calls simultaneously."
-    ]
-  },
-
-  {
     "plan": "standard",
     "period": "yearly",
+    "description": "",
     "amount": 2149,
     "priceId": "price_1QS0GHEZh5HgtazOh9DO5LM5",
     "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
@@ -138,8 +118,30 @@
     ]
   },
   {
+    "plan": "premium",
+    "period": "yearly",
+    "description": "",
+    "amount": 4309,
+    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
+    "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
+    "paymentProvider": "stripe",
+    "features": [
+      "2000 Calls",
+      "Custom call scripts.",
+      "Priority email support.",
+      "Full conversational AI technology.",
+      "24/7 answering, Call forwarding and Outbound calls.",
+      " Customized greeting.",
+      "Company operations in real-time.",
+      "Multiple languages and voice choices.",
+      "Detailed usage analytics.",
+      "Answers multiple calls simultaneously."
+    ]
+  },
+  {
     "plan": "enterprise",
     "period": "yearly",
+    "description": "",
     "amount": 100,
     "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
@@ -163,6 +165,7 @@
   {
     "plan": "basic",
     "period": "monthly",
+    "description": "",
     "amount": 1000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -180,6 +183,7 @@
   {
     "plan": "standard",
     "period": "monthly",
+    "description": "",
     "amount": 2000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -204,6 +208,7 @@
   {
     "plan": "premium",
     "period": "monthly",
+    "description": "",
     "amount": 3000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -225,6 +230,7 @@
   {
     "plan": "enterprise",
     "period": "monthly",
+    "description": "",
     "amount": 4000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -249,6 +255,7 @@
   {
     "plan": "basic",
     "period": "yearly",
+    "description": "",
     "amount": 1000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -266,6 +273,7 @@
   {
     "plan": "standard",
     "period": "yearly",
+    "description": "",
     "amount": 2000,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
@@ -290,7 +298,8 @@
   {
     "plan": "premium",
     "period": "yearly",
-    "amount": 3000,
+    "description": "",
+    "amount": 4309,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
     "paymentProvider": "paystack",
@@ -311,7 +320,7 @@
   {
     "plan": "enterprise",
     "period": "yearly",
-    "amount": 4000,
+    "amount": 0,
     "priceId": "PLN_q33i0c3oyb0s4ne",
     "paymentLink": "https://paystack.com/pay/2ntwjyu8ky",
     "paymentProvider": "paystack",
