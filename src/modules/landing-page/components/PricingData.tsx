@@ -19,8 +19,8 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
       {filteredSubscriptions?.map(plan => (
         <PricingCard
           price={
-            typeof plan.amount === "string"
-              ? plan.amount
+            plan.plan?.toLowerCase() === "enterprise"
+              ? "Custom"
               : formatCurrency(plan.amount ?? 0, {
                   style: "currency",
                   currencyDisplay: "symbol",
