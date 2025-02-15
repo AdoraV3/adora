@@ -9,7 +9,7 @@ import { SignUp } from "./SignUp";
 // create a nodemailer transporter for sending emails
 const transporter = nodemailer.createTransport({
   host: env.SMTP_HOST,
-  port: parseInt(env.SMTP_PORT ?? "587", 10),
+  port: Number(env.SMTP_PORT ?? "587"),
   secure: true,
   auth: {
     user: env.SMTP_USERNAME,
