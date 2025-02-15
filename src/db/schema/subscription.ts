@@ -19,6 +19,7 @@ export const subscription = pgTable("subscription", {
   plan: varchar("subscription_plan", {
     enum: subscriptionPlanEnum,
   }).default("basic"),
+  description: text("description"),
   period: varchar("subscription_period", {
     enum: subscriptionPlanPeriod,
   }).default("monthly"),
