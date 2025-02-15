@@ -26,16 +26,18 @@ export async function sendVerificationEmail({
   token: string;
   name: string;
 }) {
-  const signUpHTML = render(SignUp({ token, name, email: to }));
-
-  const mailOptions = {
-    from: env.SMTP_FROM_EMAIL,
-    to,
-    subject: "Verify your email address",
-    html: signUpHTML,
-  };
-
-  await transporter.sendMail(mailOptions);
+  try {
+    const signUpHTML = render(SignUp({ token, name, email: to }));
+    const mailOptions = {
+      from: env.SMTP_FROM_EMAIL,
+      to,
+      subject: "Verify your email address",
+      html: signUpHTML,
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 }
 
 export async function sendResetPasswordEmail({
