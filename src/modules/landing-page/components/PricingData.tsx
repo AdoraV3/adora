@@ -18,18 +18,22 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
     <section className="grid grid-cols-1 md:px-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-5 rounded-2xl gap-4 bg-white-100 shadow-[0px_4px_25px_0px_hsla(0 0%,0%,0.05)] sm:mt-8">
       {filteredSubscriptions?.map(plan => (
         <PricingCard
-          price={formatCurrency(plan.amount ?? 0, {
-            style: "currency",
-            currencyDisplay: "symbol",
-            currency: "USD",
-          })}
+          price={
+            plan.plan === "enterprise"
+              ? "Custom"
+              : formatCurrency(plan.amount ?? 0, {
+                  style: "currency",
+                  currencyDisplay: "symbol",
+                  currency: "USD",
+                })
+          }
           key={plan.id}
           isYearly={view === "yearly"}
           features={plan.features ?? []}
           plan={plan?.plan ?? ""}
-          ctaText={plan.plan === "enterprise" ? "Contact Us" : "Choose Plan"}
+          ctaText="Choose Plan"
           isPopular={plan.plan === "premium"}
-          priceId={plan.priceId ?? ""}
+          priceId="price_1QsnhBEZh5HgtazOw10TDoxc"
         />
       ))}
     </section>

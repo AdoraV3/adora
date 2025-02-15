@@ -52,7 +52,7 @@ export function DashboardNav() {
     getSubscriptionAction,
     {
       input: business?.subscriptionId as string,
-      queryKey: ["getSubscription"],
+      queryKey: ["getSubscription", business?.subscriptionId as string],
       enabled: !!business?.subscriptionId,
     },
   );

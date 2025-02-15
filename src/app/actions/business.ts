@@ -78,17 +78,34 @@ export const createBusinessAction = authenticationProcedure
     const client = new VapiClient({ token: env.VAPI_API_KEY });
     const newTool = await client.tools.create({
       type: "transferCall",
-
       destinations: [
         {
           type: "number",
           number: businessPhoneNumber,
+          message:
+            "I am forwarding your call to a live agent. Please stay on the line.",
         },
       ],
-
       function: {
         name: `transfer-call`,
         description: "Transfer call to the business",
+        parameters: {
+          type: "object",
+          properties: {
+            destination: {
+              type: "object",
+              properties: {
+                number: {
+                  type: "string",
+                },
+                message: {
+                  type: "string",
+                },
+              },
+            },
+          },
+          required: ["destination"],
+        },
       },
     });
 
@@ -222,17 +239,6 @@ export const updateBusinessAction = authenticationProcedure
     });
 
     const client = new VapiClient({ token: env.VAPI_API_KEY });
-
-    //   messages: [
-    //     {
-    //       role: "system",
-    //       content: categoryResult?.systemPrompt as string,
-    //     },
-    //   ],
-    //   model: "gpt-4",
-    //   provider: "openai",
-    //   toolIds: [newTool.id],
-    // },
 
     const assistant = await client.assistants.get(agent.assistantId);
 

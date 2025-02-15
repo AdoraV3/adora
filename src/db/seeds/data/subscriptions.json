@@ -61,7 +61,7 @@
     "period": "monthly",
     "subtitle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
     "amount": 1000,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "priceId": "price_1QLIgrEZh5HgtazOkFB2oZgW",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",
     "features": [
@@ -141,7 +141,7 @@
     "plan": "enterprise",
     "period": "yearly",
     "amount": 100,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "priceId": "price_1QLIgrEZh5HgtazOkFB2oZgW",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",
     "features": [
