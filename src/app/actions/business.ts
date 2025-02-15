@@ -87,7 +87,7 @@ export const createBusinessAction = authenticationProcedure
       ],
 
       function: {
-        name: `transfer_call_${businessName}`,
+        name: `transfer-call`,
         description: "Transfer call to the business",
       },
     });

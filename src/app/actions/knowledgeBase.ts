@@ -71,21 +71,6 @@ export const createKnowledgeBaseAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Knowledge base not found");
     }
 
-    const assistant = await client.assistants.get(agent.assistantId);
-
-    if (!assistant.model?.model || !assistant.model?.provider) {
-      throw new ZSAError("NOT_FOUND", "Model or provider not found");
-    }
-    await client.assistants.update(agent.assistantId, {
-      ...assistant,
-      model: {
-        ...assistant.model,
-        model: assistant.model?.model as any,
-        provider: assistant?.model?.provider as any,
-        knowledgeBaseId: knowledgeBase.id,
-      },
-    });
-
     const [newKnowledgeBase] = await createKnowledgeBase({
       fileId,
       url,
@@ -94,6 +79,22 @@ export const createKnowledgeBaseAction = authenticationProcedure
       size,
       vapiKnowledgeBaseId: knowledgeBase.id,
     });
+
+    const assistant = await client.assistants.get(agent.assistantId);
+
+    if (!assistant.model?.model || !assistant.model?.provider) {
+      throw new ZSAError("NOT_FOUND", "Model or provider not found");
+    }
+    await client.assistants.update(agent.assistantId, {
+      // ...assistant,
+      model: {
+        ...assistant.model,
+        // model: assistant.model?.model as any,
+        // provider: assistant?.model?.provider as any,
+        knowledgeBaseId: knowledgeBase.id,
+      },
+    });
+
     return { success: true, data: newKnowledgeBase };
   });
 
@@ -112,7 +113,7 @@ export const deleteKnowledgeBaseAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Knowledge base not found.");
     }
     await client.knowledgeBases.delete(knowledgeBase?.vapiKnowledgeBaseId);
-
+    await client.files.delete(knowledgeBase?.fileId);
     await deleteKnowledgeBase(business?.id);
 
     return { success: true };
