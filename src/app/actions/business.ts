@@ -120,6 +120,19 @@ export const createBusinessAction = authenticationProcedure
         model: "gpt-4",
         provider: "openai",
         toolIds: [newTool.id],
+        tools: [
+          {
+            type: "transferCall",
+            destinations: [
+              {
+                type: "number",
+                number: businessPhoneNumber,
+                message:
+                  "I am forwarding your call to a live agent. Please stay on the line.",
+              },
+            ],
+          },
+        ],
       },
 
       name: agentName,
@@ -128,7 +141,6 @@ export const createBusinessAction = authenticationProcedure
         provider: "11labs",
         voiceId: findVoice?.createdVoiceId,
       },
-
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
     });
 

@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport({
     user: env.SMTP_USERNAME,
     pass: env.RESEND_API_KEY,
   },
+  name: "adora3.com",
 });
 
 export async function sendVerificationEmail({
