@@ -35,8 +35,6 @@ import {
 } from "@/lib/hooks/server-action-hooks";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
 import {
-  FloatingInput,
-  FloatingLabel,
   PhoneNumberInput,
 } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -152,7 +150,7 @@ export function Edit() {
   return (
     <Form {...form}>
       <form
-        className="mt-20 flex flex-col md:grid max-w-3xl md:items-center gap-y-6 md:gap-5 bg-white-100 grid-cols-2"
+        className="mt-20 flex max-w-3xl grid-cols-2 flex-col gap-y-6 bg-white-100 md:grid md:items-center md:gap-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -293,35 +291,36 @@ export function Edit() {
           name="category"
           render={({ field }) => (
             <FormItem key={field.value} id="category">
-              <FormControl>
-                <div className="relative">
-                  <FloatingLabel>Business Category</FloatingLabel>
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
-                      <SelectValue
-                        placeholder="Category"
-                        className="!text-[#8c8c8c40]"
-                      />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        <SelectLabel className="text-[#8c8c8c80]">
-                          Select a business category
-                        </SelectLabel>
-                        {categories?.data?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                            key={el.id ?? ""}
-                            value={el.id ?? ""}
-                          >
-                            {el.label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </FormControl>
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Business Category
+              </FormLabel>
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger className=" h-12 focus:border-primary ">
+                    <SelectValue
+                      placeholder="Category"
+                      className="!text-[#8c8c8c40]"
+                    />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent sideOffset={5}>
+                  <SelectGroup>
+                    <SelectLabel className="text-[#8c8c8c80]">
+                      Select a business category
+                    </SelectLabel>
+                    {categories?.data?.map(el => (
+                      <SelectItem
+                        className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                        key={el.id ?? ""}
+                        value={el.id ?? ""}
+                      >
+                        {el.label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+
               <FormMessage />
             </FormItem>
           )}
@@ -332,14 +331,16 @@ export function Edit() {
           name="agentName"
           render={({ field }) => (
             <FormItem id="agentName">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Agent Name
+              </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <FloatingInput
-                    className="h-12"
+                  <Input
+                    className="border-none bg-gray-650"
                     placeholder="Enter agent name"
                     {...field}
                   />
-                  <FloatingLabel>Agent Name</FloatingLabel>
                 </div>
               </FormControl>
               <FormMessage />
@@ -351,34 +352,34 @@ export function Edit() {
           name="voice"
           render={({ field }) => (
             <FormItem key={field.value} id="voice" className="relative">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Agent Voice
+              </FormLabel>
               <FormControl>
-                <div className="relative">
-                  <FloatingLabel>Agent Voice</FloatingLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className="peer h-12 border border-gray-550 bg-white-100 capitalize focus:border-primary ">
-                      <SelectValue
-                        placeholder="male"
-                        className="!text-[#8c8c8c40]"
-                      />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        <SelectLabel className="text-[#8c8c8c80]">
-                          Select a voice
-                        </SelectLabel>
-                        {voices?.data?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal capitalize text-[#8c8c8c]"
-                            key={el.id}
-                            value={el.id}
-                          >
-                            {el.gender}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className=" h-12 capitalize focus:border-primary ">
+                    <SelectValue
+                      placeholder="male"
+                      className="!text-[#8c8c8c40]"
+                    />
+                  </SelectTrigger>
+                  <SelectContent sideOffset={5}>
+                    <SelectGroup>
+                      <SelectLabel className="text-[#8c8c8c80]">
+                        Select a voice
+                      </SelectLabel>
+                      {voices?.data?.map(el => (
+                        <SelectItem
+                          className="font-satoshi text-base font-normal capitalize text-[#8c8c8c]"
+                          key={el.id}
+                          value={el.id}
+                        >
+                          {el.gender}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -391,34 +392,34 @@ export function Edit() {
             name="phoneNumber"
             render={({ field }) => (
               <FormItem id="phone" className="relative">
+                <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                  Agent Phone
+                </FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <FloatingLabel>Agent Phone</FloatingLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="bg-white peer h-12 border border-gray-550 focus:border-primary ">
-                        <SelectValue
-                          placeholder="Select Phone Number"
-                          className="!text-[#8c8c8c40]"
-                        />
-                      </SelectTrigger>
-                      <SelectContent sideOffset={5}>
-                        <SelectGroup>
-                          <SelectLabel className="text-[#8c8c8c80]">
-                            Select an agent phone
-                          </SelectLabel>
-                          {phones?.data?.map(el => (
-                            <SelectItem
-                              className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                              key={el.id}
-                              value={el.id}
-                            >
-                              {formatPhoneNumber(el.phoneNumber)}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className=" h-12 focus:border-primary ">
+                      <SelectValue
+                        placeholder="Select Phone Number"
+                        className="!text-[#8c8c8c40]"
+                      />
+                    </SelectTrigger>
+                    <SelectContent sideOffset={5}>
+                      <SelectGroup>
+                        <SelectLabel className="text-[#8c8c8c80]">
+                          Select an agent phone
+                        </SelectLabel>
+                        {phones?.data?.map(el => (
+                          <SelectItem
+                            className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                            key={el.id}
+                            value={el.id}
+                          >
+                            {formatPhoneNumber(el.phoneNumber)}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
