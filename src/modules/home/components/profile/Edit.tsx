@@ -34,9 +34,7 @@ import {
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
-import {
-  PhoneNumberInput,
-} from "@/modules/commons/components";
+import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
 import { useEffect } from "react";
