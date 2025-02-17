@@ -2,10 +2,11 @@ import { ResetPassword } from "@/emails/ResetPassword";
 import { render } from "@react-email/render";
 import { env } from "env.mjs";
 import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { ContactUs } from "./ContactUs";
 import { SignUp } from "./SignUp";
 
-// const resend = new Resend(env.EMAIL_SERVER_PASSWORD);
+const resend = new Resend(env.RESEND_API_KEY);
 // create a nodemailer transporter for sending emails
 const transporter = nodemailer.createTransport({
   host: env.SMTP_HOST,
@@ -35,7 +36,7 @@ export async function sendVerificationEmail({
       subject: "Verify your email address",
       html: signUpHTML,
     };
-    await transporter.sendMail(mailOptions);
+    await resend.emails.send(mailOptions);
   } catch (error) {
     console.error("Error sending email:", error);
   }
