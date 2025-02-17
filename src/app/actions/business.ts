@@ -93,7 +93,7 @@ export const createBusinessAction = authenticationProcedure
           type: "object",
           properties: {
             destination: {
-              type: "object",
+              type: "string",
               properties: {
                 number: {
                   type: "string",
