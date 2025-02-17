@@ -97,8 +97,8 @@ jobs:
       # - name: Run DB Push
       #   run: pnpm run db:push
 
-      # - name: Run DB Reset
-      #   run: pnpm run db:reset
+      - name: Run DB Reset
+        run: pnpm run db:reset
 
       # - name: Run Seeding
       #   run: pnpm run db:seed
