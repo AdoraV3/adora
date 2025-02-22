@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CrmWebhookForm } from "./CrmWebhookForm";
+import { useState } from "react";
 import appointmentData from "../../../db/seeds/data/appointment_booking.json";
 import calendarData from "../../../db/seeds/data/calendar_check.json";
+import { BookAppointmentForm } from "./BookAppointmentForm";
+import { CreateAvailabilityForm } from "./CreateAvailabilityForm";
 
 export function Appointment() {
   function Step({ text, linkText, linkHref, suffix, isBold, last }: any) {
@@ -166,7 +167,7 @@ export function Appointment() {
                 }}
                 className=""
               >
-                <CrmWebhookForm setstage={setstage} />
+                <CreateAvailabilityForm setStage={setstage} />
               </div>
             </div>
           )}
@@ -242,7 +243,7 @@ export function Appointment() {
                 }}
                 className=""
               >
-                <CrmWebhookForm setstage={setstage} />
+                <BookAppointmentForm setStage={setstage} />
               </div>
             </div>
           )}

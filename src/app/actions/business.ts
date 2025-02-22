@@ -87,7 +87,7 @@ export const createBusinessAction = authenticationProcedure
         },
       ],
       function: {
-        name: `transfer-call`,
+        name: "transfer-call",
         description: "Transfer call to the business",
         parameters: {
           type: "object",
@@ -120,23 +120,21 @@ export const createBusinessAction = authenticationProcedure
         model: "gpt-4",
         provider: "openai",
         toolIds: [newTool.id],
-        tools: [
-          {
-            type: "transferCall",
-            destinations: [
-              {
-                type: "number",
-                number: businessPhoneNumber,
-                message:
-                  "I am forwarding your call to a live agent. Please stay on the line.",
-              },
-            ],
-          },
-        ],
+        // tools: [
+        //   {
+        //     type: "transferCall",
+        //     destinations: [
+        //       {
+        //         type: "number",
+        //         number: businessPhoneNumber,
+        //         message:
+        //           "I am forwarding your call to a live agent. Please stay on the line.",
+        //       },
+        //     ],
+        //   },
+        // ],
       },
-
       name: agentName,
-
       voice: {
         provider: "11labs",
         voiceId: findVoice?.createdVoiceId,

@@ -2,7 +2,7 @@
 
 "use server";
 
-import { getBusiness } from "@/data-access";
+import { getBusiness, getUserByEmail } from "@/data-access";
 import { getAgent, getAgentPhoneNumber } from "@/data-access/agents";
 import { db } from "@/db";
 import { agent } from "@/db/schema";
@@ -13,7 +13,6 @@ import { eq } from "drizzle-orm";
 import { env } from "env.mjs";
 import { z } from "zod";
 import { ZSAError } from "zsa";
-// import { updateAssistant } from "./vapi";
 
 export const getAgentPhoneNumberAction = authenticationProcedure
   .createServerAction()
@@ -92,6 +91,50 @@ export const getAgentWithVoiceAction = authenticationProcedure
     }
 
     return { success: true, data: agentDetails };
+  });
+
+export const getProfileAction = authenticationProcedure
+  .createServerAction()
+  .handler(async ({ ctx }) => {
+    const { id, email } = ctx;
+    const business = await getBusiness(id);
+    if (!business) {
+      throw new ZSAError("NOT_FOUND", "Business not found");
+    }
+
+    const user = await getUserByEmail(email);
+    if (!user) {
+      throw new ZSAError("NOT_FOUND", "User not found");
+    }
+
+    const existingAgent = await db.query.agent.findFirst({
+      where: eq(agent?.id, business?.agentId),
+      with: {
+        phoneNumber: true,
+      },
+    });
+
+    if (!existingAgent) {
+      throw new ZSAError("NOT_FOUND", "Agent not found");
+    }
+
+    const profile = {
+      businessCountry: business?.country,
+      businessName: business?.name,
+      country: user?.profile?.country,
+      phoneNumber: existingAgent?.phoneNumber?.phoneNumber,
+      name: user?.profile?.name,
+      agentName: existingAgent?.name,
+      category: existingAgent?.categoryId,
+      businessPhoneNumber: user?.profile?.phone,
+      voice: existingAgent?.voiceId,
+      isProfileCompleted: business?.isProfileCompleted,
+    };
+
+    return {
+      success: true,
+      profile,
+    };
   });
 
 export const updateAssistantAction = authenticationProcedure

@@ -25,7 +25,7 @@ export function AppointmentConfigForm(props: Readonly<Disclosure>) {
 
   const initialValues: AppointmentSchemaType = {
     scenarioId: "",
-    webhookUrl: "",
+    url: "",
   };
 
   const form = useForm<AppointmentSchemaType>({
@@ -93,7 +93,7 @@ export function AppointmentConfigForm(props: Readonly<Disclosure>) {
               />
               <FormField
                 control={form.control}
-                name="webhookUrl"
+                name="url"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>

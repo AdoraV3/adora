@@ -18,7 +18,7 @@ import { fileUploadSchema } from "@/modules/knowledge-base/validation";
 import { VapiClient } from "@vapi-ai/server-sdk";
 import { env } from "env.mjs";
 import { ZSAError } from "zsa";
-import { deleteVapiKnowledgeBase } from "./vapi";
+import { createVapiKnowledgeBase, deleteVapiKnowledgeBase } from "./vapi";
 
 export const getKnowledgeBaseAction = authenticationProcedure
   .createServerAction()
@@ -56,17 +56,57 @@ export const createKnowledgeBaseAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Category not found");
     }
 
-    const client = new VapiClient({ token: env.VAPI_API_KEY });
-    const knowledgeBase = await client.knowledgeBases.create({
+    const payload = {
       provider: "trieve",
-      vectorStoreCreatePlan: {
-        fileIds: [fileId],
+      searchPlan: {
+        scoreThreshold: 0.2,
+        searchType: "semantic",
       },
-      vectorStoreSearchPlan: {
-        searchType: "fulltext",
+      createPlan: {
+        type: "create",
+        chunkPlans: [
+          {
+            fileIds: [fileId],
+            websites: [url],
+            rebalanceChunks: true,
+            targetSplitsPerChunk: 50,
+          },
+        ],
       },
+      // vectorStoreSearchPlan: {
+      //   searchType: "hybrid",
+      // },
       name: `Knowledge Base for ${business.name}`,
-    });
+    };
+
+    const knowledgeBase = await createVapiKnowledgeBase(payload);
+
+    const client = new VapiClient({ token: env.VAPI_API_KEY });
+    // const knowledgeBase = await client.knowledgeBases.create({
+    //   provider: "trieve",
+    //   vectorStoreCreatePlan: {
+    //     fileIds: [fileId],
+    //   },
+    //   searchPlan: {
+    //     scoreThreshold: 0.2,
+    //     searchType: "semantic",
+    //   },
+    //   createPlan: {
+    //     type: "create",
+    //     chunkPlans: [
+    //       {
+    //         fileIds: [fileId],
+    //         websites: [url],
+    //         rebalanceChunks: true,
+    //         targetSplitsPerChunk: 50,
+    //       },
+    //     ],
+    //   },
+    //   // vectorStoreSearchPlan: {
+    //   //   searchType: "hybrid",
+    //   // },
+    //   name: `Knowledge Base for ${business.name}`,
+    // });
     if (!knowledgeBase.id) {
       throw new ZSAError("NOT_FOUND", "Knowledge base not found");
     }

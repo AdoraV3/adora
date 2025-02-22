@@ -37,7 +37,7 @@
     ]
   },
   {
-    "plan": "pro",
+    "plan": "premium",
     "period": "monthly",
     "description": "Designed for growing businesses that need advanced capabilities and scalability.",
     "amount": 399,
@@ -102,7 +102,7 @@
     "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
     "paymentProvider": "stripe",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",

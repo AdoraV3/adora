@@ -91,7 +91,7 @@ jobs:
       # - name: Generate Migration
       #   run: pnpm run db:generate
 
-      # - name: Run Migration
+      # - name: Run Migrationt
       #   run: pnpm run db:migrate
 
       # - name: Run DB Push

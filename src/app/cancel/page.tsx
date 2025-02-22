@@ -9,7 +9,7 @@ export default function Cancel() {
       </h1>
       <p className="leading-7">The good news is, you can try again 😊</p>
       <div className="mt-5">
-        <Link href="/">
+        <Link href="/pricing">
           <Button variant="outline">Home</Button>
         </Link>
       </div>
