@@ -9,16 +9,16 @@ import {
   updateKnowledgeBase,
 } from "@/data-access/knowledgeBase";
 import { getCategory } from "@/data-access/systemPrompt";
-import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
-import { assistantConfig } from "@/mock";
 import {
   RateLimitConfig,
   RateLimiterUtility,
 } from "@/modules/commons/utils/RateLimiterUtility";
 import { fileUploadSchema } from "@/modules/knowledge-base/validation";
+import { VapiClient } from "@vapi-ai/server-sdk";
+import { env } from "env.mjs";
 import { ZSAError } from "zsa";
-import { deleteVapiKnowledgeBase, updateAssistantKnowledgeBase } from "./vapi";
+import { createVapiKnowledgeBase, deleteVapiKnowledgeBase } from "./vapi";
 
 export const getKnowledgeBaseAction = authenticationProcedure
   .createServerAction()
@@ -57,29 +57,84 @@ export const createKnowledgeBaseAction = authenticationProcedure
     }
 
     const payload = {
-      model: {
-        ...assistantConfig.model,
-        messages: [
+      provider: "trieve",
+      searchPlan: {
+        scoreThreshold: 0.2,
+        searchType: "semantic",
+      },
+      createPlan: {
+        type: "create",
+        chunkPlans: [
           {
-            role: "system",
-            content: category?.systemPrompt,
+            fileIds: [fileId],
+            websites: [url],
+            rebalanceChunks: true,
+            targetSplitsPerChunk: 50,
           },
         ],
-        knowledgeBase: {
-          ...assistantConfig.model.knowledgeBase,
-          fileIds: [fileId],
-        },
       },
+      // vectorStoreSearchPlan: {
+      //   searchType: "hybrid",
+      // },
+      name: `Knowledge Base for ${business.name}`,
     };
 
-    await updateAssistantKnowledgeBase(agent.assistantId, payload);
+    const knowledgeBase = await createVapiKnowledgeBase(payload);
+
+    const client = new VapiClient({ token: env.VAPI_API_KEY });
+    // const knowledgeBase = await client.knowledgeBases.create({
+    //   provider: "trieve",
+    //   vectorStoreCreatePlan: {
+    //     fileIds: [fileId],
+    //   },
+    //   searchPlan: {
+    //     scoreThreshold: 0.2,
+    //     searchType: "semantic",
+    //   },
+    //   createPlan: {
+    //     type: "create",
+    //     chunkPlans: [
+    //       {
+    //         fileIds: [fileId],
+    //         websites: [url],
+    //         rebalanceChunks: true,
+    //         targetSplitsPerChunk: 50,
+    //       },
+    //     ],
+    //   },
+    //   // vectorStoreSearchPlan: {
+    //   //   searchType: "hybrid",
+    //   // },
+    //   name: `Knowledge Base for ${business.name}`,
+    // });
+    if (!knowledgeBase.id) {
+      throw new ZSAError("NOT_FOUND", "Knowledge base not found");
+    }
+
     const [newKnowledgeBase] = await createKnowledgeBase({
       fileId,
       url,
       originalName,
       businessId: business?.id,
       size,
+      vapiKnowledgeBaseId: knowledgeBase.id,
     });
+
+    const assistant = await client.assistants.get(agent.assistantId);
+
+    if (!assistant.model?.model || !assistant.model?.provider) {
+      throw new ZSAError("NOT_FOUND", "Model or provider not found");
+    }
+    await client.assistants.update(agent.assistantId, {
+      // ...assistant,
+      model: {
+        ...assistant.model,
+        // model: assistant.model?.model as any,
+        // provider: assistant?.model?.provider as any,
+        knowledgeBaseId: knowledgeBase.id,
+      },
+    });
+
     return { success: true, data: newKnowledgeBase };
   });
 
@@ -91,16 +146,15 @@ export const deleteKnowledgeBaseAction = authenticationProcedure
     if (!business) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
+    const client = new VapiClient({ token: env.VAPI_API_KEY });
 
     const knowledgeBase = await getKnowledgeBase(business?.id);
-
-    await createTransaction(async trx => {
-      if (!knowledgeBase?.fileId) {
-        throw new ZSAError("NOT_FOUND", "Knowledge base not found.");
-      }
-      await deleteVapiKnowledgeBase(knowledgeBase?.fileId);
-      await deleteKnowledgeBase(business?.id, trx);
-    });
+    if (!knowledgeBase?.fileId) {
+      throw new ZSAError("NOT_FOUND", "Knowledge base not found.");
+    }
+    await client.knowledgeBases.delete(knowledgeBase?.vapiKnowledgeBaseId);
+    await client.files.delete(knowledgeBase?.fileId);
+    await deleteKnowledgeBase(business?.id);
 
     return { success: true };
   });

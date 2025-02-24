@@ -12,7 +12,7 @@ export const callLogSchema = z.object({
 });
 
 export const appointmentSchema = z.object({
-  webhookUrl: z.string().url(),
+  url: z.string().url(),
   scenarioId: z.union([
     z.coerce
       .number({

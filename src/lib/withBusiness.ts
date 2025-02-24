@@ -18,7 +18,7 @@ export async function withBusiness<T>(action: ActionWithTeamFunction<T>) {
     }
     const business = await getBusiness(currentUser?.id);
     if (!business) {
-      throw new Error("Business not found");
+      redirect("/profile");
     }
 
     return action(formData, business);

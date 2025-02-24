@@ -19,7 +19,7 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
       {filteredSubscriptions?.map(plan => (
         <PricingCard
           price={
-            plan.plan?.toLowerCase() === "enterprise"
+            plan.plan === "enterprise"
               ? "Custom"
               : formatCurrency(plan.amount ?? 0, {
                   style: "currency",
@@ -32,9 +32,9 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
           isYearly={view === "yearly"}
           features={plan.features ?? []}
           plan={plan?.plan ?? ""}
-          ctaText={plan.plan === "enterprise" ? "Contact Us" : "Choose Plan"}
+          ctaText="Choose Plan"
           isPopular={plan.plan === "premium"}
-          priceId={plan.priceId ?? ""}
+          priceId="price_1QsnhBEZh5HgtazOw10TDoxc"
         />
       ))}
     </section>

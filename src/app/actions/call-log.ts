@@ -40,7 +40,7 @@ export const createCalendarAvailabilityToolAction = authenticationProcedure
   .createServerAction()
   .input(appointmentSchema)
   .handler(async ({ input, ctx }) => {
-    const { webhookUrl, scenarioId } = input;
+    const { url, scenarioId } = input;
 
     const { id } = ctx;
 
@@ -95,7 +95,7 @@ export const createCalendarAvailabilityToolAction = authenticationProcedure
         },
       },
       server: {
-        url: webhookUrl,
+        url,
       },
     });
 
@@ -112,7 +112,7 @@ export const createAppointmentBookingToolAction = authenticationProcedure
   .createServerAction()
   .input(appointmentSchema)
   .handler(async ({ input, ctx }) => {
-    const { webhookUrl, scenarioId } = input;
+    const { url: webhookUrl, scenarioId } = input;
 
     const { id } = ctx;
 

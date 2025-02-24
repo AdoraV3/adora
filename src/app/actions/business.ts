@@ -76,6 +76,38 @@ export const createBusinessAction = authenticationProcedure
     });
 
     const client = new VapiClient({ token: env.VAPI_API_KEY });
+    const newTool = await client.tools.create({
+      type: "transferCall",
+      destinations: [
+        {
+          type: "number",
+          number: businessPhoneNumber,
+          message:
+            "I am forwarding your call to a live agent. Please stay on the line.",
+        },
+      ],
+      function: {
+        name: "transfer-call",
+        description: "Transfer call to the business",
+        parameters: {
+          type: "object",
+          properties: {
+            destination: {
+              type: "string",
+              properties: {
+                number: {
+                  type: "string",
+                },
+                message: {
+                  type: "string",
+                },
+              },
+            },
+          },
+          required: ["destination"],
+        },
+      },
+    });
 
     const newAssistant = await client.assistants.create({
       model: {
@@ -87,6 +119,20 @@ export const createBusinessAction = authenticationProcedure
         ],
         model: "gpt-4",
         provider: "openai",
+        toolIds: [newTool.id],
+        // tools: [
+        //   {
+        //     type: "transferCall",
+        //     destinations: [
+        //       {
+        //         type: "number",
+        //         number: businessPhoneNumber,
+        //         message:
+        //           "I am forwarding your call to a live agent. Please stay on the line.",
+        //       },
+        //     ],
+        //   },
+        // ],
       },
       name: agentName,
       voice: {
@@ -203,7 +249,21 @@ export const updateBusinessAction = authenticationProcedure
     });
 
     const client = new VapiClient({ token: env.VAPI_API_KEY });
+
+    const assistant = await client.assistants.get(agent.assistantId);
+
     await client.assistants.update(agent.assistantId, {
       name: agentName,
+      model: {
+        ...assistant.model,
+        messages: [
+          {
+            role: "system",
+            content: categoryResult?.systemPrompt as string,
+          },
+        ],
+        provider: assistant.model?.provider as any,
+        model: assistant.model?.model as any,
+      },
     });
   });

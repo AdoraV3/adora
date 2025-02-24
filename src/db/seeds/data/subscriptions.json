@@ -37,7 +37,7 @@
     ]
   },
   {
-    "plan": "pro",
+    "plan": "premium",
     "period": "monthly",
     "description": "Designed for growing businesses that need advanced capabilities and scalability.",
     "amount": 399,
@@ -59,9 +59,9 @@
   {
     "plan": "enterprise",
     "period": "monthly",
-    "description": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
-    "amount": 0,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "subtitle": "Built for large-scale businesses requiring tailored solutions and high-volume call handling.",
+    "amount": 1000,
+    "priceId": "price_1QLIgrEZh5HgtazOkFB2oZgW",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",
     "features": [
@@ -102,7 +102,7 @@
     "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
     "paymentProvider": "stripe",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",
@@ -143,7 +143,7 @@
     "period": "yearly",
     "description": "",
     "amount": 100,
-    "priceId": "price_1PfSh7EZh5HgtazOn9VbrvRD",
+    "priceId": "price_1QLIgrEZh5HgtazOkFB2oZgW",
     "paymentLink": "https://buy.stripe.com/test_7sIfZj8Qh2SL44E6oo",
     "paymentProvider": "stripe",
     "features": [

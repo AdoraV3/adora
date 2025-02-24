@@ -18,7 +18,6 @@ jobs:
       NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       SMTP_PORT: ${{ secrets.SMTP_PORT }}
-      SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
       SMTP_HOST: ${{ secrets.SMTP_HOST }}
       SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
       SMTP_FROM_EMAIL: ${{ secrets.SMTP_FROM_EMAIL }}
@@ -59,11 +58,11 @@ jobs:
             ${{ github.workspace }}/.next/cache
           # Generate a new cache whenever packages or source files change.
           key:
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{
             hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Install package dependencies
         run: pnpm install
@@ -92,10 +91,10 @@ jobs:
       # - name: Generate Migration
       #   run: pnpm run db:generate
 
-      # - name: Run Migration
+      # - name: Run Migrationt
       #   run: pnpm run db:migrate
 
-      # - name: Run MDB Push
+      # - name: Run DB Push
       #   run: pnpm run db:push
 
       # - name: Run DB Reset

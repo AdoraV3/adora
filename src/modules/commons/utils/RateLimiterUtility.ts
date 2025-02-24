@@ -5,7 +5,7 @@ import { ZSAError } from "zsa";
 
 export const RateLimitConfig = {
   SIGNUP: {
-    limit: 1,
+    limit: 3,
     window: "45 s",
   },
   LOGIN: {

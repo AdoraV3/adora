@@ -1,5 +1,6 @@
 "use client";
 
+import { createAppointmentBookingToolAction } from "@/app/actions/call-log";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -8,18 +9,47 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
+import {
+  AppointmentSchemaType,
+  appointmentSchema,
+} from "@/modules/call-logs/validation";
 import { FloatingInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { WebhookFormSchemaType, webhookFormSchema } from "../schema";
+import { toast } from "sonner";
 
-export function CrmWebhookForm({ setstage }: any) {
-  const form = useForm<WebhookFormSchemaType>({
+interface BookAppointmentFormProps {
+  setStage: (stage: number) => void;
+}
+
+export function BookAppointmentForm({
+  setStage,
+}: Readonly<BookAppointmentFormProps>) {
+  const initialValues: AppointmentSchemaType = {
+    url: "",
+    scenarioId: "",
+  };
+  const form = useForm<AppointmentSchemaType>({
     mode: "onChange",
-    resolver: zodResolver(webhookFormSchema),
+    resolver: zodResolver(appointmentSchema),
+    defaultValues: initialValues,
   });
 
-  const onSubmit: SubmitHandler<WebhookFormSchemaType> = () => {};
+  const webhookHandler = useServerActionMutation(
+    createAppointmentBookingToolAction,
+    {
+      onSuccess: () => {
+        form.reset(initialValues);
+        toast.success("Configurations saved successfully");
+      },
+      onError: err => toast.error(err?.message),
+    },
+  );
+
+  const onSubmit: SubmitHandler<AppointmentSchemaType> = data => {
+    webhookHandler.mutate(data);
+  };
   return (
     <section>
       <Form {...form}>
@@ -71,7 +101,7 @@ export function CrmWebhookForm({ setstage }: any) {
 
           <div className="mx-auto mt-5 flex w-[80%] flex-row items-center justify-between">
             <Button
-              onClick={() => setstage(1)}
+              onClick={() => setStage(1)}
               type="button"
               className="mt-5 w-[48%] border border-[#DDE4F060] bg-[#FDFAFF] text-[#653716]"
             >
@@ -79,8 +109,7 @@ export function CrmWebhookForm({ setstage }: any) {
             </Button>
             <Button
               className="mt-5 w-[48%] bg-[#653716]"
-              onClick={() => setstage(2)}
-              type="button"
+              onClick={form.handleSubmit(onSubmit)}
             >
               Submit
             </Button>

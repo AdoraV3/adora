@@ -1,14 +1,12 @@
 "use client";
 
-import { getAgentWithVoiceAction } from "@/app/actions/agent";
+import { getProfileAction } from "@/app/actions/agent";
 import {
   createBusinessAction,
-  getBusinessAction,
   updateBusinessAction,
 } from "@/app/actions/business";
 import { getPhoneNumbersAction } from "@/app/actions/phoneNumbers";
 import { getCategoriesAction } from "@/app/actions/systemPrompt";
-import { getUserAction } from "@/app/actions/user";
 import { getVoicesAction } from "@/app/actions/voice";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,9 +32,7 @@ import {
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
-import {
-  PhoneNumberInput,
-} from "@/modules/commons/components";
+import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
 import { useEffect } from "react";
@@ -50,27 +46,12 @@ export function Edit() {
     value: el.isoCode,
   }));
 
-  const { data, isPending } = useServerActionQuery(getBusinessAction, {
+  const { data, isPending } = useServerActionQuery(getProfileAction, {
     input: undefined,
     queryKey: ["getBusinessProfile"],
   });
 
-  const { data: queryData, isPending: loadingUser } = useServerActionQuery(
-    getUserAction,
-    {
-      input: undefined,
-      queryKey: ["getUser"],
-    },
-  );
-  const { data: agentData, isPending: loadingAgent } = useServerActionQuery(
-    getAgentWithVoiceAction,
-    {
-      input: undefined,
-      queryKey: ["getAgent"],
-    },
-  );
-
-  const user = queryData?.data;
+  const profile = data?.profile;
 
   const updateProfileHandler = useServerActionMutation(updateBusinessAction, {
     onSuccess: () => {
@@ -110,9 +91,7 @@ export function Edit() {
     resolver: zodResolver(profileSchema),
   });
 
-  const businessProfile = data?.data;
-
-  const isProfileCompleted = businessProfile?.isProfileCompleted;
+  const isProfileCompleted = data?.profile?.isProfileCompleted;
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
@@ -123,29 +102,19 @@ export function Edit() {
 
   useEffect(() => {
     form.reset({
-      businessCountry: businessProfile?.country ?? "",
-      businessName: businessProfile?.name ?? "",
-      country: user?.profile?.country ?? "",
-      phoneNumber: agentData?.data?.phoneNumber?.phoneNumber ?? "",
-      name: user?.profile?.name ?? "",
-      agentName: agentData?.data?.name ?? "",
-      category: agentData?.data?.categoryId ?? "",
-      businessPhoneNumber: user?.profile?.phone ?? "",
-      voice: agentData?.data?.voiceId ?? "",
+      businessCountry: profile?.businessCountry ?? "",
+      businessName: profile?.businessName ?? "",
+      country: profile?.country ?? "",
+      phoneNumber: profile?.phoneNumber ?? "",
+      name: profile?.name ?? "",
+      agentName: profile?.agentName ?? "",
+      category: profile?.category ?? "",
+      businessPhoneNumber: profile?.businessPhoneNumber ?? "",
+      voice: profile?.voice ?? "",
     });
-  }, [
-    form.reset,
-    businessProfile?.name,
-    businessProfile?.country,
-    user?.profile?.country,
-    user?.profile?.name,
-    user?.profile?.phone,
-    agentData?.data?.name,
-    agentData?.data?.voiceId,
-    agentData?.data?.phoneNumberId,
-  ]);
+  }, [form.reset, profile, form]);
 
-  if (isPending || loadingUser || loadingAgent) return <div>Loading...</div>;
+  if (isPending) return <div>Loading...</div>;
 
   return (
     <Form {...form}>
