@@ -34,7 +34,11 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
           plan={plan?.plan ?? ""}
           ctaText="Choose Plan"
           isPopular={plan.plan === "premium"}
-          priceId="price_1QsnhBEZh5HgtazOw10TDoxc"
+          priceId={
+            plan.plan !== "enterprise"
+              ? plan?.priceId ?? undefined
+              : "price_1QsnhBEZh5HgtazOw10TDoxc"
+          }
         />
       ))}
     </section>
