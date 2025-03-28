@@ -264,8 +264,9 @@ export function Appointment() {
                   <Step text="Go to the meetings tab and copy the meeting link." />
                   <Step
                     text="Download the make.com template on Adora and open the JSON file. Replace the current URL that looks like "
-                    linkText="https://adora.neetocal.com/api/external/v1/slots/meeting-with-xxx-yyy with the meeting link you just copied on neetocal.com."
-                    linkHref="https://adora.neetocal.com/api/external/v1/slots/meeting-with-xxx-yyy with the meeting link you just copied on neetocal.com."
+                    linkText="https://adora.neetocal.com/api/external/v1/slots/meeting-with-xxx-yyy"
+                    linkHref="https://adora.neetocal.com/api/external/v1/slots/meeting-with-xxx-yyy"
+                    suffix=" with the meeting link you just copied on neetocal.com."
                   />
                   <Step text="Sign up on make.com and navigate to the Create Scenario section. Click on the menu icon and import the blueprint template." />
                   <Step
