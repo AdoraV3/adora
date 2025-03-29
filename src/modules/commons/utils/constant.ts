@@ -7,7 +7,8 @@ export const INVALID_FULL_NAME = "Please enter your name";
 export const INVALID_FIRST_NAME = "Please enter your first name";
 export const INVALID_LAST_NAME = "Please enter your last name";
 export const MAXIMUM_ALLOWED_FILE_UPLOAD = 1;
-
+export const FREE_TRIAL_DAYS = 7;
+export const ADORA_AUTH_COOKIE_NAME = "adora-auth-cookie";
 export const REQUIRED_MIN_CHARACTER = "Number must be greater than or equal to";
 
 export const MIN_PHONE_NUMBER_LENGTH =

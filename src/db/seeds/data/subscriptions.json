@@ -190,7 +190,7 @@
     "paymentProvider": "paystack",
     "currency": "NGN",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",
@@ -280,7 +280,7 @@
     "paymentProvider": "paystack",
     "currency": "NGN",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",

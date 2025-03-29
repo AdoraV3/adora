@@ -26,15 +26,11 @@ export const business = pgTable("business", {
   country: varchar("country", { length: 255 }),
   subscriptionStartDate: timestamp("subscription_start_date", {
     mode: "string",
-  })
-    .defaultNow()
-    .notNull(),
-  subscriptionEndDate: timestamp("subscription_end_date", { mode: "string" })
-    .notNull()
-    .defaultNow(),
-  subscriptionId: text("subscription_id")
-    .notNull()
-    .references(() => subscription.id, { onDelete: "cascade" }),
+  }),
+  subscriptionEndDate: timestamp("subscription_end_date", { mode: "string" }),
+  subscriptionId: text("subscription_id").references(() => subscription.id, {
+    onDelete: "cascade",
+  }),
   agentId: text("agent_id")
     .notNull()
     .references(() => agent.id, { onDelete: "cascade" }),

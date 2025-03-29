@@ -46,7 +46,7 @@ export default function VerifyOtp() {
     },
   });
   const onSubmit: SubmitHandler<OtpSchemaType> = data => {
-    verifyOtpHandler.mutate({ otp: data.otp }, {});
+    verifyOtpHandler.mutate({ otp: data.otp });
   };
 
   useEffect(() => {

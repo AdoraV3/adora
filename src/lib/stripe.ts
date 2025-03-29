@@ -2,6 +2,7 @@ import { updateBusiness } from "@/data-access";
 import { getSubscriptionByPriceId } from "@/data-access/subscription";
 import { db } from "@/db";
 import { Business, user } from "@/db/schema";
+import { FREE_TRIAL_DAYS } from "@/modules/commons/utils/constant";
 import { formatDateToCustomFormat } from "@/modules/commons/utils/helpers";
 import { eq } from "drizzle-orm";
 import { env } from "env.mjs";
@@ -45,11 +46,9 @@ export async function createStripeCheckoutSession({
     cancel_url: `${env.NEXT_PUBLIC_URL}/pricing`,
     client_reference_id: business.id.toString(),
     allow_promotion_codes: true,
-    ...(!business?.isFreeTrial && {
-      subscription_data: {
-        trial_period_days: 3,
-      },
-    }),
+    subscription_data: {
+      trial_period_days: FREE_TRIAL_DAYS,
+    },
     ...(findUser.email
       ? { customer_email: findUser.email }
       : {
@@ -88,7 +87,7 @@ export async function updateSubscriptions(
         subscriptionId: findSubscription?.id,
         subscriptionStartDate: formatDateToCustomFormat(new Date()),
         subscriptionEndDate: formatDateToCustomFormat(endDate),
-        // isFreeTrial: false,
+        isFreeTrial: false,
       });
     } else {
       // Handle one-time purchase logic here if necessary

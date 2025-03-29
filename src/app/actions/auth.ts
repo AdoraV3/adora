@@ -166,15 +166,6 @@ export const getGoogleOauthConsentUrl = async () => {
   }
 };
 
-// export const updatePreferenceAction = authenticationProcedure
-//   .createServerAction()
-//   .input(
-//     z.object({
-//       emailNotification: z.boolean(),
-//     }),
-//   )
-//   .handler(({ input, ctx }) => {});
-
 export const verifyEmailAction = createServerAction()
   .input(otpSchema)
   .handler(async ({ input }) => {

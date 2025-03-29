@@ -13,7 +13,6 @@ import { db } from "@/db";
 import { availablePhoneNumber, subscription, systemPrompt } from "@/db/schema";
 import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
-import { formatDateToCustomFormat } from "@/modules/commons/utils/helpers";
 import { profileSchema } from "@/modules/home/components/profile/validation";
 import { VapiClient } from "@vapi-ai/server-sdk";
 import { and, eq } from "drizzle-orm";
@@ -165,10 +164,6 @@ export const createBusinessAction = authenticationProcedure
         trx,
       );
 
-      const endDate = new Date();
-      const subscriptionEndDate = new Date(endDate);
-      subscriptionEndDate.setDate(endDate.getDate() + 3);
-
       updateProfile(userId, {
         country,
         phone: businessPhoneNumber,
@@ -178,10 +173,7 @@ export const createBusinessAction = authenticationProcedure
         {
           name: businessName,
           userId,
-          subscriptionId: basicSubscription?.id,
           agentId: newAgent.agentId,
-          subscriptionStartDate: formatDateToCustomFormat(new Date()),
-          subscriptionEndDate: formatDateToCustomFormat(subscriptionEndDate),
           isFreeTrial: true,
           isProfileCompleted: true,
           country: businessCountry,
