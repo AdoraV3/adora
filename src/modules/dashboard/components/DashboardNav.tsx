@@ -142,9 +142,11 @@ export function DashboardNav() {
                 </div>
               </div>
 
-              <Badge className="bg-blue-200 capitalize rounded-md text-white-100">
-                {subscriptionData?.data?.plan ?? "basic"} plan{" "}
-              </Badge>
+              {subscriptionData?.data?.plan && (
+                <Badge className="bg-blue-200 capitalize rounded-md text-white-100">
+                  {subscriptionData?.data?.plan ?? "No Subscription"} plan{" "}
+                </Badge>
+              )}
             </div>
 
             {subscriptionData?.data?.plan !== "enterprise" && (

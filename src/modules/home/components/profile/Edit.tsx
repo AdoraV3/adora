@@ -92,7 +92,16 @@ export function Edit() {
   });
 
   const isProfileCompleted = data?.profile?.isProfileCompleted;
+  const hasActiveSubscription = !!data?.profile?.stripeCustomerId;
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
+    if (!hasActiveSubscription) {
+      toast.error("Unable to update profile", {
+        description:
+          "You need to be on a subscription plan to create a profile",
+      });
+      return;
+    }
+
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
     } else {

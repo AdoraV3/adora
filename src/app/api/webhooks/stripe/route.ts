@@ -1,6 +1,5 @@
 import { updateBusiness } from "@/data-access";
 import { unAssignPhoneNumber } from "@/data-access/availablePhoneNumber";
-import { getPlan } from "@/data-access/subscription";
 import { db } from "@/db";
 import { business as businessTable, user as userTable } from "@/db/schema";
 import { stripe, updateSubscriptions } from "@/lib/stripe";
@@ -40,7 +39,7 @@ export async function POST(req: Request) {
 
         if (!customerDetails?.email) {
           return NextResponse.json({
-            status: 500,
+            status: 404,
             error: "Customer email could not be fetched",
           });
         }
@@ -66,11 +65,10 @@ export async function POST(req: Request) {
             error: "business not found",
           });
         }
-        if (!findBusiness?.stripeCustomerId) {
-          await updateBusiness(findUser.id, {
-            stripeCustomerId: customerId,
-          });
-        }
+
+        await updateBusiness(findUser.id, {
+          stripeCustomerId: customerId,
+        });
 
         const lineItems = session.line_items?.data || [];
 
@@ -79,9 +77,7 @@ export async function POST(req: Request) {
         break;
       }
       case "customer.subscription.deleted": {
-        const subscription = await stripe.subscriptions.retrieve(
-          event.data.object.id,
-        );
+        const subscription = event.data.object;
 
         const business = await db.query.business.findFirst({
           where: eq(
@@ -96,13 +92,15 @@ export async function POST(req: Request) {
             error: "business not found",
           });
         }
-        const basicPlan = await getPlan("basic");
-        updateBusiness(business.userId, {
-          subscriptionId: basicPlan?.id,
-          subscriptionStartDate: undefined,
+
+        await updateBusiness(business.userId, {
+          subscriptionId: null,
+          subscriptionStartDate: null,
+          subscriptionEndDate: null,
+          stripeCustomerId: null,
         });
 
-        await unAssignPhoneNumber(business?.id);
+        await unAssignPhoneNumber(business?.userId);
 
         break;
       }
@@ -127,21 +125,14 @@ export async function POST(req: Request) {
             });
           }
 
-          const basicPlan = await getPlan("basic");
-          if (!basicPlan) {
-            console.error("Basic plan not found");
-            return new Response("Basic plan configuration error", {
-              status: 500,
-            });
-          }
-
-          // Downgrade business to the basic plan
           await updateBusiness(business.userId, {
-            subscriptionId: basicPlan.id,
-            subscriptionStartDate: undefined,
+            subscriptionId: null,
+            subscriptionStartDate: null as unknown as string,
+            subscriptionEndDate: null as unknown as string,
+            stripeCustomerId: null,
           });
 
-          await unAssignPhoneNumber(business.id);
+          await unAssignPhoneNumber(business.userId);
         }
 
         break;

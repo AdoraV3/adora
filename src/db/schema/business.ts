@@ -31,9 +31,7 @@ export const business = pgTable("business", {
   subscriptionId: text("subscription_id").references(() => subscription.id, {
     onDelete: "cascade",
   }),
-  agentId: text("agent_id")
-    .notNull()
-    .references(() => agent.id, { onDelete: "cascade" }),
+  agentId: text("agent_id").references(() => agent.id, { onDelete: "cascade" }),
   isFreeTrial: boolean("is_free_trial").default(true),
   ...lifecycleDates,
   isProfileCompleted: boolean("is_profile_completed").default(false),

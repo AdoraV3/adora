@@ -174,7 +174,6 @@ export const createBusinessAction = authenticationProcedure
           name: businessName,
           userId,
           agentId: newAgent.agentId,
-          isFreeTrial: true,
           isProfileCompleted: true,
           country: businessCountry,
         },
@@ -201,7 +200,7 @@ export const updateBusinessAction = authenticationProcedure
 
     const business = await getBusiness(userId);
 
-    if (!business) {
+    if (!business || !business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
@@ -218,7 +217,7 @@ export const updateBusinessAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Category not found");
     }
 
-    const agent = await getAgent(business.agentId);
+    const agent = await getAgent(business?.agentId);
     if (!agent?.assistantId) {
       throw new ZSAError("NOT_FOUND", "Agent not found");
     }

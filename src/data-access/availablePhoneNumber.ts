@@ -44,9 +44,9 @@ export async function getPhoneNumber(phoneNumberId: string) {
   });
 }
 
-export async function unAssignPhoneNumber(businessId: string) {
-  const business = await getBusiness(businessId);
-  if (!business) {
+export async function unAssignPhoneNumber(userId: string) {
+  const business = await getBusiness(userId);
+  if (!business?.agentId) {
     throw new ZSAError("NOT_FOUND", "Business not found.");
   }
 
@@ -64,8 +64,8 @@ export async function unAssignPhoneNumber(businessId: string) {
     dateAssigned: null,
   });
 
-  await updateBusiness(businessId, {
-    agentId: undefined,
+  await updateBusiness(userId, {
+    agentId: null,
   });
 
   const client = new VapiClient({ token: env.VAPI_API_KEY });
