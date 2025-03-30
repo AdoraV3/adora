@@ -73,12 +73,12 @@ jobs:
       - name: Execute build
         run: pnpm run build
 
-      # - name: Configure AWS Credentials for GitHub Actions
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ca-central-1
+      - name: Configure AWS Credentials for GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
 
       # - name: Update RDS Security Group
       #   run: |
@@ -94,8 +94,8 @@ jobs:
       # - name: Run Migrationt
       #   run: pnpm run db:migrate
 
-      # - name: Run DB Push
-      #   run: pnpm run db:push
+      - name: Run DB Push
+        run: pnpm run db:push
 
       # - name: Run DB Reset
       #   run: pnpm run db:reset
