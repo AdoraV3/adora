@@ -5,7 +5,7 @@ import { ContactUs } from "./ContactUs";
 import { ResetPassword } from "./ResetPassword";
 import { SignUp } from "./SignUp";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY ?? "");
+sgMail.setApiKey(env.SENDGRID_API_KEY ?? "");
 // const resend = new Resend(env.RESEND_API_KEY);
 // create a nodemailer transporter for sending emails
 // const transporter = nodemailer.createTransport({

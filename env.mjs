@@ -23,6 +23,7 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.string().min(1),
     PAYSTACK_SECRET_KEY: z.string().min(1),
+    SENDGRID_API_KEY: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_URL: z.string().url(),
@@ -43,6 +44,7 @@ export const env = createEnv({
     SMTP_USERNAME: process.env.SMTP_USERNAME,
     SMTP_PORT: process.env.SMTP_PORT,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
     VAPI_API_KEY: process.env.VAPI_API_KEY,
     NEXT_PUBLIC_VAPI_API_KEY: process.env.NEXT_PUBLIC_VAPI_API_KEY,
     NEXT_PUBLIC_VAPI_CLIENT_SDK: process.env.NEXT_PUBLIC_VAPI_CLIENT_SDK,
