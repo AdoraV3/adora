@@ -7,7 +7,9 @@ import { SignUp } from "./SignUp";
 
 sgMail.setApiKey(env.SENDGRID_API_KEY ?? "");
 
-export const maxDuration = 60; // 60 seconds (Hobby plan max)
+export const maxDuration = 60;
+export const dynamic = "force-dynamic";
+
 // const resend = new Resend(env.RESEND_API_KEY);
 // create a nodemailer transporter for sending emails
 // const transporter = nodemailer.createTransport({

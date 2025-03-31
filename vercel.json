@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "src/emails/index.ts": {
-      "maxDuration": 60
-    }
-  },
-  "version": 2
-}
