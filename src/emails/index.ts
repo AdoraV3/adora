@@ -36,7 +36,8 @@ export async function sendVerificationEmail({
       subject: "Verify your email address",
       html: signUpHTML,
     };
-    await sgMail.send(mailOptions);
+    const response = await sgMail.send(mailOptions);
+    console.error("Email sent successfully:", response);
   } catch (error) {
     console.error("Error sending email:", error);
   }
