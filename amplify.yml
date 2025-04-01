@@ -11,7 +11,7 @@ frontend:
       commands:
         - pnpm run build
   artifacts:
-    baseDirectory: .next # Change based on your framework (e.g., `build` for React, `dist` for Vue)
+    baseDirectory: .next/standalone
     files:
       - "**/*"
   cache:
