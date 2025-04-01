@@ -22,7 +22,7 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.string().min(1),
-    PAYSTACK_SECRET_KEY: z.string().min(1),
+    // PAYSTACK_SECRET_KEY: z.string().min(1),
     SENDGRID_API_KEY: z.string().min(1),
   },
   client: {
@@ -52,7 +52,7 @@ export const env = createEnv({
     STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    PAYSTACK_SECRET_KEY: process.env.PAYSTACK_SECRET_KEY,
+    // PAYSTACK_SECRET_KEY: process.env.PAYSTACK_SECRET_KEY,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
   },

@@ -4,13 +4,12 @@ import {
   updateBusiness,
 } from "@/data-access";
 import crypto from "crypto";
-import { env } from "env.mjs";
 import { NextRequest, NextResponse } from "next/server";
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export async function POST(req: NextRequest) {
   const hash = crypto
-    .createHmac("sha512", env.PAYSTACK_SECRET_KEY)
+    .createHmac("sha512", "")
     .update(JSON.stringify(req.body))
     .digest("hex");
 
