@@ -1,10 +1,9 @@
 import { Providers } from "@/services/Providers";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Viewport } from "next";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
-import "./globals.css";
 import "react-tooltip/dist/react-tooltip.css";
+import "./globals.css";
 
 const CORE_SANS_C = localFont({
   src: [
@@ -93,7 +92,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${CORE_SANS_C.variable} ${SATOSHI.variable}`}>
         <Providers>
-          <SpeedInsights />
+          {/* <SpeedInsights /> */}
           <NextTopLoader color="hsla(25, 64%, 36%, 1)" />
           {children}
         </Providers>
