@@ -4,7 +4,6 @@ import {
   createAccount,
   createProfile,
   createUser,
-  createVerifyEmailToken,
   deleteSessionForUser,
   verifyEmail,
 } from "@/data-access";
@@ -71,10 +70,10 @@ export const signupAction = createServerAction()
         trx,
       );
 
-      const token = await createVerifyEmailToken(newUser.userId, trx);
+      // const token = await createVerifyEmailToken(newUser.userId, trx);
 
       await sendVerificationEmail({
-        token,
+        token: "123456",
         to: email,
         name,
       });
