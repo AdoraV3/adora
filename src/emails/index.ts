@@ -48,7 +48,7 @@ export async function sendResetPasswordEmail({
   const resetPasswordHTML = render(ResetPassword({ token, name }));
   const mailOptions = {
     from: env.SMTP_FROM_EMAIL,
-    to: [to],
+    to,
     subject: "Password Reset Instructions",
     html: resetPasswordHTML,
   };
