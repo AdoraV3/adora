@@ -17,6 +17,7 @@ const nextConfig = {
     ],
   },
   output: "standalone",
+  reactProductionProfiling: true,
 };
 
 export default nextConfig;
