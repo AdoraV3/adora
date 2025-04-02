@@ -1,19 +1,12 @@
 "use server";
 
-import {
-  createAccount,
-  createProfile,
-  createUser,
-  deleteSessionForUser,
-  verifyEmail,
-} from "@/data-access";
+import { deleteSessionForUser, verifyEmail } from "@/data-access";
 
 import { getAccount } from "@/data-access/account";
 import { db } from "@/db";
 import { user as userTable } from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
-import { createTransaction } from "@/lib/create-transaction";
 import { googleOAuthClient } from "@/lib/googleAuth";
 import { authenticationProcedure } from "@/lib/procedures";
 import {
@@ -30,55 +23,67 @@ import { ZSAError, createServerAction } from "zsa";
 
 export const signupAction = createServerAction()
   .input(registerSchema)
-  .handler(async ({ input }) => {
-    const { password, email, name } = input;
-
-    await RateLimiterUtility.limit(RateLimitConfig.SIGNUP);
-
-    const passwordHash = await new Argon2id().hash(password);
-
-    const user = await db.query.user.findFirst({
-      where: eq(userTable.email, email),
-    });
-
-    if (user) {
-      throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
-    }
-
-    createTransaction(async trx => {
-      const [newUser] = await createUser(
-        {
-          email,
-        },
-        trx,
-      );
-
-      await createProfile(
-        {
-          userId: newUser.userId,
-          name,
-        },
-        trx,
-      );
-
-      await createAccount(
-        {
-          userId: newUser.userId,
-          type: "email",
-          password: passwordHash,
-        },
-        trx,
-      );
-
-      // const token = await createVerifyEmailToken(newUser.userId, trx);
-
+  .handler(async () => {
+    try {
       await sendVerificationEmail({
         // token: "123456",
-        to: email,
+        to: "stemitope370@gmail.com",
         // name,
       });
-    });
-    return { success: true };
+      return { success: true };
+    } catch (error) {
+      console.error("Error in signupAction:", error);
+      return { success: false, error: "An error occurred during signup" };
+    }
+
+    // const { password, email, name } = input;
+
+    // await RateLimiterUtility.limit(RateLimitConfig.SIGNUP);
+
+    // const passwordHash = await new Argon2id().hash(password);
+
+    // const user = await db.query.user.findFirst({
+    //   where: eq(userTable.email, email),
+    // });
+
+    // if (user) {
+    //   throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
+    // }
+
+    // createTransaction(async trx => {
+    //   const [newUser] = await createUser(
+    //     {
+    //       email,
+    //     },
+    //     trx,
+    //   );
+
+    //   await createProfile(
+    //     {
+    //       userId: newUser.userId,
+    //       name,
+    //     },
+    //     trx,
+    //   );
+
+    //   await createAccount(
+    //     {
+    //       userId: newUser.userId,
+    //       type: "email",
+    //       password: passwordHash,
+    //     },
+    //     trx,
+    //   );
+
+    //   // const token = await createVerifyEmailToken(newUser.userId, trx);
+
+    //   await sendVerificationEmail({
+    //     // token: "123456",
+    //     to: email,
+    //     // name,
+    //   });
+    // });
+    // return { success: true };
   });
 
 export const loginInAction = createServerAction()
