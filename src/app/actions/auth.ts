@@ -73,9 +73,9 @@ export const signupAction = createServerAction()
       // const token = await createVerifyEmailToken(newUser.userId, trx);
 
       await sendVerificationEmail({
-        token: "123456",
+        // token: "123456",
         to: email,
-        name,
+        // name,
       });
     });
     return { success: true };

@@ -3,7 +3,6 @@ import sgMail from "@sendgrid/mail";
 import { env } from "env.mjs";
 import { ContactUs } from "./ContactUs";
 import { ResetPassword } from "./ResetPassword";
-import { SignUp } from "./SignUp";
 
 sgMail.setApiKey(env.SENDGRID_API_KEY ?? "");
 
@@ -14,20 +13,20 @@ export const maxDuration = 60;
 
 export async function sendVerificationEmail({
   to,
-  token,
-  name,
-}: {
+}: // token,
+// name,
+{
   to: string;
-  token: string;
-  name: string;
+  // token: string;
+  // name: string;
 }) {
   try {
-    const signUpHTML = render(SignUp({ token, name, email: to }));
+    // const signUpHTML = render(SignUp({ token, name, email: to }));
     const mailOptions = {
       from: env.SMTP_FROM_EMAIL,
       to,
       subject: "Verify your email address",
-      html: signUpHTML,
+      text: "Hello",
     };
     const response = await sgMail.send(mailOptions);
     console.error("Email sent successfully:", response);
