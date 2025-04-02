@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
 import sgMail from "@sendgrid/mail";
 import { env } from "env.mjs";
+import { Resend } from "resend";
 import { ContactUs } from "./ContactUs";
 import { ResetPassword } from "./ResetPassword";
 import { SignUp } from "./SignUp";
@@ -10,7 +11,7 @@ sgMail.setApiKey(env.SENDGRID_API_KEY ?? "");
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
-// const resend = new Resend(env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 // create a nodemailer transporter for sending emails
 // const transporter = nodemailer.createTransport({
 //   host: env.SMTP_HOST,
@@ -40,7 +41,7 @@ export async function sendVerificationEmail({
       subject: "Verify your email address",
       html: signUpHTML,
     };
-    const response = await sgMail.send(mailOptions);
+    const response = await resend.emails.send(mailOptions);
     console.error("Email sent successfully:", response);
   } catch (error) {
     console.error("Error sending email:", error);
