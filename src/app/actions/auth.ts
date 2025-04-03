@@ -45,7 +45,7 @@ export const signupAction = createServerAction()
       throw new ZSAError("NOT_AUTHORIZED", "Email already in use");
     }
 
-    createTransaction(async trx => {
+    await createTransaction(async trx => {
       try {
         const [newUser] = await createUser(
           {
