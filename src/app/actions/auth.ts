@@ -4,6 +4,7 @@ import {
   createAccount,
   createProfile,
   createUser,
+  createVerifyEmailToken,
   deleteSessionForUser,
   verifyEmail,
 } from "@/data-access";
@@ -70,12 +71,12 @@ export const signupAction = createServerAction()
           },
           trx,
         );
-        // const token = await createVerifyEmailToken(newUser.userId, trx);
+        const token = await createVerifyEmailToken(newUser.userId, trx);
 
         await sendVerificationEmail({
-          // token,
-          to: "stemitope370@gmail.com",
-          // name,
+          token,
+          to: email,
+          name,
         });
       } catch (error) {
         console.error("Database transaction error:", error);
