@@ -22,7 +22,7 @@ export async function createStripeCheckoutSession({
   priceId: string;
 }) {
   if (!business) {
-    redirect(`/register?redirect=checkout&priceId=${priceId}`);
+    redirect(`/register?redirect_uri=checkout&priceId=${priceId}`);
   }
 
   const findUser = await db.query.user.findFirst({
@@ -30,7 +30,7 @@ export async function createStripeCheckoutSession({
   });
 
   if (!findUser) {
-    redirect(`/register?redirect=checkout&priceId=${priceId}`);
+    redirect(`/register?redirect_uri=checkout&priceId=${priceId}`);
   }
 
   const session = await stripe.checkout.sessions.create({

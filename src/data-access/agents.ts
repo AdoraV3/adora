@@ -9,7 +9,6 @@ export async function createAgent(data: NewAgent, trx = db) {
       ...data,
     })
     .returning({ agentId: agent.id });
-  // .onConflictDoNothing();
 }
 
 export async function getAgent(agentId: Agent["id"]) {

@@ -13,6 +13,10 @@ import { db } from "@/db";
 import { availablePhoneNumber, subscription, systemPrompt } from "@/db/schema";
 import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
+import {
+  RateLimitConfig,
+  RateLimiterUtility,
+} from "@/modules/commons/utils/RateLimiterUtility";
 import { profileSchema } from "@/modules/home/components/profile/validation";
 import { VapiClient } from "@vapi-ai/server-sdk";
 import { and, eq } from "drizzle-orm";
@@ -44,7 +48,7 @@ export const createBusinessAction = authenticationProcedure
       businessCountry,
     } = input;
     const { id: userId } = ctx;
-
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const isPhoneNumberAvailable =
       await db.query.availablePhoneNumber.findFirst({
         where: and(
@@ -119,19 +123,6 @@ export const createBusinessAction = authenticationProcedure
         model: "gpt-4",
         provider: "openai",
         toolIds: [newTool.id],
-        // tools: [
-        //   {
-        //     type: "transferCall",
-        //     destinations: [
-        //       {
-        //         type: "number",
-        //         number: businessPhoneNumber,
-        //         message:
-        //           "I am forwarding your call to a live agent. Please stay on the line.",
-        //       },
-        //     ],
-        //   },
-        // ],
       },
       name: agentName,
       voice: {

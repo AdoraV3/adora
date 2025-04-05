@@ -1,5 +1,11 @@
-import { updateBusiness } from "@/data-access";
-import { unAssignPhoneNumber } from "@/data-access/availablePhoneNumber";
+import { updateVapiPhoneNumber } from "@/app/actions/vapi";
+import { getBusinessWithAgentPhoneNumber, updateBusiness } from "@/data-access";
+import { getAgent } from "@/data-access/agents";
+import {
+  getAvailablePhoneNumberById,
+  unAssignPhoneNumber,
+  updatePhoneNumber,
+} from "@/data-access/availablePhoneNumber";
 import { db } from "@/db";
 import { business as businessTable, user as userTable } from "@/db/schema";
 import { stripe, updateSubscriptions } from "@/lib/stripe";
@@ -59,15 +65,54 @@ export async function POST(req: Request) {
           where: eq(businessTable.userId, findUser.id),
         });
 
-        if (!findBusiness) {
+        if (!findBusiness || !findBusiness?.agentId) {
           return NextResponse.json({
             status: 404,
             error: "business not found",
           });
         }
 
+        const existingAgent = await getAgent(findBusiness?.agentId);
+        if (!existingAgent) {
+          return NextResponse.json({
+            status: 404,
+            error: "Agent not found",
+          });
+        }
+
+        const isPhoneNumberAvailable = await getAvailablePhoneNumberById(
+          existingAgent?.phoneNumberId,
+        );
+
+        if (!isPhoneNumberAvailable) {
+          return NextResponse.json({
+            status: 404,
+            error: "Phone number not available",
+          });
+        }
+
         await updateBusiness(findUser.id, {
           stripeCustomerId: customerId,
+        });
+
+        const phoneNumber = await getBusinessWithAgentPhoneNumber(
+          findBusiness?.id,
+        );
+
+        if (!phoneNumber) {
+          return NextResponse.json({
+            status: 404,
+            error: "Phone number not found",
+          });
+        }
+
+        await updateVapiPhoneNumber(isPhoneNumberAvailable?.vapiId, {
+          assistantId: existingAgent?.assistantId,
+        });
+
+        await updatePhoneNumber(phoneNumber?.id, {
+          isAssigned: true,
+          dateAssigned: new Date()?.toISOString(),
         });
 
         const lineItems = session.line_items?.data || [];

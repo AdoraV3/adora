@@ -25,3 +25,16 @@ export async function getBusiness(userId: User["id"]) {
     // with: { subscription: true },
   });
 }
+
+export async function getBusinessWithAgentPhoneNumber(businessId: string) {
+  return db.query.business.findFirst({
+    where: eq(business.id, businessId),
+    with: {
+      agent: {
+        with: {
+          phoneNumber: true,
+        },
+      },
+    },
+  });
+}

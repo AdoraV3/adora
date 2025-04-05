@@ -91,16 +91,23 @@ export function Edit() {
     resolver: zodResolver(profileSchema),
   });
 
-  const isProfileCompleted = data?.profile?.isProfileCompleted;
-  const hasActiveSubscription = !!data?.profile?.stripeCustomerId;
+  const isProfileCompleted = data?.profile?.isProfileCompleted ?? false;
+  // const hasActiveSubscription = !!data?.profile?.stripeCustomerId;
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
-    if (!hasActiveSubscription) {
-      toast.error("Unable to update profile", {
-        description:
-          "You need to be on a subscription plan to create a profile",
-      });
-      return;
-    }
+    // if (!hasActiveSubscription) {
+    //   toast.error("Unable to update profile", {
+    //     description:
+    //       "You need to be on a subscription plan to create a profile",
+    //     action: {
+    //       label: "Select plan",
+    //       onClick: selectPlan,
+    //     },
+    //     duration: Infinity,
+    //     closeButton: false,
+    //   });
+
+    //   return;
+    // }
 
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
@@ -337,7 +344,7 @@ export function Edit() {
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className=" h-12 capitalize focus:border-primary ">
                     <SelectValue
-                      placeholder="male"
+                      placeholder="Select Voice"
                       className="!text-[#8c8c8c40]"
                     />
                   </SelectTrigger>
@@ -364,46 +371,48 @@ export function Edit() {
           )}
         />
 
-        {!isProfileCompleted && (
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem id="phone" className="relative">
-                <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                  Agent Phone
-                </FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className=" h-12 focus:border-primary ">
-                      <SelectValue
-                        placeholder="Select Phone Number"
-                        className="!text-[#8c8c8c40]"
-                      />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        <SelectLabel className="text-[#8c8c8c80]">
-                          Select an agent phone
-                        </SelectLabel>
-                        {phones?.data?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                            key={el.id}
-                            value={el.id}
-                          >
-                            {formatPhoneNumber(el.phoneNumber)}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+        <FormField
+          control={form.control}
+          name="phoneNumber"
+          render={({ field }) => (
+            <FormItem id="phone" className="relative">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Agent Phone
+              </FormLabel>
+              <FormControl>
+                <Select
+                  disabled={isProfileCompleted}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <SelectTrigger className=" h-12 focus:border-primary ">
+                    <SelectValue
+                      placeholder="Select Phone Number"
+                      className="!text-[#8c8c8c40]"
+                    />
+                  </SelectTrigger>
+                  <SelectContent sideOffset={5}>
+                    <SelectGroup>
+                      <SelectLabel className="text-[#8c8c8c80]">
+                        Select an agent phone
+                      </SelectLabel>
+                      {phones?.data?.map(el => (
+                        <SelectItem
+                          className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                          key={el.id}
+                          value={el.id}
+                        >
+                          {formatPhoneNumber(el.phoneNumber)}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button
           className="ma col-span-2 border border-input bg-brown-50 px-6 text-black-100 "

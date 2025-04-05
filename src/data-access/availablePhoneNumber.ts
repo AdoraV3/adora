@@ -17,6 +17,14 @@ export async function getAvailablePhoneNumbers() {
   });
 }
 
+export async function getAvailablePhoneNumberById(
+  id: AvailablePhoneNumber["id"],
+) {
+  return db.query.availablePhoneNumber.findFirst({
+    where: eq(availablePhoneNumber.id, id),
+  });
+}
+
 export async function createAvailablePhoneNumber(
   data: NewAvailablePhoneNumber[],
 ) {

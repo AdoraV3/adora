@@ -34,7 +34,7 @@ export function Login() {
   });
 
   const { queryParams } = useQueryParams();
-  const from = queryParams.get("from");
+  const from = queryParams.get("redirect_uri");
 
   const [isPending, startTransition] = useTransition();
 

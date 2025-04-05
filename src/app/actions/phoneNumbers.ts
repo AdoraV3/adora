@@ -3,14 +3,13 @@
 import {
   createAvailablePhoneNumber,
   getAvailablePhoneNumbers,
-  getPhoneNumbers,
 } from "@/data-access/availablePhoneNumber";
 import { createServerAction } from "zsa";
 import { getVapiPhoneNumbers } from "./vapi";
 
 export const getPhoneNumbersAction = createServerAction().handler(async () => {
   const vapiPhoneNumbers = await getVapiPhoneNumbers();
-  const existingPhoneNumbers = await getPhoneNumbers();
+  const existingPhoneNumbers = await getAvailablePhoneNumbers();
 
   const existingPhoneNumberSet = new Set(
     existingPhoneNumbers.map(pn => pn.phoneNumber),
