@@ -81,13 +81,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ca-central-1
 
-      - name: Update RDS Security Group
-        run: |
-          aws ec2 authorize-security-group-ingress \
-            --group-id sg-055eeb230b6ca28ab \
-            --protocol tcp \
-            --port 5432 \
-            --cidr 172.183.0.0/16
+      # - name: Update RDS Security Group
+      #   run: |
+      #     aws ec2 authorize-security-group-ingress \
+      #       --group-id sg-055eeb230b6ca28ab \
+      #       --protocol tcp \
+      #       --port 5432 \
+      #       --cidr 172.183.0.0/16
 
       # - name: Generate Migration
       #   run: pnpm run db:generate
