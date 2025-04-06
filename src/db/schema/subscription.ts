@@ -30,7 +30,7 @@ export const subscription = pgTable("subscription", {
   paymentProvider: varchar("payment_provider", {
     enum: paymentProvider,
   }),
-  features: text("features").array(),
+  features: text("features").array().default([]),
   totalAllowedCalls: integer("total_allowed_calls"),
 });
 

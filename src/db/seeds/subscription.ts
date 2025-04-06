@@ -10,6 +10,7 @@ export async function subscription() {
         .values({
           ...el,
         })
+        .onConflictDoNothing()
         .returning();
     }),
   );
