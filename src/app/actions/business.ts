@@ -167,6 +167,7 @@ export const createBusinessAction = authenticationProcedure
           agentId: newAgent.agentId,
           isProfileCompleted: true,
           country: businessCountry,
+          subscriptionId: null,
         },
         trx,
       );
