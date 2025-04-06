@@ -1,0 +1,1 @@
+ALTER TABLE "adora_subscription" ALTER COLUMN "features" SET DEFAULT ;
