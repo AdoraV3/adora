@@ -7,7 +7,6 @@ import {
   updateProfile,
 } from "@/data-access";
 import { createAgent, getAgent, updateAgent } from "@/data-access/agents";
-import { updatePhoneNumber } from "@/data-access/availablePhoneNumber";
 import { getVoice } from "@/data-access/voices";
 import { db } from "@/db";
 import { availablePhoneNumber, systemPrompt } from "@/db/schema";
@@ -22,7 +21,6 @@ import { VapiClient } from "@vapi-ai/server-sdk";
 import { and, eq } from "drizzle-orm";
 import { env } from "process";
 import { ZSAError } from "zsa";
-import { updateVapiPhoneNumber } from "./vapi";
 
 export const getBusinessAction = authenticationProcedure
   .createServerAction()
@@ -125,9 +123,9 @@ export const createBusinessAction = authenticationProcedure
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
     });
 
-    await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-      assistantId: newAssistant?.id,
-    });
+    // await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
+    //   assistantId: newAssistant?.id,
+    // });
 
     await createTransaction(async trx => {
       const [newAgent] = await createAgent(
@@ -139,12 +137,6 @@ export const createBusinessAction = authenticationProcedure
           provider: findVoice.provider,
           categoryId: category,
         },
-        trx,
-      );
-
-      await updatePhoneNumber(
-        phone,
-        { isAssigned: true, dateAssigned: new Date()?.toISOString() },
         trx,
       );
 
