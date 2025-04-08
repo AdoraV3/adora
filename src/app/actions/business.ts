@@ -10,7 +10,7 @@ import { createAgent, getAgent, updateAgent } from "@/data-access/agents";
 import { updatePhoneNumber } from "@/data-access/availablePhoneNumber";
 import { getVoice } from "@/data-access/voices";
 import { db } from "@/db";
-import { availablePhoneNumber, subscription, systemPrompt } from "@/db/schema";
+import { availablePhoneNumber, systemPrompt } from "@/db/schema";
 import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
 import {
@@ -61,13 +61,6 @@ export const createBusinessAction = authenticationProcedure
       throw new ZSAError("NOT_AUTHORIZED", "Phone number not available");
     }
 
-    const basicSubscription = await db.query.subscription.findFirst({
-      where: eq(subscription.plan, "basic"),
-    });
-
-    if (!basicSubscription?.priceId) {
-      throw new ZSAError("NOT_FOUND", "Subscription not found");
-    }
     const findVoice = await getVoice(voice);
 
     if (!findVoice) {
@@ -167,7 +160,6 @@ export const createBusinessAction = authenticationProcedure
           agentId: newAgent.agentId,
           isProfileCompleted: true,
           country: businessCountry,
-          subscriptionId: null,
         },
         trx,
       );
