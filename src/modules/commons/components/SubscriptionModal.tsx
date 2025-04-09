@@ -51,7 +51,7 @@ export function SubscriptionModal() {
       >
         <DialogHeader>
           <DialogTitle className="text-black-100 font-semibold font-lg">
-            Upgrade Plan
+            Select Plan
           </DialogTitle>
 
           <DialogDescription className="font-normal pt-3 text-gray-750 text-sm font-satoshi">
