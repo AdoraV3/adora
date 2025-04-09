@@ -55,8 +55,7 @@ export function SubscriptionModal() {
           </DialogTitle>
 
           <DialogDescription className="font-normal pt-3 text-gray-750 text-sm font-satoshi">
-            Your Free Trial as expired. To continue to use Adora, Please select
-            a subscription plan.
+            To continue using Adora, Select a plan to enjoy a 7day free trial
           </DialogDescription>
         </DialogHeader>
 
