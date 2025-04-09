@@ -68,11 +68,11 @@ jobs:
       - name: Install package dependencies
         run: pnpm install
 
-      # - name: Check linting and formatting
-      #   run: pnpm run lint
+      - name: Check linting and formatting
+        run: pnpm run lint
 
-      # - name: Execute build
-      #   run: pnpm run build
+      - name: Execute build
+        run: pnpm run build
 
       - name: Configure AWS Credentials for GitHub Actions
         uses: aws-actions/configure-aws-credentials@v4
