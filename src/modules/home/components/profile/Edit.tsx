@@ -35,6 +35,7 @@ import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -45,6 +46,8 @@ export function Edit() {
     label: el.name,
     value: el.isoCode,
   }));
+
+  const router = useRouter();
 
   const { data, isPending } = useServerActionQuery(getProfileAction, {
     input: undefined,
@@ -65,6 +68,7 @@ export function Edit() {
   const createProfileHandler = useServerActionMutation(createBusinessAction, {
     onSuccess: () => {
       toast.success("Profile created successfully");
+      router.push("/pricing");
     },
     onError: error => {
       toast.error(error?.message);
@@ -92,23 +96,8 @@ export function Edit() {
   });
 
   const isProfileCompleted = data?.profile?.isProfileCompleted ?? false;
-  // const hasActiveSubscription = !!data?.profile?.stripeCustomerId;
+
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
-    // if (!hasActiveSubscription) {
-    //   toast.error("Unable to update profile", {
-    //     description:
-    //       "You need to be on a subscription plan to create a profile",
-    //     action: {
-    //       label: "Select plan",
-    //       onClick: selectPlan,
-    //     },
-    //     duration: Infinity,
-    //     closeButton: false,
-    //   });
-
-    //   return;
-    // }
-
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
     } else {

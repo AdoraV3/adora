@@ -96,3 +96,11 @@ export const toolSchema = z.object({
 });
 
 export type ToolSchemaType = z.infer<typeof toolSchema>;
+
+export const resendOtpSchema = z.object({
+  email: z.string().email({
+    message: "Please enter a valid email address",
+  }),
+});
+
+export type ResendOtpSchemaType = z.infer<typeof resendOtpSchema>;

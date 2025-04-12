@@ -6,12 +6,13 @@ import {
   createUser,
   createVerifyEmailToken,
   deleteSessionForUser,
+  getProfile,
   verifyEmail,
 } from "@/data-access";
 
 import { getAccount } from "@/data-access/account";
 import { db } from "@/db";
-import { user as userTable } from "@/db/schema";
+import { user as userTable, verifyEmailToken } from "@/db/schema";
 import { sendVerificationEmail } from "@/emails";
 import { lucia } from "@/lib/auth";
 import { createTransaction } from "@/lib/create-transaction";
@@ -21,7 +22,12 @@ import {
   RateLimitConfig,
   RateLimiterUtility,
 } from "@/modules/commons/utils/RateLimiterUtility";
-import { authSchema, otpSchema, registerSchema } from "@/validations/auth";
+import {
+  authSchema,
+  otpSchema,
+  registerSchema,
+  resendOtpSchema,
+} from "@/validations/auth";
 import { generateCodeVerifier, generateState } from "arctic";
 import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
@@ -177,4 +183,44 @@ export const verifyEmailAction = createServerAction()
     const { otp: token } = input;
 
     return verifyEmail(token);
+  });
+
+export const resendVerificationAction = createServerAction()
+  .input(resendOtpSchema)
+  .handler(async ({ input }) => {
+    const { email } = input;
+
+    await RateLimiterUtility.limit(RateLimitConfig.SIGNUP);
+
+    const user = await db.query.user.findFirst({
+      where: eq(userTable.email, email),
+    });
+
+    if (!user) {
+      throw new ZSAError("NOT_FOUND", "User not found");
+    }
+
+    const profile = await getProfile(user.id);
+
+    if (!profile) {
+      throw new ZSAError("NOT_FOUND", "Profile not found");
+    }
+
+    // Invalidate any existing verification tokens
+    await db
+      .delete(verifyEmailToken)
+      .where(eq(verifyEmailToken.userId, user.id))
+      .execute();
+
+    // Create a new verification token
+    const token = await createVerifyEmailToken(user.id);
+
+    // Send the verification email with the new token
+    await sendVerificationEmail({
+      token,
+      to: email,
+      name: profile.name,
+    });
+
+    return { success: true };
   });
