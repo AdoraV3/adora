@@ -28,7 +28,7 @@ export async function getAvailablePhoneNumberById(
 export async function createAvailablePhoneNumber(
   data: NewAvailablePhoneNumber[],
 ) {
-  return db.insert(availablePhoneNumber).values(data).returning();
+  return db.insert(availablePhoneNumber).values(data);
 }
 
 export async function getPhoneNumbers() {

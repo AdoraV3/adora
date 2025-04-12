@@ -25,6 +25,7 @@ import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { DynamicBreadcrumb } from "@/modules/commons/components";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { getInitials } from "@/modules/commons/utils/helpers";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -76,6 +77,12 @@ export function DashboardNav() {
 
   const agentPhoneNumber =
     formatPhoneNumber(agent?.data?.phoneNumber as string) ?? "";
+
+  const queryClient = useQueryClient();
+  const handleLogout = () => {
+    logOutHandler.mutate(undefined);
+    queryClient.invalidateQueries();
+  };
 
   return (
     <nav className=" sticky px-6 md:flex  items-center justify-between top-0 z-10   border-b border-gray-450 pb-4 hidden w-full   bg-white-100 ">
@@ -188,7 +195,7 @@ export function DashboardNav() {
                 Help
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => logOutHandler.mutate(undefined)}
+                onClick={handleLogout}
                 className="text-gray-2  font-satoshi font-normal text-sm"
               >
                 Logout

@@ -390,6 +390,7 @@ export function Edit() {
                           className="font-satoshi text-base font-normal text-[#8c8c8c]"
                           key={el.id}
                           value={el.id}
+                          disabled={el.isAssigned}
                         >
                           {formatPhoneNumber(el.phoneNumber)}
                         </SelectItem>

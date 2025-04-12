@@ -13,6 +13,7 @@ import {
 import { useServerActionMutation } from "@/lib/hooks/server-action-hooks";
 import { AuthSchemaType, authSchema } from "@/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -39,13 +40,16 @@ export function Login() {
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
+  const queryClient = useQueryClient();
   const loginHandler = useServerActionMutation(loginInAction, {
     onSuccess: () => {
       if (from) {
         const redirectUrl = decodeURIComponent(from);
         router.push(redirectUrl);
+        queryClient.invalidateQueries();
         return;
       }
+
       router.push("/home");
       toast.success("Login successful");
     },

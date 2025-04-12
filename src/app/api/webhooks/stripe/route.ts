@@ -1,5 +1,5 @@
 import { updateVapiPhoneNumber } from "@/app/actions/vapi";
-import { getBusinessWithAgentPhoneNumber, updateBusiness } from "@/data-access";
+import { updateBusiness } from "@/data-access";
 import { getAgent } from "@/data-access/agents";
 import {
   getAvailablePhoneNumberById,
@@ -95,22 +95,11 @@ export async function POST(req: Request) {
           stripeCustomerId: customerId,
         });
 
-        const phoneNumber = await getBusinessWithAgentPhoneNumber(
-          findBusiness?.id,
-        );
-
-        if (!phoneNumber) {
-          return NextResponse.json({
-            status: 404,
-            error: "Phone number not found",
-          });
-        }
-
         await updateVapiPhoneNumber(isPhoneNumberAvailable?.vapiId, {
           assistantId: existingAgent?.assistantId,
         });
 
-        await updatePhoneNumber(phoneNumber?.id, {
+        await updatePhoneNumber(isPhoneNumberAvailable.id, {
           isAssigned: true,
           dateAssigned: new Date()?.toISOString(),
         });
