@@ -99,7 +99,7 @@ export async function POST(req: Request) {
           assistantId: existingAgent?.assistantId,
         });
 
-        await updatePhoneNumber(isPhoneNumberAvailable.id, {
+        await updatePhoneNumber(existingAgent?.phoneNumberId, {
           isAssigned: true,
           dateAssigned: new Date()?.toISOString(),
         });
