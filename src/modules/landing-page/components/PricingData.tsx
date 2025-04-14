@@ -37,7 +37,7 @@ export function PricingData({ subscriptions, view }: PricingDataProps) {
           priceId={
             plan.plan !== "enterprise"
               ? plan?.priceId ?? undefined
-              : "price_1QsnhBEZh5HgtazOw10TDoxc"
+              : "price_1QslBPEZh5HgtazOSojfwXOg"
           }
         />
       ))}
