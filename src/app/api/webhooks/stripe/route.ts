@@ -147,6 +147,7 @@ export async function POST(req: Request) {
           subscriptionStartDate: null,
           subscriptionEndDate: null,
           stripeCustomerId: null,
+          isProfileCompleted: false,
         });
 
         await unAssignPhoneNumber(business?.userId);
@@ -195,6 +196,7 @@ export async function POST(req: Request) {
             subscriptionStartDate: null as unknown as string,
             subscriptionEndDate: null as unknown as string,
             stripeCustomerId: null,
+            isProfileCompleted: false,
           });
 
           await unAssignPhoneNumber(business.userId);
