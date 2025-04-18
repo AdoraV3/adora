@@ -4,10 +4,9 @@ async function main() {
   console.warn("⏳ Running seed...");
   const start = Date.now();
 
-  // await seeds.subscription();
-  // await seeds.systemPrompt();
-  // await seeds.voice();
-  await seeds.availablePhoneNumber();
+  await seeds.subscription();
+  await seeds.systemPrompt();
+  await seeds.voice();
 
   const end = Date.now();
 
