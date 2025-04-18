@@ -110,14 +110,14 @@ export function Edit() {
       businessCountry: profile?.businessCountry ?? "",
       businessName: profile?.businessName ?? "",
       country: profile?.country ?? "",
-      phoneNumber: profile?.phoneNumber ?? "",
+      phoneNumber: profile?.phoneNumber,
       name: profile?.name ?? "",
       agentName: profile?.agentName ?? "",
       category: profile?.category ?? "",
       businessPhoneNumber: profile?.businessPhoneNumber ?? "",
       voice: profile?.voice ?? "",
     });
-  }, [form.reset, profile, form]);
+  }, [form.reset, profile, form, profile?.phoneNumber]);
 
   if (isPending) return <div>Loading...</div>;
 
@@ -364,13 +364,13 @@ export function Edit() {
           control={form.control}
           name="phoneNumber"
           render={({ field }) => (
-            <FormItem id="phone" className="relative">
+            <FormItem key={field.value} id="phoneNumber" className="relative">
               <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
                 Agent Phone
               </FormLabel>
               <FormControl>
                 <Select
-                  disabled={isProfileCompleted}
+                  // disabled={isProfileCompleted}
                   onValueChange={field.onChange}
                   value={field.value}
                 >
@@ -388,9 +388,9 @@ export function Edit() {
                       {phones?.data?.map(el => (
                         <SelectItem
                           className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                          key={el.id}
-                          value={el.id}
-                          disabled={el.isAssigned}
+                          key={el.phoneNumber}
+                          value={el.phoneNumber}
+                          // disabled={el.isAssigned}
                         >
                           {formatPhoneNumber(el.phoneNumber)}
                         </SelectItem>
