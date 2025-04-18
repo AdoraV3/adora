@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { updateVapiPhoneNumber } from "@/app/actions/vapi";
 import { updateBusiness } from "@/data-access";
 import { getAgent } from "@/data-access/agents";
@@ -118,12 +119,26 @@ export async function POST(req: Request) {
             businessTable.stripeCustomerId,
             subscription.customer as string,
           ),
+          with: {
+            agent: {
+              with: {
+                phoneNumber: true,
+              },
+            },
+          },
         });
 
         if (!business) {
           return NextResponse.json({
             status: 404,
             error: "business not found",
+          });
+        }
+
+        if (!business?.agent?.phoneNumber?.vapiId) {
+          return NextResponse.json({
+            status: 404,
+            error: "Phone number not available",
           });
         }
 
@@ -135,6 +150,9 @@ export async function POST(req: Request) {
         });
 
         await unAssignPhoneNumber(business?.userId);
+        await updateVapiPhoneNumber(business?.agent?.phoneNumber?.vapiId, {
+          assistantId: null,
+        });
 
         break;
       }
@@ -150,12 +168,25 @@ export async function POST(req: Request) {
               businessTable.stripeCustomerId,
               subscription.customer as string,
             ),
+            with: {
+              agent: {
+                with: {
+                  phoneNumber: true,
+                },
+              },
+            },
           });
 
           if (!business) {
             return NextResponse.json({
               status: 404,
               error: "Business not found",
+            });
+          }
+          if (!business?.agent?.phoneNumber?.vapiId) {
+            return NextResponse.json({
+              status: 404,
+              error: "Phone number not available",
             });
           }
 
@@ -167,6 +198,9 @@ export async function POST(req: Request) {
           });
 
           await unAssignPhoneNumber(business.userId);
+          await updateVapiPhoneNumber(business?.agent?.phoneNumber?.vapiId, {
+            assistantId: null,
+          });
         }
 
         break;

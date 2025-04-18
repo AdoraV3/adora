@@ -6,7 +6,7 @@ import { db } from ".";
 async function reset() {
   const tableSchema = db._.schema;
 
-  const tableName = ""; // db._.schema?.subscription.dbName;
+  const tableName = db._.schema?.availablePhoneNumber.dbName; // db._.schema?.subscription.dbName;
   if (!tableSchema) {
     throw new Error("No table schema found");
   }

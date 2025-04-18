@@ -99,6 +99,7 @@ export function DashboardNav() {
           {isPending ? "Loading..." : agentPhoneNumber ?? "Unassigned"}
         </span>{" "}
       </p>
+
       <div className="flex gap-4 items-center">
         <Link href="/notification">
           <Icons.Notification className="text-black-100" />
@@ -135,7 +136,6 @@ export function DashboardNav() {
                 <Avatar className="size-9">
                   <AvatarImage src={user?.profile?.avatar ?? ""} alt="name" />
                   <AvatarFallback>
-                    {" "}
                     {getInitials(user?.profile?.name ?? "")}{" "}
                   </AvatarFallback>
                 </Avatar>
