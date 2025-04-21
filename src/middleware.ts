@@ -119,9 +119,9 @@ function handleBusinessLogic(business: any): string | null {
     ? Math.ceil((endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : 0;
 
-  if (!business.isProfileCompleted) {
-    return "/profile";
-  }
+  // if (!business.isProfileCompleted) {
+  //   return "/profile";
+  // }
 
   if (!endDate || daysLeft <= 0) {
     return "/pricing";
