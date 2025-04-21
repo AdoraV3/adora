@@ -52,6 +52,7 @@ export function Edit() {
   const { data, isPending } = useServerActionQuery(getProfileAction, {
     input: undefined,
     queryKey: ["getBusinessProfile"],
+    refetchOnMount: false,
   });
 
   const profile = data?.profile;
@@ -285,8 +286,8 @@ export function Edit() {
                     {categories?.data?.map(el => (
                       <SelectItem
                         className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                        key={el.id ?? ""}
-                        value={el.id ?? ""}
+                        key={el.id}
+                        value={el.id}
                       >
                         {el.label}
                       </SelectItem>

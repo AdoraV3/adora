@@ -46,6 +46,7 @@ export const createBusinessAction = authenticationProcedure
       businessCountry,
     } = input;
     const { id: userId } = ctx;
+
     await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const isPhoneNumberAvailable =
       await db.query.availablePhoneNumber.findFirst({
@@ -123,10 +124,6 @@ export const createBusinessAction = authenticationProcedure
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
     });
 
-    // await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-    //   assistantId: newAssistant?.id,
-    // });
-
     await createTransaction(async trx => {
       const [newAgent] = await createAgent(
         {
@@ -140,7 +137,7 @@ export const createBusinessAction = authenticationProcedure
         trx,
       );
 
-      updateProfile(userId, {
+      await updateProfile(userId, {
         country,
         phone: businessPhoneNumber,
       });

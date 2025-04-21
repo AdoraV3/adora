@@ -5,7 +5,7 @@
 import { getBusiness, getUserByEmail } from "@/data-access";
 import { getAgent, getAgentPhoneNumber } from "@/data-access/agents";
 import { db } from "@/db";
-import { agent } from "@/db/schema";
+import { agent, business } from "@/db/schema";
 import { authenticationProcedure } from "@/lib/procedures";
 import { agentDetailsSchema } from "@/modules/home/account-settings/schema";
 import { VapiClient } from "@vapi-ai/server-sdk";
@@ -18,11 +18,11 @@ export const getAgentPhoneNumberAction = authenticationProcedure
   .createServerAction()
   .handler(async ({ ctx }) => {
     const { id } = ctx;
-    const business = await getBusiness(id);
-    if (!business?.agentId) {
+    const findBusiness = await getBusiness(id);
+    if (!findBusiness?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
-    const findAgent = await getAgent(business.agentId);
+    const findAgent = await getAgent(findBusiness.agentId);
 
     if (!findAgent) {
       throw new ZSAError("NOT_FOUND", "Agent not found.");
@@ -36,12 +36,12 @@ export const getAgentAction = authenticationProcedure
   .createServerAction()
   .handler(async ({ ctx }) => {
     const { id } = ctx;
-    const business = await getBusiness(id);
-    if (!business?.agentId) {
+    const findBusiness = await getBusiness(id);
+    if (!findBusiness?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
 
-    const agentDetails = await getAgent(business.agentId);
+    const agentDetails = await getAgent(findBusiness.agentId);
 
     if (!agentDetails) {
       throw new ZSAError("NOT_FOUND", "Agent not found.");
@@ -73,8 +73,8 @@ export const getAgentWithVoiceAction = authenticationProcedure
   .createServerAction()
   .handler(async ({ ctx }) => {
     const { id } = ctx;
-    const business = await getBusiness(id);
-    if (!business?.agentId) {
+    const findBusiness = await getBusiness(id);
+    if (!findBusiness?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
 
@@ -97,8 +97,17 @@ export const getProfileAction = authenticationProcedure
   .createServerAction()
   .handler(async ({ ctx }) => {
     const { id, email } = ctx;
-    const business = await getBusiness(id);
-    if (!business?.agentId) {
+    const findBusiness = await db.query.business.findFirst({
+      where: eq(business.userId, id),
+      with: {
+        agent: {
+          with: {
+            phoneNumber: true,
+          },
+        },
+      },
+    });
+    if (!findBusiness?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
@@ -107,29 +116,18 @@ export const getProfileAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "User not found");
     }
 
-    const existingAgent = await db.query.agent.findFirst({
-      where: eq(agent?.id, business?.agentId),
-      with: {
-        phoneNumber: true,
-      },
-    });
-
-    if (!existingAgent) {
-      throw new ZSAError("NOT_FOUND", "Agent not found");
-    }
-
     const profile = {
-      businessCountry: business?.country,
-      businessName: business?.name,
+      businessCountry: findBusiness?.country,
+      businessName: findBusiness?.name,
       country: user?.profile?.country,
-      phoneNumber: existingAgent?.phoneNumber?.phoneNumber,
+      phoneNumber: findBusiness?.agent?.phoneNumber?.phoneNumber,
       name: user?.profile?.name,
-      agentName: existingAgent?.name,
-      category: existingAgent?.categoryId,
+      agentName: findBusiness?.agent?.name,
+      category: findBusiness?.agent?.categoryId,
       businessPhoneNumber: user?.profile?.phone,
-      voice: existingAgent?.voiceId,
-      isProfileCompleted: business?.isProfileCompleted,
-      stripeCustomerId: business?.stripeCustomerId,
+      voice: findBusiness?.agent?.voiceId,
+      isProfileCompleted: findBusiness?.isProfileCompleted,
+      stripeCustomerId: findBusiness?.stripeCustomerId,
     };
 
     return {
@@ -145,8 +143,8 @@ export const updateAssistantAction = authenticationProcedure
     const { name, voice } = input;
     const { id } = ctx;
 
-    const business = await getBusiness(id);
-    if (!business?.agentId) {
+    const findBusiness = await getBusiness(id);
+    if (!findBusiness?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
 

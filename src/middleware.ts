@@ -56,6 +56,10 @@ export async function middleware(req: NextRequest) {
         if (redirectUrl) {
           return NextResponse.redirect(new URL(redirectUrl, req.url));
         }
+
+        // if (!business.isProfileCompleted && pathname !== "/profile") {
+        //   return NextResponse.redirect(new URL("/profile", req.url));
+        // }
       }
     }
   } catch (error) {
@@ -119,9 +123,9 @@ function handleBusinessLogic(business: any): string | null {
     ? Math.ceil((endDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : 0;
 
-  if (!business.isProfileCompleted) {
-    return "/profile";
-  }
+  // if (!business.isProfileCompleted) {
+  //   return "/profile";
+  // }
 
   if (!endDate || daysLeft <= 0) {
     return "/pricing";
