@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS "adora_account_preference" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
 	"theme" text,
-	"language" text,
+	"country" text,
 	"timezone" text,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
@@ -51,12 +51,14 @@ CREATE TABLE IF NOT EXISTS "adora_business" (
 	"stripe_customer_id" varchar(255),
 	"customer_base" integer,
 	"country" varchar(255),
-	"subscription_start_date" timestamp DEFAULT now() NOT NULL,
-	"subscription_end_date" timestamp DEFAULT now() NOT NULL,
-	"subscription_id" text NOT NULL,
-	"agent_id" text NOT NULL,
+	"subscription_start_date" timestamp,
+	"subscription_end_date" timestamp,
+	"subscription_id" text,
+	"agent_id" text,
+	"is_free_trial" boolean DEFAULT true,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"is_profile_completed" boolean DEFAULT false
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_call_log" (
@@ -74,6 +76,8 @@ CREATE TABLE IF NOT EXISTS "adora_knowledge_base" (
 	"file_id" text,
 	"size" integer,
 	"original_name" text,
+	"vapi_knowledge_base_id" text DEFAULT '' NOT NULL,
+	"vapi_file_id" text DEFAULT '' NOT NULL,
 	"business_id" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
@@ -109,12 +113,15 @@ CREATE TABLE IF NOT EXISTS "adora_session" (
 CREATE TABLE IF NOT EXISTS "adora_subscription" (
 	"id" text PRIMARY KEY NOT NULL,
 	"subscription_plan" varchar DEFAULT 'basic',
+	"description" text DEFAULT '',
 	"subscription_period" varchar DEFAULT 'monthly',
 	"amount" integer DEFAULT 0,
 	"currency" varchar(3) DEFAULT 'USD',
 	"price_id" varchar(255),
 	"payment_link" varchar(255),
-	"payment_provider" varchar
+	"payment_provider" varchar,
+	"total_allowed_calls" integer DEFAULT 0,
+	"features" text[] NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_system_prompt" (
@@ -150,8 +157,6 @@ CREATE TABLE IF NOT EXISTS "adora_verify_email_token" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "adora_voice" (
 	"id" text PRIMARY KEY NOT NULL,
-	"label" text,
-	"language" text DEFAULT 'english',
 	"gender" text DEFAULT 'male',
 	"provider" text NOT NULL,
 	"created_voice_id" text NOT NULL

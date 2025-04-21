@@ -30,8 +30,8 @@ export const subscription = pgTable("subscription", {
   paymentProvider: varchar("payment_provider", {
     enum: paymentProvider,
   }),
-  features: text("features").array(),
-  totalAllowedCalls: integer("total_allowed_calls"),
+  totalAllowedCalls: integer("total_allowed_calls").default(0),
+  features: text("features").array().notNull(),
 });
 
 export type Subscription = typeof subscription.$inferSelect;

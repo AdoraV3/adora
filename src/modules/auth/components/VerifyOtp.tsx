@@ -1,6 +1,6 @@
 "use client";
 
-import { verifyEmailAction } from "@/app/actions";
+import { resendVerificationAction, verifyEmailAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -29,7 +29,8 @@ export default function VerifyOtp() {
     mode: "onSubmit",
     resolver: zodResolver(otpSchema),
   });
-  const { timer, isOtpValid } = useOtpTimer();
+  const { timer, isOtpValid, resetTimer } = useOtpTimer();
+
   const router = useRouter();
   const { queryParams } = useQueryParams();
   const email = queryParams.get("email");
@@ -46,12 +47,27 @@ export default function VerifyOtp() {
     },
   });
   const onSubmit: SubmitHandler<OtpSchemaType> = data => {
-    verifyOtpHandler.mutate({ otp: data.otp }, {});
+    verifyOtpHandler.mutate({ otp: data.otp });
   };
 
   useEffect(() => {
     form.reset({ otp });
   }, [otp, form]);
+
+  const resetOtpHandler = useServerActionMutation(resendVerificationAction, {
+    onSuccess: () => {
+      resetTimer();
+      toast.success("Code resent successfully");
+    },
+    onError: error => {
+      toast.error(error?.message);
+    },
+  });
+
+  const resendOTP = () => {
+    if (!email) return;
+    resetOtpHandler.mutate({ email });
+  };
 
   return (
     <div className="flex flex-col items-center my-auto justify-between ">
@@ -116,10 +132,10 @@ export default function VerifyOtp() {
                     isDisabled={isOtpValid}
                     variant="link"
                     className="px-0 underline"
-                    // onClick={resendOtp}
-                    // isLoading={handleRegisterPhone.isPending}
+                    onClick={resendOTP}
+                    isLoading={resetOtpHandler.isPending}
                   >
-                    Resend Code{" "}
+                    {!resetOtpHandler.isPending ? "Resend Code" : ""}
                   </Button>{" "}
                 </span>{" "}
               </p>

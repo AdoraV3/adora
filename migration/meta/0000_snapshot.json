@@ -1,5 +1,5 @@
 {
-  "id": "d4089e71-08b9-4ed1-b99e-b49db99a1c28",
+  "id": "67f5b32e-2a91-4e6c-886e-c2542641e455",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -97,8 +97,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "language": {
-          "name": "language",
+        "country": {
+          "name": "country",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -351,27 +351,32 @@
           "name": "subscription_start_date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": false
         },
         "subscription_end_date": {
           "name": "subscription_end_date",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": false
         },
         "subscription_id": {
           "name": "subscription_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "agent_id": {
           "name": "agent_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "is_free_trial": {
+          "name": "is_free_trial",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         },
         "created_at": {
           "name": "created_at",
@@ -386,6 +391,13 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "is_profile_completed": {
+          "name": "is_profile_completed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
         }
       },
       "indexes": {},
@@ -512,6 +524,20 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "vapi_knowledge_base_id": {
+          "name": "vapi_knowledge_base_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "vapi_file_id": {
+          "name": "vapi_file_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
         },
         "business_id": {
           "name": "business_id",
@@ -738,6 +764,13 @@
           "notNull": false,
           "default": "'basic'"
         },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
         "subscription_period": {
           "name": "subscription_period",
           "type": "varchar",
@@ -776,6 +809,19 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "total_allowed_calls": {
+          "name": "total_allowed_calls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "features": {
+          "name": "features",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -980,19 +1026,6 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true
-        },
-        "label": {
-          "name": "label",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "language": {
-          "name": "language",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'english'"
         },
         "gender": {
           "name": "gender",

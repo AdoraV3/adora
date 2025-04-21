@@ -1,6 +1,12 @@
+/* eslint-disable sonarjs/no-duplicate-string */
+import { updateVapiPhoneNumber } from "@/app/actions/vapi";
 import { updateBusiness } from "@/data-access";
-import { unAssignPhoneNumber } from "@/data-access/availablePhoneNumber";
-import { getPlan } from "@/data-access/subscription";
+import { getAgent } from "@/data-access/agents";
+import {
+  getAvailablePhoneNumberById,
+  unAssignPhoneNumber,
+  updatePhoneNumber,
+} from "@/data-access/availablePhoneNumber";
 import { db } from "@/db";
 import { business as businessTable, user as userTable } from "@/db/schema";
 import { stripe, updateSubscriptions } from "@/lib/stripe";
@@ -40,7 +46,7 @@ export async function POST(req: Request) {
 
         if (!customerDetails?.email) {
           return NextResponse.json({
-            status: 500,
+            status: 404,
             error: "Customer email could not be fetched",
           });
         }
@@ -60,17 +66,44 @@ export async function POST(req: Request) {
           where: eq(businessTable.userId, findUser.id),
         });
 
-        if (!findBusiness) {
+        if (!findBusiness || !findBusiness?.agentId) {
           return NextResponse.json({
             status: 404,
             error: "business not found",
           });
         }
-        if (!findBusiness?.stripeCustomerId) {
-          await updateBusiness(findUser.id, {
-            stripeCustomerId: customerId,
+
+        const existingAgent = await getAgent(findBusiness?.agentId);
+        if (!existingAgent) {
+          return NextResponse.json({
+            status: 404,
+            error: "Agent not found",
           });
         }
+
+        const isPhoneNumberAvailable = await getAvailablePhoneNumberById(
+          existingAgent?.phoneNumberId,
+        );
+
+        if (!isPhoneNumberAvailable) {
+          return NextResponse.json({
+            status: 404,
+            error: "Phone number not available",
+          });
+        }
+
+        await updateBusiness(findUser.id, {
+          stripeCustomerId: customerId,
+        });
+
+        await updateVapiPhoneNumber(isPhoneNumberAvailable?.vapiId, {
+          assistantId: existingAgent?.assistantId,
+        });
+
+        await updatePhoneNumber(existingAgent?.phoneNumberId, {
+          isAssigned: true,
+          dateAssigned: new Date()?.toISOString(),
+        });
 
         const lineItems = session.line_items?.data || [];
 
@@ -79,15 +112,20 @@ export async function POST(req: Request) {
         break;
       }
       case "customer.subscription.deleted": {
-        const subscription = await stripe.subscriptions.retrieve(
-          event.data.object.id,
-        );
+        const subscription = event.data.object;
 
         const business = await db.query.business.findFirst({
           where: eq(
             businessTable.stripeCustomerId,
             subscription.customer as string,
           ),
+          with: {
+            agent: {
+              with: {
+                phoneNumber: true,
+              },
+            },
+          },
         });
 
         if (!business) {
@@ -96,13 +134,26 @@ export async function POST(req: Request) {
             error: "business not found",
           });
         }
-        const basicPlan = await getPlan("basic");
-        updateBusiness(business.userId, {
-          subscriptionId: basicPlan?.id,
-          subscriptionStartDate: undefined,
+
+        if (!business?.agent?.phoneNumber?.vapiId) {
+          return NextResponse.json({
+            status: 404,
+            error: "Phone number not available",
+          });
+        }
+
+        await updateBusiness(business.userId, {
+          subscriptionId: null,
+          subscriptionStartDate: null,
+          subscriptionEndDate: null,
+          stripeCustomerId: null,
+          isProfileCompleted: false,
         });
 
-        await unAssignPhoneNumber(business?.id);
+        await unAssignPhoneNumber(business?.userId);
+        await updateVapiPhoneNumber(business?.agent?.phoneNumber?.vapiId, {
+          assistantId: null,
+        });
 
         break;
       }
@@ -118,6 +169,13 @@ export async function POST(req: Request) {
               businessTable.stripeCustomerId,
               subscription.customer as string,
             ),
+            with: {
+              agent: {
+                with: {
+                  phoneNumber: true,
+                },
+              },
+            },
           });
 
           if (!business) {
@@ -126,22 +184,25 @@ export async function POST(req: Request) {
               error: "Business not found",
             });
           }
-
-          const basicPlan = await getPlan("basic");
-          if (!basicPlan) {
-            console.error("Basic plan not found");
-            return new Response("Basic plan configuration error", {
-              status: 500,
+          if (!business?.agent?.phoneNumber?.vapiId) {
+            return NextResponse.json({
+              status: 404,
+              error: "Phone number not available",
             });
           }
 
-          // Downgrade business to the basic plan
           await updateBusiness(business.userId, {
-            subscriptionId: basicPlan.id,
-            subscriptionStartDate: undefined,
+            subscriptionId: null,
+            subscriptionStartDate: null as unknown as string,
+            subscriptionEndDate: null as unknown as string,
+            stripeCustomerId: null,
+            isProfileCompleted: false,
           });
 
-          await unAssignPhoneNumber(business.id);
+          await unAssignPhoneNumber(business.userId);
+          await updateVapiPhoneNumber(business?.agent?.phoneNumber?.vapiId, {
+            assistantId: null,
+          });
         }
 
         break;

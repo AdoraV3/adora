@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1733560265657,
-      "tag": "0000_big_outlaw_kid",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1733560507527,
-      "tag": "0001_new_nova",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1734787374067,
-      "tag": "0002_military_mandrill",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1735290371131,
-      "tag": "0003_good_pestilence",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1737134712613,
-      "tag": "0004_greedy_unicorn",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1737754522320,
-      "tag": "0005_complete_katie_power",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1739567134982,
-      "tag": "0006_oval_galactus",
+      "when": 1743980335040,
+      "tag": "0000_fuzzy_groot",
       "breakpoints": true
     }
   ]

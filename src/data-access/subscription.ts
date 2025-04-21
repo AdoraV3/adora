@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import {
   NewSubscription,
+  Subscription,
   subscription,
   subscriptionPlanEnum,
 } from "@/db/schema";
@@ -35,4 +36,14 @@ export async function getSubscriptionByPriceId(priceId: string) {
   return db.query.subscription.findFirst({
     where: eq(subscription.priceId, priceId),
   });
+}
+
+export async function patchSubscription(
+  subscriptionId: Subscription["id"],
+  data: Partial<Subscription>,
+) {
+  return db
+    .update(subscription)
+    .set(data)
+    .where(eq(subscription.id, subscriptionId));
 }

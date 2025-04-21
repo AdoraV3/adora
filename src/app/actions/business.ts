@@ -7,19 +7,20 @@ import {
   updateProfile,
 } from "@/data-access";
 import { createAgent, getAgent, updateAgent } from "@/data-access/agents";
-import { updatePhoneNumber } from "@/data-access/availablePhoneNumber";
 import { getVoice } from "@/data-access/voices";
 import { db } from "@/db";
-import { availablePhoneNumber, subscription, systemPrompt } from "@/db/schema";
+import { availablePhoneNumber, systemPrompt } from "@/db/schema";
 import { createTransaction } from "@/lib/create-transaction";
 import { authenticationProcedure } from "@/lib/procedures";
-import { formatDateToCustomFormat } from "@/modules/commons/utils/helpers";
+import {
+  RateLimitConfig,
+  RateLimiterUtility,
+} from "@/modules/commons/utils/RateLimiterUtility";
 import { profileSchema } from "@/modules/home/components/profile/validation";
 import { VapiClient } from "@vapi-ai/server-sdk";
 import { and, eq } from "drizzle-orm";
 import { env } from "process";
 import { ZSAError } from "zsa";
-import { updateVapiPhoneNumber } from "./vapi";
 
 export const getBusinessAction = authenticationProcedure
   .createServerAction()
@@ -45,7 +46,7 @@ export const createBusinessAction = authenticationProcedure
       businessCountry,
     } = input;
     const { id: userId } = ctx;
-
+    await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const isPhoneNumberAvailable =
       await db.query.availablePhoneNumber.findFirst({
         where: and(
@@ -58,13 +59,6 @@ export const createBusinessAction = authenticationProcedure
       throw new ZSAError("NOT_AUTHORIZED", "Phone number not available");
     }
 
-    const basicSubscription = await db.query.subscription.findFirst({
-      where: eq(subscription.plan, "basic"),
-    });
-
-    if (!basicSubscription?.priceId) {
-      throw new ZSAError("NOT_FOUND", "Subscription not found");
-    }
     const findVoice = await getVoice(voice);
 
     if (!findVoice) {
@@ -120,19 +114,6 @@ export const createBusinessAction = authenticationProcedure
         model: "gpt-4",
         provider: "openai",
         toolIds: [newTool.id],
-        // tools: [
-        //   {
-        //     type: "transferCall",
-        //     destinations: [
-        //       {
-        //         type: "number",
-        //         number: businessPhoneNumber,
-        //         message:
-        //           "I am forwarding your call to a live agent. Please stay on the line.",
-        //       },
-        //     ],
-        //   },
-        // ],
       },
       name: agentName,
       voice: {
@@ -142,9 +123,9 @@ export const createBusinessAction = authenticationProcedure
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
     });
 
-    await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-      assistantId: newAssistant?.id,
-    });
+    // await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
+    //   assistantId: newAssistant?.id,
+    // });
 
     await createTransaction(async trx => {
       const [newAgent] = await createAgent(
@@ -159,16 +140,6 @@ export const createBusinessAction = authenticationProcedure
         trx,
       );
 
-      await updatePhoneNumber(
-        phone,
-        { isAssigned: true, dateAssigned: new Date()?.toISOString() },
-        trx,
-      );
-
-      const endDate = new Date();
-      const subscriptionEndDate = new Date(endDate);
-      subscriptionEndDate.setDate(endDate.getDate() + 3);
-
       updateProfile(userId, {
         country,
         phone: businessPhoneNumber,
@@ -178,11 +149,7 @@ export const createBusinessAction = authenticationProcedure
         {
           name: businessName,
           userId,
-          subscriptionId: basicSubscription?.id,
           agentId: newAgent.agentId,
-          subscriptionStartDate: formatDateToCustomFormat(new Date()),
-          subscriptionEndDate: formatDateToCustomFormat(subscriptionEndDate),
-          isFreeTrial: true,
           isProfileCompleted: true,
           country: businessCountry,
         },
@@ -209,7 +176,7 @@ export const updateBusinessAction = authenticationProcedure
 
     const business = await getBusiness(userId);
 
-    if (!business) {
+    if (!business || !business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
@@ -226,7 +193,7 @@ export const updateBusinessAction = authenticationProcedure
       throw new ZSAError("NOT_FOUND", "Category not found");
     }
 
-    const agent = await getAgent(business.agentId);
+    const agent = await getAgent(business?.agentId);
     if (!agent?.assistantId) {
       throw new ZSAError("NOT_FOUND", "Agent not found");
     }

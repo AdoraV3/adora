@@ -98,7 +98,7 @@ export const getProfileAction = authenticationProcedure
   .handler(async ({ ctx }) => {
     const { id, email } = ctx;
     const business = await getBusiness(id);
-    if (!business) {
+    if (!business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
@@ -129,6 +129,7 @@ export const getProfileAction = authenticationProcedure
       businessPhoneNumber: user?.profile?.phone,
       voice: existingAgent?.voiceId,
       isProfileCompleted: business?.isProfileCompleted,
+      stripeCustomerId: business?.stripeCustomerId,
     };
 
     return {

@@ -33,9 +33,10 @@ jobs:
       NEXT_PUBLIC_VAPI_API_KEY: ${{ secrets.NEXT_PUBLIC_VAPI_API_KEY }}
       NEXT_PUBLIC_VAPI_CLIENT_SDK: ${{ secrets.NEXT_PUBLIC_VAPI_CLIENT_SDK }}
       NEXT_PUBLIC_ADORA_AI: ${{ secrets.NEXT_PUBLIC_ADORA_AI }}
-      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+      # PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
       UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
       UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
 
     steps:
       - name: Checkout repository
@@ -73,12 +74,12 @@ jobs:
       - name: Execute build
         run: pnpm run build
 
-      # - name: Configure AWS Credentials for GitHub Actions
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ca-central-1
+      - name: Configure AWS Credentials for GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
 
       # - name: Update RDS Security Group
       #   run: |
@@ -91,7 +92,7 @@ jobs:
       # - name: Generate Migration
       #   run: pnpm run db:generate
 
-      # - name: Run Migrationt
+      # - name: Run Migration
       #   run: pnpm run db:migrate
 
       # - name: Run DB Push

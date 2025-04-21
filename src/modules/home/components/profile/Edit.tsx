@@ -35,6 +35,7 @@ import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -45,6 +46,8 @@ export function Edit() {
     label: el.name,
     value: el.isoCode,
   }));
+
+  const router = useRouter();
 
   const { data, isPending } = useServerActionQuery(getProfileAction, {
     input: undefined,
@@ -65,6 +68,7 @@ export function Edit() {
   const createProfileHandler = useServerActionMutation(createBusinessAction, {
     onSuccess: () => {
       toast.success("Profile created successfully");
+      router.push("/pricing");
     },
     onError: error => {
       toast.error(error?.message);
@@ -91,7 +95,8 @@ export function Edit() {
     resolver: zodResolver(profileSchema),
   });
 
-  const isProfileCompleted = data?.profile?.isProfileCompleted;
+  const isProfileCompleted = data?.profile?.isProfileCompleted ?? false;
+
   const onSubmit: SubmitHandler<ProfileSchemaType> = values => {
     if (isProfileCompleted) {
       updateProfileHandler.mutate(values);
@@ -328,7 +333,7 @@ export function Edit() {
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className=" h-12 capitalize focus:border-primary ">
                     <SelectValue
-                      placeholder="male"
+                      placeholder="Select Voice"
                       className="!text-[#8c8c8c40]"
                     />
                   </SelectTrigger>
@@ -355,46 +360,49 @@ export function Edit() {
           )}
         />
 
-        {!isProfileCompleted && (
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem id="phone" className="relative">
-                <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
-                  Agent Phone
-                </FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className=" h-12 focus:border-primary ">
-                      <SelectValue
-                        placeholder="Select Phone Number"
-                        className="!text-[#8c8c8c40]"
-                      />
-                    </SelectTrigger>
-                    <SelectContent sideOffset={5}>
-                      <SelectGroup>
-                        <SelectLabel className="text-[#8c8c8c80]">
-                          Select an agent phone
-                        </SelectLabel>
-                        {phones?.data?.map(el => (
-                          <SelectItem
-                            className="font-satoshi text-base font-normal text-[#8c8c8c]"
-                            key={el.id}
-                            value={el.id}
-                          >
-                            {formatPhoneNumber(el.phoneNumber)}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+        <FormField
+          control={form.control}
+          name="phoneNumber"
+          render={({ field }) => (
+            <FormItem key={field.value} id="phone" className="relative">
+              <FormLabel className="font-satoshi text-base font-normal text-[hsla(0,0%,11%,0.8)]">
+                Agent Phone
+              </FormLabel>
+              <FormControl>
+                <Select
+                  disabled={isProfileCompleted && !!field.value}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <SelectTrigger className=" h-12 focus:border-primary ">
+                    <SelectValue
+                      placeholder="Select Phone Number"
+                      className="!text-[#8c8c8c40]"
+                    />
+                  </SelectTrigger>
+                  <SelectContent sideOffset={5}>
+                    <SelectGroup>
+                      <SelectLabel className="text-[#8c8c8c80]">
+                        Select an agent phone
+                      </SelectLabel>
+                      {phones?.data?.map(el => (
+                        <SelectItem
+                          className="font-satoshi text-base font-normal text-[#8c8c8c]"
+                          key={el.id}
+                          value={el.id}
+                          disabled={el.isAssigned}
+                        >
+                          {formatPhoneNumber(el.phoneNumber)}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button
           className="ma col-span-2 border border-input bg-brown-50 px-6 text-black-100 "

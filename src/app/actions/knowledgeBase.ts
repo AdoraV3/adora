@@ -41,7 +41,7 @@ export const createKnowledgeBaseAction = authenticationProcedure
     const business = await getBusiness(id);
     const { id: fileId, url, originalName, size } = input;
 
-    if (!business) {
+    if (!business || !business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }
 
@@ -167,7 +167,7 @@ export const updateKnowledgeBaseAction = authenticationProcedure
     const { id: fileId, url, originalName, size } = input;
     const { id } = ctx;
     const business = await getBusiness(id);
-    if (!business) {
+    if (!business || !business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found.");
     }
 

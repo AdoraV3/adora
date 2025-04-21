@@ -4,7 +4,7 @@
     "period": "monthly",
     "description": "For small businesses taking their first steps toward AI-powered customer support.",
     "amount": 99,
-    "priceId": "price_1QS08IEZh5HgtazOUSE9mIwZ",
+    "priceId": "price_1QQhHjEZh5HgtazOZti9EpcX",
     "paymentProvider": "stripe",
     "features": [
       "1 AI voice agent.",
@@ -21,7 +21,7 @@
     "period": "monthly",
     "description": "Ideal for businesses looking for more flexibility and functionality.",
     "amount": 199,
-    "priceId": "price_1QS09PEZh5HgtazOXtkRKSB6",
+    "priceId": "price_1QLIU9EZh5HgtazO6FxHLRVG",
     "paymentLink": "https://buy.stripe.com/4gw5og3tqfT74hyfZ0",
     "paymentProvider": "stripe",
     "features": [
@@ -41,7 +41,7 @@
     "period": "monthly",
     "description": "Designed for growing businesses that need advanced capabilities and scalability.",
     "amount": 399,
-    "priceId": "price_1QS0ASEZh5HgtazOC5a1lPmj",
+    "priceId": "price_1QLIffEZh5HgtazO4tRvmXpE",
     "paymentLink": "https://buy.stripe.com/14k9EwbZW36lbK06ot",
     "paymentProvider": "stripe",
     "features": [
@@ -81,7 +81,7 @@
     "period": "yearly",
     "description": "",
     "amount": 1069,
-    "priceId": "price_1QS0FEEZh5HgtazOP4xeUInI",
+    "priceId": "price_1QQhCCEZh5HgtazOY6gV5530",
     "paymentProvider": "stripe",
     "features": [
       "125 Calls",
@@ -98,7 +98,7 @@
     "period": "yearly",
     "description": "",
     "amount": 2149,
-    "priceId": "price_1QS0GHEZh5HgtazOh9DO5LM5",
+    "priceId": "price_1QQhVpEZh5HgtazOPTYJ5nXQ",
     "paymentLink": "https://buy.stripe.com/bIY7woaVS8qF6pGbIM",
     "paymentProvider": "stripe",
     "features": [
@@ -122,7 +122,7 @@
     "period": "yearly",
     "description": "",
     "amount": 4309,
-    "priceId": "price_1QS0PWEZh5HgtazOLpzvyvVa",
+    "priceId": "price_1QQhamEZh5HgtazOL6YwA73E",
     "paymentLink": "https://buy.stripe.com/aEU5og8NK0Yd8xO6ou",
     "paymentProvider": "stripe",
     "features": [
@@ -190,7 +190,7 @@
     "paymentProvider": "paystack",
     "currency": "NGN",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",
@@ -280,7 +280,7 @@
     "paymentProvider": "paystack",
     "currency": "NGN",
     "features": [
-      "5000 Calls",
+      "750 Calls",
       "Custom call scripts.",
       "Priority email support.",
       "Full conversational AI technology.",

@@ -17,10 +17,18 @@ export async function getAvailablePhoneNumbers() {
   });
 }
 
+export async function getAvailablePhoneNumberById(
+  id: AvailablePhoneNumber["id"],
+) {
+  return db.query.availablePhoneNumber.findFirst({
+    where: eq(availablePhoneNumber.id, id),
+  });
+}
+
 export async function createAvailablePhoneNumber(
   data: NewAvailablePhoneNumber[],
 ) {
-  return db.insert(availablePhoneNumber).values(data).returning();
+  return db.insert(availablePhoneNumber).values(data);
 }
 
 export async function getPhoneNumbers() {
@@ -44,9 +52,9 @@ export async function getPhoneNumber(phoneNumberId: string) {
   });
 }
 
-export async function unAssignPhoneNumber(businessId: string) {
-  const business = await getBusiness(businessId);
-  if (!business) {
+export async function unAssignPhoneNumber(userId: string) {
+  const business = await getBusiness(userId);
+  if (!business?.agentId) {
     throw new ZSAError("NOT_FOUND", "Business not found.");
   }
 
@@ -64,8 +72,8 @@ export async function unAssignPhoneNumber(businessId: string) {
     dateAssigned: null,
   });
 
-  await updateBusiness(businessId, {
-    agentId: undefined,
+  await updateBusiness(userId, {
+    agentId: null,
   });
 
   const client = new VapiClient({ token: env.VAPI_API_KEY });
