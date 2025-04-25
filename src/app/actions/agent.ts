@@ -98,6 +98,7 @@ export const getProfileAction = authenticationProcedure
   .handler(async ({ ctx }) => {
     const { id, email } = ctx;
     const business = await getBusiness(id);
+
     if (!business?.agentId) {
       throw new ZSAError("NOT_FOUND", "Business not found");
     }

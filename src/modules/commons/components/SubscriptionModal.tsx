@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { differenceInDays } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ import { useEffect, useState } from "react";
 export function SubscriptionModal() {
   const { data } = useServerActionQuery(getBusinessAction, {
     input: undefined,
-    queryKey: ["getBusiness"],
+    queryKey: QueryKeyFactory.getBusiness(),
   });
 
   const business = data?.data;

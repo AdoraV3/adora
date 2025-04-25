@@ -3,6 +3,7 @@ import { getBusinessAction } from "@/app/actions/business";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { differenceInDays, formatDate } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,7 +12,7 @@ import { PageHeader } from "./PageHeader";
 export function SubscriptionTab() {
   const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
-    queryKey: ["getBusiness"],
+    queryKey: QueryKeyFactory.getBusiness(),
   });
 
   const business = data?.data;
@@ -20,7 +21,7 @@ export function SubscriptionTab() {
     getSubscriptionAction,
     {
       input: business?.subscriptionId as string,
-      queryKey: ["getSubscription"],
+      queryKey: QueryKeyFactory.getSubscription(business?.subscriptionId),
       enabled: !!business?.subscriptionId,
     },
   );

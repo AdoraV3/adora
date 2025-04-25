@@ -28,6 +28,7 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { FloatingInput, FloatingLabel } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,12 +50,12 @@ export default function AgentDetails() {
 
   const { data } = useServerActionQuery(getAgentWithVoiceAction, {
     input: undefined,
-    queryKey: ["getAgentDetails"],
+    queryKey: QueryKeyFactory.getAgentWithVoice(),
   });
 
   const { data: voices } = useServerActionQuery(getVoicesAction, {
     input: undefined,
-    queryKey: ["getVoices"],
+    queryKey: QueryKeyFactory.getVoices(),
   });
 
   useEffect(() => {

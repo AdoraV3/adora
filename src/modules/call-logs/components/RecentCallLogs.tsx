@@ -3,6 +3,7 @@ import { getCallsAction } from "@/app/actions/call-log";
 import { InboundPhoneCall } from "@/app/actions/vapi/type";
 import { Icons } from "@/components/icons";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { DataTable } from "@/modules/commons/components";
 import { ColumnDef } from "@tanstack/react-table";
 import { addDays } from "date-fns/addDays";
@@ -16,7 +17,7 @@ interface RecentCallLogsProps {
 export function RecentCallLogs({ type }: RecentCallLogsProps) {
   const { data: agent } = useServerActionQuery(getAgentAction, {
     input: undefined,
-    queryKey: ["getAgent"],
+    queryKey: QueryKeyFactory.getAgent(),
   });
 
   const columns: ColumnDef<InboundPhoneCall>[] = useMemo(() => {
@@ -84,7 +85,7 @@ export function RecentCallLogs({ type }: RecentCallLogsProps) {
       createdAtLe:
         type === "past" ? addDays(new Date(), -7).toISOString() : undefined,
     },
-    queryKey: ["getCallLogs", type],
+    queryKey: QueryKeyFactory.getCallLogs(type),
     enabled: !!agent?.data.assistantId,
   });
 

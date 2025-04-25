@@ -26,6 +26,7 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Country } from "country-state-city";
 import { useEffect, useMemo } from "react";
@@ -43,7 +44,7 @@ export function AccountPreferenceForm() {
     getAccountPreferenceAction,
     {
       input: undefined,
-      queryKey: ["getAccountPreference"],
+      queryKey: QueryKeyFactory.getAccountPreferences(),
     },
   );
 
@@ -56,8 +57,8 @@ export function AccountPreferenceForm() {
       },
     },
   );
-  const timezones = Intl.supportedValuesOf("timeZone");
 
+  const timezones = Intl.supportedValuesOf("timeZone");
   const countries = Country.getAllCountries();
 
   const formattedTimezones = useMemo(() => {

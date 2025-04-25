@@ -3,6 +3,7 @@
 import { getUserAction } from "@/app/actions/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
 import { getInitials } from "@/modules/commons/utils/helpers";
 import { BusinessSetupModal } from "@/modules/dashboard/components/BusinessSetUpModal";
@@ -12,7 +13,7 @@ export function Profile() {
   const disclosure = useDisclosure();
   const { data: queryData } = useServerActionQuery(getUserAction, {
     input: undefined,
-    queryKey: ["getUser"],
+    queryKey: QueryKeyFactory.getUser(),
   });
 
   const user = queryData?.data;

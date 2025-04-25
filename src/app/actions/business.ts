@@ -123,10 +123,6 @@ export const createBusinessAction = authenticationProcedure
       firstMessage: `Hello, Thank you for calling ${businessName}. My name is ${agentName} How may I help you today?`,
     });
 
-    // await updateVapiPhoneNumber(isPhoneNumberAvailable.vapiId, {
-    //   assistantId: newAssistant?.id,
-    // });
-
     await createTransaction(async trx => {
       const [newAgent] = await createAgent(
         {

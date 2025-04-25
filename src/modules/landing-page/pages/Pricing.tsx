@@ -4,6 +4,7 @@ import { getSubscriptionsAction } from "@/app/actions";
 import BlurIn from "@/components/animations/blur-in";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { cn } from "@/lib/utils";
 import { renderQueryState } from "@/modules/commons/utils/renderQueryState";
 import Link from "next/link";
@@ -13,7 +14,7 @@ import { PricingData } from "../components/PricingData";
 export function Pricing() {
   const subscriptionQuery = useServerActionQuery(getSubscriptionsAction, {
     input: undefined,
-    queryKey: ["getSubscriptions"],
+    queryKey: QueryKeyFactory.getSubscriptions(),
   });
 
   const [view, setView] = useState<"monthly" | "yearly">("monthly");

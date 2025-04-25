@@ -31,9 +31,11 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { PhoneNumberInput } from "@/modules/commons/components";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { Country } from "country-state-city";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -46,12 +48,12 @@ export function Edit() {
     label: el.name,
     value: el.isoCode,
   }));
-
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { data, isPending } = useServerActionQuery(getProfileAction, {
     input: undefined,
-    queryKey: ["getBusinessProfile"],
+    queryKey: QueryKeyFactory.getBusinessProfile(),
   });
 
   const profile = data?.profile;
@@ -59,6 +61,9 @@ export function Edit() {
   const updateProfileHandler = useServerActionMutation(updateBusinessAction, {
     onSuccess: () => {
       toast.success("Profile updated successfully");
+      queryClient.invalidateQueries({
+        queryKey: QueryKeyFactory.getBusinessProfile(),
+      });
     },
     onError: error => {
       toast.error(error?.message);
@@ -69,6 +74,9 @@ export function Edit() {
     onSuccess: () => {
       toast.success("Profile created successfully");
       router.push("/pricing");
+      queryClient.invalidateQueries({
+        queryKey: QueryKeyFactory.getBusinessProfile(),
+      });
     },
     onError: error => {
       toast.error(error?.message);
@@ -77,17 +85,17 @@ export function Edit() {
 
   const { data: phones } = useServerActionQuery(getPhoneNumbersAction, {
     input: undefined,
-    queryKey: ["getPhoneNumbers"],
+    queryKey: QueryKeyFactory.getPhoneNumbers(),
   });
 
   const { data: voices } = useServerActionQuery(getVoicesAction, {
     input: undefined,
-    queryKey: ["getVoices"],
+    queryKey: QueryKeyFactory.getVoices(),
   });
 
   const { data: categories } = useServerActionQuery(getCategoriesAction, {
     input: undefined,
-    queryKey: ["getCategories"],
+    queryKey: QueryKeyFactory.getCategories(),
   });
 
   const form = useForm<ProfileSchemaType>({

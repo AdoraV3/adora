@@ -2,13 +2,14 @@ import { getAgentWithVoiceAction } from "@/app/actions/agent";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
 import Image from "next/image";
 
 export function AiInfo() {
   const { data, isPending } = useServerActionQuery(getAgentWithVoiceAction, {
     input: undefined,
-    queryKey: ["getAgent"],
+    queryKey: QueryKeyFactory.getAgent(),
   });
 
   const agentDetails = data?.data;

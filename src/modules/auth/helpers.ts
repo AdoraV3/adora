@@ -7,7 +7,6 @@ export function formatPhoneNumber(
   if (!phoneNumber) return "No phone number provided";
   try {
     const parsedNumber = parsePhoneNumber(phoneNumber, defaultCountry);
-
     if (parsedNumber) {
       // Format for international use
       return parsedNumber.formatInternational();

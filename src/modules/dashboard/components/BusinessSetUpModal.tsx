@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { Disclosure } from "@/modules/commons/hooks/useDisclosure";
 import { useEffect } from "react";
 
@@ -18,7 +19,7 @@ export function BusinessSetupModal(props: Readonly<Disclosure>) {
   const { isOpen, onClose, onOpen } = props;
   const { data, isPending } = useServerActionQuery(getBusinessAction, {
     input: undefined,
-    queryKey: ["getBusiness"],
+    queryKey: QueryKeyFactory.getBusiness(),
   });
 
   const business = data?.data ?? null;

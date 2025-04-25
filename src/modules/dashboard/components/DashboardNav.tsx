@@ -21,6 +21,7 @@ import {
   useServerActionMutation,
   useServerActionQuery,
 } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { formatPhoneNumber } from "@/modules/auth/helpers";
 import { DynamicBreadcrumb } from "@/modules/commons/components";
 import { useDisclosure } from "@/modules/commons/hooks/useDisclosure";
@@ -33,32 +34,32 @@ import { useEffect } from "react";
 export function DashboardNav() {
   const { data: queryData } = useServerActionQuery(getUserAction, {
     input: undefined,
-    queryKey: ["getUser"],
+    queryKey: QueryKeyFactory.getUser(),
   });
 
   const { data: agent, isPending } = useServerActionQuery(
     getAgentPhoneNumberAction,
     {
       input: undefined,
-      queryKey: ["getAgentPhoneNumber"],
+      queryKey: QueryKeyFactory.getAgentPhoneNumber(),
     },
   );
 
   const { data: businessData } = useServerActionQuery(getBusinessAction, {
     input: undefined,
-    queryKey: ["getBusiness"],
+    queryKey: QueryKeyFactory.getBusinessProfile(),
   });
   const business = businessData?.data;
   const { data: subscriptionData } = useServerActionQuery(
     getSubscriptionAction,
     {
       input: business?.subscriptionId as string,
-      queryKey: ["getSubscription", business?.subscriptionId as string],
+      queryKey: QueryKeyFactory.getSubscription(business?.subscriptionId),
       enabled: !!business?.subscriptionId,
     },
   );
 
-  const logOutHandler = useServerActionMutation(logOutAction, {});
+  const logOutHandler = useServerActionMutation(logOutAction);
 
   const user = queryData?.data;
   const router = useRouter();

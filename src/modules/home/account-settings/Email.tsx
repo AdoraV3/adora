@@ -3,11 +3,12 @@
 import { getUserAction } from "@/app/actions/user";
 import { Icons } from "@/components/icons";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 
 export function Email() {
   const { data: queryData } = useServerActionQuery(getUserAction, {
     input: undefined,
-    queryKey: ["getUser"],
+    queryKey: QueryKeyFactory.getUser(),
   });
 
   const user = queryData?.data;

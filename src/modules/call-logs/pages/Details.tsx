@@ -5,6 +5,7 @@ import { getCallAction } from "@/app/actions/call-log";
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { useServerActionQuery } from "@/lib/hooks/server-action-hooks";
+import { QueryKeyFactory } from "@/lib/queryKeyFactory";
 import { exportToCSV } from "@/modules/commons/utils/exportToCsv";
 import { formatPhoneNumber } from "@/modules/commons/utils/helpers";
 import { formatDate } from "date-fns";
@@ -20,7 +21,7 @@ export function Details() {
     input: {
       callId: id as string,
     },
-    queryKey: ["getCallLog", id as string],
+    queryKey: QueryKeyFactory.getCallLog(id as string),
     enabled: !!id,
   });
 
@@ -28,7 +29,7 @@ export function Details() {
     input: {
       agentId: callData?.data.assistantId,
     },
-    queryKey: ["getAgentDetails", callData?.data.assistantId as string],
+    queryKey: QueryKeyFactory.getAgentDetails(callData?.data.assistantId),
     enabled: !!callData?.data.assistantId,
   });
 
