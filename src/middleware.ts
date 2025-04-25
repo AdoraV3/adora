@@ -56,6 +56,10 @@ export async function middleware(req: NextRequest) {
         if (redirectUrl) {
           return NextResponse.redirect(new URL(redirectUrl, req.url));
         }
+
+        // if (!business.isProfileCompleted && pathname !== "/profile") {
+        //   return NextResponse.redirect(new URL("/profile", req.url));
+        // }
       }
     }
   } catch (error) {

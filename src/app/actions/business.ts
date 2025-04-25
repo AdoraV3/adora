@@ -46,6 +46,7 @@ export const createBusinessAction = authenticationProcedure
       businessCountry,
     } = input;
     const { id: userId } = ctx;
+
     await RateLimiterUtility.limit(RateLimitConfig.API_CALL);
     const isPhoneNumberAvailable =
       await db.query.availablePhoneNumber.findFirst({
@@ -136,7 +137,7 @@ export const createBusinessAction = authenticationProcedure
         trx,
       );
 
-      updateProfile(userId, {
+      await updateProfile(userId, {
         country,
         phone: businessPhoneNumber,
       });
