@@ -170,7 +170,7 @@ const VerifyEmailPage = () => {
 
         {/* Resend Section */}
         <div className="mt-8 text-center">
-          <p className="text-gray-600 text-sm mb-4">Didn't receive the code?</p>
+          <p className="text-gray-600 text-sm mb-4">Didn&apos;t receive the code?</p>
           <Button
             type="button"
             onClick={handleResend}

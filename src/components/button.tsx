@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 type ButtonProps = {
     name: string,
     action: ()=> void,

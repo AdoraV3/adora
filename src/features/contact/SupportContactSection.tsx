@@ -69,7 +69,7 @@ export default function SupportContactSection() {
                 {/* Support Message Bubble */}
                 <div className="absolute -bottom-4 -right-8 sm:-right-12 bg-orange-100 px-4 py-2 rounded-2xl shadow-lg animate-float">
                   <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
-                    We're Here to help
+                    We&apos;re Here to help
                   </p>
                   <div className="absolute -top-2 left-4 w-4 h-4 bg-orange-100 transform rotate-45"></div>
                 </div>

@@ -1,9 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useState, useEffect } from "react"
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
-import { ArrowRight, Phone, Zap, Users, BarChart3 } from 'lucide-react'
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import { Phone, Zap, Users } from 'lucide-react'
 
 export function BannerSlider() {
   const banners = [

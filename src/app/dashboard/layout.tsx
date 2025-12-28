@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const [showLogoutModal, setShowLogoutModal] = useState(false)
 
   return (
-    // <ProtectedRoute>
+    <ProtectedRoute>
       <DashboardLayoutContext.Provider value={{ showLogoutModal, setShowLogoutModal }}>
       <div className="flex h-screen">
         {/* Sidebar - desktop only */}
@@ -37,6 +37,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       )}
     </DashboardLayoutContext.Provider>
-    // </ProtectedRoute>
+    </ProtectedRoute>
   )
 }

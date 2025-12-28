@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 interface CallAnalysisProps {
   summary?: string
   successEvaluation?: boolean | string

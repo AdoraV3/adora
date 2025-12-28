@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { MapPin, Mail, Phone } from 'lucide-react';
 
 interface ContactInfoProps {
@@ -49,7 +48,7 @@ const InputField: React.FC<InputFieldProps> = ({
 const ContactSection: React.FC = () => (
   <div className="bg-gray-50 p-8 lg:p-12">
     <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
-      We'd Love To Hear From
+      We&apos;d Love To Hear From
     </h1>
     <p className="text-orange-500 text-xl mb-8">Get in Touch with Adora3 Support Team</p>
     

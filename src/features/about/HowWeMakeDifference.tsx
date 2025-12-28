@@ -46,7 +46,7 @@ const HowWeMakeDifference: React.FC = () => (
             <p>
               We provide businesses with innovative solutions that combine the empathy of human 
               agents with the efficiency and scalability of AI. From setting up AI-powered call 
-              centers to delivering personalized customer interactions, we're dedicated to 
+              centers to delivering personalized customer interactions, we&apos;re dedicated to 
               redefining the customer service experience for businesses worldwide.
             </p>
           </ContentBlock>

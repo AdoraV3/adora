@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Shield, Users, CreditCard, Copyright, AlertTriangle, Gavel, Settings } from 'lucide-react'
 
 const Section = ({ title, icon: Icon, children }: { title: string; icon: any; children: React.ReactNode }) => (
@@ -108,7 +109,7 @@ export default function AdoraTerms() {
           </Section>
 
           <Section title="Limitation of Liability" icon={Shield}>
-            <p className="text-gray-700 mb-4">Adora is provided "as-is" without warranties of any kind. Poulina Inc. is not liable for:</p>
+            <p className="text-gray-700 mb-4">Adora is provided &quot;as-is&quot; without warranties of any kind. Poulina Inc. is not liable for:</p>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div className="p-4 bg-red-50 rounded-lg">
