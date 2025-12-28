@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/cors": "^2.8.19",
     "@types/multer": "^2.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
