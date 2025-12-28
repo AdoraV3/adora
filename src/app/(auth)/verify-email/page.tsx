@@ -1,17 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 export const dynamic = "force-dynamic"
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter,} from 'next/navigation'
 import adoraLogo from '../../../../public/adora3-logo.png'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store/auth-store'
 
 const VerifyEmailPage = () => {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState(['', '', '', '', '', ''])
   const [error, setError] = useState('')
@@ -21,12 +22,12 @@ const VerifyEmailPage = () => {
   const otpInputs = useRef<(HTMLInputElement | null)[]>([])
   const { verifyEmail, resendVerification, loading } = useAuthStore()
 
-  useEffect(() => {
-    const emailParam = searchParams.get('email')
-    if (emailParam) {
-      setEmail(decodeURIComponent(emailParam))
-    }
-  }, [searchParams])
+  // useEffect(() => {
+  //   const emailParam = searchParams.get('email')
+  //   if (emailParam) {
+  //     setEmail(decodeURIComponent(emailParam))
+  //   }
+  // }, [searchParams])
 
   useEffect(() => {
     if (resendTimer > 0) {
