@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+export const dynamic = "force-dynamic"
+
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
