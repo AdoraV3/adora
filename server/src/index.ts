@@ -8,7 +8,7 @@ import { env } from "./config/env"
 import { errorHandler } from "./middleware/errorHandler"
 import passport from "./models/Passport"
 import { systemPrompt } from "./config/seeds/systemPrompt"
-import { subscription } from "./config/seeds/subscription"
+// import { subscription } from "./config/seeds/subscription"
 
 import authRoutes from "./routes/auth"
 import businessRoutes from "./routes/business"
