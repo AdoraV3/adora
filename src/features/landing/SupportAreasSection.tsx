@@ -55,10 +55,10 @@ const SupportAreasSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-white mb-4 leading-tight">
             We specialize in these customer support areas
           </h2>
-          <p className="text-lg sm:text-xl text-orange-500 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-lg text-orange-500 max-w-3xl mx-auto">
             We provide expert support tailored to your customers
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ const SupportAreasSection = () => {
                 </motion.div>
                 <div className="flex-1">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 leading-tight">{area.title}</h3>
-                  <p className="text-gray-300 leading-relaxed text-base sm:text-lg">{area.description}</p>
+                  <p className="text-gray-300 leading-relaxed text-base sm:text-sm">{area.description}</p>
                 </div>
               </div>
             </motion.div>

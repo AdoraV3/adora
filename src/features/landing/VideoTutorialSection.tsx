@@ -10,7 +10,7 @@ const VideoTutorialSection = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section className="py-16 lg:py-24 bg-white" ref={ref}>
+    <section className="py-16 lg:py-12 bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -19,10 +19,10 @@ const VideoTutorialSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
             Easy Account Setup in Minutes
           </h2>
-          <p className="text-lg sm:text-xl text-orange-600 max-w-4xl mx-auto">
+          <p className="text-sm sm:text-xl text-orange-600 max-w-4xl mx-auto">
             We&apos;ll guide you through every click, so you&apos;re ready to go in no time.
           </p>
         </motion.div>

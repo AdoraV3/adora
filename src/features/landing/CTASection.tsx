@@ -26,7 +26,7 @@ const CTASection = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="space-y-6">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-4xl sm:text-4xl lg:text-4xl font-bold text-gray-900 leading-tight">
                 Let Adora3 Take the Calls, While You Take the <span className="text-orange-500">Lead</span>.
               </h2>
               <p className="text-lg sm:text-xl text-orange-600 leading-relaxed">

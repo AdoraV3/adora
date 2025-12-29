@@ -46,8 +46,11 @@ const HowAdoraWorks = () => {
             initial={{ opacity: 0, x: -60 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex justify-center"
           >
-            <Image alt="Mobile Phone Mockup" src={phone || "/placeholder.svg"} />
+            <div className="w-full max-w-xs h-auto">
+              <Image alt="Mobile Phone Mockup" src={phone || "/placeholder.svg"} className="w-full h-auto" />
+            </div>
           </motion.div>
 
           {/* Steps Content */}
@@ -59,8 +62,8 @@ const HowAdoraWorks = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">How Adora Works</h2>
-              <p className="text-lg text-orange-600">
+              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-900">How Adora Works</h2>
+              <p className="text-lg sm:text-lg text-orange-600">
                 An AI intelligent assistant for exceptional customer experiences.
               </p>
             </motion.div>
@@ -88,7 +91,7 @@ const HowAdoraWorks = () => {
                   {/* Step Content */}
                   <div className="space-y-2">
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               ))}
