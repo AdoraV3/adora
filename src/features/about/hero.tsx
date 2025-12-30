@@ -11,7 +11,7 @@ const DecorativeShape: React.FC<DecorativeShapeProps> = ({ className = "" }) => 
 );
 
 const AboutUsHero: React.FC = () => (
-  <div className="min-h-screen bg-white relative overflow-hidden">
+  <div className="min-h-screen relative overflow-hidden bg-white px-6">
     {/* Decorative background shapes */}
     <DecorativeShape className="absolute top-0 left-0 w-32 h-64 lg:w-48 lg:h-96" />
     <DecorativeShape className="absolute top-0 left-32 w-24 h-32 lg:left-48 lg:w-36 lg:h-48" />
@@ -27,7 +27,7 @@ const AboutUsHero: React.FC = () => (
           <div className="mb-6">
             <span className="text-orange-500 font-medium text-lg">About us</span>
           </div>
-          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
+          <h1 className="text-4xl lg:text-5xl xl:text-5xl font-bold text-gray-900 leading-tight">
             Empowering<br/> businesses to thrive
           </h1>
         </div>
