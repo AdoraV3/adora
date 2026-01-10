@@ -45,7 +45,7 @@ function FormField({ label, type, value, onChange, icon, options, required }: Fo
           <select
             value={value || ""}
             onChange={onChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white transition-all hover:border-gray-400"
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent appearance-none bg-white transition-all hover:border-gray-400"
           >
             <option value="">Select {label}</option>
             {options?.map((opt) => (
@@ -58,7 +58,7 @@ function FormField({ label, type, value, onChange, icon, options, required }: Fo
           <textarea
             value={value || ""}
             onChange={onChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all hover:border-gray-400"
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent resize-none transition-all hover:border-gray-400"
             placeholder={label}
             rows={3}
           />
@@ -67,7 +67,7 @@ function FormField({ label, type, value, onChange, icon, options, required }: Fo
             type="text"
             value={value || ""}
             onChange={onChange}
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent transition-all hover:border-gray-400"
             placeholder={label}
           />
         )}
@@ -230,22 +230,22 @@ export default function AccountInfoContent() {
   }
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-8">
       {/* Account Info Section */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-blue-100 rounded-xl">
-              <User className="text-blue-600" size={24} />
+            <div className="p-3 bg-[#E05E00]/10 rounded-xl">
+              <User className="text-[#E05E00]" size={24} />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Account Information</h2>
+              <h2 className="text-[20px] font-bold text-gray-900">Account Information</h2>
               <p className="text-sm text-gray-600 mt-1">Manage your profile and account details</p>
             </div>
           </div>
           <button
             onClick={() => setIsProfileEditOpen(true)}
-            className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 rounded-lg transition-colors shadow-md hover:shadow-lg"
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-[#E05E00] hover:bg-[#c45200] border border-[#E05E00] rounded-lg transition-colors shadow-md hover:shadow-lg"
           >
             <Edit2 size={16} />
             Edit Profile
@@ -259,7 +259,7 @@ export default function AccountInfoContent() {
               <div className="flex items-center gap-3 pb-6 border-b border-gray-200">
                 <div>
                   <span className="text-lg font-bold text-gray-900">{profile?.name || "User"}</span>
-                  <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                  <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-[#E05E00]/10 text-[#E05E00] rounded-full">
                     <span className="text-xs font-semibold">{getDaysLeft()}</span>
                   </div>
                 </div>
@@ -276,10 +276,12 @@ export default function AccountInfoContent() {
               <InfoItem label="Joined account on" value={formatDate(business?.createdAt)} />
               <InfoItem
                 label="Subscription Start Date"
-                value={formatDate(business?.subscriptionStartDate || business?.freeTrialStartDate)}
+                value={formatDate(
+                  currentSubscription?.subscriptionStartDate || currentSubscription?.freeTrialStartDate,
+                )}
               />
-              <InfoItem label="Free Trial End Date" value={formatDate(business?.freeTrialEndDate)} />
-              <InfoItem label="Subscription End Date" value={formatDate(business?.subscriptionEndDate)} />
+              {/* <InfoItem label="Free Trial End Date" value={formatDate(currentSubscription?.freeTrialEndDate)} /> */}
+              <InfoItem label="Subscription End Date" value={formatDate(currentSubscription?.subscriptionEndDate)} />
             </div>
           </div>
 
@@ -301,11 +303,11 @@ export default function AccountInfoContent() {
 
       {/* Business Information Section */}
       {business && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-6 mt-6">
           <div className="flex items-center justify-between border-b border-gray-200 pb-6">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-green-100 rounded-xl">
-                <Building2 className="text-green-600" size={24} />
+              <div className="p-3 bg-[#E05E00]/10 rounded-xl">
+                <Building2 className="text-[#E05E00]" size={24} />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900">Business Information</h3>
@@ -314,7 +316,7 @@ export default function AccountInfoContent() {
             </div>
             <button
               onClick={() => setIsEditingBusiness(!isEditingBusiness)}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-blue-600 hover:text-blue-700 border border-blue-300 hover:bg-blue-50 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#E05E00] hover:text-[#c45200] border border-[#E05E00]/30 hover:bg-[#E05E00]/5 rounded-lg transition-colors"
             >
               <Edit2 size={16} />
               {isEditingBusiness ? "Cancel" : "Edit"}
@@ -367,7 +369,7 @@ export default function AccountInfoContent() {
                 <button
                   onClick={handleSaveBusiness}
                   disabled={businessLoading}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#E05E00] hover:bg-[#c45200] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
                 >
                   <Save size={18} />
                   {businessLoading ? "Saving..." : "Save Changes"}
@@ -388,7 +390,7 @@ export default function AccountInfoContent() {
               <InfoItem label="Agent Name" value={business?.agentName || "N/A"} />
               <InfoItem label="Voice ID" value={business?.voiceId || "N/A"} />
               <InfoItem label="Phone Number" value={business?.vapiPhoneNumber || "N/A"} />
-              <InfoItem label="Vapi Assistant ID" value={business?.vapiAssistantId || "N/A"} />
+              {/* <InfoItem label="Vapi Assistant ID" value={business?.vapiAssistantId || "N/A"} /> */}
             </div>
           )}
         </div>
@@ -441,10 +443,10 @@ export default function AccountInfoContent() {
 
       {/* Agent Information Section */}
       {business && agents && agents.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-6 mt-6">
           <div className="flex items-center gap-3 border-b border-gray-200 pb-6">
-            <div className="p-3 bg-purple-100 rounded-xl">
-              <Zap className="text-purple-600" size={24} />
+            <div className="p-3 bg-[#E05E00]/10 rounded-xl">
+              <Zap className="text-[#E05E00]" size={24} />
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900">AI Agent Information</h3>
@@ -500,10 +502,10 @@ export default function AccountInfoContent() {
           <button
             onClick={handleSaveAgent}
             disabled={savingAgent}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg mt-4"
+            className="flex items-center gap-2 px-6 py-3 bg-[#E05E00] hover:bg-[#c45200] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg mt-4"
           >
             <Save size={18} />
-            {savingAgent ? "Saving..." : "Save Agent Information"}
+            {savingAgent ? "Saving..." : "Save Agent Settings"}
           </button>
         </div>
       )}

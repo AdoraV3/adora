@@ -9,7 +9,7 @@ interface AccountInfoState {
   updateProfileInfo: (formData: FormData) => Promise<void>
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 function getHeaders(token: string) {
   return {

@@ -99,7 +99,11 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Customer Name</p>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} className="h-11 border-slate-200" />
+                    <Input
+                      placeholder="John Doe"
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -112,7 +116,11 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Customer Email</p>
                   <FormControl>
-                    <Input placeholder="john@example.com" {...field} className="h-11 border-slate-200" />
+                    <Input
+                      placeholder="john@example.com"
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -128,7 +136,11 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Date</p>
                   <FormControl>
-                    <Input type="date" {...field} className="h-11 border-slate-200" />
+                    <Input
+                      type="date"
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +153,11 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Time</p>
                   <FormControl>
-                    <Input type="time" {...field} className="h-11 border-slate-200" />
+                    <Input
+                      type="time"
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,7 +173,12 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Scenario ID (Optional)</p>
                   <FormControl>
-                    <Input type="number" placeholder="12345" {...field} className="h-11 border-slate-200" />
+                    <Input
+                      type="number"
+                      placeholder="12345"
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -170,7 +191,11 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
                 <FormItem>
                   <p className="mb-1 text-sm font-bold text-slate-700">Webhook URL (Optional)</p>
                   <FormControl>
-                    <Input placeholder="https://hook.make.com/..." {...field} className="h-11 border-slate-200" />
+                    <Input
+                      placeholder="https://hook.make.com/..."
+                      {...field}
+                      className="h-11 border-slate-200 focus:ring-[#E05E00] focus:border-[#E05E00]"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -189,7 +214,7 @@ export function BookAppointmentForm({ setStage }: Readonly<BookAppointmentFormPr
             </Button>
             <Button
               disabled={loading}
-              className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-bold shadow-lg shadow-slate-200"
+              className="w-full h-12 bg-[#E05E00] hover:bg-[#c65300] text-white font-bold shadow-lg shadow-orange-100"
             >
               {loading ? (
                 <>

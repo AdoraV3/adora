@@ -94,10 +94,10 @@ export default function SecurityContent() {
       <div className="max-w-full mx-auto">
         <div className="space-y-2 mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Lock className="w-6 h-6 text-blue-600" />
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <Lock className="w-6 h-6" style={{ color: "#E05E00" }} />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Security Settings</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Security Settings</h1>
           </div>
           <p className="text-gray-600 ml-11">
             Keep your account secure by managing your password and security preferences
@@ -122,11 +122,13 @@ export default function SecurityContent() {
           </div>
         )}
 
-        <div className="mb-8 bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4 flex gap-4">
-          <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+        <div className="mb-8 bg-orange-50 border-l-4 rounded-lg p-4 flex gap-4" style={{ borderLeftColor: "#E05E00" }}>
+          <Shield className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: "#E05E00" }} />
           <div>
-            <p className="font-semibold text-blue-900 text-sm">Strong Password Required</p>
-            <p className="text-blue-800 text-sm mt-1">
+            <p className="font-semibold text-sm" style={{ color: "#B84600" }}>
+              Strong Password Required
+            </p>
+            <p className="text-sm mt-1" style={{ color: "#A63D00" }}>
               Use a password with at least 8 characters including uppercase, lowercase, numbers, and special characters
             </p>
           </div>
@@ -137,7 +139,7 @@ export default function SecurityContent() {
           className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8 space-y-6"
         >
           <div className="space-y-2">
-            <Label htmlFor="oldPassword" className="font-semibold text-gray-900">
+            <Label htmlFor="oldPassword" className="font-semibold text-gray-900 pb-[10px]">
               Current Password
             </Label>
             <div className="relative">
@@ -150,8 +152,19 @@ export default function SecurityContent() {
                 onChange={handleInputChange}
                 disabled={loading}
                 className={`pr-10 h-11 rounded-lg border-2 transition-colors ${
-                  errors.oldPassword ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
+                  errors.oldPassword ? "border-red-300" : "border-gray-200"
                 }`}
+                style={!errors.oldPassword ? ({ "--tw-ring-color": "#E05E00" } as React.CSSProperties) : undefined}
+                onFocus={(e) => {
+                  if (!errors.oldPassword) {
+                    e.target.style.borderColor = "#E05E00"
+                  }
+                }}
+                onBlur={(e) => {
+                  if (!errors.oldPassword) {
+                    e.target.style.borderColor = "#e5e7eb"
+                  }
+                }}
               />
               <button
                 type="button"
@@ -183,8 +196,18 @@ export default function SecurityContent() {
                 onChange={handleInputChange}
                 disabled={loading}
                 className={`pr-10 h-11 rounded-lg border-2 transition-colors ${
-                  errors.password ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-blue-500"
+                  errors.password ? "border-red-300" : "border-gray-200"
                 }`}
+                onFocus={(e) => {
+                  if (!errors.password) {
+                    e.target.style.borderColor = "#E05E00"
+                  }
+                }}
+                onBlur={(e) => {
+                  if (!errors.password) {
+                    e.target.style.borderColor = "#e5e7eb"
+                  }
+                }}
               />
               <button
                 type="button"
@@ -216,10 +239,18 @@ export default function SecurityContent() {
                 onChange={handleInputChange}
                 disabled={loading}
                 className={`pr-10 h-11 rounded-lg border-2 transition-colors ${
-                  errors.confirmPassword
-                    ? "border-red-300 focus:border-red-500"
-                    : "border-gray-200 focus:border-blue-500"
+                  errors.confirmPassword ? "border-red-300" : "border-gray-200"
                 }`}
+                onFocus={(e) => {
+                  if (!errors.confirmPassword) {
+                    e.target.style.borderColor = "#E05E00"
+                  }
+                }}
+                onBlur={(e) => {
+                  if (!errors.confirmPassword) {
+                    e.target.style.borderColor = "#e5e7eb"
+                  }
+                }}
               />
               <button
                 type="button"
@@ -240,7 +271,16 @@ export default function SecurityContent() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full h-11 rounded-lg font-semibold mt-8 bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full h-11 rounded-lg font-semibold mt-8 text-white shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              backgroundColor: "#E05E00",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#CC5000"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#E05E00"
+            }}
           >
             {loading ? (
               <>
@@ -256,7 +296,7 @@ export default function SecurityContent() {
           </Button>
         </form>
 
-        <div className="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 space-y-4">
+        {/* <div className="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 space-y-4">
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-green-600" />
             <h3 className="font-bold text-gray-900 text-lg">Password Security Tips</h3>
@@ -279,7 +319,7 @@ export default function SecurityContent() {
               <span className="text-gray-700 text-sm">Avoid personal information</span>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   )

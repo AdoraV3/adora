@@ -138,7 +138,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="absolute bottom-0 right-0 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2.5 shadow-lg transition-colors"
+                className="absolute bottom-0 right-0 bg-[#E05E00] hover:bg-[#CC5000] text-white rounded-full p-2.5 shadow-lg transition-colors"
               >
                 <Upload size={16} />
               </button>
@@ -147,7 +147,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                className="text-sm font-medium text-[#E05E00] hover:text-[#CC5000] transition-colors"
               >
                 Upload Photo
               </button>
@@ -172,7 +172,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Enter your full name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent transition-all"
               />
               {touched.has("name") && !formData.name && <p className="text-xs text-red-500 mt-1">Name is required</p>}
             </div>
@@ -186,7 +186,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="+1 (555) 000-0000"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent transition-all"
               />
             </div>
 
@@ -199,7 +199,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
                 value={formData.country}
                 onChange={handleInputChange}
                 placeholder="United States"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent transition-all"
               />
             </div>
 
@@ -213,7 +213,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
                 placeholder="Tell us about yourself... (max 500 characters)"
                 rows={4}
                 maxLength={500}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E05E00] focus:border-transparent transition-all resize-none"
               />
               <p className="text-xs text-gray-500 mt-1">{formData.bio.length}/500 characters</p>
             </div>
@@ -260,7 +260,7 @@ export function ProfileEditModal({ isOpen, onClose, onSuccess }: ProfileEditModa
             <button
               type="submit"
               disabled={loading}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-8 py-3 bg-[#E05E00] hover:bg-[#CC5000] text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
               {loading && <Loader size={18} className="animate-spin" />}
               {loading ? "Saving..." : "Save Changes"}

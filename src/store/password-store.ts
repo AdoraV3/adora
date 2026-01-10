@@ -9,7 +9,7 @@ interface PasswordState {
   resetSuccess: () => void
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 export const usePasswordStore = create<PasswordState>((set) => ({
   loading: false,

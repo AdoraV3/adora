@@ -31,6 +31,7 @@ interface SubscriptionStatus {
   subscriptionStartDate?: string
   subscriptionEndDate?: string
   freeTrialEndDate?: string
+  freeTrialStartDate?: string
 }
 
 interface SubscriptionStore {
@@ -53,7 +54,7 @@ interface SubscriptionStore {
   refreshSubscriptionStatus: (businessId: string) => Promise<void>
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token: string) => ({
   "Content-Type": "application/json",

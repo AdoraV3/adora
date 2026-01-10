@@ -5,15 +5,8 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Card, Table, Modal, Button, Tag, Statistic, Row, Col, Empty } from "antd"
-import {
-  CheckCircleOutlined,
-  ExclamationCircleOutlined,
-  LoadingOutlined,
-  DollarOutlined,
-  CalendarOutlined,
-  EyeOutlined,
-} from "@ant-design/icons"
+import { Card, Table, Modal, Button, Tag, Empty } from "antd"
+import { CheckCircleOutlined, ExclamationCircleOutlined, EyeOutlined } from "@ant-design/icons"
 import { useAuthStore } from "@/store/auth-store"
 import { useSubscriptionStore } from "@/store/subscription-store"
 import { usePaymentStore } from "@/store/payment-store"
@@ -205,7 +198,7 @@ export default function PaymentPage() {
         {/* {loading && (
           <Card className="border-0 shadow-sm">
             <div className="flex items-center justify-center gap-3 py-8">
-              <LoadingOutlined className="text-2xl text-blue-600" />
+              <LoadingOutlined className="text-2xl" style={{ color: '#E05E00' }} />
               <span className="text-lg text-slate-700">{message}</span>
             </div>
           </Card>
@@ -251,7 +244,7 @@ export default function PaymentPage() {
                       value={stats.totalPaid ?? 0}
                       prefix={<DollarOutlined />}
                       precision={2}
-                      valueStyle={{ color: "#2563eb" }}
+                      valueStyle={{ color: "#E05E00" }}
                     />
                   </Card>
                 </Col>
@@ -261,7 +254,7 @@ export default function PaymentPage() {
                       title="Total Transactions"
                       value={stats.transactionCount}
                       prefix={<CalendarOutlined />}
-                      valueStyle={{ color: "#7c3aed" }}
+                      valueStyle={{ color: "#E05E00" }}
                     />
                   </Card>
                 </Col>

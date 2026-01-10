@@ -5,7 +5,7 @@
  * Handles authentication, error handling, and request/response formatting
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://adora-backend-r10q.onrender.com/"
 
 interface ApiResponse<T = any> {
   success: boolean

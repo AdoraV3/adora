@@ -186,7 +186,7 @@ export const useAuthStore = create<AuthState>()(
 
           console.log("[v0] Signup request body:", { email, password: "***", name })
 
-          const response = await fetch("http://localhost:5000/api/auth/signup", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/signup", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -229,7 +229,7 @@ export const useAuthStore = create<AuthState>()(
       login: async (email: string, password: string) => {
         set({ loading: true, error: null })
         try {
-          const response = await fetch("http://localhost:5000/api/auth/login", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -269,7 +269,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/profile", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/profile", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -309,7 +309,7 @@ export const useAuthStore = create<AuthState>()(
 
           console.log("[v0] Updating profile with token:", user.token.substring(0, 20) + "...")
 
-          const response = await fetch("http://localhost:5000/api/profile", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/profile", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -349,7 +349,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/business", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/business", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -385,7 +385,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/business", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/business", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -437,7 +437,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/auth/me", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/me", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -478,7 +478,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/business", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/business", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -516,7 +516,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/business/${id}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/business/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -552,7 +552,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/business/${id}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/business/${id}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -586,7 +586,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/agent", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/agent", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -622,7 +622,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/agent/business/${businessId}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/agent/business/${businessId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -657,7 +657,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/agent/${id}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/agent/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -693,7 +693,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/call-logs", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/call-logs", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -729,7 +729,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/call-logs/vapi/business/${businessId}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/call-logs/vapi/business/${businessId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -770,7 +770,7 @@ export const useAuthStore = create<AuthState>()(
           const formData = new FormData()
           formData.append("avatar", file)
 
-          const response = await fetch("http://localhost:5000/api/profile/upload-avatar", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/profile/upload-avatar", {
             method: "POST",
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -805,7 +805,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/voice/available?gender=${gender}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/voice/available?gender=${gender}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -840,7 +840,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/vapi/phone-numbers/available", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/vapi/phone-numbers/available", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -884,7 +884,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/business/${businessId}/assign-phone-number`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/business/${businessId}/assign-phone-number`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -915,7 +915,7 @@ export const useAuthStore = create<AuthState>()(
       verifyEmail: async (token: string) => {
         set({ loading: true, error: null })
         try {
-          const response = await fetch("http://localhost:5000/api/auth/verify-email", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/verify-email", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -942,7 +942,7 @@ export const useAuthStore = create<AuthState>()(
       resendVerification: async (email: string) => {
         set({ loading: true, error: null })
         try {
-          const response = await fetch("http://localhost:5000/api/auth/resend-verification", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/resend-verification", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -974,7 +974,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/notifications", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -1009,7 +1009,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/notifications/${notificationId}/read`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/notifications/${notificationId}/read`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -1042,7 +1042,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/notifications/all/read", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications/all/read", {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -1072,7 +1072,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch(`http://localhost:5000/api/notifications/${notificationId}`, {
+          const response = await fetch(`https://adora-backend-r10q.onrender.com/api/notifications/${notificationId}`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -1101,7 +1101,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error("No authentication token")
           }
 
-          const response = await fetch("http://localhost:5000/api/notifications", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications", {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -1134,7 +1134,7 @@ export const useAuthStore = create<AuthState>()(
 
           const queryParams = limit ? `?limit=${limit}` : ""
           const response = await fetch(
-            `http://localhost:5000/api/call-logs/vapi/business/${businessId}${queryParams}`,
+            `https://adora-backend-r10q.onrender.com/api/call-logs/vapi/business/${businessId}${queryParams}`,
             {
               method: "GET",
               headers: {
@@ -1170,7 +1170,7 @@ export const useAuthStore = create<AuthState>()(
       refreshToken: async () => {
         try {
           console.log("[v0] Attempting to refresh token...")
-          const response = await fetch("http://localhost:5000/api/auth/refresh-token", {
+          const response = await fetch("https://adora-backend-r10q.onrender.com/api/auth/refresh-token", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

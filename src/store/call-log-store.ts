@@ -27,7 +27,7 @@ interface CallLogStore {
   clearError: () => void
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 export const useCallLogStore = create<CallLogStore>((set) => ({
   callLogs: [],

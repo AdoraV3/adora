@@ -4,7 +4,7 @@
 import { create } from "zustand"
 import { useAuthStore } from "@/store/auth-store"
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token?: string) => {
   const headers: any = {

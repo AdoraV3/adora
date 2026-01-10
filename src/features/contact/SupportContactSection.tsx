@@ -31,7 +31,7 @@ export default function SupportContactSection() {
                 <p className="text-lg sm:text-xl text-orange-500 font-medium mb-4">
                   Get in Touch with Adora3 Support Team
                 </p>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-gray-800 leading-tight">
                   Here To Give You The Supports You Need
                 </h1>
               </div>

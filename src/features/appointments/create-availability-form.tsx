@@ -55,7 +55,7 @@ export function CreateAvailabilityForm({ setStage }: Readonly<CreateAvailability
                     type="number"
                     placeholder="Enter scenario id"
                     {...field}
-                    className="h-12 border-gray-300 focus:ring-[#653716] focus:border-[#653716]"
+                    className="h-12 border-gray-300 focus:ring-[#E05E00] focus:border-[#E05E00]"
                   />
                 </FormControl>
                 <FormMessage />
@@ -73,7 +73,7 @@ export function CreateAvailabilityForm({ setStage }: Readonly<CreateAvailability
                     type="url"
                     placeholder="Paste webhook URL"
                     {...field}
-                    className="h-12 border-gray-300 focus:ring-[#653716] focus:border-[#653716]"
+                    className="h-12 border-gray-300 focus:ring-[#E05E00] focus:border-[#E05E00]"
                   />
                 </FormControl>
                 <FormMessage />
@@ -90,7 +90,7 @@ export function CreateAvailabilityForm({ setStage }: Readonly<CreateAvailability
             >
               Close
             </Button>
-            <Button className="w-full h-12 bg-[#653716] hover:bg-[#4d2911] text-white">Next Step</Button>
+            <Button className="w-full h-12 bg-[#E05E00] hover:bg-[#c65300] text-white">Next Step</Button>
           </div>
         </form>
       </Form>

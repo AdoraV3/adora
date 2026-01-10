@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Header from "@/components/navigation/header/Header"
 import Sidebar from "@/components/navigation/sidebar/Sidebar"
 import LogoutConfirmationModal from "@/components/toasts/logout-confirmation"
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
+// import { ProtectedRoute } from "@/components/auth/ProtectedRoute"
 
 export const DashboardLayoutContext = React.createContext<{
   showLogoutModal: boolean
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const [showLogoutModal, setShowLogoutModal] = useState(false)
 
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
       <DashboardLayoutContext.Provider value={{ showLogoutModal, setShowLogoutModal }}>
       <div className="flex h-screen">
         {/* Sidebar - desktop only */}
@@ -37,6 +37,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       )}
     </DashboardLayoutContext.Provider>
-    </ProtectedRoute>
+    // </ProtectedRoute>
   )
 }

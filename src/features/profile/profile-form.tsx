@@ -288,7 +288,7 @@ export function ProfileFormComponent() {
             )}
           </div>
           <Upload accept="image/*" maxCount={1} beforeUpload={handleAvatarChange} showUploadList={false}>
-            <Button icon={<UploadOutlined />} loading={isUploadingAvatar} className="w-full" type="primary" danger>
+            <Button icon={<UploadOutlined />} loading={isUploadingAvatar} className="w-full bg-[#E05E00]" style={{backgroundColor: "#E05E00", color: "#fff"}} danger>
               {isUploadingAvatar ? "Uploading..." : "Upload Image"}
             </Button>
           </Upload>
@@ -571,7 +571,7 @@ export function ProfileFormComponent() {
           <div className={currentStep === "profile" ? "ml-auto" : ""}>
             {validationErrors.general && <p className="text-sm text-red-500 mb-2">{validationErrors.general}</p>}
             <Button
-              type="primary"
+              style={{backgroundColor: "#E05E00", color: "#fff"}}
               danger
               onClick={() => handleNextStep(currentStep)}
               disabled={isSubmitting || isUploadingAvatar}

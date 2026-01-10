@@ -41,7 +41,7 @@ interface PaymentStore {
   ) => Promise<{ success: boolean; status: string; subscription?: any; message?: string }>
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token?: string) => {
   const headers: any = {

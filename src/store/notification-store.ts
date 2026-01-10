@@ -41,7 +41,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         throw new Error("No authentication token")
       }
 
-      const response = await fetch("http://localhost:5000/api/notifications", {
+      const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         throw new Error("No authentication token")
       }
 
-      const response = await fetch(`http://localhost:5000/api/notifications/${notificationId}/read`, {
+      const response = await fetch(`https://adora-backend-r10q.onrender.com/api/notifications/${notificationId}/read`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         throw new Error("No authentication token")
       }
 
-      const response = await fetch("http://localhost:5000/api/notifications/all/read", {
+      const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications/all/read", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         throw new Error("No authentication token")
       }
 
-      const response = await fetch(`http://localhost:5000/api/notifications/${notificationId}`, {
+      const response = await fetch(`https://adora-backend-r10q.onrender.com/api/notifications/${notificationId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +168,7 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         throw new Error("No authentication token")
       }
 
-      const response = await fetch("http://localhost:5000/api/notifications", {
+      const response = await fetch("https://adora-backend-r10q.onrender.com/api/notifications", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
