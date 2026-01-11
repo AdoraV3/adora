@@ -3,11 +3,11 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from "lucide-react"
 import adoraLogo from "../../../../public/adora3-logo.png"
 import google from "../../../../public/google.webp"
 import Link from "next/link"
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/store/auth-store"
 
 interface InputFieldProps {
@@ -33,12 +33,12 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   name,
 }) => (
-  <div className="mb-6">
-    <label className="block text-gray-600 mb-2 text-sm">{label}</label>
+  <div className="mb-4 sm:mb-6">
+    <label className="block text-gray-600 mb-2 text-xs sm:text-sm">{label}</label>
     <div className="relative">
       <input
         type={showPasswordToggle ? (isPasswordVisible ? "text" : "password") : type}
-        className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="w-full px-3 sm:p-4 py-2 sm:py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -75,7 +75,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
 }) => {
   const baseClasses =
-    "w-full py-4 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+    "w-full py-3 sm:py-4 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
   const variants = {
     primary: "bg-orange-600 hover:bg-orange-700 text-white",
     secondary: "border border-gray-300 hover:bg-gray-50 text-gray-700 flex items-center justify-center gap-2",
@@ -94,16 +94,24 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 const Logo: React.FC = () => (
-  <div className="flex items-center gap-2 mb-12">
-    <Image src={adoraLogo || "/placeholder.svg"} alt="Adora3 Logo" width={100} height={100} />
+  <div className="flex items-center gap-2 mb-8 sm:mb-12">
+    <Image
+      src={adoraLogo || "/placeholder.svg"}
+      alt="Adora3 Logo"
+      width={80}
+      height={80}
+      className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px]"
+    />
   </div>
 )
 
 const LeftPanel: React.FC = () => (
-  <div className="bg-gray-900 p-8 h-[100vh] sticky top-0 left-0 lg:p-12 flex flex-col">
+  <div className="hidden lg:flex bg-gray-900 p-6 sm:p-8 lg:p-12 sticky top-0 left-0 flex-col justify-center min-h-screen lg:w-1/2">
     <Logo />
-    <h1 className="text-white text-4xl lg:text-5xl font-bold mb-4 leading-tight">Sign up your business on Adora</h1>
-    <p className="text-orange-400 text-lg">Revolutionize Your Customer&lsquo;s Experience</p>
+    <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+      Sign up your business on Adora
+    </h1>
+    <p className="text-orange-400 text-base sm:text-lg">Revolutionize Your Customer&lsquo;s Experience</p>
   </div>
 )
 
@@ -156,15 +164,17 @@ const SignUpForm: React.FC = () => {
   }
 
   return (
-    <div className="bg-white p-8 lg:p-12 flex flex-col justify-center">
+    <div className="bg-white px-4 py-8 sm:p-8 lg:p-12 flex flex-col justify-center w-full lg:w-1/2 min-h-screen">
       <div className="max-w-md mx-auto w-full">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Create An Account</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Create An Account</h2>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs sm:text-sm">
+            {error}
+          </div>
         )}
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
           <InputField label="Full Name" name="name" value={formData.name} onChange={handleInputChange} />
           <InputField
             label="Email Address"
@@ -192,7 +202,7 @@ const SignUpForm: React.FC = () => {
             onChange={handleInputChange}
           />
 
-          <div className="text-sm text-gray-600 mb-6">
+          <div className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
             By signing up, You automatically agree with the{" "}
             <span className="text-orange-500 hover:underline cursor-pointer">
               <Link href={"/terms"}>terms and condition</Link>
@@ -204,16 +214,16 @@ const SignUpForm: React.FC = () => {
             {loading ? "Creating Account..." : "Create Account"}
           </Button>
 
-          <div className="text-center text-[14px] mt-4 text-gray-600">
+          <div className="text-center text-xs sm:text-sm mt-4 text-gray-600">
             Already Have An Account?{" "}
             <span className="text-orange-500 hover:underline cursor-pointer font-medium">
               <Link href={"login"}>Sign In</Link>
             </span>
           </div>
 
-          <div className="flex items-center my-6">
+          <div className="flex items-center my-4 sm:my-6">
             <hr className="flex-1 border-gray-300" />
-            <span className="px-4 text-gray-500 text-sm">OR</span>
+            <span className="px-4 text-gray-500 text-xs sm:text-sm">OR</span>
             <hr className="flex-1 border-gray-300" />
           </div>
 
@@ -228,7 +238,7 @@ const SignUpForm: React.FC = () => {
 }
 
 const SignUpPage: React.FC = () => (
-  <div className="flex min-h-screen">
+  <div className="flex flex-col lg:flex-row min-h-screen w-full">
     <LeftPanel />
     <SignUpForm />
   </div>
