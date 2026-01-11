@@ -13,8 +13,7 @@ const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 function getHeaders(token: string) {
   return {
-    Authorization: `Bearer ${token}`,
-    "ngrok-skip-browser-warning": "69420",
+    Authorization: `Bearer ${token}`
   }
 }
 

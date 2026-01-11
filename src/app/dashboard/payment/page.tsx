@@ -184,7 +184,7 @@ export default function PaymentPage() {
       title: "Action",
       key: "action",
       render: (_: any, record: PaymentHistory) => (
-        <Button type="primary" ghost size="small" icon={<EyeOutlined />} onClick={() => setSelectedPayment(record)}>
+        <Button style={{backgroundColor: "#E05E00"}} ghost size="small" icon={<EyeOutlined />} onClick={() => setSelectedPayment(record)}>
           View
         </Button>
       ),
@@ -216,7 +216,7 @@ export default function PaymentPage() {
           </Card>
         )}
 
-        {!loading && status === "error" && (
+        {/* {!loading && status === "error" && (
           <Card className="border-l-4 border-red-500 bg-gradient-to-r from-red-50 to-transparent shadow-sm">
             <div className="flex items-center gap-3">
               <ExclamationCircleOutlined className="text-3xl text-red-600" />
@@ -226,7 +226,7 @@ export default function PaymentPage() {
               </div>
             </div>
           </Card>
-        )}
+        )} */}
 
         {showHistory && (
           <>

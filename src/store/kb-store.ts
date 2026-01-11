@@ -8,8 +8,7 @@ const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token?: string) => {
   const headers: any = {
-    "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "true",
+    "Content-Type": "application/json"
   }
   if (token) {
     headers.Authorization = `Bearer ${token}`
@@ -94,7 +93,6 @@ export const useKBStore = create<KBStore>((set, get) => ({
       const uploadResponse = await fetch(`${BASE_URL}/api/knowledge-base/upload`, {
         method: "POST",
         headers: {
-          "ngrok-skip-browser-warning": "true",
           Authorization: `Bearer ${user.token}`,
         },
         body: formData,
@@ -142,7 +140,6 @@ export const useKBStore = create<KBStore>((set, get) => ({
       const response = await fetch(`${BASE_URL}/api/knowledge-base/upload`, {
         method: "POST",
         headers: {
-          "ngrok-skip-browser-warning": "true",
           Authorization: `Bearer ${user.token}`,
         },
         body: formData,
@@ -197,7 +194,6 @@ export const useKBStore = create<KBStore>((set, get) => ({
       const response = await fetch(`${BASE_URL}/api/knowledge-base/${id}`, {
         method: "DELETE",
         headers: {
-          "ngrok-skip-browser-warning": "true",
           Authorization: `Bearer ${user.token}`,
         },
       })

@@ -45,12 +45,11 @@ interface BusinessStore {
   clearError: () => void
 }
 
-const BASE_URL = "https://rhys-unerasable-unsedimentally.ngrok-free.dev"
+const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token: string) => ({
   "Content-Type": "application/json",
-  Authorization: `Bearer ${token}`,
-  "ngrok-skip-browser-warning": "69420",
+  Authorization: `Bearer ${token}`
 })
 
 export const useBusinessStore = create<BusinessStore>((set, get) => ({

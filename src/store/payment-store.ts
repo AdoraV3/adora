@@ -45,8 +45,7 @@ const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token?: string) => {
   const headers: any = {
-    "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "true",
+    "Content-Type": "application/json"
   }
   if (token) {
     headers.Authorization = `Bearer ${token}`

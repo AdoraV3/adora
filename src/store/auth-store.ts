@@ -179,8 +179,7 @@ const BASE_URL = "https://adora-backend-r10q.onrender.com"
 
 const getHeaders = (token?: string) => {
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-    "ngrok-skip-browser-warning": "69420",
+    "Content-Type": "application/json"
   }
   if (token) {
     headers["Authorization"] = `Bearer ${token}`
@@ -774,8 +773,7 @@ export const useAuthStore = create<AuthState>()(
           const response = await fetch(`${BASE_URL}/api/profile/upload-avatar`, {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${user.token}`,
-              "ngrok-skip-browser-warning": "69420",
+              Authorization: `Bearer ${user.token}`
             },
             body: formData,
           })
